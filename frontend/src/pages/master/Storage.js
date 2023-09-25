@@ -113,7 +113,7 @@ export default function Storage() {
                     <Col md={12}>
                       <Box className="storage-table-wrap">
                         <Table>
-                          <thead className="thead-dark">
+                          <thead className="thead-dark" style={{backgroundColor:'#F07632'}}>
                             <tr>
                               <td className="th-w30">Name</td>
                               <td className="th-w30">Active</td>

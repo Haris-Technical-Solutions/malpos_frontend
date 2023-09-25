@@ -128,17 +128,17 @@ export default function Suppliers() {
                             <FontAwesomeIcon icon={faPlus} /> Create{" "}
                           </button>
                         </Link>
-                        <Link to={""}>
+                      {/*   <Link to={""}>
                           <button className="acc-create-btn rs-btn-create payment-btn">
                             <FontAwesomeIcon icon={faPlus} /> Make a Payment{" "}
                           </button>
-                        </Link>
+                        </Link>*/}
                       </Box>
                     </Col>
                     <Col md={12}>
                       <Box className={"suppliers-table-wrap"}>
                         <Table responsive>
-                          <thead className="thead-dark">
+                          <thead className="thead-dark" style={{backgroundColor:'#F07632'}}>
                             <tr>
                               <th className="th-w20">Name</th>
                               <th className="th-w15 text-end">
@@ -149,7 +149,7 @@ export default function Suppliers() {
                                   color={"#f29b30"}
                                 />
                                 <br />
-                                <span className="debt">-322670.00 SAR</span>
+                                <span className="debt" >-322670.00 SAR</span>
                               </th>
                               <th className="th-w15 text-end">
                                 Balance
@@ -159,7 +159,7 @@ export default function Suppliers() {
                                   color={"#f29b30"}
                                 />
                                 <br />
-                                <span className="bal ">-02670.00 SAR</span>
+                                <span className="bal " style={{color:'black'}}>-02670.00 SAR</span>
                               </th>
                               <th className="th-w15">Description</th>
                               <th className="th-w15">Phone</th>

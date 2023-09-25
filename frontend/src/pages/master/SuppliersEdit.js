@@ -74,16 +74,19 @@ export default function SuppliersEdit() {
     <div>
       <PageLayout>
         <Row>
-          <Col md={12}>
+        {/*  <Col md={12}>
             <CardLayout>
-              {action === "create" ? "Create Supplier" : "Edit Supplier"}
             </CardLayout>
-          </Col>
-          <Col md={12}>
+          </Col>*/}
+          <Col  md={12}>
             <CardLayout>
+              <Col style={{fontSize:'1.5rem', marginBottom:'1rem'}} md={12}>
+              { action === "create" ? "Create Supplier" : "Edit Supplier"}
+              </Col>
               <Row>
                 <Col md={6}>
                   <LabelField
+                  style={{marginBottom:'1rem' }}
                     type="text"
                     value={currentSupplier.supplier_name}
                     onChange={(e) =>
@@ -93,6 +96,7 @@ export default function SuppliersEdit() {
                       })
                     }
                     placeholder={"Supplier Name"}
+                    label={'Name:'}
                   />
                   <LabelField
                     type="number"
@@ -102,11 +106,15 @@ export default function SuppliersEdit() {
                         ...currentSupplier,
                         phone: e.target.value,
                       })
+
                     }
+                    style={{marginBottom:'1rem' }}
+                    label={'Phone Number:'}
                     placeholder={"Phone"}
                   />
                   <LabelField
                     type="text"
+                    style={{marginBottom:'1rem' }}
                     value={currentSupplier.tin}
                     onChange={(e) =>
                       setCurrentSupplier({
@@ -114,10 +122,13 @@ export default function SuppliersEdit() {
                         tin: e.target.value,
                       })
                     }
+                    label={'Tin:'}
                     placeholder={"Tin"}
                   />
                   <LabelField
                     type="text"
+                    style={{marginBottom:'1rem' }}
+
                     value={currentSupplier.description}
                     onChange={(e) =>
                       setCurrentSupplier({
@@ -125,10 +136,12 @@ export default function SuppliersEdit() {
                         description: e.target.value,
                       })
                     }
+                    label={'Description'}
                     placeholder={"Description"}
                   />
                   <Box className={"storageEdit-switch"}>
                     <Form.Check
+                    style={{marginBottom:'1rem' }}
                       className="switch"
                       type="switch"
                       id="custom-switch"

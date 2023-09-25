@@ -57,7 +57,7 @@ export default function SuppliesDetailTab() {
                             <Box className={'cus-ptb'}>
                                 <Box className={'supplies-gen-table-wrap'}>
                                     <Table>
-                                        <thead className='thead-dark '>
+                                        <thead className='thead-dark ' style={{backgroundColor:'#F07632'}} >
                                             <tr className='f-12'>
                                                 <th className='th-w50'>ID</th>
                                                 <th className='th-w150'>Products</th>
@@ -74,7 +74,7 @@ export default function SuppliesDetailTab() {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr className='f-13'>
+                                            <tr className='f-13'  >
                                             <td className='td-w50'>188</td>
                                                 <td className='td-w150'>New Item11(3 pcs)</td>
                                                 <td className='td-w130'>Mar 19, 16:00:20</td>

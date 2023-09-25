@@ -74,7 +74,7 @@ export default function SuppliesGeneralTab() {
               <Box className={'cus-ptb'}>
                 <Box className={'supplies-gen-table-wrap'}>
                   <Table style={{ width: '1200px' }}>
-                    <thead className='thead-dark'>
+                    <thead className='thead-dark' style={{backgroundColor:'#F07632'}} >
                       <tr className='f-12'>
                         <th className='th-w50'>ID</th>
                         <th className='th-w150'>Products</th>
@@ -82,7 +82,7 @@ export default function SuppliesGeneralTab() {
                         <th className='th-w100'>Supplier</th>
                         <th className='th-w100'>Storage</th>
                         <th className='th-w100'>Amount<br />
-                          <span>9742003 SAR</span>
+                          <span style={{color:'black'}}>9742003 SAR</span>
                         </th>
                         <th className='th-w100'>Account</th>
                         <th className='th-w130'>Invoice#</th>

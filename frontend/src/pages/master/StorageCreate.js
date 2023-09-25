@@ -57,11 +57,14 @@ export default function StorageCreate() {
                 <Col md={6}>
                   <LabelField
                     type="text"
+                    style={{marginBottom:'1rem' }}
+                    label={'Name'}
                     value={newStorage.name}
                     onChange={(e) => setNewStorage({ ...newStorage, name: e.target.value })}
                     placeholder={'Name'}
                   />
                   <Form.Check
+                  style={{marginBottom:'1rem' }}
                     type="switch"
                     label="Status"
                     checked={newStorage.is_active === 1}

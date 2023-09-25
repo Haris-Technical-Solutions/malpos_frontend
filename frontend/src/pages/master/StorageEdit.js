@@ -75,15 +75,15 @@ export default function StorageEdit() {
         <Row>
           <Col md={12}>
             <CardLayout>
+          <Col md={12}  style={{marginBottom:'2rem', fontSize:'1.5rem'  }} >          
               {action === "create" ? "Create Storage" : "Edit Storage"}
-            </CardLayout>
           </Col>
-          <Col md={12}>
-            <CardLayout>
               <Row>
                 <Col md={6}>
                   <LabelField
+                  style={{marginBottom:'1rem' }}
                     type="text"
+                    label={'Name'}
                     value={currentStorage.name}
                     onChange={(e) =>
                       setCurrentStorage({
@@ -95,6 +95,7 @@ export default function StorageEdit() {
                   />
                   <Box className={"storageEdit-switch"}>
                     <Form.Check
+                    style={{marginBottom:'1rem' }}
                       className="switch"
                       type="switch"
                       id="custom-switch"
