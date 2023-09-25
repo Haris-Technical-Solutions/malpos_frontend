@@ -16,6 +16,8 @@ export default function Supplies() {
   const [activeTab, setActiveTab] = useState(0);
 
   const handleTabClick = (index) => {
+
+    
     setActiveTab(index);
   };
   return (
