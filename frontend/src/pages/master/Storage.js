@@ -34,10 +34,10 @@ export default function Storage() {
   const handleDotBox = () => {
     Close(!open);
   };
-  const { storage,setStorage } = useProduct();
+  const  [storage, setStorage]= useState([]);
   useEffect(() => {
-
-  });
+    fetchStorage();
+  },[storage]);
 
   const handleStorageEdit = (id) =>{
     console.log("id: " + id);

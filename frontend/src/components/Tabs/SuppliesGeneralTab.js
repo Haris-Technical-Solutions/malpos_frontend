@@ -36,7 +36,14 @@ export default function SuppliesGeneralTab() {
     { value: 'option4', label: 'Option 4' },
     { value: 'option5', label: 'Option 5' },
   ];
+  const handleSuppliesCreate = () =>{
 
+    navigate(`/supplies-edit/`, {
+      state: {
+        action: "createSupplies",
+      },
+    });
+  };
   const handleSuppliesEdit = (id) =>{
     console.log("id: " + id);
     navigate(`/supplies-edit/`, {
@@ -64,11 +71,10 @@ export default function SuppliesGeneralTab() {
               </Row>
             </Col>
             <Col md={2}>
-              <Link to="/customer-create" style={{ float: "right" }}>
+  
                 <button className="acc-create-btn rs-btn-create">
-                  <FontAwesomeIcon icon={faPlus} /> Create
+                  <FontAwesomeIcon onClick={handleSuppliesCreate} icon={faPlus} /> Create
                 </button>
-              </Link>
             </Col>
             <Col md={12}>
               <Box className={'cus-ptb'}>
@@ -116,13 +122,7 @@ export default function SuppliesGeneralTab() {
                                   <Box className="DotBox-inner">
                                     <Box className="DotBox-p-con" >
                                    
-                                      <Button
-                                  title="Edit"
-                                  className="material-icons edit"
-                                  onClick={() =>handleSuppliesEdit(supply.id)}
-                                >
-                                     <FontAwesomeIcon icon={faEdit}/> Edit
-                                </Button>
+                                     <FontAwesomeIcon onClick={() =>handleSuppliesEdit(supply.id)} icon={faEdit}/> Edit
                                     </Box>
                                     <Box className="DotBox-p-con">
                                       <FontAwesomeIcon icon={faArrowTurnRight} /> Product Return

@@ -76,7 +76,7 @@ export default function SuppliersEdit() {
         <Row>
           <Col md={12}>
             <CardLayout>
-              {action === "create" ? "Create Supplier" : "Edit Supplier"}
+              {action === "updateSupplies" ? "Create Supplies" : "Edit Supplies"}
             </CardLayout>
           </Col>
           <Col md={12}>
