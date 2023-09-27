@@ -7,17 +7,20 @@ import {  faSave } from "@fortawesome/free-solid-svg-icons";
 import {Link} from "react-router-dom"
 
 import { LabelField } from '../../components/fields'
-export default function AccountsEdit() {
+
+export default function AccountCategoryedit  () {
   return (
     <div>
-        <PageLayout>
+   <PageLayout>
             <Row>
                 <Col md={12}>
                     <CardLayout>
-                        <Row>
-                <Col md={12}>                 
-                        Accounts / Edit
+                <Col md={12} style={{marginBottom:"2rem"}} >
+                   
+                        Account Category / Edit
+      
                 </Col>
+                        <Row>
                             <Col md={11}>
                                 <Row>
                                     <Col md={6}>
@@ -36,19 +39,11 @@ export default function AccountsEdit() {
                 fieldSize="w-100 h-md"
               />
                             </Col>
-                            <Col md={6}>
-                            <LabelField
-                label="Amount"
-                type="number"
-                placeholder="0"
-                fieldSize="w-100 h-md"
-                disabled
-              />
-                                    </Col>
-                                </Row>
+                        
+                                </Row> 
                  
                         </Col>                
-                        <Link to={"/accounts"}>
+                        <Link to={"/account-categories"}>
                       <button className="acc-create-btn">
                         <FontAwesomeIcon icon={faSave} /> {" "}Save
                       </button>
@@ -63,3 +58,5 @@ export default function AccountsEdit() {
     </div>
   )
 }
+
+ 

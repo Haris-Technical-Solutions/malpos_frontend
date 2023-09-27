@@ -26,7 +26,10 @@ export default function CreateTransaction() {
           <Col md={12}>
             <Row>
               <CardLayout>
-                <div className="d-flex justify-content-between align-items-center">
+          <Col md={12}>
+            <Row>
+             
+                <div className="d-flex justify-content-between align-items-center" style={{marginBottom:"1rem"}}>
                   <h5>Create Transaction</h5>
                   <Box className="construction-edit-icons">
                     <Box className="edit-icons">
@@ -40,12 +43,9 @@ export default function CreateTransaction() {
                     </Box>
                   </Box>
                 </div>
-              </CardLayout>
+            
             </Row>
           </Col>
-          <Col md={12}>
-            <Row>
-              <CardLayout>
                 <Col md={12}>
                   <Box className="categories-btn">
                     <button

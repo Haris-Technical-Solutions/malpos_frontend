@@ -133,7 +133,7 @@
 
             { "href": "/movement-reports", "text": "Movements Reports" },
             { "href": "/product-movement", "text": "Product Movement" },
-
+            {"href":"/unit-measurement","text":"Units Measurement"},
             { "href": "/return-supplies", "text": "Returned Supplies" },
             { "href": "/transfers", "text": "Transfers" },
             { "href": "/inventory-check", "text": "Inventory Check" },
@@ -141,6 +141,7 @@
 
             { "href": "/packages", "text": "Packages" },
             { "href": "/suppliers", "text": "Suppliers" },
+
 
             { "href": "/production", "text": "Production" }
           ]

@@ -37,12 +37,10 @@ export default function Production() {
                 <Row>
                     <Col md={12}>
                         <CardLayout>
-                            Prduction
-                        </CardLayout>
-                    </Col>
-                    <Col md={12}>
-                        <CardLayout>
                             <Row>
+                    <Col md={12}>
+                            Production
+                    </Col>
                                 <Col md={12}>
                                     <Row>
                                         <Col md={3}>

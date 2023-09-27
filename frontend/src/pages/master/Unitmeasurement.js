@@ -1,3 +1,4 @@
+
 import React,{useState} from 'react'
 import { Col, Row, Form, Tab } from 'react-bootstrap'
 import { CardLayout } from '../../components/cards'
@@ -7,7 +8,7 @@ import { faSearch, faPlus, faCheck, faEllipsis, faEdit,faTrash,faMinus } from '@
 import { Box } from '../../components/elements'
 import { Table } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-export default function Packages() {
+export default function Unitmeasurement() {
     const [open, Close] = useState(false);
 
     const handleDotBox = () => {
@@ -21,7 +22,7 @@ export default function Packages() {
                         <CardLayout>
                             <Row>
                     <Col md={12} style={{fontSize:"1.3rem"}}  > 
-                            Packages
+                            Units Measurement
                     </Col>
                                 <Col md={12}>
                                     <Row>
@@ -48,7 +49,7 @@ export default function Packages() {
                                             </div>
                                         </Col>
                                         <Col md={9}>
-                                            <Link to={'/packages-create'} style={{ float: "right" }} ><button className='acc-create-btn rs-btn-create'><FontAwesomeIcon icon={faPlus} /> Create </button></Link>
+                                            <Link to={'/units-create'} style={{ float: "right" }} ><button className='acc-create-btn rs-btn-create'><FontAwesomeIcon icon={faPlus} /> Create </button></Link>
 
                                         </Col>
                                         <Col md={12}>
@@ -73,7 +74,7 @@ export default function Packages() {
                                                             {open ? (
                                                                 <Box className="DotBox-main-wrapper">
                                                                     <Box className="DotBox-inner">
-                                                                       <Link to={'/packages-create'}> <Box className="DotBox-p-con">
+                                                                       <Link to={'/units-create'}> <Box className="DotBox-p-con">
                                                                             <FontAwesomeIcon icon={faEdit} /> Edit
                                                                         </Box>
                                                                         </Link>

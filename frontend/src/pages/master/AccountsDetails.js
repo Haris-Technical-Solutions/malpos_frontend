@@ -10,9 +10,14 @@ export default function AccountsDetails() {
     <div>
       <PageLayout>
         <Row>
+            
+            {/* </Row> */}
+          
+          <Col md={12}>
+            <CardLayout>
+              <Row>
           <Col md={12}>
             {/* <Row> */}
-            <CardLayout>
               <div className="d-flex justify-content-between align-items-center">
                 <h5>Details</h5>
                 <Box className="construction-edit-icons">
@@ -27,15 +32,10 @@ export default function AccountsDetails() {
                   </Box>
                 </Box>
               </div>
-            </CardLayout>
-            {/* </Row> */}
-          </Col>
-          <Col md={12}>
-            <CardLayout>
-              <Row>
+              </Col>
                 <Col md={12}>
                   <Table className="acc-details-table">
-                    <thead>
+                    <thead style={{backgroundColor:'#F07632'}}>
                       <tr>
                         <th>Date</th>
                         <th>Amount</th>

@@ -6,6 +6,7 @@ import PageLayout from '../../layouts/PageLayout';
 import axiosInstance from '../../api/baseUrl';
 import { toast } from 'react-toastify';
 import { useProduct } from "../../components/createProduct/productContext";
+import { Link } from 'react-router-dom';
 
 export default function StorageCreate() {
     const {
@@ -49,27 +50,31 @@ export default function StorageCreate() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>Storage Create</CardLayout>
-          </Col>
-          <Col md={12}>
             <CardLayout>
               <Row>
+          <Col md={12}>
+            Storage Create
+          </Col>
                 <Col md={6}>
                   <LabelField
                     type="text"
+                    style={{marginBottom:'1rem' }}
+                    label={'Name'}
                     value={newStorage.name}
                     onChange={(e) => setNewStorage({ ...newStorage, name: e.target.value })}
                     placeholder={'Name'}
                   />
                   <Form.Check
+                  style={{marginBottom:'1rem' }}
                     type="switch"
                     label="Status"
                     checked={newStorage.is_active === 1}
                     onChange={() => setNewStorage({ ...newStorage, is_active: newStorage.is_active === 1 ? 0 : 1 })}
                   />
+                  <Link to={"/Storage"}>
                   <Button variant="primary" onClick={handleCreateStorage}>
                     Create
-                  </Button>
+                  </Button></Link>
                 </Col>
               </Row>
             </CardLayout>

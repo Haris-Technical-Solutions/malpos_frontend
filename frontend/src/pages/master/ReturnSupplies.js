@@ -116,7 +116,7 @@ export default function ReturnSupplies() {
                       </Row>
                     </Col>
                     <Col md={3} className="rs-btn-create">
-                      <Link to="">
+                      <Link to={"/return-create"}>
                         <button className="acc-create-btn rs-btn-create">
                           <FontAwesomeIcon icon={faPlus} /> Create{" "}
                         </button>

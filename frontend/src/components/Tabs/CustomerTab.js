@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faAngleDown,
-  faSearch,
+  faSearch,faTrash,faEllipsis,
   faPlus,
   faEdit,
 } from "@fortawesome/free-solid-svg-icons";
@@ -325,7 +325,7 @@ export default function CustomerTab() {
 
         <Box className="receip-table-m">
           <Table responsive>
-            <thead className="thead-modifier thead-dark">
+            <thead className="thead-modifier " style={{backgroundColor:'#F07632', color:'black'}}>
               <tr>
                 <th>
                   ID
@@ -374,7 +374,7 @@ export default function CustomerTab() {
                     {sortOrder === "asc" ? "▲" : "▼"}
                   </button>
                   <br />
-                  <span>112.00 SA</span>
+                  <span style={{color:'red'}} >112.00 SA</span>
                 </th>
                 <th>From account</th>
                 <th>To account</th>
@@ -409,29 +409,28 @@ export default function CustomerTab() {
                 <td> Cash account</td>
                 <td> Income</td>
                 <td>
-                  <Box className="dot-content">
-                    <div onClick={handleDotBox}>...</div>
-                    {open ? (
-                      <Box
-                        className="DotBox-main-wrapper"
-                        onClick={handleDotBox}
-                      >
-                        <Box className="DotBox-inner">
-                          <Box className="DotBox-p-con">
-                            <Link to={"/payment-method-create"}>
-                              {" "}
-                              <FontAwesomeIcon icon={faEdit} /> Edit{" "}
-                            </Link>
-                          </Box>
-                        </Box>
-                      </Box>
-                    ) : (
-                      ""
-                    )}
-                  </Box>
+                <Box className="dot-content">
+                           <div onClick={handleDotBox}><FontAwesomeIcon icon={faEllipsis} /> </div>
+                                      {open ? (
+                                                                <Box className="DotBox-main-wrapper">
+                                                                    <Box className="DotBox-inner">
+                                                                       <Link to={'/accounts-edit'}> <Box className="DotBox-p-con">
+                                                                            <FontAwesomeIcon icon={faEdit} /> Edit
+                                                                        </Box>
+                                                                        </Link>
+                                                                        <Box className="DotBox-p-con">
+                                                                            <FontAwesomeIcon icon={faTrash} /> Remove
+                                                                        </Box>
+                                                                    </Box>
+                                                                </Box>
+                                                            ) : (
+                                                                ""
+                                                            )}
+                                                        </Box>
                 </td>
               </tr>
             </tbody>
+           
           </Table>
         </Box>
       </Box>

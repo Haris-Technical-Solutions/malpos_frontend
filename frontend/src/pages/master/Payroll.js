@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState} from "react";
 import { Col, Row } from "react-bootstrap";
 import { CardLayout } from "../../components/cards";
 import PageLayout from "../../layouts/PageLayout";
@@ -13,23 +13,23 @@ import {
 import { Table } from "react-bootstrap";
 import { Link } from "react-router-dom";
 export default function Payroll() {
+  const [open, Close] = useState(false);
+
   return (
     <div>
       <PageLayout>
         <Row>
           <Col md={12}>
             <CardLayout>
+              <Row>
+          <Col md={12}>
               <div className="d-flex justify-content-between align-items-center">
                 <h5>PayRoll</h5>
                 <div>
                   <FontAwesomeIcon icon={faCalendarDays} />
                 </div>{" "}
-              </div>
-            </CardLayout>
+              </div>           
           </Col>
-          <Col md={12}>
-            <CardLayout>
-              <Row>
                 <Col md={12}>
                   <Row>
                     <Col md={3}>
@@ -57,6 +57,7 @@ export default function Payroll() {
                     <Col md={9} className="col-9-checkbox">
                       <Box className={"h-checkBox-payroll"}>
                         <Form.Check
+                        style={{fontSize:"0.7rem", marginLeft:"0.5rem"}}
                           type="checkbox"
                           label="Show Deleted Accounts"
                         />
@@ -66,7 +67,7 @@ export default function Payroll() {
                 </Col>
                 <Col md={12}>
                   <Table className="payroll-table" responsive>
-                    <thead className="thead-dark">
+                    <thead  style={{backgroundColor:'#F07632'}}>
                       <tr>
                         <th className="th-w15">Username</th>
                         <th className="th-w15">Role</th>
@@ -77,22 +78,22 @@ export default function Payroll() {
                         <th className="th-w15 text-end">
                           Total Paid
                           <br />
-                          <span>0.3345 SAR</span>
+                          <span style={{color:'red'}} >0.3345 SAR</span>
                         </th>
                         <th className="th-w10 text-end">
                           Salary
                           <br />
-                          <span>0.3345 SAR</span>
+                          <span style={{color:'red'}} >0.3345 SAR</span>
                         </th>
                         <th className="th-w10 text-end">
                           Bonus
                           <br />
-                          <span>0.3345 SAR</span>
+                          <span style={{color:'red'}} >0.3345 SAR</span>
                         </th>
                         <th className="th-w10 text-end">
                           Paid Salary
                           <br />
-                          <span>0.3345 SAR</span>
+                          <span style={{color:'red'}} >0.3345 SAR</span>
                         </th>
                         <th className="th-w10 text-end">Left Salary</th>
                       </tr>

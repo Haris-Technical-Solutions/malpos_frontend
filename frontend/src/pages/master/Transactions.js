@@ -21,22 +21,20 @@ export default function Transaction() {
     <div>
       <PageLayout>
         <Row>
+
           <Col md={12}>
             <Row>
               <CardLayout>
-                <div className="d-flex justify-content-between align-items-center">
+          <Col md={12}>
+            <Row>          
+                <div className="d-flex justify-content-between align-items-center"  style={{marginBottom:"1rem"}}>
                   <h5>Transactions 4</h5>
                   <div>
                     <FontAwesomeIcon icon={faCalendarDays} />
                   </div>{" "}
                 </div>
-              </CardLayout>
             </Row>
           </Col>
-
-          <Col md={12}>
-            <Row>
-              <CardLayout>
                 <Col md={12}>
                   <Box className="categories-btn">
                     <button

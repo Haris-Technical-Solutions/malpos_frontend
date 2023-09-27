@@ -62,6 +62,7 @@ export default function SuppliersCreate() {
                 <Col md={6}>
                   <LabelField
                     type="text"
+                    style={{marginBottom:'1rem' }}
                     value={currentSupplier.supplier_name}
                     onChange={(e) =>
                       setCurrentSupplier({
@@ -69,10 +70,13 @@ export default function SuppliersCreate() {
                         supplier_name: e.target.value,
                       })
                     }
+                    label={'Name:'}
                     placeholder={"Supplier Name"}
                   />
                   <LabelField
+                  label={'Phone Number:'}
                     type="number"
+                    style={{marginBottom:'1rem' }}
                     value={currentSupplier.phone}
                     onChange={(e) =>
                       setCurrentSupplier({
@@ -85,6 +89,7 @@ export default function SuppliersCreate() {
                   <LabelField
                     type="text"
                     value={currentSupplier.tin}
+                    style={{marginBottom:'1rem' }}
                     onChange={(e) =>
                       setCurrentSupplier({
                         ...currentSupplier,
@@ -92,9 +97,11 @@ export default function SuppliersCreate() {
                       })
                     }
                     placeholder={"Tin"}
+                    label={'Tin:'}
                   />
                   <LabelField
                     type="text"
+                    style={{marginBottom:'1rem' }}
                     value={currentSupplier.description}
                     onChange={(e) =>
                       setCurrentSupplier({
@@ -103,9 +110,11 @@ export default function SuppliersCreate() {
                       })
                     }
                     placeholder={"Description"}
+                    label={'Description:'}
                   />
                   <Box className={"storageEdit-switch"}>
                     <Form.Check
+                    style={{marginBottom:'1rem' }}
                       className="switch"
                       type="switch"
                       id="custom-switch"

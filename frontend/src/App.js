@@ -169,6 +169,9 @@ import CreateModifer from "./pages/form/CreateModifer";
 
 import { ProductProvider } from "./components/createProduct/productContext";
 import SuppliersEdit from "./pages/master/SuppliersEdit";
+import AccountCategoryedit from "./pages/master/AccountCategoryedit";
+import Unitmeasurement from "./pages/master/Unitmeasurement";
+import UnitCreate from "./pages/master/unitCreate";
 
 export default function App() {
   return (
@@ -210,6 +213,8 @@ export default function App() {
                 <Route path="/notification" element={<Notification />} />
                 <Route path="/settings" element={<Settings />} />
                 <Route path="/blank-page" element={<BlankPage />} />
+                <Route path="/return-create" element={<ReturnSuppliesCreate/>}/>
+                <Route path="/category-edit" element={<AccountCategoryedit/>}/>
                 {/* Blocks Pages */}
                 {/* <Route path="/headings" element={<Headings />} />
             <Route path="/buttons" element={<Buttons />} />
@@ -480,6 +485,7 @@ export default function App() {
                   path="/payment-method-create"
                   element={<PaymentMethodCreate />}
                 />
+                <Route path="/unit-measurement" element={<Unitmeasurement/>}/>
                 <Route path="/saleType-create" element={<SaleTypeCreate />} />
 
                 <Route path="/accounts" element={<Accounts />} />
@@ -606,6 +612,7 @@ export default function App() {
                 <Route path="/suppliers" element={<Suppliers />} />
                 <Route path="/suppliers-create" element={<SuppliersCreate />} />
                 <Route path="/suppliers-edit" element={<SuppliersEdit />} />
+                <Route path="/units-create" element={<UnitCreate/>}/>
                 <Route
                   path="/suppliers-details"
                   element={<SuppliersDetails />}

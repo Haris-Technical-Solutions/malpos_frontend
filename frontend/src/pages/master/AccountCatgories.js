@@ -8,6 +8,7 @@ import {
   faSearch,
   faPlus,
   faCaretRight,
+  faEdit, faTrash, faEllipsis,
   faCaretDown,
   faLock,
 } from "@fortawesome/free-solid-svg-icons";
@@ -15,6 +16,12 @@ import PageLayout from "../../layouts/PageLayout";
 import { Box } from "../../components/elements";
 export default function AccountCatgories() {
   const [expandedRows, setExpandedRows] = useState([]);
+  const [open, Close] = useState(false);
+
+  const handleDotBox = () => {
+      Close(!open);
+  };
+
   const data = [
     {
       id: 1,
@@ -42,6 +49,9 @@ export default function AccountCatgories() {
           <Col md={12}>
             <CardLayout>
               <Row>
+        <Col md={12}>
+            Accounts Categories
+          </Col>
                 <Col md={12}>
                   <Row>
                     <Col md={6}>
@@ -81,7 +91,8 @@ export default function AccountCatgories() {
                 </Col>
                 <Col md={12}>
                   <Table className="acc-categories-parent-table">
-                    <thead>
+                    <thead style={{backgroundColor:'#F07632', 
+  lineHeight: "5px"}}>
                       <tr>
                         <th className="th-w60">Name</th>
                         <th className="th-w30">type</th>
@@ -89,6 +100,7 @@ export default function AccountCatgories() {
                       </tr>
                     </thead>
                     <tbody>
+
                       {data.map(({ id, name, type, children }) => (
                         <React.Fragment key={id}>
                           <tr onClick={() => handleRowClick(id)}>
@@ -109,6 +121,24 @@ export default function AccountCatgories() {
                               <Box className={"faLock"}>
                                 <FontAwesomeIcon icon={faLock} />
                               </Box>
+                              <Box className="dot-content">
+                           <div onClick={handleDotBox}><FontAwesomeIcon icon={faEllipsis} /> </div>
+                                      {open ? (
+                                                                <Box className="DotBox-main-wrapper">
+                                                                    <Box className="DotBox-inner">
+                                                                       <Link to={'/category-edit'}> <Box className="DotBox-p-con">
+                                                                            <FontAwesomeIcon icon={faEdit} /> Edit
+                                                                        </Box>
+                                                                        </Link>
+                                                                        <Box className="DotBox-p-con">
+                                                                            <FontAwesomeIcon icon={faTrash} /> Remove
+                                                                        </Box>
+                                                                    </Box>
+                                                                </Box>
+                                                            ) : (
+                                                                ""
+                                                            )}
+                                                        </Box>
                             </td>
                           </tr>
                           {expandedRows.includes(id) && children.length > 0 && (
@@ -125,6 +155,7 @@ export default function AccountCatgories() {
                                     <Box className={"faLock"}>
                                       <FontAwesomeIcon icon={faLock} />
                                     </Box>
+                                   
                                   </td>
                                 </tr>
                               ))}

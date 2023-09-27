@@ -54,16 +54,13 @@ export default function Cashflow() {
         <Row>
           <Col md={12}>
             <CardLayout>
-              <div className="d-flex justify-content-between align-items-center">
-                <h5>Cashflow</h5>
+            <Col >
+             <div   className="d-flex justify-content-between align-items-center" style={{marginBottom:" 1rem"}}>
+                <h5 >Cashflow</h5>
                 <div>
                   <FontAwesomeIcon icon={faCalendarDays} />
                 </div>{" "}
-              </div>
-            </CardLayout>
-          </Col>
-          <Col md={12}>
-            <CardLayout>
+              </div></Col>
               <Row>
                 <Col md={12}>
                   <Row>
@@ -83,12 +80,13 @@ export default function Cashflow() {
                     <Col md={8} className="col-md-8-checkbox-cashflow">
                       <Box className={"h-checkBox-cashflow"}>
                         <Form.Check
+                        style={{fontSize:" 0.7rem"}}
                           type="checkbox"
                           label="Hide Empty Reports"
                         />
                       </Box>
                       <Box className={"h-checkBox-cashflow"}>
-                        <Form.Check type="checkbox" label="Hide Transfer" />
+                        <Form.Check type="checkbox" label="Hide Transfer"  style={{fontSize:" 0.7rem"}}/>
                       </Box>
                     </Col>
                   </Row>
@@ -97,7 +95,7 @@ export default function Cashflow() {
                   <Row>
                     <Col md={12} lg={6}>
                       <Table className="cashflow-Table" bordered>
-                        <thead className="thead-dark">
+                        <thead className="" style={{backgroundColor:'#F07632'}} >
                           <tr>
                             <th className="th-w50">Category</th>
                             <th className="th-w25 text-end">February</th>
@@ -165,7 +163,7 @@ export default function Cashflow() {
                                   </>
                                 )}
                               <tr>
-                                <td>Total Expence</td>
+                                <td>Total Expense</td>
                                 <td className="text-end">0.00 SAR</td>
                                 <td
                                   className="text-end"

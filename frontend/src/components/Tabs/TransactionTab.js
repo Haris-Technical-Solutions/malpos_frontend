@@ -356,7 +356,7 @@ export default function TransactionTab() {
 
         <Box className="receip-table-m">
           <Table responsive> 
-            <thead className="thead-modifier thead-dark">
+            <thead className="thead-modifier " style={{ backgroundColor: "#F07632", color:"black" }} >
               <tr>
                 <th>
                   ID
@@ -402,7 +402,7 @@ export default function TransactionTab() {
                     {sortOrder === "asc" ? "▲" : "▼"}
                   </button>
                   <br />
-                  <span>112.00 SA</span>
+                  <span style={{color:'red'}}>112.00 SA</span>
                 </th>
                 <th>Account</th>
                 <th></th>

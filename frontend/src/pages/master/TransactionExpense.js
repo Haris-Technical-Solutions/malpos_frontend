@@ -41,9 +41,9 @@ export default function TransactionExpense() {
   return (
     <Col md={12}>
       <Row>
-        <Col md={8}>
+        <Col md={11}>
           <Row>
-            <Col md={8}>
+            <Col md={6}>
               <Form.Label>Amount</Form.Label>
               <InputGroup>
                 <InputGroup.Text
@@ -54,7 +54,7 @@ export default function TransactionExpense() {
                   ––
                 </InputGroup.Text>
                 <Form.Control
-                  placeholder=""
+                  placeholder="Enter Amount"
                   label="Amount"
                   ref={nameInputRef}
                   aria-describedby="basic-addon1"
@@ -62,7 +62,7 @@ export default function TransactionExpense() {
               </InputGroup>
             </Col>
 
-            <Col md={8}>
+            <Col md={6} style={{marginTop:"1.8rem"}} >
               <LabelFieldS
                 label=" Balance"
                 option={[
@@ -75,7 +75,7 @@ export default function TransactionExpense() {
                 fieldSize="w-100 h-md"
               />
             </Col>
-            <Col md={8}>
+            <Col md={6}>
               <LabelFieldS
                 label="Category"
                 required
@@ -96,7 +96,7 @@ export default function TransactionExpense() {
                 Must select a category
               </Form.Control.Feedback>
             </Col>
-            <Col md={8}>
+            <Col md={6} style={{marginTop:"1.2rem"}} >
               <Form.Label>Oprerated at</Form.Label>
               <Form.Control
                 className="m-0"
@@ -113,7 +113,7 @@ export default function TransactionExpense() {
               </Form.Control.Feedback>
             </Col>
 
-            <Col md={8}>
+            <Col md={6}>
               <LabelTextarea
                 label="Description"
                 fieldSize="w-100 h-text-sm"
@@ -121,7 +121,7 @@ export default function TransactionExpense() {
               />
             </Col>
           </Row>
-          <Col md={8}>
+          <Col md={12}>
             <Box className="head-sec-rearrange-right">
               <Box className="rearrange-right">
                 <Link
