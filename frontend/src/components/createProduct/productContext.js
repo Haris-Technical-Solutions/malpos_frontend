@@ -121,8 +121,9 @@ export const ProductProvider = ({ children }) => {
 
   // Fetch Functions
   const fetchClients = async () => {
+    debugger
     try {
-      const res = await axiosInstance.get("/cdclient");
+      const res = await axiosInstance.get("/cdclients");
       const formattedData = formatData(res.data, "cd_client_id");
       setClients(formattedData);
     } catch (error) {

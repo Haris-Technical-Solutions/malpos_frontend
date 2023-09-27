@@ -11,9 +11,9 @@ import { faXmark, faPlus } from "@fortawesome/free-solid-svg-icons";
 import axiosInstance from "../../api/baseUrl";
 import { toast } from "react-toastify";
 import Datetime from "react-datetime";
+import moment from "moment";
 import "react-datetime/css/react-datetime.css";
 import { useProduct } from "../../components/createProduct/productContext"; // Import the context
-// import { TimePicker } from 'react-bootstrap-time-picker';
 import { MultiSelect } from "react-multi-select-component";
 export default function SuppliesEdit() {
   const location = useLocation();
@@ -31,7 +31,7 @@ export default function SuppliesEdit() {
     { label: "Draft", value: "draft" },
     { label: "Deleted", value: "deleted" },
   ];
-
+  const [uoms, setUOMs] = useState([]);
   const [currentSupplies, setCurrentSupplies] = useState({
     id: "",
     md_supply_id: "",
@@ -56,20 +56,61 @@ export default function SuppliesEdit() {
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedStatus, setSelectedStatus] = useState([]);
   const [selectedDateTime, setSelectedDateTime] = useState("");
-  const storageOptions = storage?.map((item) => ({
-    label: item.name,
-    value: item.id,
-  }));
-  const productOptions = products?.map((item) => ({
-    label: item.product_name,
-    value: item.id,
-  }));
+  const [invoiceNumber, setInvoicesNumber] = useState("asdf");
+  const [description, setDescription] = useState("asdf");
+  const [seleectedProduct ,setSelectedProduct]  = useState([]);
+  const storageOptions =
+    storage != undefined &&
+    storage?.map((item) => ({
+      label: item.name,
+      value: item.id,
+    }));
+
+  useEffect(() => {
+    fetchProducts();
+    fetchUom();
+    fetchStorage();
+    fetchCategories();
+    if (location.state?.id) {
+      setEditSuppliesId(location.state.id);
+      setAction(location.state.action);
+
+      const fetchSuppliesById = async (id) => {
+        try {
+          const res = await axiosInstance.get(`/md_supplies/${id}/edit`);
+          setCurrentSupplies(res.data);
+          setSelectedStorage(res.data.md_storage_id);
+          setSelectedStatus(res.data.status.toLowerCase());
+          setInvoicesNumber(res.data.invoice_no);
+
+          const momentObject = moment(
+            res.data.operation_time,
+            "YYYY-MM-DD HH:mm:ss"
+          );
+          const formattedDate = momentObject.format("YYYY-MM-DD HH:mm");
+          setSelectedDateTime(formattedDate);
+          console.log(res.data, "supplies updated");
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      fetchSuppliesById(location.state.id);
+    }
+  }, [location.state]);
+
+  const productOptions =
+    products != undefined &&
+    products?.map((item) => ({
+      label: item.product_name,
+      value: item.id,
+    }));
   const CategoryOptions =
     categories != undefined &&
     categories?.map((item) => ({
       label: item.product_category_name,
       value: item.md_product_category_id,
     }));
+
   const handleSwitchChange = () => {
     setCurrentSupplies((prevSupplier) => ({
       ...prevSupplier,
@@ -80,8 +121,8 @@ export default function SuppliesEdit() {
   const fetchStorage = async () => {
     try {
       const res = await axiosInstance.get("/md_storage");
-      setStorage(res.data);
-      console.log("Storage", res.data);
+      setStorage(res.data.data);
+      console.log("Storage", res.data.data);
     } catch (error) {
       console.log(error);
     }
@@ -100,8 +141,8 @@ export default function SuppliesEdit() {
   const fetchUom = async () => {
     try {
       const res = await axiosInstance.get("/uom");
-      // setProducts(res.data.products.data);
-      console.log("uom", res);
+      setUOMs(res.data.data.data);
+      console.log("uom details", res.data.data.data);
     } catch (error) {
       console.log(error);
     }
@@ -209,57 +250,6 @@ export default function SuppliesEdit() {
       console.log(error);
     }
   };
-  const fetchProductData = async () => {
-    try {
-      // const response = await axiosInstance.get(`/product_edit/${id}`);
-      // console.log(response, "response is here");
-      // const productData = response.data;
-      // setForm((prevForm) => ({
-      //   ...prevForm,
-      //   cd_client_id: productData.cd_client_id,
-      //   cd_brand_id: getPreSelectIds(
-      //     productData.product_brand,
-      //     "cd_brand_id"
-      //   ),
-      //   cd_branch_id: getPreSelectIds(
-      //     productData.product_branch,
-      //     "cd_branch_id"
-      //   ),
-      //   md_product_category_id: getPreSelectIds(
-      //     productData.product_product_category,
-      //     "md_product_category_id"
-      //   ),
-      //   td_tax_category_id: productData.td_tax_category_id,
-      //   product_name: productData.product_name,
-      //   maximun_day_of_product_return:
-      //     productData.maximun_day_of_product_return,
-      //   sold_by_weight: productData.sold_by_weight,
-      //   sale_price: productData.sale_price,
-      //   is_active: productData.is_active,
-      //   description: productData.description,
-      //   gift: productData.gift,
-      //   cooking_time: productData.cooking_time,
-      //   barcode: productData.barcode,
-      //   bundle: productData.bundle,
-      //   not_allow_apply_discount: productData.not_allow_apply_discount,
-      //   md_allergy_id: getPreSelectIds(
-      //     productData.product_allergy,
-      //     "md_allergy_id"
-      //   ),
-      //   md_menu_id: productData.md_menu_id,
-      //   md_menu_section_id: productData.md_menu_section_id,
-      //   md_diet_id: getPreSelectIds(productData.product_diet, "md_diet_id"),
-      //   md_station_id: getPreSelectIds(
-      //     productData.station_product,
-      //     "md_station_id"
-      //   ),
-      //   product_code: productData.product_code,
-      //   product_price: productData.product_price,
-      //   product_image: productData.product_image,
-      //   product_detail: productData.product_detail,
-      // }));
-    } catch (error) {}
-  };
 
   const handleUpdateSupplies = () => {
     axiosInstance
@@ -280,29 +270,6 @@ export default function SuppliesEdit() {
       });
   };
 
-  useEffect(() => {
-    fetchProducts();
-    fetchUom();
-    fetchStorage();
-    fetchCategories();
-    if (location.state?.id) {
-      setEditSuppliesId(location.state.id);
-      setAction(location.state.action);
-
-      const fetchSuppliesById = async (id) => {
-        try {
-          const res = await axiosInstance.get(`/md_supplies/${id}/edit`);
-          setCurrentSupplies(res.data);
-          console.log(res.data, "supplies updated");
-        } catch (error) {
-          console.log(error);
-        }
-      };
-
-      fetchSuppliesById(location.state.id);
-    }
-  }, [location.state]);
-
   const handleStorageChange = (e) => {
     setSelectedStorage(e.target.value);
     // setSelectedStorage(selectedOptions);
@@ -314,12 +281,17 @@ export default function SuppliesEdit() {
     const selectedIds = selectedOptions.map((option) => option.value);
   };
   const handleDateChange = (date) => {
+    console.log("date", date);
     setSelectedDateTime(date);
   };
   const handleStatusChange = (e) => {
     setSelectedStatus(e.target.value);
   };
+const handleProductSelect = (e) => {
+  console.log(e.target.value);
+  setSelectedProduct(e.target.value)
 
+}
   return (
     <div>
       <PageLayout>
@@ -393,7 +365,7 @@ export default function SuppliesEdit() {
                       <span style={{ color: "red" }}>*</span>
                     </label>
                     <MultiSelect
-                      options={CategoryOptions}
+                      options={[]}
                       value={selectedCategories}
                       onChange={handleCategoryChange}
                       labelledBy="Select"
@@ -420,57 +392,6 @@ export default function SuppliesEdit() {
                     </Form.Control>
                   </Form.Group>
                 </Col>
-                {/* <Col md={4}>
-                  <LabelField
-                    label="Unit"
-                    type="text"
-                    value={
-                      currentSupplies.supply_lines &&
-                      currentSupplies?.supply_lines[0]?.unit
-                    }
-                    onChange={(e) =>
-                      setCurrentSupplies({
-                        ...currentSupplies,
-                        unit: e.target.value,
-                      })
-                    }
-                    placeholder={"Unit"}
-                  />
-                </Col> */}
-                {/* <Col md={4}>
-                  <LabelField
-                    label="Cost"
-                    type="text"
-                    value={
-                      currentSupplies.supply_lines &&
-                      currentSupplies?.supply_lines[0]?.cost
-                    }
-                    onChange={(e) =>
-                      setCurrentSupplies({
-                        ...currentSupplies,
-                        cost: e.target.value,
-                      })
-                    }
-                    placeholder={"Cost"}
-                  />
-                </Col> */}
-                {/* <Col md={4}>
-                  <LabelField
-                    label="Discount Percent"
-                    type="text"
-                    value={
-                      currentSupplies.supply_lines &&
-                      currentSupplies?.supply_lines[0]?.discount_percent
-                    }
-                    onChange={(e) =>
-                      setCurrentSupplies({
-                        ...currentSupplies,
-                        discount_percent: e.target.value,
-                      })
-                    }
-                    placeholder={"Discount Percent"}
-                  />
-                </Col> */}
                 <Col md={4}>
                   <Form.Label>OPERATION TIME</Form.Label>
                   <Datetime
@@ -484,48 +405,17 @@ export default function SuppliesEdit() {
                   <LabelField
                     label="Invoice Number"
                     type="text"
-                    value={
-                      currentSupplies.supply_lines &&
-                      currentSupplies?.invoice_no
-                    }
-                    onChange={(e) =>
-                      setCurrentSupplies({
-                        ...currentSupplies,
-                        invoice_no: e.target.value,
-                      })
-                    }
+                    value={invoiceNumber}
+                    onChange={(e) => setInvoicesNumber(e.target.value)}
                     placeholder={"Invoice Number"}
                   />
                 </Col>
-                {/* <Col md={4}>
-                  <LabelField
-                    label="Tax Percent"
-                    type="text"
-                    value={
-                      currentSupplies.supply_lines &&
-                      currentSupplies?.supply_lines[0]?.tax_percent
-                    }
-                    onChange={(e) =>
-                      setCurrentSupplies({
-                        ...currentSupplies,
-                        tax_percent: e.target.value,
-                      })
-                    }
-                    placeholder={"Tax Percent"}
-                  />
-                </Col> */}
-
                 <Col md={4}>
                   <LabelField
                     label="Description"
                     type="text"
-                    value={currentSupplies && currentSupplies?.description}
-                    onChange={(e) =>
-                      setCurrentSupplies({
-                        ...currentSupplies,
-                        description: e.target.value,
-                      })
-                    }
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
                     placeholder={"Description"}
                   />
                 </Col>
@@ -534,12 +424,6 @@ export default function SuppliesEdit() {
                     label="Balance"
                     type="text"
                     value={currentSupplies && currentSupplies?.balance}
-                    onChange={(e) =>
-                      setCurrentSupplies({
-                        ...currentSupplies,
-                        balance: e.target.value,
-                      })
-                    }
                     placeholder={"Balance"}
                   />
                 </Col>
@@ -596,7 +480,7 @@ export default function SuppliesEdit() {
                             name="status"
                             type="select"
                             value={selectedStorage} // Set the value to preselect
-                            onChange={handleStorageChange}
+                            onChange={handleProductSelect}
                           >
                             <option value="">Select</option>
                             {productOptions.map((option) => (
@@ -608,18 +492,25 @@ export default function SuppliesEdit() {
                         </Form.Group>
                       </Box>
                       <Box className=" modifier-gen-box-items modifier-gen-box-mod">
-                        <LabelField
-                          option={[
-                            "Select",
-                            "Sea food",
-                            "Expresso",
-                            "Ice drink",
-                            "Pizza",
-                          ]}
-                          // option={option}
-                          fieldSize="w-100 h-md"
-                          // onChange={handleOptionChange}
-                        />
+                        <Form.Group>
+                          <Form.Control
+                            as="select"
+                            name="status"
+                            type="select"
+                            value={selectedStorage} // Set the value to preselect
+                            onChange={handleStorageChange}
+                          >
+                            <option value="">Select</option>
+                            {uoms.map((option) => (
+                              <option
+                                key={option.md_uoms_id}
+                                value={option.md_uoms_id}
+                              >
+                                {option.name}
+                              </option>
+                            ))}
+                          </Form.Control>
+                        </Form.Group>
                       </Box>
 
                       <Box className="modifier-gen-box-items modifier-gen-box-gross">

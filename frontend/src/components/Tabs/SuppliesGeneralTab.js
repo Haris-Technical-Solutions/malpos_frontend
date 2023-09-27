@@ -20,15 +20,18 @@ export default function SuppliesGeneralTab() {
 
   useEffect(() => {
     // Fetch supply data using Axios when the component mounts
-    axiosInstance.get('/md_supplies')
-      .then(response => {
-        setSupplyData(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching supply data', error);
-      });
+    fetchSupplies();
   }, []); // The empty dependency array ensures this effect runs only once
-
+const fetchSupplies = async () =>{
+   await axiosInstance.get('/md_supplies')
+  .then(response => {
+    console.log(response.data.data,"success");
+    setSupplyData(response.data.data);
+  })
+  .catch(error => {
+    console.error('Error fetching supply data', error);
+  });
+}
   const options = [
     { value: 'option1', label: 'Option 1' },
     { value: 'option2', label: 'Option 2' },
@@ -99,10 +102,10 @@ export default function SuppliesGeneralTab() {
                       </tr>
                     </thead>
                     <tbody>
-                      {supplyData.map(supply => (
+                      {supplyData!=undefined && supplyData.map(supply => (
                         <tr className='f-13' key={supply.id}>
                           <td className='td-w50'>{supply.id}</td>
-                          <td className='td-w150'>{supply?.supply_lines[0]?.product?.product_name}</td>
+                          <td className='td-w150'>{supply?.supplies_lines[0]?.product?.product_name}</td>
                           <td className='td-w130' title={supply.operation_time}>{`${supply.operation_time.substring(0, 10)}...`}</td>
                           <td className='td-w100'>{supply.supplier.supplier_name}</td>
                           <td className='td-w100'>{supply.storage.name}</td>
