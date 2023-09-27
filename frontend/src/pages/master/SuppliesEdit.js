@@ -32,40 +32,32 @@ export default function SuppliesEdit() {
     { label: "Deleted", value: "deleted" },
   ];
   const [uoms, setUOMs] = useState([]);
-  const [currentSupplies, setCurrentSupplies] = useState({
-    id: "",
-    md_supply_id: "",
-    invoice_no: "",
-    md_product_id: "",
-    balance: "",
-    qty: 0,
-    operation_time: "",
-    storage: "",
-    unit: "",
-    cost: 0,
-    discount_percent: 0,
-    tax_percent: 0,
-    total: 0,
-    created_at: "",
-    updated_at: "",
-    cd_branch_id: form.cd_branch_id, // Use context value
-    cd_brand_id: form.cd_brand_id, // Use context value
-    cd_client_id: form.cd_client_id, // Use context value
-  });
+  const [currentSupplies, setCurrentSupplies] = useState([]);
   const [selectedStorage, setSelectedStorage] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedStatus, setSelectedStatus] = useState([]);
   const [selectedDateTime, setSelectedDateTime] = useState("");
   const [invoiceNumber, setInvoicesNumber] = useState("asdf");
   const [description, setDescription] = useState("asdf");
-  const [seleectedProduct ,setSelectedProduct]  = useState([]);
+  const [seleectedProduct, setSelectedProduct] = useState([]);
   const storageOptions =
     storage != undefined &&
     storage?.map((item) => ({
       label: item.name,
       value: item.id,
     }));
-
+  const [supplyLines, setSupplyLines] = useState([
+    {
+      md_product_id: 0,
+      qty: 0,
+      total: 0,
+      cost: 0,
+      discount_percent: 0,
+      tax: 0,
+      uom_id: 0,
+      uom_type: "base",
+    },
+  ]);
   useEffect(() => {
     fetchProducts();
     fetchUom();
@@ -80,6 +72,7 @@ export default function SuppliesEdit() {
           const res = await axiosInstance.get(`/md_supplies/${id}/edit`);
           setCurrentSupplies(res.data);
           setSelectedStorage(res.data.md_storage_id);
+          fecthSupplyLines(res.data?.supplies_lines);
           setSelectedStatus(res.data.status.toLowerCase());
           setInvoicesNumber(res.data.invoice_no);
 
@@ -97,12 +90,28 @@ export default function SuppliesEdit() {
       fetchSuppliesById(location.state.id);
     }
   }, [location.state]);
+  
+  const fecthSupplyLines = (supplies) => {
+    debugger
 
+    const suppliesOptions = supplies.map((item) => ({
+      md_product_id: item.md_product_id,
+      qty: item.qty,
+      total: item.total,
+      cost: item.cost,
+      discount_percent: item.discount_percent,
+      tax: item.tax,
+      uom_id: item.uom_id,
+      uom_type: "base",
+    }));
+
+    setSupplyLines(suppliesOptions);
+  };
   const productOptions =
     products != undefined &&
     products?.map((item) => ({
       label: item.product_name,
-      value: item.id,
+      value: item.md_product_id,
     }));
   const CategoryOptions =
     categories != undefined &&
@@ -156,90 +165,23 @@ export default function SuppliesEdit() {
     setBoxes(newBoxes);
     setNumBoxes(numBoxes - 1);
   };
-  const handleAddBox = () => {
-    const nextIndex = boxes.length;
-    const newBox = (
-      <Col md={12}>
-        <Box className="manage-modifier-gen-box">
-          <Box className="manage-modifier-gen-box-inner">
-            <Box className=" modifier-gen-box-items modifier-gen-box-mod">
-              Product
-            </Box>
-            <Box className="modifier-gen-box-items modifier-gen-box-name">
-              Unit
-            </Box>
-            <Box className="modifier-gen-box-items modifier-gen-box-img">
-              QTY
-            </Box>
-            <Box className="modifier-gen-box-items modifier-gen-box-gross">
-              Cost
-            </Box>
-            <Box className="modifier-gen-box-items modifier-gen-box-def">
-              Discount(%)
-            </Box>
-            <Box className="modifier-gen-box-items modifier-gen-box-cp">
-              Tax(%)
-            </Box>
-            <Box className="modifier-gen-box-items modifier-gen-box-price">
-              Total
-            </Box>
-          </Box>
-        </Box>
-        <Box className="manage-modifier-gen-box">
-          <Box className="manage-modifier-gen-box-inner-textfield">
-            <Box className=" modifier-gen-box-items modifier-gen-box-mod">
-              <LabelField
-                option={[
-                  "Select",
-                  "Sea food",
-                  "Expresso",
-                  "Ice drink",
-                  "Pizza",
-                ]}
-                // option={option}
-                fieldSize="w-100 h-md"
-                // onChange={handleOptionChange}
-              />
-            </Box>
-            <Box className=" modifier-gen-box-items modifier-gen-box-mod">
-              <LabelField
-                option={[
-                  "Select",
-                  "Sea food",
-                  "Expresso",
-                  "Ice drink",
-                  "Pizza",
-                ]}
-                // option={option}
-                fieldSize="w-100 h-md"
-                // onChange={handleOptionChange}
-              />
-            </Box>
+  const handleAddBox = () =>{
 
-            <Box className="modifier-gen-box-items modifier-gen-box-gross">
-              <LabelField type="text" fieldSize="w-100 h-md" placeholder="0" />
-            </Box>
-            <Box className="modifier-gen-box-items modifier-gen-box-gross">
-              <LabelField type="text" fieldSize="w-100 h-md" placeholder="0" />
-            </Box>
+    const newSupplyLine = {
+      md_product_id: '', 
+      qty: 0,
+      cost: 0,
+      discount_percent: 0,
+      tax: 0,
+      total: 0,
+      uom_id: '',
+      uom_type: 'base',
+    };
+    const updatedSupplyLines = [...supplyLines];
+    updatedSupplyLines.push(newSupplyLine);
+    setSupplyLines(updatedSupplyLines);
+  }
 
-            <Box className="modifier-gen-box-items modifier-gen-box-gross">
-              <LabelField type="text" fieldSize="w-100 h-md" placeholder="0" />
-            </Box>
-
-            <Box className="modifier-gen-box-items modifier-gen-box-gross">
-              <LabelField type="text" fieldSize="w-100 h-md" placeholder="0" />
-            </Box>
-            <Box className="modifier-gen-box-items modifier-gen-box-price">
-              <LabelField type="text" fieldSize="w-100 h-md" placeholder="0" />
-            </Box>
-          </Box>
-        </Box>
-      </Col>
-    );
-    setBoxes([...boxes, newBox]);
-    setNumBoxes(numBoxes + 1);
-  };
 
   const fetchCategories = async () => {
     try {
@@ -251,9 +193,28 @@ export default function SuppliesEdit() {
     }
   };
 
-  const handleUpdateSupplies = () => {
+  const handleUpdateSupplies = (editSuppliesId) => {
+    let currentSupplies_ = {
+      cd_client_id: currentSupplies.cd_client_id,
+      cd_brand_id: currentSupplies.cd_brand_id,
+      cd_branch_id: currentSupplies.cd_branch_id,
+
+      invoice_no: invoiceNumber,
+      operation_time: selectedDateTime,
+      md_supplier_id: currentSupplies.md_supplier_id,
+      md_storage_id: selectedStorage,
+      status: selectedStatus,
+      balance: null,
+      category: null,
+      description: description,
+      created_by: "1",
+      updated_by: "1",
+      lines: supplyLines,
+    };
+    // console.log(currentSupplies_,'currentSupplies_');
+    // return
     axiosInstance
-      .post(`/md_supplies/update/${editSuppliesId}`, currentSupplies)
+      .post(`/md_supplies/update/${editSuppliesId}`, currentSupplies_)
       .then((response) => {
         toast.success("Supplies updated successfully", {
           position: "top-right",
@@ -276,6 +237,16 @@ export default function SuppliesEdit() {
     // const selectedIds = selectedOptions.map((option) => option.value);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (action == "updateSupplies") {
+      handleUpdateSupplies(location.state.id);
+    } else {
+      console.log("we are here");
+    }
+  };
+
   const handleCategoryChange = (selectedOptions) => {
     setSelectedCategories(selectedOptions);
     const selectedIds = selectedOptions.map((option) => option.value);
@@ -287,11 +258,18 @@ export default function SuppliesEdit() {
   const handleStatusChange = (e) => {
     setSelectedStatus(e.target.value);
   };
-const handleProductSelect = (e) => {
-  console.log(e.target.value);
-  setSelectedProduct(e.target.value)
+  const handleProductSelect = (e) => {
+    console.log(e.target.value);
+    setSelectedProduct(e.target.value);
+  };
 
+function handleSupplyFieldsChange(event, index, fieldName) {
+  const { name, value } = event.target;
+  const updatedSupplyLines = [...supplyLines];
+  updatedSupplyLines[index][fieldName] = value;
+  setSupplyLines(updatedSupplyLines);
 }
+  
   return (
     <div>
       <PageLayout>
@@ -300,14 +278,14 @@ const handleProductSelect = (e) => {
             <CardLayout>
               <div className="d-flex justify-content-between">
                 <h3>
-                  {action === "updateProduct"
+                  {action === "updateSupplies"
                     ? "Update Supplies"
                     : "Create Supplies"}
                 </h3>
                 <div className="align-self-end">
                   <button
                     className="add-product-btn-pl"
-                    // onClick={(e) => handleSubmit(e)}
+                    onClick={(e) => handleSubmit(e)}
                   >
                     Submit
                   </button>
@@ -333,13 +311,6 @@ const handleProductSelect = (e) => {
                   />
                 </Col>
                 <Col md={4}>
-                  {/* <MultiSelect
-                      options={storageOptions}
-                      value={selectedStorage}
-                      onChange={handleStorageChange}
-                      labelledBy="Select"
-                      hasSelectAll={false}
-                    /> */}
                   <Form.Group>
                     <Form.Label>Storage</Form.Label>
                     <Form.Control
@@ -427,24 +398,7 @@ const handleProductSelect = (e) => {
                     placeholder={"Balance"}
                   />
                 </Col>
-                {/* <Col md={12}>
-                  <button className="cus-btn">
-                    {" "}
-                    {action === "updateSupplies" ? "Update" : "Create"}
-                  </button>
-                  <Link to="/product-list">
-                    <button
-                      style={{
-                        backgroundColor: "#F07632",
-                        color: "white",
-                        borderColor: "#F07632",
-                      }}
-                      className="cus-btn-bor"
-                    >
-                      Back
-                    </button>
-                  </Link>
-                </Col> */}
+
                 <Col md={12}>
                   <Box className="manage-modifier-gen-box">
                     <Box className="manage-modifier-gen-box-inner">
@@ -471,87 +425,105 @@ const handleProductSelect = (e) => {
                       </Box>
                     </Box>
                   </Box>
-                  <Box className="manage-modifier-gen-box">
-                    <Box className="manage-modifier-gen-box-inner-textfield">
-                      <Box className=" modifier-gen-box-items modifier-gen-box-mod">
-                        <Form.Group>
-                          <Form.Control
-                            as="select"
-                            name="status"
-                            type="select"
-                            value={selectedStorage} // Set the value to preselect
-                            onChange={handleProductSelect}
-                          >
-                            <option value="">Select</option>
-                            {productOptions.map((option) => (
-                              <option key={option.value} value={option.value}>
-                                {option.label}
-                              </option>
-                            ))}
-                          </Form.Control>
-                        </Form.Group>
-                      </Box>
-                      <Box className=" modifier-gen-box-items modifier-gen-box-mod">
-                        <Form.Group>
-                          <Form.Control
-                            as="select"
-                            name="status"
-                            type="select"
-                            value={selectedStorage} // Set the value to preselect
-                            onChange={handleStorageChange}
-                          >
-                            <option value="">Select</option>
-                            {uoms.map((option) => (
-                              <option
-                                key={option.md_uoms_id}
-                                value={option.md_uoms_id}
+
+                  {supplyLines.map((supply, index) => {
+                    return (
+                      <Box className="manage-modifier-gen-box">
+                        <Box className="manage-modifier-gen-box-inner-textfield">
+                          <Box className=" modifier-gen-box-items modifier-gen-box-mod">
+                            <Form.Group>
+                              <Form.Control
+                                as="select"
+                                name="productid"
+                                type="select"
+                                value={supply.md_product_id} // Set the value to preselect
+                                onChange={(e)=>{handleSupplyFieldsChange(e, index, 'md_product_id')}}
                               >
-                                {option.name}
-                              </option>
-                            ))}
-                          </Form.Control>
-                        </Form.Group>
-                      </Box>
+                                <option value="">Select</option>
+                                {productOptions.map((option) => (
+                                  <option
+                                    key={option.value}
+                                    value={option.value}
+                                  >
+                                    {option.label}
+                                  </option>
+                                ))}
+                              </Form.Control>
+                            </Form.Group>
+                          </Box>
+                          <Box className=" modifier-gen-box-items modifier-gen-box-mod">
+                            <Form.Group>
+                              <Form.Control
+                                as="select"
+                                name="uom_id"
+                                type="select"
+                                value={supply.uom_id} // Set the value to preselect
+                                onChange={(e)=>{handleSupplyFieldsChange(e, index, 'uom_id')}}
+                              >
+                                <option value="">Select</option>
+                                {uoms.map((option) => (
+                                  <option
+                                    key={option.md_uoms_id}
+                                    value={option.md_uoms_id}
+                                  >
+                                    {option.name}
+                                  </option>
+                                ))}
+                              </Form.Control>
+                            </Form.Group>
+                          </Box>
 
-                      <Box className="modifier-gen-box-items modifier-gen-box-gross">
-                        <LabelField
-                          type="text"
-                          fieldSize="w-100 h-md"
-                          placeholder="0"
-                        />
-                      </Box>
-                      <Box className="modifier-gen-box-items modifier-gen-box-gross">
-                        <LabelField
-                          type="text"
-                          fieldSize="w-100 h-md"
-                          placeholder="0"
-                        />
-                      </Box>
+                          <Box className="modifier-gen-box-items modifier-gen-box-gross">
+                            <LabelField
+                              value={supply.qty}
+                              onChange={(e)=>{handleSupplyFieldsChange(e, index, 'qty')}}
+                              type="text"
+                              fieldSize="w-100 h-md"
+                              placeholder="0"
+                            />
+                          </Box>
+                          <Box className="modifier-gen-box-items modifier-gen-box-gross">
+                            <LabelField
+                              type="text"
+                              value={supply.cost}
+                              onChange={(e)=>{handleSupplyFieldsChange(e, index, 'cost')}}
+                              fieldSize="w-100 h-md"
+                              placeholder="0"
+                            />
+                          </Box>
 
-                      <Box className="modifier-gen-box-items modifier-gen-box-gross">
-                        <LabelField
-                          type="text"
-                          fieldSize="w-100 h-md"
-                          placeholder="0"
-                        />
-                      </Box>
+                          <Box className="modifier-gen-box-items modifier-gen-box-gross">
+                            <LabelField
+                              type="text"
+                              value={supply.discount_percent}
+                              onChange={(e)=>{handleSupplyFieldsChange(e, index, 'discount_percent')}}
+                              fieldSize="w-100 h-md"
+                              placeholder="0"
+                            />
+                          </Box>
 
-                      <Box className="modifier-gen-box-items modifier-gen-box-gross">
-                        <LabelField
-                          type="text"
-                          fieldSize="w-100 h-md"
-                          placeholder="0"
-                        />
+                          <Box className="modifier-gen-box-items modifier-gen-box-gross">
+                            <LabelField
+                              type="text"
+                              value={supply.tax}
+                              onChange={(e)=>{handleSupplyFieldsChange(e, index, 'tax')}}
+                              fieldSize="w-100 h-md"
+                              placeholder="0"
+                            />
+                          </Box>
+                          <Box className="modifier-gen-box-items modifier-gen-box-price">
+                            <LabelField
+                              type="text"
+                              value={supply.total}
+                              onChange={(e)=>{handleSupplyFieldsChange(e, index, 'total')}}
+                              fieldSize="w-100 h-md"
+                              placeholder="0"
+                            />
+                          </Box>
+                        </Box>
                       </Box>
-                      <Box className="modifier-gen-box-items modifier-gen-box-price">
-                        <LabelField
-                          type="text"
-                          fieldSize="w-100 h-md"
-                          placeholder="0"
-                        />
-                      </Box>
-                    </Box>
-                  </Box>
+                    );
+                  })}
                   {boxes.map((box, index) => {
                     return (
                       <div
@@ -559,7 +531,6 @@ const handleProductSelect = (e) => {
                         style={{
                           display: "flex",
                           alignItems: "center",
-                          // marginTop: "25px",
                         }}
                       >
                         {console.log(index)}

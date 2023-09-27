@@ -36,21 +36,15 @@ export default function Suppliers() {
 
   useEffect(() => {
     // Fetch suppliers data
-    axiosInstance
-      .get("/md_supplier")
-      .then((response) => {
-        setSuppliers(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching suppliers data", error);
-      });
+fetchSupplier();
   }, []);
 
-  const fetchSupplier = () => {
-    axiosInstance
+  const fetchSupplier = async () => {
+    debugger
+   await axiosInstance
       .get("/md_supplier")
       .then((response) => {
-        setSuppliers(response.data);
+        setSuppliers(response.data.data);
       })
       .catch((error) => {
         console.error("Error fetching suppliers data", error);
@@ -170,7 +164,7 @@ export default function Suppliers() {
                             </tr>
                           </thead>
                           <tbody>
-                            {suppliers.map((supplier) => (
+                            {suppliers !=undefined && suppliers.map((supplier) => (
                               <tr key={supplier.id} className="f-13">
                                 <td className="td-w20">
                                   {supplier.supplier_name}

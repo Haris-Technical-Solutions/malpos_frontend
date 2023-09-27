@@ -64,7 +64,7 @@ export default function Storage() {
   const fetchStorage = async () => {
     try {
       const res = await axiosInstance.get("/md_storage");
-      setStorage(res.data);
+      setStorage(res.data.data);
     } catch (error) {
       console.log(error);
     }

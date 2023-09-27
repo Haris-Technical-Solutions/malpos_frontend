@@ -28,6 +28,7 @@ export default function CreateProduct() {
     stations,
     menus,
     menuId,
+    UOMs,
     // menuSections,
     imagePreviewURL,
     setDeletingMethod,
@@ -62,6 +63,7 @@ export default function CreateProduct() {
 
     handleChange,
     handleTaxCategoryChange,
+    handleUomChange,
     handleCheckboxChange,
     handleSubmit,
   } = useProduct();
@@ -75,7 +77,7 @@ export default function CreateProduct() {
   };
 
   useEffect(() => {
-    console.log(stations, menus, "context");
+    console.log(stations, menus, UOMs,"context");
     console.log(location.state, "locations");
     if (location.state?.id) {
       setEditProductId(location.state?.id);
@@ -338,6 +340,15 @@ export default function CreateProduct() {
                             options={stations}
                             value={form.md_station_id}
                             onChange={handleStationChange}
+                          />
+                        </Col>
+                        <Col md={3}>
+                          <SelectField
+                            label="Unit of Measurement"
+                            name="md_uoms_id"
+                            options={UOMs}
+                            value={form.md_uoms_id}
+                            onChange={handleUomChange}
                           />
                         </Col>
                         {/* <Col md={6}>

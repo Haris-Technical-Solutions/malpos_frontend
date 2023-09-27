@@ -28,7 +28,7 @@ export default function Supplies() {
             <Row>
               <CardLayout>
                 <div className="d-flex justify-content-between align-items-center">
-                  <h5>Supplies 8</h5>
+                  <h5>Supplies</h5>
                   <div>
                     <FontAwesomeIcon icon={faCalendarDays} />
                   </div>{" "}
