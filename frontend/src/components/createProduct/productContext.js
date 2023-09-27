@@ -27,6 +27,7 @@ export const ProductProvider = ({ children }) => {
   const [imagePreviewURL, setImagePreviewURL] = useState("");
   const [editProductId, setEditProductId] = useState(null);
   const [totalGrossWeight, setTotalGrossWeight] = useState(0);
+  const [UOMs, setUOMs] = useState([]);
   const [allOptions, setAllOptions] = useState([
     {
       label: "Ingredients",
@@ -121,15 +122,25 @@ export const ProductProvider = ({ children }) => {
 
   // Fetch Functions
   const fetchClients = async () => {
+    debugger
     try {
-      const res = await axiosInstance.get("/cdclient");
+      const res = await axiosInstance.get("/cdclients");
       const formattedData = formatData(res.data, "cd_client_id");
       setClients(formattedData);
     } catch (error) {
       console.log(error);
     }
   };
-
+  const fetchUom = async () => {
+    try {
+      const res = await axiosInstance.get("/uom");
+      const formattedData = formatData(res.data.data.data, "md_uoms_id");
+      setUOMs(formattedData);
+      console.log("uom details", res.data.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const fetchStorage = async () => {
     
     try {
@@ -462,6 +473,14 @@ export const ProductProvider = ({ children }) => {
     }));
   };
 
+  const handleUomChange = (e) => {
+    setForm((prevForm) => ({
+      ...prevForm,
+      md_uoms_id: e.target.value,
+    }));
+  };
+
+
   const handleCheckboxChange = (event) => {
     const { name, checked } = event.target;
 
@@ -509,25 +528,25 @@ export const ProductProvider = ({ children }) => {
     debugger;
     e.preventDefault();
     console.log("ingredients submit", ingredients);
-    // const updatedIngredients = ingredients.map((item) => {
-    //   if (item && item.ingredient && item.ingredient.value) {
-    //     const originalValue = item.ingredient.value.replace(
-    //       /^(ingredient_|preparation_)/,
-    //       ""
-    //     );
+    const updatedIngredients = ingredients.map((item) => {
+      if (item && item.ingredient && item.ingredient.value) {
+        const originalValue = item.ingredient.value.replace(
+          /^(ingredient_|preparation_)/,
+          ""
+        );
 
-    //     return {
-    //       ...item,
-    //       ingredient: {
-    //         ...item.ingredient,
-    //         value: originalValue,
-    //       },
-    //     };
-    //   }
-    //   return item; // If it doesn't meet the criteria, return the original item
-    // });
+        return {
+          ...item,
+          ingredient: {
+            ...item.ingredient,
+            value: originalValue,
+          },
+        };
+      }
+      return item; // If it doesn't meet the criteria, return the original item
+    });
 
-    const product_detail = ingredients.map((ing, index) => ({
+    const product_detail = updatedIngredients.map((ing, index) => ({
       md_detail_id: ing.ingredient ? ing.ingredient.value : null,
       product_type: ing.type,
       gross: ing.grossWeight,
@@ -674,6 +693,7 @@ export const ProductProvider = ({ children }) => {
 
   // Use useEffect to fetch data when component mounts
   useEffect(() => {
+    fetchUom();
     fetchClients();
     fetchStorage();
     fetchBrands();
@@ -687,6 +707,7 @@ export const ProductProvider = ({ children }) => {
     fetchIngredients();
     fetchPreparations();
     fetchModifiers();
+   
     // if (location.state?.id) {
     //   setEditProductId(location.state?.id);
     // }
@@ -726,6 +747,7 @@ export const ProductProvider = ({ children }) => {
         allOptions,
         modifiers,
         selectedModifier,
+        UOMs,
         form,
         // Setters
         setForm,
@@ -771,7 +793,7 @@ export const ProductProvider = ({ children }) => {
         handleSelectChange,
         handleSubmit,
         handleGrossWeightChange,
-
+        handleUomChange,
         //Functions
         updateProductDetail,
         calculateCostPrice,

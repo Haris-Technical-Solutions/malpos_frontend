@@ -34,10 +34,10 @@ export default function Storage() {
   const handleDotBox = () => {
     Close(!open);
   };
-  const { storage,setStorage } = useProduct();
+  const  [storage, setStorage]= useState([]);
   useEffect(() => {
-
-  });
+    fetchStorage();
+  },[storage]);
 
   const handleStorageEdit = (id) =>{
     console.log("id: " + id);
@@ -64,7 +64,7 @@ export default function Storage() {
   const fetchStorage = async () => {
     try {
       const res = await axiosInstance.get("/md_storage");
-      setStorage(res.data);
+      setStorage(res.data.data);
     } catch (error) {
       console.log(error);
     }

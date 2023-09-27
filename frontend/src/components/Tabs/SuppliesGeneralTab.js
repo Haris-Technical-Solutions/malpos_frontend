@@ -20,15 +20,18 @@ export default function SuppliesGeneralTab() {
 
   useEffect(() => {
     // Fetch supply data using Axios when the component mounts
-    axiosInstance.get('/md_supplies')
-      .then(response => {
-        setSupplyData(response.data);
-      })
-      .catch(error => {
-        console.error('Error fetching supply data', error);
-      });
+    fetchSupplies();
   }, []); // The empty dependency array ensures this effect runs only once
-
+const fetchSupplies = async () =>{
+   await axiosInstance.get('/md_supplies')
+  .then(response => {
+    console.log(response.data.data,"success");
+    setSupplyData(response.data.data);
+  })
+  .catch(error => {
+    console.error('Error fetching supply data', error);
+  });
+}
   const options = [
     { value: 'option1', label: 'Option 1' },
     { value: 'option2', label: 'Option 2' },
@@ -36,7 +39,14 @@ export default function SuppliesGeneralTab() {
     { value: 'option4', label: 'Option 4' },
     { value: 'option5', label: 'Option 5' },
   ];
+  const handleSuppliesCreate = () =>{
 
+    navigate(`/supplies-edit/`, {
+      state: {
+        action: "createSupplies",
+      },
+    });
+  };
   const handleSuppliesEdit = (id) =>{
     console.log("id: " + id);
     navigate(`/supplies-edit/`, {
@@ -64,11 +74,10 @@ export default function SuppliesGeneralTab() {
               </Row>
             </Col>
             <Col md={2}>
-              <Link to="/customer-create" style={{ float: "right" }}>
+  
                 <button className="acc-create-btn rs-btn-create">
-                  <FontAwesomeIcon icon={faPlus} /> Create
+                  <FontAwesomeIcon onClick={handleSuppliesCreate} icon={faPlus} /> Create
                 </button>
-              </Link>
             </Col>
             <Col md={12}>
               <Box className={'cus-ptb'}>
@@ -93,10 +102,10 @@ export default function SuppliesGeneralTab() {
                       </tr>
                     </thead>
                     <tbody>
-                      {supplyData.map(supply => (
+                      {supplyData!=undefined && supplyData.map(supply => (
                         <tr className='f-13' key={supply.id}>
                           <td className='td-w50'>{supply.id}</td>
-                          <td className='td-w150'>{supply?.supply_lines[0]?.product?.product_name}</td>
+                          <td className='td-w150'>{supply?.supplies_lines[0]?.product?.product_name}</td>
                           <td className='td-w130' title={supply.operation_time}>{`${supply.operation_time.substring(0, 10)}...`}</td>
                           <td className='td-w100'>{supply.supplier.supplier_name}</td>
                           <td className='td-w100'>{supply.storage.name}</td>
@@ -116,13 +125,7 @@ export default function SuppliesGeneralTab() {
                                   <Box className="DotBox-inner">
                                     <Box className="DotBox-p-con" >
                                    
-                                      <Button
-                                  title="Edit"
-                                  className="material-icons edit"
-                                  onClick={() =>handleSuppliesEdit(supply.id)}
-                                >
-                                     <FontAwesomeIcon icon={faEdit}/> Edit
-                                </Button>
+                                     <FontAwesomeIcon onClick={() =>handleSuppliesEdit(supply.id)} icon={faEdit}/> Edit
                                     </Box>
                                     <Box className="DotBox-p-con">
                                       <FontAwesomeIcon icon={faArrowTurnRight} /> Product Return

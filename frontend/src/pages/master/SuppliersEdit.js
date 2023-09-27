@@ -74,10 +74,11 @@ export default function SuppliersEdit() {
     <div>
       <PageLayout>
         <Row>
-        {/*  <Col md={12}>
+        { <Col md={12}>
             <CardLayout>
+              {action === "updateSupplies" ? "Create Supplies" : "Edit Supplies"}
             </CardLayout>
-          </Col>*/}
+          </Col>}
           <Col  md={12}>
             <CardLayout>
               <Col style={{fontSize:'1.5rem', marginBottom:'1rem'}} md={12}>
