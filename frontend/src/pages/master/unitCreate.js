@@ -5,7 +5,7 @@ import { CardLayout } from '../../components/cards'
 import PageLayout from '../../layouts/PageLayout'
 import {Link} from "react-router-dom"
 
-export default function PackagesCreate() {
+export default function UnitCreate() {
     const options = [
         { value: 'option1', label: 'Option 1' },
         { value: 'option2', label: 'Option 2' },
@@ -21,7 +21,7 @@ export default function PackagesCreate() {
                         <Col md={12}>
                     <Row>
                 <Col md={12}>
-                        Packages /Create
+                        Unit Mearsurements /Create
                 </Col>
                         <Col md={4}>
                         <LabelField type={'text'} placeholder={'Name'} label={'Name'}/>
@@ -38,7 +38,7 @@ export default function PackagesCreate() {
   fieldSize="field-select cus-w-300 h-md"
 /></Col>
                         
-                    <Link to={'/packages'} style={{ float:'left' }} >
+                    <Link to={'/unit-measurement'} style={{ float:'left' }} >
                         <button className='acc-create-btn rs-btn-create'> Submit </button></Link>
                     </Row>
                     </Col>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Col, Row, Form } from "react-bootstrap";
 import { CardLayout } from "../../components/cards";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faPlus, faLock } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faPlus, faLock, faEdit,faTrash,faEllipsis } from "@fortawesome/free-solid-svg-icons";
 import PageLayout from "../../layouts/PageLayout";
 import { Box } from "../../components/elements";
 import { Table } from "react-bootstrap";
@@ -14,17 +14,24 @@ export default function Accounts() {
   const toggleSortOrder = () => {
     setSortOrder(sortOrder === "asc" ? "desc" : "asc");
   };
+
+  const [open, Close] = useState(false);
+
+    const handleDotBox = () => {
+        Close(!open);
+    };
   return (
     <div>
       <PageLayout>
         <Row>
-          <Col md={12}>
-            <CardLayout>Accounts</CardLayout>
-          </Col>
+         
           <Col md={12}>
             <CardLayout>
               <Col md={12}>
                 <Row>
+            <Col md={12}>
+            Accounts
+          </Col>
                   <Col md={3}>
                     <div style={{ position: "relative" }}>
                       <Form.Control
@@ -62,6 +69,7 @@ export default function Accounts() {
                       <Col md={6} className="h-checkBox-acc-col-6">
                         <Box className={"h-checkBox-acc"}>
                           <Form.Check
+                          style={{fontSize:"0.7rem", marginLeft:"10px"}}
                             type="checkbox"
                             label="Show Deleted Accounts"
                           />
@@ -81,7 +89,7 @@ export default function Accounts() {
               <Col md={12}>
                 <Box className="acc-tables">
                   <Table>
-                    <thead className="acc-table-head">
+                    <thead className="acc-table-head" style={{backgroundColor:'#F07632', height:"10px" }}>
                       <tr>
                         <th className="th-w300">Name</th>
                         <th className="th-w300">
@@ -104,7 +112,7 @@ export default function Accounts() {
                             {sortOrder === "asc" ? "▲" : "▼"}
                           </button>
                           <br />
-                          <span>446456.43432423 SAR</span>
+                          <span style={{color:'red'}} >446456.43432423 SAR</span>
                         </th>
                         <th className="th-w60"> </th>
                       </tr>
@@ -120,6 +128,24 @@ export default function Accounts() {
                           <Box className="fa-lock">
                             <FontAwesomeIcon icon={faLock} />
                           </Box>
+                          <Box className="dot-content">
+                           <div onClick={handleDotBox}><FontAwesomeIcon icon={faEllipsis} /> </div>
+                                      {open ? (
+                                                                <Box className="DotBox-main-wrapper">
+                                                                    <Box className="DotBox-inner">
+                                                                       <Link to={'/accounts-edit'}> <Box className="DotBox-p-con">
+                                                                            <FontAwesomeIcon icon={faEdit} /> Edit
+                                                                        </Box>
+                                                                        </Link>
+                                                                        <Box className="DotBox-p-con">
+                                                                            <FontAwesomeIcon icon={faTrash} /> Remove
+                                                                        </Box>
+                                                                    </Box>
+                                                                </Box>
+                                                            ) : (
+                                                                ""
+                                                            )}
+                                                        </Box>
                         </td>
                       </tr>
                     </tbody>

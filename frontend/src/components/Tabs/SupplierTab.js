@@ -301,7 +301,7 @@ export default function SupplierTab() {
 
         <Box className="receip-table-m">
           <Table responsive>
-            <thead className="thead-modifier thead-dark">
+            <thead className="thead-modifier "  style={{backgroundColor:'#F07632', color:'black'}}>
               <tr>
                 <th>
                   ID
@@ -350,7 +350,7 @@ export default function SupplierTab() {
                     {sortOrder === "asc" ? "▲" : "▼"}
                   </button>
                   <br />
-                  <span>112.00 SA</span>
+                  <span style={{color:'red'}}>112.00 SA</span>
                 </th>
                 <th>From account</th>
                 <th>To account</th>

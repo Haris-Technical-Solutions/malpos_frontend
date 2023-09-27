@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Col, Row, Form } from "react-bootstrap";
 import { CardLayout } from "../../components/cards";
-import { Box, Input } from "../../components/elements";
+import { Box } from "../../components/elements";
 
 import PageLayout from "../../layouts/PageLayout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -26,12 +26,14 @@ export default function AccountCreate() {
   return (
     <div>
       <PageLayout>
-        <Row>
+        <Row >
           <Col md={12}>
-            <CardLayout>
+            <CardLayout >
+              <Row >
+          <Col md={12}>
               <Box className="head-sec-rearrange">
                 <Box className="head-sec-rearrange-left">
-                  <h3 style={{ width: "500px" }}>
+                  <h3 style={{ width: "500px" , fontSize:"1.1rem"}}>
                     <Link to="/accounts" style={{ color: "#edb213" }}>
                       Accounts
                     </Link>
@@ -49,15 +51,11 @@ export default function AccountCreate() {
                     </Link>
                   </Box>
                 </Box>
-              </Box>
-            </CardLayout>
+              </Box> 
           </Col>
-          <Col md={12}>
-            <CardLayout>
-              <Row>
-                <Col md={8}>
-                  <Row>
-                    <Col md={8}>
+                <Col md={11}>
+                  <Row >
+                    <Col md={4}>
                       <Form.Label>Name</Form.Label>
                       <Form.Control
                         className="m-0"
@@ -74,9 +72,9 @@ export default function AccountCreate() {
                         Must not be empty
                       </Form.Control.Feedback>
                     </Col>
-
-                    <Col md={8}>
+                    <Col md={4} style={{marginTop:'28px'}} mdOffset={2} >
                       <LabelFieldS
+                      
                         label=" Type"
                         option={[
                           { label: "Cash", value: null },
@@ -86,7 +84,7 @@ export default function AccountCreate() {
                         fieldSize="w-100 h-md"
                       />
                     </Col>
-                    <Col md={8}>
+                    <Col md={4}>
                       <Form.Label>Payment</Form.Label>
                       <Form.Control
                         className="m-0"

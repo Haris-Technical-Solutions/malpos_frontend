@@ -74,11 +74,11 @@ export default function Storage() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>Stoarge</CardLayout>
-          </Col>
-          <Col md={12}>
             <CardLayout>
               <Row>
+          <Col md={12}>
+            Storage
+          </Col>
                 <Col md={12}>
                   <Row>
                     <Col md={3}>

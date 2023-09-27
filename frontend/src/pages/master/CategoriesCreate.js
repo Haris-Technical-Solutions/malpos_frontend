@@ -29,9 +29,11 @@ export default function CategoriesCreate() {
         <Row>
           <Col md={12}>
             <CardLayout>
+              <Row>
+          <Col md={12}>
               <Box className="head-sec-rearrange">
                 <Box className="head-sec-rearrange-left">
-                  <h3 style={{ width: "500px" }}>
+                  <h3 style={{ width: "500px", fontSize:"1.1rem" }}>
                     <Link to="/account-categories" style={{ color: "#edb213" }}>
                       Categories
                     </Link>
@@ -53,14 +55,10 @@ export default function CategoriesCreate() {
                   </Box>
                 </Box>
               </Box>
-            </CardLayout>
           </Col>
-          <Col md={12}>
-            <CardLayout>
-              <Row>
-                <Col md={8}>
+                <Col md={11}>
                   <Row>
-                    <Col md={8}>
+                    <Col md={6}>
                       <Form.Label>Name</Form.Label>
                       <Form.Control
                         className="m-0"
@@ -78,7 +76,7 @@ export default function CategoriesCreate() {
                       </Form.Control.Feedback>
                     </Col>
 
-                    <Col md={8}>
+                    <Col md={6} style={{marginTop:"1.8rem"}} >
                       <LabelFieldS
                         label=" Type"
                         option={[
@@ -89,7 +87,7 @@ export default function CategoriesCreate() {
                         fieldSize="w-100 h-md"
                       />
                     </Col>
-                    <Col md={8}>
+                    <Col md={6}>
                       <LabelFieldS
                         label=" Parent Category"
                         option={[

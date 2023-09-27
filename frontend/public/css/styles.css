@@ -906,7 +906,7 @@ textarea.form-control {
 
 .thead-dark {
   color: var(--cusWhite) !important;
-  background-color: #172026;
+  background-color: #F07632;
 }
 
 .mc-table-head.gray {
@@ -8930,7 +8930,9 @@ textarea.form-control {
 .receipt-tab-main .thead-modifier {
   font-size: 13px;
   font-weight: 100;
-  color: #5e5d72;
+height: 32px;
+line-height: 15px;
+  color: black;
 }
 
 /* .receipt-tab-main .thead-modifier th {
@@ -8959,7 +8961,7 @@ textarea.form-control {
 .receip-table-m thead tr {
   font-size: 12px;
   display: flex;
-  height: 60px;
+  height: 15px; 
   /* replace 50px with your desired height */
 }
 
@@ -9604,19 +9606,23 @@ textarea.form-control {
 
 .acc-tables .acc-table-head tr {
   display: flex;
-  height: 60px;
+  height: 30px;
+  line-height: 12px;
 }
 
 .acc-tables .acc-table-head tr .th-w300 {
   width: 30%;
+  padding-top: 3px;
 }
 
 .acc-tables .acc-table-head tr .th-acc {
   text-align: end;
+  padding-top: 3px;
 }
 
 .acc-tables .acc-table-head tr .th-w60 {
   width: 10%;
+  
 }
 
 .acc-tables .acc-table-head tr .th-acc span {
@@ -9860,8 +9866,15 @@ textarea.form-control {
 /* payroll  */
 .payroll-table thead tr {
   font-size: 12px;
-  height: 60px;
   font-weight: bold;
+ 
+}
+.payroll-table thead{
+ 
+  height: 1rem;
+  line-height: 11px;
+  padding-top: 1px;
+  
 }
 
 .payroll-table tbody tr {
@@ -9870,19 +9883,29 @@ textarea.form-control {
 
 .payroll-table tbody tr td .text-end {
   text-align: end;
+  
 }
 
 .payroll-table thead tr th .text-end {
   text-align: end;
+ 
 }
 
 .payroll-table thead tr th span {
   font-size: 13px;
   color: #f29b30;
+ 
 }
 
+
 .payroll-table thead tr th {
+
   vertical-align: text-top;
+
+  height: 20px;
+  line-height: 10px;
+  padding-top: 7px;
+  padding-bottom: -5px;
 }
 
 .payroll-table thead tr .th-w15 {
@@ -9895,6 +9918,7 @@ textarea.form-control {
 
 .payroll-table tbody tr .td-w15 {
   width: 15%;
+
 }
 
 .payroll-table tbody tr .td-w10 {
@@ -10249,6 +10273,8 @@ textarea.form-control {
 /* packages */
 .pacakes-table-wrap thead tr {
   font-size: 12px;
+height: 0px;
+line-height: 3px;
 }
 
 .pacakes-table-wrap thead tr .th-w30 {
@@ -10458,14 +10484,18 @@ textarea.form-control {
   padding: 10px 0px;
 }
 
-.productionTable-wrap thead tr {
+.productionTable-wrap thead tr th {
   font-size: 12px;
+  
   font-weight: bold;
+  line-height: 3px;
+height: 15px;
 }
 
 .productionTable-wrap tbody tr {
   font-size: 13px;
   font-weight: bold;
+
 }
 
 .productionTable-wrap thead tr .th-w10 {
