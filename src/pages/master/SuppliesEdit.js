@@ -32,14 +32,18 @@ export default function SuppliesEdit() {
     { label: "Deleted", value: "deleted" },
   ];
   const [uoms, setUOMs] = useState([]);
+  const [UOMConversions, setUOMConversions] = useState([]);
   const [currentSupplies, setCurrentSupplies] = useState([]);
   const [selectedStorage, setSelectedStorage] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedStatus, setSelectedStatus] = useState([]);
   const [selectedDateTime, setSelectedDateTime] = useState("");
-  const [invoiceNumber, setInvoicesNumber] = useState("asdf");
-  const [description, setDescription] = useState("asdf");
+  const [invoiceNumber, setInvoicesNumber] = useState("");
+  const [description, setDescription] = useState("");
   const [seleectedProduct, setSelectedProduct] = useState([]);
+  const [suppliers, setSuppliers] = useState([]);
+  const [seletedSupplier, setSelectedSupplier] = useState([]);
+
   const storageOptions =
     storage != undefined &&
     storage?.map((item) => ({
@@ -48,6 +52,7 @@ export default function SuppliesEdit() {
     }));
   const [supplyLines, setSupplyLines] = useState([
     {
+      md_supply_id: 0,
       md_product_id: 0,
       qty: 0,
       total: 0,
@@ -56,6 +61,7 @@ export default function SuppliesEdit() {
       tax: 0,
       uom_id: 0,
       uom_type: "base",
+      unitsOptions: [],
     },
   ]);
   useEffect(() => {
@@ -63,49 +69,75 @@ export default function SuppliesEdit() {
     fetchUom();
     fetchStorage();
     fetchCategories();
+    fecthSuppliers();
     if (location.state?.id) {
       setEditSuppliesId(location.state.id);
       setAction(location.state.action);
-
-      const fetchSuppliesById = async (id) => {
-        try {
-          const res = await axiosInstance.get(`/md_supplies/${id}/edit`);
-          setCurrentSupplies(res.data);
-          setSelectedStorage(res.data.md_storage_id);
-          fecthSupplyLines(res.data?.supplies_lines);
-          setSelectedStatus(res.data.status.toLowerCase());
-          setInvoicesNumber(res.data.invoice_no);
-
-          const momentObject = moment(
-            res.data.operation_time,
-            "YYYY-MM-DD HH:mm:ss"
-          );
-          const formattedDate = momentObject.format("YYYY-MM-DD HH:mm");
-          setSelectedDateTime(formattedDate);
-          console.log(res.data, "supplies updated");
-        } catch (error) {
-          console.log(error);
-        }
-      };
       fetchSuppliesById(location.state.id);
     }
   }, [location.state]);
-  
-  const fecthSupplyLines = (supplies) => {
-    debugger
 
-    const suppliesOptions = supplies.map((item) => ({
-      md_product_id: item.md_product_id,
-      qty: item.qty,
-      total: item.total,
-      cost: item.cost,
-      discount_percent: item.discount_percent,
-      tax: item.tax,
-      uom_id: item.uom_id,
-      uom_type: "base",
-    }));
+  const fetchSuppliesById = async (id) => {
+    try {
+      const res = await axiosInstance.get(`/md_supplies/${id}/edit`);
+     
 
+      setSelectedStorage(res.data.md_storage_id);
+      const supplylines = await fecthSupplyLines(res.data?.supplies_lines);
+      
+      fecthSuppliersById(res.data?.md_supplier_id);
+      setSelectedStatus(res.data.status.toLowerCase());
+      setInvoicesNumber(res.data.invoice_no);
+      setSelectedSupplier(res.data?.md_supplier_id);
+
+      const momentObject = moment(
+        res.data.operation_time,
+        "YYYY-MM-DD HH:mm:ss"
+      );
+      const formattedDate = momentObject.format("YYYY-MM-DD HH:mm");
+      setSelectedDateTime(formattedDate);
+      res.data.supplies_lines = supplylines;
+      console.log(res.data, "supplies updated");
+      setCurrentSupplies(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const fecthSuppliersById = async (id) => {
+    const res = await axiosInstance.get(`/md_supplier/${id}/edit`);
+  };
+
+  const fecthSuppliers = async (id) => {
+    const res = await axiosInstance.get(`/md_supplier/`);
+    setSuppliers(res.data.data);
+  };
+
+  const fecthSupplyLines = async (supplies) => {
+
+    const suppliesOptions = 
+    await Promise.all(
+      supplies.map(async (item) => {
+        const unitsOptions = await fetchUomConversions(item.md_product_id);
+        let tempData = {
+          md_supply_id: item.md_supply_id,
+          md_product_id: item.md_product_id,
+          qty: item.qty,
+          total: item.total,
+          cost: item.cost,
+          discount_percent: item.discount_percent,
+          tax: item.tax,
+          uom_id: item.uom_id,
+          uom_type: "base",
+          unitsOptions: unitsOptions,
+        }
+        return tempData
+      })
+    );
     setSupplyLines(suppliesOptions);
+    return suppliesOptions
+    // Now suppliesOptions contains the resolved data.
+  
   };
   const productOptions =
     products != undefined &&
@@ -113,6 +145,14 @@ export default function SuppliesEdit() {
       label: item.product_name,
       value: item.md_product_id,
     }));
+
+  const supplierOptions =
+    suppliers != undefined &&
+    suppliers?.map((item) => ({
+      label: item.supplier_name,
+      value: item.id,
+    }));
+
   const CategoryOptions =
     categories != undefined &&
     categories?.map((item) => ({
@@ -146,7 +186,22 @@ export default function SuppliesEdit() {
       console.log(error);
     }
   };
-
+  const fetchUomConversions = async (id) => {
+    const res = await axiosInstance.get(`/uom/get_units_by_product/${id}`);
+    const uniqueId = Date.now();
+    const mergedArray = [
+      {
+        uniqueid: uniqueId,
+        name: res.data.data.name,
+        md_uoms_id: res.data.data.md_uoms_id,
+      },
+      ...res.data.data.conversions.map((conversion) => ({
+        ...conversion,
+        uniqueid: uniqueId,
+      })),
+    ];
+    return mergedArray;
+  };
   const fetchUom = async () => {
     try {
       const res = await axiosInstance.get("/uom");
@@ -165,23 +220,21 @@ export default function SuppliesEdit() {
     setBoxes(newBoxes);
     setNumBoxes(numBoxes - 1);
   };
-  const handleAddBox = () =>{
-
+  const handleAddBox = () => {
     const newSupplyLine = {
-      md_product_id: '', 
+      md_product_id: "",
       qty: 0,
       cost: 0,
       discount_percent: 0,
       tax: 0,
       total: 0,
-      uom_id: '',
-      uom_type: 'base',
+      uom_id: "",
+      uom_type: "base",
     };
     const updatedSupplyLines = [...supplyLines];
     updatedSupplyLines.push(newSupplyLine);
     setSupplyLines(updatedSupplyLines);
-  }
-
+  };
 
   const fetchCategories = async () => {
     try {
@@ -194,14 +247,18 @@ export default function SuppliesEdit() {
   };
 
   const handleUpdateSupplies = (editSuppliesId) => {
+    const momentObject = moment(selectedDateTime, "YYYY-MM-DD HH:mm:ss");
+    delete supplyLines.unitsOptions;
+    console.log(selectedDateTime);
+    const formattedDate = momentObject.format("YYYY-MM-DD HH:mm");
     let currentSupplies_ = {
       cd_client_id: currentSupplies.cd_client_id,
       cd_brand_id: currentSupplies.cd_brand_id,
       cd_branch_id: currentSupplies.cd_branch_id,
 
       invoice_no: invoiceNumber,
-      operation_time: selectedDateTime,
-      md_supplier_id: currentSupplies.md_supplier_id,
+      operation_time: formattedDate,
+      md_supplier_id: seletedSupplier,
       md_storage_id: selectedStorage,
       status: selectedStatus,
       balance: null,
@@ -230,7 +287,46 @@ export default function SuppliesEdit() {
         console.error("Error updating supplies", error);
       });
   };
+  const handleCreateSupplies = () => {
+    let timeCurrent = selectedDateTime.format("YYYY-MM-DD HH:mm:ss");
+    delete supplyLines.unitsOptions;
 
+    let currentSupplies_ = {
+      cd_client_id: 1,
+      cd_brand_id: 1,
+      cd_branch_id: 1,
+
+      invoice_no: invoiceNumber,
+    operation_time: timeCurrent,
+      md_supplier_id: 1,
+      md_storage_id: selectedStorage,
+      status: selectedStatus,
+      balance: null,
+      category: null,
+      description: description,
+      created_by: "1",
+      updated_by: "1",
+      lines: supplyLines,
+    };
+    // console.log(currentSupplies_,'currentSupplies_');
+    // return
+    axiosInstance
+      .post(`/md_supplies`, currentSupplies_)
+      .then((response) => {
+        toast.success("Supplies updated successfully", {
+          position: "top-right",
+          autoClose: 3000,
+        });
+        console.log("Supplies updated successfully", response.data);
+      })
+      .catch((error) => {
+        toast.error("Error updating supplies", {
+          position: "top-right",
+          autoClose: 3000,
+        });
+        console.error("Error updating supplies", error);
+      });
+  };
   const handleStorageChange = (e) => {
     setSelectedStorage(e.target.value);
     // setSelectedStorage(selectedOptions);
@@ -243,7 +339,7 @@ export default function SuppliesEdit() {
     if (action == "updateSupplies") {
       handleUpdateSupplies(location.state.id);
     } else {
-      console.log("we are here");
+      handleCreateSupplies();
     }
   };
 
@@ -252,7 +348,6 @@ export default function SuppliesEdit() {
     const selectedIds = selectedOptions.map((option) => option.value);
   };
   const handleDateChange = (date) => {
-    console.log("date", date);
     setSelectedDateTime(date);
   };
   const handleStatusChange = (e) => {
@@ -263,13 +358,56 @@ export default function SuppliesEdit() {
     setSelectedProduct(e.target.value);
   };
 
-function handleSupplyFieldsChange(event, index, fieldName) {
-  const { name, value } = event.target;
-  const updatedSupplyLines = [...supplyLines];
-  updatedSupplyLines[index][fieldName] = value;
-  setSupplyLines(updatedSupplyLines);
-}
-  
+  const calculateTotal = (supply) => {
+    const qty = parseFloat(supply.qty) || 0;
+    const cost = parseFloat(supply.cost) || 0;
+    const discount = parseFloat(supply.discount_percent) || 0;
+    const tax = parseFloat(supply.tax) || 0;
+
+    return qty * cost - discount + tax;
+  };
+  const handleSupplyFieldsChange = (event, index, fieldName) => {
+    const { value } = event.target;
+
+    // Clone the supplyLines array
+    const updatedSupplyLines = [...supplyLines];
+    // Update the field
+    updatedSupplyLines[index][fieldName] = value;
+    // Calculate and update the total
+    updatedSupplyLines[index].total = calculateTotal(updatedSupplyLines[index]);
+
+    // Update the state
+    setSupplyLines(updatedSupplyLines);
+  };
+let handleChangeFlag = 0
+  const handleUnitOptionsChange = (event, index) => {
+    handleChangeFlag = 1
+    const  value  =JSON.parse(event)
+    let fieldName = value.md_uoms_id ? "md_uoms_id" :"md_uom_id" 
+    let typeName = value.md_uoms_id ? "base" : "conversion"
+    // Clone the supplyLines array
+    const updatedSupplyLines = [...supplyLines];
+    // Update the field
+    updatedSupplyLines[index][fieldName] = value[fieldName];
+    updatedSupplyLines[index]['type'] = typeName;
+    console.log("hello world",updatedSupplyLines[index])
+    debugger
+    // Calculate and update the total
+    // updatedSupplyLines[index].total = calculateTotal(updatedSupplyLines[index]);
+
+    // Update the state
+    setSupplyLines(updatedSupplyLines);
+  };
+  const getUomValue = (id, type)=>{
+    if(type =='conversion'){
+
+      console.log("conversion")
+    }
+    if(type =='base'){
+      console.log("base")
+    }
+
+  }
   return (
     <div>
       <PageLayout>
@@ -297,18 +435,25 @@ function handleSupplyFieldsChange(event, index, fieldName) {
             <CardLayout>
               <Row>
                 <Col md={4}>
-                  <LabelField
-                    label="Supplier Name"
-                    type="text"
-                    value={currentSupplies?.supplier?.supplier_name}
-                    onChange={(e) =>
-                      setCurrentSupplies({
-                        ...currentSupplies,
-                        supplier_name: e.target.value,
-                      })
-                    }
-                    placeholder={"Supplier Name"}
-                  />
+                  <Form.Group>
+                    <Form.Label>Supplier</Form.Label>
+                    <Form.Control
+                      as="select"
+                      name="productid"
+                      type="select"
+                      value={seletedSupplier} // Set the value to preselect
+                      onChange={(e) => {
+                        setSelectedSupplier(e.target.value);
+                      }}
+                    >
+                      <option value="">Select</option>
+                      {supplierOptions.map((option) => (
+                        <option key={option.value} value={option.value}>
+                          {option.label}
+                        </option>
+                      ))}
+                    </Form.Control>
+                  </Form.Group>
                 </Col>
                 <Col md={4}>
                   <Form.Group>
@@ -427,7 +572,7 @@ function handleSupplyFieldsChange(event, index, fieldName) {
                   </Box>
 
                   {supplyLines.map((supply, index) => {
-                    return (
+                      return (
                       <Box className="manage-modifier-gen-box">
                         <Box className="manage-modifier-gen-box-inner-textfield">
                           <Box className=" modifier-gen-box-items modifier-gen-box-mod">
@@ -437,7 +582,13 @@ function handleSupplyFieldsChange(event, index, fieldName) {
                                 name="productid"
                                 type="select"
                                 value={supply.md_product_id} // Set the value to preselect
-                                onChange={(e)=>{handleSupplyFieldsChange(e, index, 'md_product_id')}}
+                                onChange={(e) => {
+                                  handleSupplyFieldsChange(
+                                    e,
+                                    index,
+                                    "md_product_id"
+                                  );
+                                }}
                               >
                                 <option value="">Select</option>
                                 {productOptions.map((option) => (
@@ -451,6 +602,7 @@ function handleSupplyFieldsChange(event, index, fieldName) {
                               </Form.Control>
                             </Form.Group>
                           </Box>
+                          
                           <Box className=" modifier-gen-box-items modifier-gen-box-mod">
                             <Form.Group>
                               <Form.Control
@@ -458,17 +610,21 @@ function handleSupplyFieldsChange(event, index, fieldName) {
                                 name="uom_id"
                                 type="select"
                                 value={supply.uom_id} // Set the value to preselect
-                                onChange={(e)=>{handleSupplyFieldsChange(e, index, 'uom_id')}}
+                                onChange={(e) => 
+                                  handleUnitOptionsChange(e.target.value, index)
+                                }
                               >
                                 <option value="">Select</option>
-                                {uoms.map((option) => (
-                                  <option
-                                    key={option.md_uoms_id}
-                                    value={option.md_uoms_id}
-                                  >
-                                    {option.name}
-                                  </option>
-                                ))}
+                                {supply.unitsOptions &&
+                                  supply.unitsOptions.length > 0 &&
+                                  supply.unitsOptions.map((item) => (
+                                    <option
+                                      key={item}
+                                      value={JSON.stringify(item)}
+                                    >
+                                      {item.name}
+                                    </option>
+                                  ))}
                               </Form.Control>
                             </Form.Group>
                           </Box>
@@ -476,7 +632,9 @@ function handleSupplyFieldsChange(event, index, fieldName) {
                           <Box className="modifier-gen-box-items modifier-gen-box-gross">
                             <LabelField
                               value={supply.qty}
-                              onChange={(e)=>{handleSupplyFieldsChange(e, index, 'qty')}}
+                              onChange={(e) => {
+                                handleSupplyFieldsChange(e, index, "qty");
+                              }}
                               type="text"
                               fieldSize="w-100 h-md"
                               placeholder="0"
@@ -486,7 +644,9 @@ function handleSupplyFieldsChange(event, index, fieldName) {
                             <LabelField
                               type="text"
                               value={supply.cost}
-                              onChange={(e)=>{handleSupplyFieldsChange(e, index, 'cost')}}
+                              onChange={(e) => {
+                                handleSupplyFieldsChange(e, index, "cost");
+                              }}
                               fieldSize="w-100 h-md"
                               placeholder="0"
                             />
@@ -496,7 +656,13 @@ function handleSupplyFieldsChange(event, index, fieldName) {
                             <LabelField
                               type="text"
                               value={supply.discount_percent}
-                              onChange={(e)=>{handleSupplyFieldsChange(e, index, 'discount_percent')}}
+                              onChange={(e) => {
+                                handleSupplyFieldsChange(
+                                  e,
+                                  index,
+                                  "discount_percent"
+                                );
+                              }}
                               fieldSize="w-100 h-md"
                               placeholder="0"
                             />
@@ -506,7 +672,9 @@ function handleSupplyFieldsChange(event, index, fieldName) {
                             <LabelField
                               type="text"
                               value={supply.tax}
-                              onChange={(e)=>{handleSupplyFieldsChange(e, index, 'tax')}}
+                              onChange={(e) => {
+                                handleSupplyFieldsChange(e, index, "tax");
+                              }}
                               fieldSize="w-100 h-md"
                               placeholder="0"
                             />
@@ -515,7 +683,6 @@ function handleSupplyFieldsChange(event, index, fieldName) {
                             <LabelField
                               type="text"
                               value={supply.total}
-                              onChange={(e)=>{handleSupplyFieldsChange(e, index, 'total')}}
                               fieldSize="w-100 h-md"
                               placeholder="0"
                             />

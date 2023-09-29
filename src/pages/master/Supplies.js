@@ -17,7 +17,6 @@ export default function Supplies() {
 
   const handleTabClick = (index) => {
 
-    
     setActiveTab(index);
   };
   return (
@@ -48,12 +47,12 @@ export default function Supplies() {
                     >
                       General
                     </button>
-                    <button
+                    {/* <button
                       onClick={() => handleTabClick(1)}
                       className={activeTab === 1 ? "active" : ""}
                     >
                       Details
-                    </button>
+                    </button> */}
                     <button
                       onClick={() => handleTabClick(2)}
                       className={activeTab === 2 ? "active" : ""}
@@ -70,27 +69,12 @@ export default function Supplies() {
                   <Row>
                     <Col md={12}>
                       <div>
-                        {activeTab === 0 && (
+                
                           <Box className="cate-Tabs-main">
-                            <SuppliesGeneralTab />
+                            <SuppliesGeneralTab activeTab={activeTab}/>
                           </Box>
-                        )}
-                        {activeTab === 1 && (
-                          <Box className="cate-Tabs-main">
-                            <SuppliesDetailTab />
-                          </Box>
-                        )}
-                        {activeTab === 2 && (
-                          <Box className="cate-Tabs-main">
-                             <SuppliesGeneralTab />
 
-                          </Box>
-                        )}
-                         {activeTab === 3 && (
-                          <Box className="cate-Tabs-main">
-                            <SuppliesGeneralTab />
-                          </Box>
-                        )}
+
                       </div>
                     </Col>
                   </Row>

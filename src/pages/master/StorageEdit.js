@@ -71,13 +71,19 @@ export default function StorageEdit() {
 
   return (
     <div>
+        
       <PageLayout>
         <Row>
+        { <Col md={12}>
+            <CardLayout>
+            {action === "create" ? "Create Storage" : "Update Storage"}
+            </CardLayout>
+          </Col>}
           <Col md={12}>
             <CardLayout>
-          <Col md={12}  style={{marginBottom:'2rem', fontSize:'1.5rem'  }} >          
+          {/* <Col md={12}  style={{marginBottom:'2rem', fontSize:'1.5rem'  }} >          
               {action === "create" ? "Create Storage" : "Edit Storage"}
-          </Col>
+          </Col> */}
               <Row>
                 <Col md={6}>
                   <LabelField
@@ -105,13 +111,13 @@ export default function StorageEdit() {
                     />
                   </Box>
                   {action === "create" ? (
-                    <Button variant="primary" onClick={handleUpdateStorage}>
+                    <button className='add-product-btn-pl' onClick={handleUpdateStorage}>
                       Create
-                    </Button>
+                    </button>
                   ) : (
-                    <Button variant="primary" onClick={handleUpdateStorage}>
+                    <button className='add-product-btn-pl' onClick={handleUpdateStorage}>
                       Update
-                    </Button>
+                    </button>
                   )}
                 </Col>
               </Row>

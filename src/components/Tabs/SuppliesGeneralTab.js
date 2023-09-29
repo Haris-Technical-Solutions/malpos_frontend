@@ -10,7 +10,8 @@ import axiosInstance from "../../api/baseUrl";
 import { useNavigate } from "react-router-dom";
 import { Button } from 'react-bootstrap';
 
-export default function SuppliesGeneralTab() {
+export default function SuppliesGeneralTab(props) {
+  const { activeTab } = props;
   const [openDot, setOpenDot] = useState({}); // Maintain dot box state for each row
   const [supplyData, setSupplyData] = useState([]);
   const navigate = useNavigate();
@@ -19,9 +20,11 @@ export default function SuppliesGeneralTab() {
   };
 
   useEffect(() => {
-    // Fetch supply data using Axios when the component mounts
+
     fetchSupplies();
-  }, []); // The empty dependency array ensures this effect runs only once
+
+  }, []);
+
 const fetchSupplies = async () =>{
    await axiosInstance.get('/md_supplies')
   .then(response => {
@@ -107,13 +110,13 @@ const fetchSupplies = async () =>{
                           <td className='td-w50'>{supply.id}</td>
                           <td className='td-w150'>{supply?.supplies_lines[0]?.product?.product_name}</td>
                           <td className='td-w130' title={supply.operation_time}>{`${supply.operation_time.substring(0, 10)}...`}</td>
-                          <td className='td-w100'>{supply.supplier.supplier_name}</td>
-                          <td className='td-w100'>{supply.storage.name}</td>
-                          <td className='td-w100'>{supply.balance}</td>
+                          <td className='td-w100'>{supply?.supplier?.supplier_name}</td>
+                          <td className='td-w100'>{supply?.storage?.name}</td>
+                          <td className='td-w100'>{supply?.balance}</td>
                           <td className='td-w100'><span className='unpaid'> Unpaid</span></td>
-                          <td className='td-w130'>{supply.invoice_no}</td>
-                          <td className='td-w100' title={supply.description}>
-                            {supply.description.length > 8? `${supply.description.substring(0, 8)}...` : supply.description}
+                          <td className='td-w130'>{supply?.invoice_no}</td>
+                          <td className='td-w100' title={supply?.description}>
+                            {supply?.description?.length > 8? `${supply?.description.substring(0, 8)}...` : supply?.description}
                           </td>
                           <td className='td-w100'><span className='check'><FontAwesomeIcon icon={faCheck} color="#fff" /> </span></td>
                           <td className='td-w100'><span className='approved'>{supply.status || 'Approved'}</span></td>
