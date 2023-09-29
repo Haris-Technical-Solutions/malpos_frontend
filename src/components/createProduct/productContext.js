@@ -122,7 +122,7 @@ export const ProductProvider = ({ children }) => {
 
   // Fetch Functions
   const fetchClients = async () => {
-    debugger
+      
     try {
       const res = await axiosInstance.get("/cdclients");
       const formattedData = formatData(res.data, "cd_client_id");
@@ -250,7 +250,7 @@ export const ProductProvider = ({ children }) => {
   };
 
   const fetchMenuSections = async () => {
-    debugger;
+      ;
     try {
       const res = await axiosInstance.get(`/menu_section/${menuId}`);
       const formattedData = formatData(res.data.data, "md_menu_section_id");
@@ -341,7 +341,7 @@ export const ProductProvider = ({ children }) => {
   };
 
   const handleBranchChange = (selectedIds) => {
-    debugger;
+      ;
     const branch_detail = selectedIds.map((value) => ({
       cd_branches: value,
     }));
@@ -357,7 +357,7 @@ export const ProductProvider = ({ children }) => {
   };
 
   const handleCategoryChange = (selectedIds) => {
-    debugger;
+      ;
     const category_detail = selectedIds.map((value) => ({
       md_product_categories: value,
     }));
@@ -476,7 +476,7 @@ export const ProductProvider = ({ children }) => {
   const handleUomChange = (e) => {
     setForm((prevForm) => ({
       ...prevForm,
-      md_uoms_id: e.target.value,
+      md_uom_id: e.target.value,
     }));
   };
 
@@ -525,7 +525,7 @@ export const ProductProvider = ({ children }) => {
   };
 
   const handleSubmit = async (e) => {
-    debugger;
+  
     e.preventDefault();
     console.log("ingredients submit", ingredients);
     const updatedIngredients = ingredients.map((item) => {
@@ -588,7 +588,7 @@ export const ProductProvider = ({ children }) => {
     // delete filteredObject.cd_client_id;
     // filteredObject.cd_client_id = 1;
     console.log(filteredObject);
-    debugger;
+      ;
     if (editProductId !== null) {
       try {
         await axiosInstance.post(

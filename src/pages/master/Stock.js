@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Row, Col, Form } from "react-bootstrap";
 import { CardLayout, FloatCard } from "../../components/cards";
 import ProductsTable from "../../components/tables/ProductsTable";
@@ -6,6 +6,7 @@ import LabelField from "../../components/fields/LabelField";
 import { Pagination, Breadcrumb } from "../../components";
 import Anchor from "../../components/elements/Anchor";
 import PageLayout from "../../layouts/PageLayout";
+import axiosInstance from "../../api/baseUrl";
 import data from "../../data/master/productList.json";
 import { Button, Input, Box, Label } from "../../components/elements";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -25,6 +26,7 @@ export default function Stocks() {
     typeOpen: false,
     categoryOpen: false,
   });
+  const [stocks,setStocks] = useState([])
   const handleStateChange = (key) => {
     setState((prevState) => {
       const newState = {};
@@ -36,6 +38,20 @@ export default function Stocks() {
   };
   const toggleSortOrder = () => {
     setSortOrder(sortOrder === "asc" ? "desc" : "asc");
+  };
+  
+  useEffect(() => {
+    fetchStocks();
+  }, []);
+
+  const fetchStocks = async () => {
+    try {
+      const res = await axiosInstance.get("/get_stock");
+      setStocks(res.data.data);
+      console.log("setProducts", res.data.products.data);
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <PageLayout>
