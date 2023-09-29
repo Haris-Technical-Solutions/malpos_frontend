@@ -76,16 +76,16 @@ export default function SuppliersEdit() {
         <Row>
         { <Col md={12}>
             <CardLayout>
-              {action === "updateSupplies" ? "Create Supplies" : "Edit Supplies"}
+              {action === "updateSupplies" ? "Create Supplies" : "Update Supplies"}
             </CardLayout>
           </Col>}
           <Col  md={12}>
             <CardLayout>
-              <Col style={{fontSize:'1.5rem', marginBottom:'1rem'}} md={12}>
-              { action === "create" ? "Create Supplier" : "Edit Supplier"}
-              </Col>
+              {/* <Col style={{fontSize:'1.5rem', marginBottom:'1rem'}} md={12}>
+              { action === "create" ? "Create Supplier" : "Update Supplier"}
+              </Col> */}
               <Row>
-                <Col md={6}>
+                <Col md={4}>
                   <LabelField
                   style={{marginBottom:'1rem' }}
                     type="text"
@@ -99,6 +99,8 @@ export default function SuppliersEdit() {
                     placeholder={"Supplier Name"}
                     label={'Name:'}
                   />
+                        </Col>
+                        <Col md={4}>
                   <LabelField
                     type="number"
                     value={currentSupplier.phone}
@@ -113,6 +115,8 @@ export default function SuppliersEdit() {
                     label={'Phone Number:'}
                     placeholder={"Phone"}
                   />
+                    </Col>
+                        <Col md={4}>
                   <LabelField
                     type="text"
                     style={{marginBottom:'1rem' }}
@@ -126,6 +130,8 @@ export default function SuppliersEdit() {
                     label={'Tin:'}
                     placeholder={"Tin"}
                   />
+                    </Col>
+                        <Col md={4}>
                   <LabelField
                     type="text"
                     style={{marginBottom:'1rem' }}
@@ -140,6 +146,8 @@ export default function SuppliersEdit() {
                     label={'Description'}
                     placeholder={"Description"}
                   />
+                    </Col>
+                        <Col md={4}>
                   <Box className={"storageEdit-switch"}>
                     <Form.Check
                     style={{marginBottom:'1rem' }}
@@ -151,14 +159,16 @@ export default function SuppliersEdit() {
                       onChange={handleSwitchChange}
                     />
                   </Box>
+                  </Col>
+                        <Col md={12}>
                   {action === "create" ? (
-                    <Button variant="primary" onClick={handleUpdateSupplier}>
+                    <button className='add-product-btn-pl' onClick={handleUpdateSupplier}>
                       Create
-                    </Button>
+                    </button>
                   ) : (
-                    <Button variant="primary" onClick={handleUpdateSupplier}>
+                    <button className='add-product-btn-pl' onClick={handleUpdateSupplier}>
                       Update
-                    </Button>
+                    </button>
                   )}
                 </Col>
               </Row>
