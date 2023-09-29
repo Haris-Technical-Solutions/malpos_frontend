@@ -52,6 +52,7 @@ export default function SuppliesEdit() {
     }));
   const [supplyLines, setSupplyLines] = useState([
     {
+      md_supply_id: 0,
       md_product_id: 0,
       qty: 0,
       total: 0,
@@ -60,6 +61,7 @@ export default function SuppliesEdit() {
       tax: 0,
       uom_id: 0,
       uom_type: "base",
+      unitsOptions: [],
     },
   ]);
   useEffect(() => {
@@ -78,10 +80,11 @@ export default function SuppliesEdit() {
   const fetchSuppliesById = async (id) => {
     try {
       const res = await axiosInstance.get(`/md_supplies/${id}/edit`);
-      setCurrentSupplies(res.data);
+     
 
       setSelectedStorage(res.data.md_storage_id);
-      fecthSupplyLines(res.data?.supplies_lines);
+      const supplylines = await fecthSupplyLines(res.data?.supplies_lines);
+      
       fecthSuppliersById(res.data?.md_supplier_id);
       setSelectedStatus(res.data.status.toLowerCase());
       setInvoicesNumber(res.data.invoice_no);
@@ -93,7 +96,9 @@ export default function SuppliesEdit() {
       );
       const formattedDate = momentObject.format("YYYY-MM-DD HH:mm");
       setSelectedDateTime(formattedDate);
+      res.data.supplies_lines = supplylines;
       console.log(res.data, "supplies updated");
+      setCurrentSupplies(res.data);
     } catch (error) {
       console.log(error);
     }
@@ -107,19 +112,32 @@ export default function SuppliesEdit() {
     const res = await axiosInstance.get(`/md_supplier/`);
     setSuppliers(res.data.data);
   };
-  const fecthSupplyLines = (supplies) => {
-    const suppliesOptions = supplies.map((item) => ({
-      md_product_id: item.md_product_id,
-      qty: item.qty,
-      total: item.total,
-      cost: item.cost,
-      discount_percent: item.discount_percent,
-      tax: item.tax,
-      uom_id: item.uom_id,
-      uom_type: "base",
-    }));
 
+  const fecthSupplyLines = async (supplies) => {
+
+    const suppliesOptions = 
+    await Promise.all(
+      supplies.map(async (item) => {
+        const unitsOptions = await fetchUomConversions(item.md_product_id);
+        let tempData = {
+          md_supply_id: item.md_supply_id,
+          md_product_id: item.md_product_id,
+          qty: item.qty,
+          total: item.total,
+          cost: item.cost,
+          discount_percent: item.discount_percent,
+          tax: item.tax,
+          uom_id: item.uom_id,
+          uom_type: "base",
+          unitsOptions: unitsOptions,
+        }
+        return tempData
+      })
+    );
     setSupplyLines(suppliesOptions);
+    return suppliesOptions
+    // Now suppliesOptions contains the resolved data.
+  
   };
   const productOptions =
     products != undefined &&
@@ -169,29 +187,20 @@ export default function SuppliesEdit() {
     }
   };
   const fetchUomConversions = async (id) => {
-    debugger;
-    try {
-      const res = await axiosInstance.get(`/uom/get_units_by_product/${id}`);
-      // setUOMConversions(res.data.data);
-      console.log(res.data.data);
-
-      const uniqueId = Date.now();
-
-      const mergedArray = [
-        {
-          md_uoms_id: uniqueId,
-          name: res.data.data.name,
-        },
-        ...res.data.data.conversions.map((conversion) => ({
-          ...conversion,
-          md_uoms_id: uniqueId,
-        })),
-      ];
-      console.log(mergedArray, "2341234");
-      return mergedArray;
-    } catch (error) {
-      return [];
-    }
+    const res = await axiosInstance.get(`/uom/get_units_by_product/${id}`);
+    const uniqueId = Date.now();
+    const mergedArray = [
+      {
+        uniqueid: uniqueId,
+        name: res.data.data.name,
+        md_uoms_id: res.data.data.md_uoms_id,
+      },
+      ...res.data.data.conversions.map((conversion) => ({
+        ...conversion,
+        uniqueid: uniqueId,
+      })),
+    ];
+    return mergedArray;
   };
   const fetchUom = async () => {
     try {
@@ -239,6 +248,7 @@ export default function SuppliesEdit() {
 
   const handleUpdateSupplies = (editSuppliesId) => {
     const momentObject = moment(selectedDateTime, "YYYY-MM-DD HH:mm:ss");
+    delete supplyLines.unitsOptions;
     console.log(selectedDateTime);
     const formattedDate = momentObject.format("YYYY-MM-DD HH:mm");
     let currentSupplies_ = {
@@ -279,13 +289,15 @@ export default function SuppliesEdit() {
   };
   const handleCreateSupplies = () => {
     let timeCurrent = selectedDateTime.format("YYYY-MM-DD HH:mm:ss");
+    delete supplyLines.unitsOptions;
+
     let currentSupplies_ = {
       cd_client_id: 1,
       cd_brand_id: 1,
       cd_branch_id: 1,
 
       invoice_no: invoiceNumber,
-      operation_time: timeCurrent,
+    operation_time: timeCurrent,
       md_supplier_id: 1,
       md_storage_id: selectedStorage,
       status: selectedStatus,
@@ -367,7 +379,35 @@ export default function SuppliesEdit() {
     // Update the state
     setSupplyLines(updatedSupplyLines);
   };
+let handleChangeFlag = 0
+  const handleUnitOptionsChange = (event, index) => {
+    handleChangeFlag = 1
+    const  value  =JSON.parse(event)
+    let fieldName = value.md_uoms_id ? "md_uoms_id" :"md_uom_id" 
+    let typeName = value.md_uoms_id ? "base" : "conversion"
+    // Clone the supplyLines array
+    const updatedSupplyLines = [...supplyLines];
+    // Update the field
+    updatedSupplyLines[index][fieldName] = value[fieldName];
+    updatedSupplyLines[index]['type'] = typeName;
+    console.log("hello world",updatedSupplyLines[index])
+    debugger
+    // Calculate and update the total
+    // updatedSupplyLines[index].total = calculateTotal(updatedSupplyLines[index]);
 
+    // Update the state
+    setSupplyLines(updatedSupplyLines);
+  };
+  const getUomValue = (id, type)=>{
+    if(type =='conversion'){
+
+      console.log("conversion")
+    }
+    if(type =='base'){
+      console.log("base")
+    }
+
+  }
   return (
     <div>
       <PageLayout>
@@ -532,17 +572,7 @@ export default function SuppliesEdit() {
                   </Box>
 
                   {supplyLines.map((supply, index) => {
-                    let conversionOptions =
-                      supply.md_product_id != 0
-                        ? fetchUomConversions(supply.md_product_id)
-                        : [];
-
-                    console.log(
-                      conversionOptions.length > 0 && conversionOptions,
-                      "mergedArray"
-                    );
-
-                    return (
+                      return (
                       <Box className="manage-modifier-gen-box">
                         <Box className="manage-modifier-gen-box-inner-textfield">
                           <Box className=" modifier-gen-box-items modifier-gen-box-mod">
@@ -572,6 +602,7 @@ export default function SuppliesEdit() {
                               </Form.Control>
                             </Form.Group>
                           </Box>
+                          
                           <Box className=" modifier-gen-box-items modifier-gen-box-mod">
                             <Form.Group>
                               <Form.Control
@@ -579,19 +610,19 @@ export default function SuppliesEdit() {
                                 name="uom_id"
                                 type="select"
                                 value={supply.uom_id} // Set the value to preselect
-                                onChange={(e) => {
-                                  handleSupplyFieldsChange(e, index, "uom_id");
-                                }}
+                                onChange={(e) => 
+                                  handleUnitOptionsChange(e.target.value, index)
+                                }
                               >
                                 <option value="">Select</option>
-                                {conversionOptions &&
-                                  conversionOptions.length > 0 &&
-                                  conversionOptions.map((option) => (
+                                {supply.unitsOptions &&
+                                  supply.unitsOptions.length > 0 &&
+                                  supply.unitsOptions.map((item) => (
                                     <option
-                                      key={option.md_uoms_id}
-                                      value={option.md_uoms_id}
+                                      key={item}
+                                      value={JSON.stringify(item)}
                                     >
-                                      {option.name}
+                                      {item.name}
                                     </option>
                                   ))}
                               </Form.Control>
