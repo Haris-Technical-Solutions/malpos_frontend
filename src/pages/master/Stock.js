@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Form } from "react-bootstrap";
 import { CardLayout, FloatCard } from "../../components/cards";
 import ProductsTable from "../../components/tables/ProductsTable";
@@ -6,18 +6,22 @@ import LabelField from "../../components/fields/LabelField";
 import { Pagination, Breadcrumb } from "../../components";
 import Anchor from "../../components/elements/Anchor";
 import PageLayout from "../../layouts/PageLayout";
-import axiosInstance from "../../api/baseUrl";
-import data from "../../data/master/productList.json";
 import { Button, Input, Box, Label } from "../../components/elements";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faAngleDown, faPlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faSearch,
+  faAngleDown,
+  faPlus,
+} from "@fortawesome/free-solid-svg-icons";
 import { Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Table } from "react-bootstrap";
+import axiosInstance from "../../api/baseUrl";
+
+// ... Other imports and component code ...
 
 export default function Stocks() {
   const [sortOrder, setSortOrder] = useState("asc");
-
   const [state, setState] = useState({
     showOption: false,
     productOpen: false,
@@ -26,7 +30,8 @@ export default function Stocks() {
     typeOpen: false,
     categoryOpen: false,
   });
-  const [stocks,setStocks] = useState([])
+  const [stocks, setStocks] = useState([]);
+
   const handleStateChange = (key) => {
     setState((prevState) => {
       const newState = {};
@@ -36,29 +41,45 @@ export default function Stocks() {
       return newState;
     });
   };
+
   const toggleSortOrder = () => {
     setSortOrder(sortOrder === "asc" ? "desc" : "asc");
   };
-  
+
   useEffect(() => {
     fetchStocks();
   }, []);
 
   const fetchStocks = async () => {
     try {
-      const res = await axiosInstance.get("/get_stock");
-      setStocks(res.data.data);
-      console.log("setProducts", res.data.products.data);
+      const response = await axiosInstance.get("/get_stock");
+      const stockData = response.data.data;
+
+      // Fetch product and storage details for each stock item
+      const stocksWithDetails = await Promise.all(
+        stockData.map(async (stock) => {
+          const mdProductId = stock.md_product_id;
+          const mdStorageId = stock.md_storage_id;
+
+          const productResponse = await axiosInstance.get(`/product/${mdProductId}/edit`);
+          const storageResponse = await axiosInstance.get(`/md_storage/${mdStorageId}/edit`);
+
+          return { ...stock, productName: productResponse.data.product_name, storageName: storageResponse.data.name };
+        })
+      );
+
+      setStocks(stocksWithDetails);
     } catch (error) {
       console.log(error);
     }
   };
+
   return (
     <PageLayout>
       <Row>
         <Col xl={12}>
           <CardLayout>
-            <h5>Stocks 38</h5>
+            <h5>Stocks {stocks.length}</h5>
           </CardLayout>
         </Col>
 
@@ -446,11 +467,9 @@ export default function Stocks() {
                     </Box>
                   </Box>
                   <Button className="add-product-btn-pl">
-                    <FontAwesomeIcon icon={faPlus}/> Create Supply
+                    <FontAwesomeIcon icon={faPlus} /> Create Supply
                   </Button>
                 </Col>
-                {/* <Col md={2}> */}
-                {/* </Col> */}
               </Box>
             </Box>
           </CardLayout>
@@ -524,16 +543,19 @@ export default function Stocks() {
                       </tr>
                     </thead>
                     <tbody>
-                      <tr>
-                        <td className="">1</td>
-                        <td className="td-w220"><Link className="link" to={'/stocks-details'}>Egg</Link></td>
-                        <td>200 pcs</td>
-                        <td>16000 SAR</td>
-                        <td>0.0080 SAR </td>
-                        <td>Ingredient</td>
-                        <td>POUTRY</td>
-                        <td>Return</td>
-                      </tr>
+                      {stocks.map((stock) => (
+                        <tr key={stock.id}>
+                          <td>{stock.id}</td>
+                          <td>{stock.productName}</td>{" "}
+                          {/* Display the product name here */}
+                          <td>{stock.current_qty}</td>
+                          <td>Sample Value</td>
+                          <td>Sample Value</td>
+                          <td>Sample Value</td>
+                          <td>Sample Value</td>
+                          <td>{stock.storageName}</td>
+                        </tr>
+                      ))}
                     </tbody>
                   </Table>
                 </Box>
