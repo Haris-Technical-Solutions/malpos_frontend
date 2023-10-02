@@ -33,6 +33,7 @@ import { faSearch, faPlus } from "@fortawesome/free-solid-svg-icons";
 import { Modal } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
+import SkeletonCell from "../../components/Skeleton";
 
 import { toast } from "react-toastify";
 import axiosInstance from "../../api/baseUrl";
@@ -405,7 +406,39 @@ export default function ProductList() {
                       </Tr>
                     </Thead>
                     <Tbody className="mc-table-body even">
-                      {products &&
+                    {isLoading ? ( // Render skeleton when loading is true
+                        <>
+                          {Array.from({ length: 5 }).map((_, index) => (
+                            <tr key={index}>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                            </tr>
+                         ))}
+                        </>
+                      ) : (
+                      products &&
                         products?.map((item, i) => (
                           <Tr key={item.md_product_id}>
                             <Td>
@@ -483,7 +516,8 @@ export default function ProductList() {
                               </Box>
                             </Td>
                           </Tr>
-                        ))}
+                        ))
+                      )}
                     </Tbody>
                   </Table>
                 </Box>
