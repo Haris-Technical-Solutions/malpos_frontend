@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Col, Row, Form, Table } from "react-bootstrap";
 import { CardLayout } from "../../components/cards";
 import PageLayout from "../../layouts/PageLayout";
+import SkeletonCell from "../../components/Skeleton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faSearch,
@@ -24,6 +25,7 @@ import {
 import { useNavigate } from "react-router-dom";
 export default function Unitmeasurement() {
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [unitMeasurements, setUnitMeasurements] = useState([]);
   const navigate = useNavigate();
 
@@ -32,7 +34,10 @@ export default function Unitmeasurement() {
   };
 
   useEffect(() => {
-    fetchUnitMeasurements();
+    fetchUnitMeasurements().then(() => setLoading(false))
+    .catch((error) => {
+      console.error("Error fetching supply data", error);
+    });
   }, []);
 
   const fetchUnitMeasurements = async () => {
@@ -61,10 +66,11 @@ export default function Unitmeasurement() {
     });
   };
   const handleUomDelete = async (id) => {
+    console.log("id is here", id)
     try {
       await axiosInstance.delete(`/uom/${id}`);
-      //   fetchSupplier();
-      toast.success("Supplier deleted successfully", {
+      fetchUnitMeasurements();
+      toast.success("Unit deleted successfully", {
         autoClose: false,
         closeButton: true,
       });
@@ -128,7 +134,28 @@ export default function Unitmeasurement() {
                             </tr>
                           </thead>
                           <tbody>
-                            {unitMeasurements != undefined &&
+                            {loading
+                            ? // Render skeletons while loading
+                              Array.from({ length: 5 }).map((_, index) => (
+                                <tr key={index}>
+                                  <td>
+                                    <SkeletonCell />
+                                  </td>
+                                  <td>
+                                    <SkeletonCell />
+                                  </td> 
+                                  <td>
+                                    <SkeletonCell />
+                                  </td>
+                                  
+                                  <td>
+                                   <SkeletonCell/>
+                                  </td>
+
+
+                                </tr>
+                              ))
+                            :unitMeasurements != undefined &&
                               unitMeasurements.map((measurement) => (
                                 <tr
                                   key={measurement.md_uoms_id}

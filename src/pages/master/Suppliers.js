@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Col, Row, Form, Table } from "react-bootstrap";
 import { CardLayout } from "../../components/cards";
 import PageLayout from "../../layouts/PageLayout";
+import SkeletonCell from "../../components/Skeleton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faSearch,
@@ -30,17 +31,21 @@ export default function Suppliers() {
   const [open, setOpen] = useState(false);
   const [suppliers, setSuppliers] = useState([]);
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
   const handleDotBox = () => {
     setOpen(!open);
   };
 
   useEffect(() => {
     // Fetch suppliers data
-fetchSupplier();
+fetchSupplier().then(() => setLoading(false))
+.catch((error) => {
+  console.error("Error fetching supply data", error);
+});;
   }, []);
 
   const fetchSupplier = async () => {
-    debugger
+    
    await axiosInstance
       .get("/md_supplier")
       .then((response) => {
@@ -164,7 +169,43 @@ fetchSupplier();
                             </tr>
                           </thead>
                           <tbody>
-                            {suppliers !=undefined && suppliers.map((supplier) => (
+                            {
+                            loading
+                            ? // Render skeletons while loading
+                              Array.from({ length: 5 }).map((_, index) => (
+                                <tr key={index}>
+                                  <td>
+                                    <SkeletonCell />
+                                  </td>
+                                  <td>
+                                    <SkeletonCell />
+                                  </td> 
+                                  <td>
+                                    <SkeletonCell />
+                                  </td>
+                                  
+                                  <td>
+                                    <SkeletonCell />
+                                  </td>
+                                  <td>
+                                    <SkeletonCell />
+                                  </td>
+                                  <td>
+                                    <SkeletonCell />
+                                  </td> 
+                                  <td>
+                                    <SkeletonCell />
+                                  </td>
+                                  
+                                  <td>
+                                    <SkeletonCell />
+                                  </td>
+
+                                </tr>
+                              ))
+                            :
+                            
+                            suppliers !=undefined && suppliers.map((supplier) => (
                               <tr key={supplier.id} className="f-13">
                                 <td className="td-w20">
                                   {supplier.supplier_name}

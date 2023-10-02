@@ -5,6 +5,7 @@ import PageLayout from "../../layouts/PageLayout";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axiosInstance from "../../api/baseUrl";
+import SkeletonCell from "../../components/Skeleton";
 import {
   faSearch,
   faPlus,
@@ -34,10 +35,16 @@ export default function Storage() {
   const handleDotBox = () => {
     Close(!open);
   };
+  const [loading, setLoading] = useState(true);
   const  [storage, setStorage]= useState([]);
   useEffect(() => {
-    fetchStorage();
-  },[storage]);
+  
+    fetchStorage()
+    .then(() => setLoading(false))
+    .catch((error) => {
+      console.error("Error fetching supply data", error);
+    });
+  },[]);
 
   const handleStorageEdit = (id) =>{
     console.log("id: " + id);
@@ -51,7 +58,11 @@ export default function Storage() {
   const handleStorageDelete = async (id) => {
     try {
       await axiosInstance.delete(`/md_storage/${id}`);
-      fetchStorage();
+      fetchStorage()
+      .then(() => setLoading(false))
+      .catch((error) => {
+        console.error("Error fetching supply data", error);
+      });
       toast.success("Storage deleted successfully", {
         autoClose: false,
         closeButton: true,
@@ -122,7 +133,29 @@ export default function Storage() {
                             </tr>
                           </thead>
                           <tbody>
-                            {storage.map((item) => (
+                            {
+                            loading
+                            ? // Render skeletons while loading
+                              Array.from({ length: 5 }).map((_, index) => (
+                                <tr key={index}>
+                                  <td>
+                                    <SkeletonCell />
+                                  </td>
+                                  <td>
+                                    <SkeletonCell />
+                                  </td> 
+                                  <td>
+                                    <SkeletonCell />
+                                  </td>
+                                  
+                                  <td>
+                                    <SkeletonCell />
+                                  </td>
+
+                                </tr>
+                              ))
+                            :
+                            storage.map((item) => (
                               <tr key={item.id}>
                                 <td className="td-w30">
                                     {item.name}

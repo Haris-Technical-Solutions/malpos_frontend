@@ -11,6 +11,7 @@ import { faXmark, faPlus } from "@fortawesome/free-solid-svg-icons";
 import axiosInstance from "../../api/baseUrl";
 import { toast } from "react-toastify";
 import Datetime from "react-datetime";
+import SelectField from "../../components/fields/SelectField";
 import moment from "moment";
 import "react-datetime/css/react-datetime.css";
 import { useProduct } from "../../components/createProduct/productContext"; // Import the context
@@ -25,6 +26,9 @@ export default function SuppliesEdit() {
   const [action, setAction] = useState("asdf");
   const [categories, setCategories] = useState([]);
   const [selectedOption, setSelectedOption] = useState("");
+  const [selectedBranchId, setSelectedBranchId] = useState("");
+  const [selectedBrandId, setSelectedBrandId] = useState("");
+  const [selectedClientId, setSelectedClientId] = useState("");
   const [products, setProducts] = useState([]);
   const statusOptions = [
     { label: "Approved", value: "approved" },
@@ -32,8 +36,11 @@ export default function SuppliesEdit() {
     { label: "Deleted", value: "deleted" },
   ];
   const [uoms, setUOMs] = useState([]);
+  const [clients, setClients] = useState([]);
   const [UOMConversions, setUOMConversions] = useState([]);
   const [currentSupplies, setCurrentSupplies] = useState([]);
+  const [brands, setBrands] = useState([]);
+  const [branches, setBranches] = useState([]);
   const [selectedStorage, setSelectedStorage] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [selectedStatus, setSelectedStatus] = useState([]);
@@ -43,12 +50,29 @@ export default function SuppliesEdit() {
   const [seleectedProduct, setSelectedProduct] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
   const [seletedSupplier, setSelectedSupplier] = useState([]);
-
+  const clientsOptions =
+    clients != undefined &&
+    clients?.map((item) => ({
+      label: item.name,
+      value: item.cd_client_id,
+    }));
   const storageOptions =
     storage != undefined &&
     storage?.map((item) => ({
       label: item.name,
       value: item.id,
+    }));
+    const branchesOptions =
+    branches != undefined &&
+    branches?.map((item) => ({
+      label: item.name,
+      value: item.cd_branch_id,
+    }));
+  const brandsOptions =
+    brands != undefined &&
+    brands?.map((item) => ({
+      label: item.name,
+      value: item.cd_brand_id,
     }));
   const [supplyLines, setSupplyLines] = useState([
     {
@@ -68,6 +92,10 @@ export default function SuppliesEdit() {
     fetchProducts();
     fetchUom();
     fetchStorage();
+    fetchClients();
+    fetchBrands();
+    fetchBranches();
+    
     fetchCategories();
     fecthSuppliers();
     if (location.state?.id) {
@@ -76,12 +104,40 @@ export default function SuppliesEdit() {
       fetchSuppliesById(location.state.id);
     }
   }, [location.state]);
-
+  const fetchClients = async () => {
+    try {
+      const res = await axiosInstance.get("/cdclients");
+      console.log(res.data, "cdclients");
+      setClients(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const fetchBranches = async () => {
+    try {
+      const res = await axiosInstance.get("/cdbranch");
+      console.log(res.data, "cdbranch");
+      setBranches(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const fetchBrands = async () => {
+    try {
+      const res = await axiosInstance.get("/cdbrand");
+      setBrands(res.data);
+      console.log(res.data, "cdbrand");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const fetchSuppliesById = async (id) => {
     try {
       const res = await axiosInstance.get(`/md_supplies/${id}/edit`);
      
-
+      setSelectedClientId(res.data.cd_client_id);
+      setSelectedBranchId(res.data.cd_branch_id);
+      setSelectedBrandId(res.data.cd_brand_id);
       setSelectedStorage(res.data.md_storage_id);
       const supplylines = await fecthSupplyLines(res.data?.supplies_lines);
       
@@ -89,7 +145,7 @@ export default function SuppliesEdit() {
       setSelectedStatus(res.data.status.toLowerCase());
       setInvoicesNumber(res.data.invoice_no);
       setSelectedSupplier(res.data?.md_supplier_id);
-
+      setDescription(res.data?.description);
       const momentObject = moment(
         res.data.operation_time,
         "YYYY-MM-DD HH:mm:ss"
@@ -252,10 +308,9 @@ export default function SuppliesEdit() {
     console.log(selectedDateTime);
     const formattedDate = momentObject.format("YYYY-MM-DD HH:mm");
     let currentSupplies_ = {
-      cd_client_id: currentSupplies.cd_client_id,
-      cd_brand_id: currentSupplies.cd_brand_id,
-      cd_branch_id: currentSupplies.cd_branch_id,
-
+      cd_client_id: selectedClientId,
+      cd_brand_id: selectedBrandId,
+      cd_branch_id: selectedBranchId,
       invoice_no: invoiceNumber,
       operation_time: formattedDate,
       md_supplier_id: seletedSupplier,
@@ -434,6 +489,46 @@ let handleChangeFlag = 0
           <Col md={12}>
             <CardLayout>
               <Row>
+              <Col md={4}>
+              <SelectField
+                      // className="w-50"
+                      label="Client"
+                      name="cd_client_id"
+                      options={clientsOptions}
+                      value={selectedClientId}
+                      onChange={(e) => {
+                        setSelectedClientId(e.target.value);
+                      }}
+                    />
+                </Col>
+                <Col md={4}>
+                    <SelectField
+                      required
+                      label="Brand"
+                      name="brand"
+                      type="select"
+                      title="Brand"
+                      options={brandsOptions}
+                      value={selectedBrandId}
+                      onChange={(e) => {
+                        setSelectedBrandId(e.target.value);
+                      }}
+                    />
+                  </Col>
+                  <Col md={4}>
+                    <SelectField
+                      required
+                      label="Branch"
+                      name="branch"
+                      type="select"
+                      title="Branch"
+                      options={branchesOptions}
+                      value={selectedBranchId}
+                      onChange={(e) => {
+                        setSelectedBranchId(e.target.value);
+                      }}
+                    />
+                  </Col>
                 <Col md={4}>
                   <Form.Group>
                     <Form.Label>Supplier</Form.Label>

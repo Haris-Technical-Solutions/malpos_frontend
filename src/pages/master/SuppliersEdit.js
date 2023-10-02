@@ -7,25 +7,44 @@ import PageLayout from "../../layouts/PageLayout";
 import { useLocation } from "react-router-dom";
 import axiosInstance from "../../api/baseUrl";
 import { toast } from "react-toastify";
+import SelectField from "../../components/fields/SelectField";
 import { useProduct } from "../../components/createProduct/productContext"; // Import the context
 
 export default function SuppliersEdit() {
   const location = useLocation();
-  const { form } = useProduct(); // Retrieve the context
-
   const [editSupplierId, setEditSupplierId] = useState();
   const [action, setAction] = useState();
+  const [clients, setClients] = useState([]);
+  const [brands, setBrands] = useState([]);
+  const [branches, setBranches] = useState([]);
   const [currentSupplier, setCurrentSupplier] = useState({
     supplier_name: "",
     phone: "",
     tin: "",
     description: "",
     is_active: "0",
-    cd_branch_id: form.cd_branch_id, // Use context value
-    cd_brand_id: form.cd_brand_id, // Use context value
-    cd_client_id: form.cd_client_id, // Use context value
+    cd_branch_id:1 ,
+    cd_brand_id:1, 
+    cd_client_id: 1,
   });
-
+  const branchesOptions =
+  branches != undefined &&
+  branches?.map((item) => ({
+    label: item.name,
+    value: item.cd_branch_id,
+  }));
+const brandsOptions =
+  brands != undefined &&
+  brands?.map((item) => ({
+    label: item.name,
+    value: item.cd_brand_id,
+  }));
+  const clientsOptions =
+  clients != undefined &&
+  clients?.map((item) => ({
+    label: item.name,
+    value: item.cd_client_id,
+  }));
   const handleSwitchChange = () => {
     setCurrentSupplier((prevSupplier) => ({
       ...prevSupplier,
@@ -53,6 +72,9 @@ export default function SuppliersEdit() {
   };
 
   useEffect(() => {
+    fetchClients();
+    fetchBrands();
+    fetchBranches();
     if (location.state?.id) {
       setEditSupplierId(location.state.id);
       setAction(location.state.action);
@@ -70,112 +92,135 @@ export default function SuppliersEdit() {
     }
   }, [location.state]);
 
+  const fetchClients = async () => {
+    try {
+      const res = await axiosInstance.get("/cdclients");
+      console.log(res.data, "cdclients");
+      setClients(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const fetchBranches = async () => {
+    try {
+      const res = await axiosInstance.get("/cdbranch");
+      console.log(res.data, "cdbranch");
+      setBranches(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const fetchBrands = async () => {
+    try {
+      const res = await axiosInstance.get("/cdbrand");
+      setBrands(res.data);
+      console.log(res.data, "cdbrand");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div>
       <PageLayout>
-        <Row>
-        { <Col md={12}>
-            <CardLayout>
-              {action === "updateSupplies" ? "Create Supplies" : "Update Supplies"}
-            </CardLayout>
-          </Col>}
-          <Col  md={12}>
-            <CardLayout>
-              {/* <Col style={{fontSize:'1.5rem', marginBottom:'1rem'}} md={12}>
-              { action === "create" ? "Create Supplier" : "Update Supplier"}
-              </Col> */}
-              <Row>
-                <Col md={4}>
-                  <LabelField
-                  style={{marginBottom:'1rem' }}
-                    type="text"
-                    value={currentSupplier.supplier_name}
-                    onChange={(e) =>
-                      setCurrentSupplier({
-                        ...currentSupplier,
-                        supplier_name: e.target.value,
-                      })
-                    }
-                    placeholder={"Supplier Name"}
-                    label={'Name:'}
-                  />
-                        </Col>
-                        <Col md={4}>
-                  <LabelField
-                    type="number"
-                    value={currentSupplier.phone}
-                    onChange={(e) =>
-                      setCurrentSupplier({
-                        ...currentSupplier,
-                        phone: e.target.value,
-                      })
-
-                    }
-                    style={{marginBottom:'1rem' }}
-                    label={'Phone Number:'}
-                    placeholder={"Phone"}
-                  />
-                    </Col>
-                        <Col md={4}>
-                  <LabelField
-                    type="text"
-                    style={{marginBottom:'1rem' }}
-                    value={currentSupplier.tin}
-                    onChange={(e) =>
-                      setCurrentSupplier({
-                        ...currentSupplier,
-                        tin: e.target.value,
-                      })
-                    }
-                    label={'Tin:'}
-                    placeholder={"Tin"}
-                  />
-                    </Col>
-                        <Col md={4}>
-                  <LabelField
-                    type="text"
-                    style={{marginBottom:'1rem' }}
-
-                    value={currentSupplier.description}
-                    onChange={(e) =>
-                      setCurrentSupplier({
-                        ...currentSupplier,
-                        description: e.target.value,
-                      })
-                    }
-                    label={'Description'}
-                    placeholder={"Description"}
-                  />
-                    </Col>
-                        <Col md={4}>
-                  <Box className={"storageEdit-switch"}>
-                    <Form.Check
-                    style={{marginBottom:'1rem' }}
-                      className="switch"
-                      type="switch"
-                      id="custom-switch"
-                      label="Status"
-                      checked={currentSupplier.is_active === "1"}
-                      onChange={handleSwitchChange}
-                    />
-                  </Box>
-                  </Col>
-                        <Col md={12}>
-                  {action === "create" ? (
-                    <button className='add-product-btn-pl' onClick={handleUpdateSupplier}>
-                      Create
-                    </button>
-                  ) : (
-                    <button className='add-product-btn-pl' onClick={handleUpdateSupplier}>
-                      Update
-                    </button>
-                  )}
-                </Col>
-              </Row>
-            </CardLayout>
-          </Col>
-        </Row>
+        <div className="form-header">
+          {action === "updateSupplier" ? "Create Supplier" : "Update Supplier"}
+        </div>
+        <div className="suppliers-edit-form">
+          {/* Rest of your component code */}
+          <Row>
+            {/* ... */}
+            <Col md={4}>
+              <LabelField
+                type="text"
+                className="label-field"
+                value={currentSupplier.supplier_name}
+                onChange={(e) =>
+                  setCurrentSupplier({
+                    ...currentSupplier,
+                    supplier_name: e.target.value,
+                  })
+                }
+                placeholder="Supplier Name"
+                label="Name:"
+              />
+            </Col>
+            <Col md={4}>
+              <LabelField
+                type="number"
+                className="label-field"
+                value={currentSupplier.phone}
+                onChange={(e) =>
+                  setCurrentSupplier({
+                    ...currentSupplier,
+                    phone: e.target.value,
+                  })
+                }
+                label="Phone Number:"
+                placeholder="Phone"
+              />
+            </Col>
+            <Col md={4}>
+              <LabelField
+                type="text"
+                className="label-field"
+                value={currentSupplier.tin}
+                onChange={(e) =>
+                  setCurrentSupplier({
+                    ...currentSupplier,
+                    tin: e.target.value,
+                  })
+                }
+                label="Tin:"
+                placeholder="Tin"
+              />
+            </Col>
+            <Col md={4}>
+              <LabelField
+                type="text"
+                className="label-field"
+                value={currentSupplier.description}
+                onChange={(e) =>
+                  setCurrentSupplier({
+                    ...currentSupplier,
+                    description: e.target.value,
+                  })
+                }
+                label="Description:"
+                placeholder="Description"
+              />
+            </Col>
+            <Col md={4}>
+              <div className="switch">
+                <Form.Check
+                  className="switch-input"
+                  type="switch"
+                  id="custom-switch"
+                  label="Status"
+                  checked={currentSupplier.is_active === "1"}
+                  onChange={handleSwitchChange}
+                />
+              </div>
+            </Col>
+            <Col md={12}>
+              {action === "create" ? (
+                <button
+                  className="submit-button"
+                  onClick={handleUpdateSupplier}
+                >
+                  Create
+                </button>
+              ) : (
+                <button
+                  className="submit-button"
+                  onClick={handleUpdateSupplier}
+                >
+                  Update
+                </button>
+              )}
+            </Col>
+          </Row>
+          {/* Rest of your component code */}
+        </div>
       </PageLayout>
     </div>
-  );
-}
+  )}

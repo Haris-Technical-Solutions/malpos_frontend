@@ -7,13 +7,62 @@ import PageLayout from "../../layouts/PageLayout";
 import { Link, useLocation } from "react-router-dom";
 import axiosInstance from "../../api/baseUrl";
 import { toast } from "react-toastify";
+import SelectField from "../../components/fields/SelectField";
 
 export default function StorageEdit() {
   const location = useLocation();
   const [editStorageId, setEditStorageId] = useState();
   const [action, setAction] = useState();
-  const [currentStorage, setCurrentStorage] = useState({ name: "", is_active: 0, cd_branch_id: 0, cd_brand_id: 0, cd_client_id: 0 });
+  const [currentStorage, setCurrentStorage] = useState({ name: "", is_active: 0, cd_branch_id: 1, cd_brand_id: 1, cd_client_id: 1 });
+  const [brands, setBrands] = useState([]);
+  const [branches, setBranches] = useState([]);
+  const [clients, setClients] = useState([]);
+  const clientsOptions =
+    clients != undefined &&
+    clients?.map((item) => ({
+      label: item.name,
+      value: item.cd_client_id,
+    }));
+  const branchesOptions =
+  branches != undefined &&
+  branches?.map((item) => ({
+    label: item.name,
+    value: item.cd_branch_id,
+  }));
+const brandsOptions =
+  brands != undefined &&
+  brands?.map((item) => ({
+    label: item.name,
+    value: item.cd_brand_id,
+  }));
 
+  const fetchClients = async () => {
+    try {
+      const res = await axiosInstance.get("/cdclients");
+      console.log(res.data, "cdclients");
+      setClients(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const fetchBranches = async () => {
+    try {
+      const res = await axiosInstance.get("/cdbranch");
+      console.log(res.data, "cdbranch");
+      setBranches(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const fetchBrands = async () => {
+    try {
+      const res = await axiosInstance.get("/cdbrand");
+      setBrands(res.data);
+      console.log(res.data, "cdbrand");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   const fetchStorageById = async (id) => {
     try {
       const res = await axiosInstance.get(`/md_storage/${id}/edit`);
@@ -24,6 +73,9 @@ export default function StorageEdit() {
   };
 
   useEffect(() => {
+    fetchClients();
+    fetchBrands();
+    fetchBranches();
     if (location.state?.id) {
       fetchStorageById(location.state?.id);
       setEditStorageId(location.state?.id);
@@ -81,10 +133,56 @@ export default function StorageEdit() {
           </Col>}
           <Col md={12}>
             <CardLayout>
-          {/* <Col md={12}  style={{marginBottom:'2rem', fontSize:'1.5rem'  }} >          
-              {action === "create" ? "Create Storage" : "Edit Storage"}
-          </Col> */}
               <Row>
+              <Col md={4}>
+              <SelectField
+                      // className="w-50"
+                      label="Client"
+                      name="cd_client_id"
+                      options={clientsOptions}
+                      value={currentStorage.cd_client_id}
+                      onChange={(e) =>
+                        setCurrentStorage({
+                          ...currentStorage,
+                          cd_client_id: e.target.value,
+                        })
+                      }
+                    />
+                </Col>
+                <Col md={4}>
+                    <SelectField
+                      required
+                      label="Brand"
+                      name="brand"
+                      type="select"
+                      title="Brand"
+                      options={brandsOptions}
+                      value={currentStorage.cd_brand_id}
+                      onChange={(e) =>
+                        setCurrentStorage({
+                          ...currentStorage,
+                          cd_brand_id: e.target.value,
+                        })
+                      }
+                    />
+                  </Col>
+                  <Col md={4}>
+                    <SelectField
+                      required
+                      label="Branch"
+                      name="branch"
+                      type="select"
+                      title="Branch"
+                      options={branchesOptions}
+                      value={currentStorage.cd_branch_id}
+                      onChange={(e) =>
+                        setCurrentStorage({
+                          ...currentStorage,
+                          cd_branch_id: e.target.value,
+                        })
+                      }
+                    />
+                  </Col>
                 <Col md={6}>
                   <LabelField
                   style={{marginBottom:'1rem' }}

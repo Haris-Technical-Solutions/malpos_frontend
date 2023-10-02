@@ -65,22 +65,22 @@ import ModiferProduct from "./pages/master/ModifierProduct";
 import SalePaymentMethod from "./pages/master/SalePaymentMethod";
 import PaymentMethodCreate from "./pages/master/PaymentMethodCreate";
 import SaleType from "./pages/master/SaleType";
-import Accounts from "./pages/master/Accounts";
+import Accounts from "./data/master/BankCashAccount";
 
 import SaleTypeCreate from "./pages/master/SaleTypeCreate";
 import Stocks from "./pages/master/Stock";
 import MovementReport from "./pages/master/MovementReport";
 import ProductMovement from "./pages/master/ProductMovement";
 
-import AccountCreate from "./pages/master/AccountCreate";
+import AccountCreate from "./data/master/BankCashaccountCreate";
 import AccountsDetails from "./pages/master/AccountsDetails";
 import AccCategories from "./pages/master/AccCategories";
-import AccountCatgories from "./pages/master/AccountCatgories";
-import AccountsEdit from "./pages/master/AccountsEdit";
-import Payroll from "./pages/master/Payroll";
-import Cashflow from "./pages/master/Cashflow";
-import Transactions from "./pages/master/Transactions";
-import TransactionCashflow from "./pages/master/TransactionCashflow";
+import AccountCatgories from "./data/master/ChartofAccounts";
+import AccountsEdit from "./data/master/BankCashAccountEdit";
+import Payroll from "./data/master/Payrolls";
+import Cashflow from "./data/master/Cashflows";
+import Transactions from "./data/master/FinancialTransactions";
+import TransactionCashflow from "./data/master/FinancialTransactionCashflow";
 import ReturnSupplies from "./pages/master/ReturnSupplies";
 import ReturnSuppliesDetails from "./pages/master/ReturnSuppliesDetails";
 import Transfers from "./pages/master/Transfers";
@@ -109,8 +109,8 @@ import Steps from "./pages/master/InventoryCreate";
 import InventoryCreate from "./pages/master/InventoryCreate";
 import AddProductInventory from "./pages/master/AddProductInventory";
 
-import CategoriesCreate from "./pages/master/CategoriesCreate";
-import CreateTransaction from "./pages/master/CreateTransaction";
+import CategoriesCreate from "./data/master/ChartofAccountCreate";
+import CreateTransaction from "./data/master/CreateFinancialTransaction";
 import PayrolTransactions from "./pages/master/PayrolTransaction";
 
 import EmenuSetting from "./pages/master/EmenuSetting";
@@ -169,7 +169,7 @@ import CreateModifer from "./pages/form/CreateModifer";
 
 import { ProductProvider } from "./components/createProduct/productContext";
 import SuppliersEdit from "./pages/master/SuppliersEdit";
-import AccountCategoryedit from "./pages/master/AccountCategoryedit";
+import AccountCategoryedit from "./data/master/ChatofAccountEdit";
 import Unitmeasurement from "./pages/master/Unitmeasurement";
 import UnitCreate from "./pages/master/unitCreate";
 
@@ -513,7 +513,7 @@ export default function App() {
                   path="/account-categories"
                   element={<AccountCatgories />}
                 />
-                <Route path="/payroll" element={<Payroll />} />
+                <Route path="/payroll" element={<Payroll/>} />
                 <Route path="/cashflow" element={<Cashflow />} />
                 <Route
                   path="/payroll-transactions"

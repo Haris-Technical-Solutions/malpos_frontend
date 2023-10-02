@@ -8,6 +8,8 @@ import Anchor from "../../components/elements/Anchor";
 import PageLayout from "../../layouts/PageLayout";
 import { Button, Input, Box, Label } from "../../components/elements";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate } from "react-router-dom";
+
 import {
   faSearch,
   faAngleDown,
@@ -17,11 +19,13 @@ import { Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { Table } from "react-bootstrap";
 import axiosInstance from "../../api/baseUrl";
+import SkeletonCell from "../../components/Skeleton";
 
 // ... Other imports and component code ...
 
 export default function Stocks() {
   const [sortOrder, setSortOrder] = useState("asc");
+  const [loading, setIsLoading] = useState(true); // Loading state
   const [state, setState] = useState({
     showOption: false,
     productOpen: false,
@@ -31,7 +35,7 @@ export default function Stocks() {
     categoryOpen: false,
   });
   const [stocks, setStocks] = useState([]);
-
+  const navigate = useNavigate();
   const handleStateChange = (key) => {
     setState((prevState) => {
       const newState = {};
@@ -49,7 +53,13 @@ export default function Stocks() {
   useEffect(() => {
     fetchStocks();
   }, []);
-
+  const handleSuppliesCreate = () => {
+    navigate(`/supplies-edit/`, {
+      state: {
+        action: "createSupplies",
+      },
+    });
+  };
   const fetchStocks = async () => {
     try {
       const response = await axiosInstance.get("/get_stock");
@@ -61,17 +71,34 @@ export default function Stocks() {
           const mdProductId = stock.md_product_id;
           const mdStorageId = stock.md_storage_id;
 
-          const productResponse = await axiosInstance.get(`/product/${mdProductId}/edit`);
-          const storageResponse = await axiosInstance.get(`/md_storage/${mdStorageId}/edit`);
+          const productResponse = await axiosInstance.get(
+            `/product/${mdProductId}/edit`
+          );
+          const storageResponse = await axiosInstance.get(
+            `/md_storage/${mdStorageId}/edit`
+          );
 
-          return { ...stock, productName: productResponse.data.product_name, storageName: storageResponse.data.name };
+          return {
+            ...stock,
+            productName: productResponse.data.product_name,
+            productPrice: productResponse.data.product_price,
+            storageName: storageResponse.data.name,
+          };
         })
       );
 
       setStocks(stocksWithDetails);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
+  };
+  const getAverage = (totalCost, quantity) => {
+    if (quantity === 0) {
+      return "N/A";
+    }
+    const average = (totalCost / quantity).toFixed(2);
+    return average;
   };
 
   return (
@@ -466,9 +493,13 @@ export default function Stocks() {
                       )}
                     </Box>
                   </Box>
-                  <Button className="add-product-btn-pl">
-                    <FontAwesomeIcon icon={faPlus} /> Create Supply
-                  </Button>
+                  <button className="acc-create-btn rs-btn-create">
+                    <FontAwesomeIcon
+                      onClick={handleSuppliesCreate}
+                      icon={faPlus}
+                    />{" "}
+                    Create Supply
+                  </button>
                 </Col>
               </Box>
             </Box>
@@ -543,19 +574,57 @@ export default function Stocks() {
                       </tr>
                     </thead>
                     <tbody>
-                      {stocks.map((stock) => (
-                        <tr key={stock.id}>
-                          <td>{stock.id}</td>
-                          <td>{stock.productName}</td>{" "}
-                          {/* Display the product name here */}
-                          <td>{stock.current_qty}</td>
-                          <td>Sample Value</td>
-                          <td>Sample Value</td>
-                          <td>Sample Value</td>
-                          <td>Sample Value</td>
-                          <td>{stock.storageName}</td>
-                        </tr>
-                      ))}
+                      {loading ? ( // Render skeleton when loading is true
+                        <>
+                          {Array.from({ length: 5 }).map((_, index) => (
+                            <tr key={index}>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                            </tr>
+                          ))}
+                        </>
+                      ) : (
+                        // Render data rows when loading is false
+                        stocks.map((stock) => (
+                          <tr key={stock.id}>
+                            <td>{stock.id}</td>
+                            <td>{stock.productName}</td>
+                            <td>{stock.current_qty}</td>
+                            <td>{stock.current_qty * stock.productPrice}</td>
+                            <td>
+                              {getAverage(
+                                stock.productPrice,
+                                stock.current_qty
+                              )}
+                            </td>
+                            <td>Sample Value</td>
+                            <td>Sample Value</td>
+                            <td>{stock.storageName}</td>
+                          </tr>
+                        ))
+                      )}
                     </tbody>
                   </Table>
                 </Box>
