@@ -8927,6 +8927,7 @@ textarea.form-control {
   margin-top: 2px;
 }
 
+
 .receipt-tab-main .thead-modifier {
   font-size: 13px;
   font-weight: 100;
@@ -8934,7 +8935,27 @@ height: 32px;
 line-height: 15px;
   color: black;
 }
+.lfield{
+width:80%;
+height:2.1rem;
+padding-left: 0.5rem;
+background-color: #f0f0f0;
+}
 
+.mfield{
+  width:60%;
+  height: 2.1rem;
+  /* background-color: #f0f0f0; */
+}
+.wfield{
+  width: 60%;
+  height: 2.1rem;
+  padding-left: 10px;
+  background-color:#F0F0F0;
+}
+.deletebtn{
+  fill: red;
+}
 /* .receipt-tab-main .thead-modifier th {
   padding: 1rem 0.3rem;
   width: 100px;
@@ -10125,6 +10146,9 @@ line-height: 15px;
 .transfer-table thead tr {
   font-size: 12px;
   display: flex;
+  height:2.5rem;
+  line-height:0.5rem;
+  padding-top: -3px;
 }
 
 .transfer-table thead tr .th-w300 {
@@ -10269,6 +10293,13 @@ line-height: 15px;
   cursor: pointer;
   margin-left: 5px;
 }
+
+.table-set thead tr td{
+  line-height:2rem;
+  height:2rem;
+  font-size: 0.7rem;
+}
+
 
 /* packages */
 .pacakes-table-wrap thead tr {

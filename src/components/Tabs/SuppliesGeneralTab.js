@@ -101,9 +101,8 @@ export default function SuppliesGeneralTab(props) {
                 <Box className={"supplies-gen-table-wrap"}>
                   <Table style={{ width: "1200px" }}>
                     <thead
-                      className="thead-dark"
-                      style={{ backgroundColor: "#F07632" }}
-                    >
+                      className="  thead-dark"
+                      style={{ backgroundColor: "#F07632", height:"0.8rem", lineHeight:"0.7rem",paddingTop:"-5px" }}>
                       <tr className="f-12">
                         <th className="th-w50">ID</th>
                         <th className="th-w150">Products</th>

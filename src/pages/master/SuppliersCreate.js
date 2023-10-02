@@ -59,8 +59,11 @@ export default function SuppliersCreate() {
           <Col md={12}>
             <CardLayout>
               <Row>
-                <Col md={6}>
+                
+                  <Col md={4}>
+
                   <LabelField
+                    className="wfield"
                     type="text"
                     style={{marginBottom:'1rem' }}
                     value={currentSupplier.supplier_name}
@@ -72,22 +75,31 @@ export default function SuppliersCreate() {
                     }
                     label={'Name:'}
                     placeholder={"Supplier Name"}
-                  />
-                  <LabelField
+                    />
+                    </Col>
+                  
+                  <Col md={4}>
+                    <LabelField
                   label={'Phone Number:'}
-                    type="number"
-                    style={{marginBottom:'1rem' }}
-                    value={currentSupplier.phone}
-                    onChange={(e) =>
-                      setCurrentSupplier({
-                        ...currentSupplier,
-                        phone: e.target.value,
-                      })
-                    }
-                    placeholder={"Phone"}
+                  type="number"
+                  className="wfield"
+                  style={{marginBottom:'1rem' }}
+                  value={currentSupplier.phone}
+                  onChange={(e) =>
+                    setCurrentSupplier({
+                      ...currentSupplier,
+                      phone: e.target.value,
+                    })
+                  }
+                  placeholder={"Phone"}
                   />
+                  </Col>
+                  
+                  <Col md={4}>
+
                   <LabelField
                     type="text"
+                    className="wfield"
                     value={currentSupplier.tin}
                     style={{marginBottom:'1rem' }}
                     onChange={(e) =>
@@ -98,9 +110,14 @@ export default function SuppliersCreate() {
                     }
                     placeholder={"Tin"}
                     label={'Tin:'}
-                  />
+                    />
+                    </Col>
+                  
+                  <Col md={4}>
+
                   <LabelField
                     type="text"
+                    className="wfield"
                     style={{marginBottom:'1rem' }}
                     value={currentSupplier.description}
                     onChange={(e) =>
@@ -111,22 +128,28 @@ export default function SuppliersCreate() {
                     }
                     placeholder={"Description"}
                     label={'Description:'}
-                  />
+                    />
+                    </Col>
+                  <Col md={4} >
                   <Box className={"storageEdit-switch"}>
                     <Form.Check
-                    style={{marginBottom:'1rem' }}
+                     style={{marginTop:'2rem' }}
                       className="switch"
                       type="switch"
+                      
                       id="custom-switch"
                       label="Status"
                       checked={currentSupplier.is_active === "1"}
                       onChange={handleSwitchChange}
                     />
                   </Box>
+                  </Col>
+
+                  <Col md={6}>
                   <Button variant="primary" onClick={handleCreateSupplier}>
                     Create
                   </Button>
-                </Col>
+                  </Col>
               </Row>
             </CardLayout>
           </Col>

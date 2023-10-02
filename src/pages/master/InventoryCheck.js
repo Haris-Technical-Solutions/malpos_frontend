@@ -171,7 +171,8 @@ export default function InventoryCheck() {
                                     <Col md={12}>
                                         <Box className={'inventory-check-table-wrap'}>
                                             <Table className='inventory-table'>
-                                                <thead className='thead-dark'>
+                                                <thead className='thead-dark'
+                                                  style={{ fontSize:"12px", height:"1rem", lineHeight:"0.2rem"}}         >
                                                     <tr>
                                                     <th className='th-w50'>Id</th>
                                                     <th className='th-w120'>Storage</th>

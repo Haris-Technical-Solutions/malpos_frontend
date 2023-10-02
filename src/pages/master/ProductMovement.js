@@ -289,7 +289,7 @@ export default function ProductMovement() {
               <Col md={12}>
                 <Box className="payment-sale-table-wrap">
                   <Table className="sale-m-table" responsive>
-                    <thead className="mc-table-head dark">
+                    <thead className="mc-table-head thead-dark"  style={{ fontSize:"15px", height:"1rem", lineHeight:"0.2rem"}} >
                       <tr>
                         <th>
                           ID

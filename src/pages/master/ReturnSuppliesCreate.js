@@ -76,15 +76,17 @@ export default function ReturnSuppliesCreate() {
                     <Col md={6} className="cus-col-mt">
                       <MultiSelectField />
                     </Col>
-                    <Col md={6} className="cus-col-mt">
+                    <Col md={4} className="cus-col-mt">
                       <LabelField
-                        type={"number"}
+className="wfield"
+type={"number"}
                         placeholder="0"
                         label={"Invoice Number"}
                       />
                     </Col>
-                    <Col md={6} className="cus-col-mt">
+                    <Col md={4} className="cus-col-mt">
                       <LabelField
+                      className="wfield"
                         type={"text"}
                         placeholder="Description"
                         label={"Description"}
@@ -94,17 +96,18 @@ export default function ReturnSuppliesCreate() {
                 </Col>
                 <Col md={12}>
                   <Box className={"product-add-box"}>
-                    <Box className={"product"}> Product</Box>
-                    <Box className={"Qty"}> Qty</Box>
-                    <Box className={"Cost"}> Cost</Box>
-                    <Box className={"Total"}> Total</Box>
-                    <Box className={"Xmark"}> </Box>
+                    <Box className={"product lfield "}> Product</Box>
+                    <Box className={"Qty lfield"}> Qty</Box>
+                    <Box className={"Cost lfield"}> Cost</Box>
+                    <Box className={"Total lfield"}> Total</Box>
+                    <Box className={"Xmark lfield"}> </Box>
                   </Box>
                   <Box className={"product-add-boxes"}>
                     <Box className={"product"}>
                       {" "}
                       <MultiSelectNoLabel
                         label="Storage"
+                        className="mfield"
                         options={[
                           { label: "Return ", value: "Return" },
                           {
@@ -120,15 +123,15 @@ export default function ReturnSuppliesCreate() {
                     </Box>
                     <Box className={"Qty"}>
                       {" "}
-                      <CusField placeholder={"0"} type="number" />{" "}
+                      <CusField className="lfield" placeholder={"0"} type="number" />{" "}
                     </Box>
                     <Box className={"Cost"}>
                       {" "}
-                      <CusField placeholder={"0"} type="number" />
+                      <CusField placeholder={"0"} className="lfield" type="number" />
                     </Box>
                     <Box className={"Total"}>
                       {" "}
-                      <CusField placeholder={"0"} type="number" />
+                      <CusField placeholder={"0"} type="number" className="lfield" />
                     </Box>
                     <Box className={"Xmark"}>
                       {" "}

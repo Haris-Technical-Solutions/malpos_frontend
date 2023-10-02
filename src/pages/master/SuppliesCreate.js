@@ -73,13 +73,13 @@ export default function SuppliesCreate() {
                                         <Col md={6} className='cus-col-mt'>
                                             <CalenderField label={'Balance '}/>
                                         </Col>
-                                        <Col md={6} className='cus-col-mt'>
+                                        <Col md={6} className='cus-col-mt mfield'>
                                             <MultiSelectField />
                                         </Col>
-                                        <Col md={6} className='cus-col-mt'>
+                                        <Col md={6} className='cus-col-mt wfield'>
                                             <LabelField type={'number'} placeholder='0' label={'Invoice Number'} />
                                         </Col>
-                                        <Col md={6} className='cus-col-mt'>
+                                        <Col md={6} className='cus-col-mt wfield'>
                                             <LabelField type={'text'} placeholder='Description' label={'Description'} />
                                         </Col>
                                     </Row>
@@ -96,14 +96,14 @@ export default function SuppliesCreate() {
                                         <Box className={'Xmark'}>  </Box>
                                     </Box>
                                     <Box className={'product-add-boxes'}>
-                                        <Box className={'product'}> <MultiSelectNoLabel /></Box>
-                                        <Box className={'Unit'}> <MultiSelectNoLabel /></Box>
-                                        <Box className={'Qty'}> <CusField placeholder={'0'} type='number' /> </Box>
-                                        <Box className={'Cost'}> <CusField placeholder={'0'} type='number' /></Box>
-                                        <Box className={'Discount'}> <CusField placeholder={'Discount (%)'} type='number' /> </Box>
-                                        <Box className={'Tax'}> <CusField placeholder={'Tax (%)'} type='number' /></Box>
-                                        <Box className={'Total'}> <CusField placeholder={'0'} type='number' /></Box>
-                                        <Box className={'Xmark'}> <FontAwesomeIcon icon={faXmark} /> </Box>
+                                        <Box className={'product mfield'}> <MultiSelectNoLabel /></Box>
+                                        <Box className={'Unit mfield'}> <MultiSelectNoLabel /></Box>
+                                        <Box className={'Qty mfield '}> <CusField placeholder={'0'} type='number' /> </Box>
+                                        <Box className={'Cost mfield'}> <CusField placeholder={'0'} type='number' /></Box>
+                                        <Box className={'Discount mfield'}> <CusField placeholder={'Discount (%)'} type='number' /> </Box>
+                                        <Box className={'Tax mfield'}> <CusField placeholder={'Tax (%)'} type='number' /></Box>
+                                        <Box className={'Total mfield'}> <CusField placeholder={'0'} type='number' /></Box>
+                                        <Box className={'Xmark mfield'}> <FontAwesomeIcon icon={faXmark} /> </Box>
                                     </Box>
 
                                 </Col>

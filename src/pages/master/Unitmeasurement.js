@@ -122,9 +122,9 @@ export default function Unitmeasurement() {
                     <Col md={12}>
                       <Box className={"unit-measurements-table-wrap"}>
                         <Table responsive>
-                          <thead
-                            className="thead-dark"
-                            style={{ backgroundColor: "#F07632" }}
+                          <thead  
+                            className=" thead-dark"
+                            style={{ backgroundColor: "#F07632", fontSize:"12px", height:"1rem", lineHeight:"0.2rem"}}
                           >
                             <tr>
                               <th className="th-w30">Name</th>
@@ -183,7 +183,7 @@ export default function Unitmeasurement() {
 
                                         <Button
                                           title="Delete"
-                                          className="material-icons delete"
+                                          className="material-icons delete deletebtn"
                                           onClick={() =>
                                             handleUomDelete(
                                               measurement.md_uoms_id

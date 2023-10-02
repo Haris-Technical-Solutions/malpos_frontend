@@ -154,19 +154,20 @@ export default function UnitCreate() {
     <div>
       <PageLayout>
         <Row>
-          <Col md={12}>
+          <Col md={12} >
             <CardLayout>
-              <Col md={12}>
-                <Row>
+              <Col md={12}  >
+                <Row >
                   {
-                    <Col md={12}>
+                    <Col md={12}   >
                       <CardLayout>
                         {action === "updateUom" ? "Update UOMs" : "Create UOMs"}
                       </CardLayout>
                     </Col>
                   }
-                  <Col md={4}>
+                  <Col md={4} >
                     <SelectField
+                    className="wfield"
                       // className="w-50"
                       label="Client"
                       name="client"
@@ -175,8 +176,9 @@ export default function UnitCreate() {
                       onChange={handleInputChange}
                     />
                   </Col>
-                  <Col md={4}>
+                  <Col md={4} >
                     <SelectField
+                      className="wfield"
                       required
                       label="Brand"
                       name="brand"
@@ -189,6 +191,7 @@ export default function UnitCreate() {
                   </Col>
                   <Col md={4}>
                     <SelectField
+                      className="wfield"
                       required
                       label="Branch"
                       name="branch"
@@ -202,6 +205,7 @@ export default function UnitCreate() {
                   <Col md={4}>
                     <LabelField
                       type="text"
+                      className="wfield"
                       name="name"
                       value={unitData?.name}
                       onChange={handleInputChange}
@@ -211,6 +215,7 @@ export default function UnitCreate() {
                   </Col>
                   <Col md={4}>
                     <LabelField
+                      className="wfield"
                       type="text"
                       name="unit"
                       value={unitData?.unit}
@@ -221,6 +226,7 @@ export default function UnitCreate() {
                   </Col>
                   <Col md={4}>
                     <LabelField
+                      className="wfield"
                       type="text"
                       name="code"
                       value={unitData?.code}
@@ -232,6 +238,7 @@ export default function UnitCreate() {
                   <Col md={4}>
                     <LabelField
                       type="text"
+                      className="wfield"
                       name="symbol"
                       value={unitData?.symbol}
                       onChange={handleInputChange}

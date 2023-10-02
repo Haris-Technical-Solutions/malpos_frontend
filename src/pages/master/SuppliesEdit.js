@@ -492,6 +492,7 @@ let handleChangeFlag = 0
               <Col md={4}>
               <SelectField
                       // className="w-50"
+                      className="wfield"
                       label="Client"
                       name="cd_client_id"
                       options={clientsOptions}
@@ -505,6 +506,7 @@ let handleChangeFlag = 0
                     <SelectField
                       required
                       label="Brand"
+                      className="wfield"
                       name="brand"
                       type="select"
                       title="Brand"
@@ -516,9 +518,11 @@ let handleChangeFlag = 0
                     />
                   </Col>
                   <Col md={4}>
+
                     <SelectField
                       required
                       label="Branch"
+                      className="wfield"
                       name="branch"
                       type="select"
                       title="Branch"
@@ -535,6 +539,7 @@ let handleChangeFlag = 0
                     <Form.Control
                       as="select"
                       name="productid"
+                      className="wfield"
                       type="select"
                       value={seletedSupplier} // Set the value to preselect
                       onChange={(e) => {
@@ -556,6 +561,7 @@ let handleChangeFlag = 0
                     <Form.Control
                       as="select"
                       name="status"
+                      className="wfield"
                       type="select"
                       value={selectedStorage} // Set the value to preselect
                       onChange={handleStorageChange}
@@ -570,12 +576,13 @@ let handleChangeFlag = 0
                   </Form.Group>
                 </Col>
                 <Col md={4}>
-                  <Box className="multi-select-opt">
-                    <label>
+                  <Box className="multi-select-opt " >
+                    <label >
                       Category
                       <span style={{ color: "red" }}>*</span>
                     </label>
                     <MultiSelect
+                    className="mfield"
                       options={[]}
                       value={selectedCategories}
                       onChange={handleCategoryChange}
@@ -589,6 +596,7 @@ let handleChangeFlag = 0
                     <Form.Label>Status</Form.Label>
                     <Form.Control
                       as="select"
+                      className="wfield"
                       name="status"
                       type="select"
                       value={selectedStatus} // Set the value to preselect
@@ -606,6 +614,7 @@ let handleChangeFlag = 0
                 <Col md={4}>
                   <Form.Label>OPERATION TIME</Form.Label>
                   <Datetime
+                  className="mfield"
                     value={selectedDateTime}
                     onChange={handleDateChange}
                     dateFormat="YYYY-MM-DD"
@@ -616,6 +625,7 @@ let handleChangeFlag = 0
                   <LabelField
                     label="Invoice Number"
                     type="text"
+                    className="wfield"
                     value={invoiceNumber}
                     onChange={(e) => setInvoicesNumber(e.target.value)}
                     placeholder={"Invoice Number"}
@@ -625,6 +635,7 @@ let handleChangeFlag = 0
                   <LabelField
                     label="Description"
                     type="text"
+                    className="wfield"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder={"Description"}
@@ -634,6 +645,7 @@ let handleChangeFlag = 0
                   <LabelField
                     label="Balance"
                     type="text"
+                    className="wfield"
                     value={currentSupplies && currentSupplies?.balance}
                     placeholder={"Balance"}
                   />
@@ -673,6 +685,7 @@ let handleChangeFlag = 0
                           <Box className=" modifier-gen-box-items modifier-gen-box-mod">
                             <Form.Group>
                               <Form.Control
+                              className="lfield"
                                 as="select"
                                 name="productid"
                                 type="select"
@@ -702,6 +715,7 @@ let handleChangeFlag = 0
                             <Form.Group>
                               <Form.Control
                                 as="select"
+                                className="lfield"
                                 name="uom_id"
                                 type="select"
                                 value={supply.uom_id} // Set the value to preselect
@@ -726,6 +740,7 @@ let handleChangeFlag = 0
 
                           <Box className="modifier-gen-box-items modifier-gen-box-gross">
                             <LabelField
+                            className="lfield"
                               value={supply.qty}
                               onChange={(e) => {
                                 handleSupplyFieldsChange(e, index, "qty");
@@ -738,6 +753,7 @@ let handleChangeFlag = 0
                           <Box className="modifier-gen-box-items modifier-gen-box-gross">
                             <LabelField
                               type="text"
+                              className="lfield"
                               value={supply.cost}
                               onChange={(e) => {
                                 handleSupplyFieldsChange(e, index, "cost");
@@ -749,6 +765,7 @@ let handleChangeFlag = 0
 
                           <Box className="modifier-gen-box-items modifier-gen-box-gross">
                             <LabelField
+                            className="lfield"
                               type="text"
                               value={supply.discount_percent}
                               onChange={(e) => {
@@ -766,6 +783,7 @@ let handleChangeFlag = 0
                           <Box className="modifier-gen-box-items modifier-gen-box-gross">
                             <LabelField
                               type="text"
+                              className="lfield"
                               value={supply.tax}
                               onChange={(e) => {
                                 handleSupplyFieldsChange(e, index, "tax");
@@ -777,6 +795,7 @@ let handleChangeFlag = 0
                           <Box className="modifier-gen-box-items modifier-gen-box-price">
                             <LabelField
                               type="text"
+                              className="lfield"
                               value={supply.total}
                               fieldSize="w-100 h-md"
                               placeholder="0"

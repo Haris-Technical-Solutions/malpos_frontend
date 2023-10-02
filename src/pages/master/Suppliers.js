@@ -137,7 +137,7 @@ fetchSupplier().then(() => setLoading(false))
                     <Col md={12}>
                       <Box className={"suppliers-table-wrap"}>
                         <Table responsive>
-                          <thead className="thead-dark" style={{backgroundColor:'#F07632'}}>
+                          <thead className="thead-dark"  style={{ fontSize:"12px", height:"0.5rem", lineHeight:"0.5rem", paddingTop:"-5px"}}>
                             <tr>
                               <th className="th-w20">Name</th>
                               <th className="th-w15 text-end">
