@@ -54,11 +54,15 @@ export default function SuppliersCreate() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>Create Supplier</CardLayout>
-          </Col>
-          <Col md={12}>
             <CardLayout>
               <Row>
+          <Col md={12}>
+            Create Supplier
+                  <Button style={{marginLeft:"64%", padding:"7px 15px"}} onClick={handleCreateSupplier} >
+                    Create
+                  </Button>
+                  <Link to={"/suppliers"} className='btnback'> <button className="btnlk"> Back</button></Link>
+          </Col>
                 
                   <Col md={4}>
 
@@ -145,11 +149,6 @@ export default function SuppliersCreate() {
                   </Box>
                   </Col>
 
-                  <Col md={6}>
-                  <Button variant="primary" onClick={handleCreateSupplier}>
-                    Create
-                  </Button>
-                  </Col>
               </Row>
             </CardLayout>
           </Col>

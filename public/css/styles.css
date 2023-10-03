@@ -1883,7 +1883,21 @@ textarea.form-control {
   -ms-transition: all linear 0.3s;
   -o-transition: all linear 0.3s;
 }
-
+.btnsub{
+  color:white;
+  font-size:0.8rem;
+}
+.btnback{
+  background-color: #f29b30;
+  border-radius: 5px;
+  margin-left: 10px;
+  padding: 5px 20px;
+}
+.btnlk{
+  text-align: center;
+  color: white;
+  font-size: 0.9rem;
+}
 .mc-btn:hover {
   opacity: 0.8;
   color: var(--lightColor);

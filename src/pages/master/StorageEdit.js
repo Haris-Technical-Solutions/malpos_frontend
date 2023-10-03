@@ -126,19 +126,31 @@ const brandsOptions =
         
       <PageLayout>
         <Row>
-        { <Col md={12}>
-            <CardLayout>
-            {action === "create" ? "Create Storage" : "Update Storage"}
-            </CardLayout>
-          </Col>}
           <Col md={12}>
             <CardLayout>
               <Row>
+        { <Col md={12}>
+            {action === "create" ? "Create Storage" : "Update Storage"}
+                {action === "create" ? (
+                  <button className='add-product-btn-pl' onClick={handleUpdateStorage}>
+                    Create
+                  </button>
+                ) : (
+                  <button className='add-product-btn-pl' onClick={handleUpdateStorage}>
+                    Update
+                  </button>
+                )
+              }
+              <Link to={"/Storage"} className='btnback'style={{marginLeft:"69%", padding:"7px 20px"}} > <button className="btnlk"> Back</button></Link>
+  
+          </Col>
+          }
               <Col md={4}>
               <SelectField
                       // className="w-50"
                       label="Client"
                       name="cd_client_id"
+                      className="wfield"
                       options={clientsOptions}
                       value={currentStorage.cd_client_id}
                       onChange={(e) =>
@@ -156,6 +168,7 @@ const brandsOptions =
                       name="brand"
                       type="select"
                       title="Brand"
+                      className="wfield"
                       options={brandsOptions}
                       value={currentStorage.cd_brand_id}
                       onChange={(e) =>
@@ -169,6 +182,7 @@ const brandsOptions =
                   <Col md={4}>
                     <SelectField
                       required
+                      className="wfield"
                       label="Branch"
                       name="branch"
                       type="select"
@@ -183,10 +197,11 @@ const brandsOptions =
                       }
                     />
                   </Col>
-                <Col md={6}>
+                <Col md={4}>
                   <LabelField
                   style={{marginBottom:'1rem' }}
                     type="text"
+                    className="wfield"
                     label={'Name'}
                     value={currentStorage.name}
                     onChange={(e) =>
@@ -208,15 +223,6 @@ const brandsOptions =
                       onChange={handleSwitchChange}
                     />
                   </Box>
-                  {action === "create" ? (
-                    <button className='add-product-btn-pl' onClick={handleUpdateStorage}>
-                      Create
-                    </button>
-                  ) : (
-                    <button className='add-product-btn-pl' onClick={handleUpdateStorage}>
-                      Update
-                    </button>
-                  )}
                 </Col>
               </Row>
             </CardLayout>

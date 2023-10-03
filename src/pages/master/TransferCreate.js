@@ -13,6 +13,7 @@ import PageLayout from "../../layouts/PageLayout";
 import IconSearchBar from "../../components/elements/IconSearchBar";
 import CusLabelField from "../../components/fields/CusLabelField";
 import { Modal } from "react-bootstrap";
+import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 
 export default function TransferCreate() {
@@ -69,11 +70,22 @@ export default function TransferCreate() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>Transfer Create</CardLayout>
-          </Col>
-          <Col md={12}>
             <CardLayout>
               <Row>
+          <Col md={12}>
+          Transfer Create
+          <Link style={{ marginLeft:"67%", backgroundColor:"black",padding:"5px 15px", borderRadius:"5px"}}>
+                    <Button
+                    className="btnsub"
+                    // style={{padding:"7px 15px"}}
+                      // className="acc-create-btn rs-btn-create"
+                
+                    >
+                      Submit
+                    </Button>
+                  </Link>
+                  <Link to={"/transfers"} className='btnback'> <button className="btnlk"> Back</button></Link>
+          </Col>
                 <Col md={12}>
                   <Row>
                     <Col md={6} className="cus-col-mt">

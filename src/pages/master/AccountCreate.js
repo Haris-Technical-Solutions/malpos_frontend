@@ -52,13 +52,14 @@ export default function AccountCreate() {
                   </Box>
                 </Box>
               </Box> 
+                    <Link to={"/Storage"} className='btnback'> <button className="btnlk"> Back</button></Link>
           </Col>
                 <Col md={11}>
                   <Row >
                     <Col md={4}>
                       <Form.Label>Name</Form.Label>
                       <Form.Control
-                        className="m-0"
+                        className="wfield"
                         label="Name"
                         type="text"
                         required

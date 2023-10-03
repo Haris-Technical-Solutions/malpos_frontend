@@ -160,9 +160,18 @@ export default function UnitCreate() {
                 <Row >
                   {
                     <Col md={12}   >
-                      <CardLayout>
+                      
                         {action === "updateUom" ? "Update UOMs" : "Create UOMs"}
-                      </CardLayout>
+                  <Link style={{ marginLeft:"67%"}}>
+                    <Button
+                    style={{padding:"7px 15px"}}
+                      // className="acc-create-btn rs-btn-create"
+                      onClick={handleSubmit}
+                    >
+                      Submit
+                    </Button>
+                  </Link>
+                  <Link to={"/unit-measurement"} className='btnback'> <button className="btnlk"> Back</button></Link>
                     </Col>
                   }
                   <Col md={4} >
@@ -246,14 +255,6 @@ export default function UnitCreate() {
                       label="Symbol"
                     />
                   </Col>
-                  <Link style={{ float: "left" }}>
-                    <Button
-                      className="acc-create-btn rs-btn-create"
-                      onClick={handleSubmit}
-                    >
-                      Submit
-                    </Button>
-                  </Link>
                 </Row>
               </Col>
             </CardLayout>

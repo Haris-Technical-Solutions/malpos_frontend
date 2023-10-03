@@ -4,7 +4,7 @@ import { CardLayout } from "../../components/cards";
 import { Box } from "../../components/elements";
 import { LabelField } from "../../components/fields";
 import PageLayout from "../../layouts/PageLayout";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import axiosInstance from "../../api/baseUrl";
 import { toast } from "react-toastify";
 import SelectField from "../../components/fields/SelectField";
@@ -122,12 +122,32 @@ const brandsOptions =
   return (
     <div>
       <PageLayout>
-        <div className="form-header">
-          {action === "updateSupplier" ? "Create Supplier" : "Update Supplier"}
-        </div>
-        <div className="suppliers-edit-form">
-          {/* Rest of your component code */}
+        <Row>
+          <Col md={12}>
+        <CardLayout>
           <Row>
+        <Col md={12} >
+          {action === "updateSupplier" ? "Create Supplier" : "Update Supplier"}
+              {action === "create" ? (
+                <Button
+                  className="submit-button"
+                  onClick={handleUpdateSupplier}
+                >
+                  Create
+                </Button>
+              ) : (
+                <Button
+                style={{marginLeft:"64%", padding:"7px 15px"}}
+                  onClick={handleUpdateSupplier}
+                >
+                  Update
+                </Button>
+              )}
+              <Link to={"/suppliers"} className='btnback'> <button className="btnlk"> Back</button></Link>
+        </Col>
+
+          {/* Rest of your component code */}
+        
             {/* ... */}
             <Col md={4}>
               <LabelField
@@ -178,7 +198,7 @@ const brandsOptions =
             <Col md={4}>
               <LabelField
                 type="text"
-                className="label-field wfield"
+                className=" wfield"
                 value={currentSupplier.description}
                 onChange={(e) =>
                   setCurrentSupplier({
@@ -194,7 +214,6 @@ const brandsOptions =
               <div className="switch">
                 <Form.Check
                 style={{marginTop:"2rem"}}
-                  className="switch-input "
                   type="switch"
                   id="custom-switch"
                   label="Status"
@@ -203,26 +222,14 @@ const brandsOptions =
                 />
               </div>
             </Col>
-            <Col md={12}>
-              {action === "create" ? (
-                <button
-                  className="submit-button"
-                  onClick={handleUpdateSupplier}
-                >
-                  Create
-                </button>
-              ) : (
-                <button
-                  className="submit-button"
-                  onClick={handleUpdateSupplier}
-                >
-                  Update
-                </button>
-              )}
-            </Col>
-          </Row>
-          {/* Rest of your component code */}
-        </div>
+      
+  
+        
+        </Row>
+  </CardLayout>
+  </Col>
+  </Row>
       </PageLayout>
     </div>
-  )}
+);
+}
