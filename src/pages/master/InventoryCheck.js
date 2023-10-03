@@ -212,7 +212,7 @@ export default function InventoryCheck() {
                                                                 <Box className="DotBox-main-wrapper">
                                                                     <Box className="DotBox-inner">
                                                                         <Box className="DotBox-p-con">
-                                                                            <FontAwesomeIcon icon={faCopy} /> Duplicate
+                                                                            <FontAwesomeIcon icon={faCopy} color="#f29b30" /> Duplicate
                                                                         </Box>
                                                                         <Box className="DotBox-p-con">
                                                                             <FontAwesomeIcon icon={faTrash} /> Remove

@@ -1884,6 +1884,13 @@ textarea.form-control {
   -o-transition: all linear 0.3s;
 }
 
+.btnlogo{
+  height: 10px;
+  width: 20px;
+  gap: 10px;
+}
+
+
 .mc-btn:hover {
   opacity: 0.8;
   color: var(--lightColor);

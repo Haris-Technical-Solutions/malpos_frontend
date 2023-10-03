@@ -4,16 +4,23 @@ import { CardLayout } from '../../components/cards'
 import IconSearchBar from '../../components/elements/IconSearchBar'
 import MultiSelectNoLabel from '../../components/fields/MultiSelectNoLabel'
 import PageLayout from '../../layouts/PageLayout'
+import CustomPagination from "../../components/CustomPagination";
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faEllipsis, faEdit, faCheck, faSearch, faAngleDown, faTrash } from '@fortawesome/free-solid-svg-icons'
-import { Box } from '../../components/elements'
+import { Box, Button } from '../../components/elements'
 export default function Production() {
     const [open, Close] = useState(false);
 
     const handleDotBox = () => {
         Close(!open);
     };
+    const paginate = (pageNumber) => {
+        setCurrentPage(pageNumber);
+      };
+    const [currentPage, setCurrentPage] = useState(1);
+    const [perPage] = useState(10);
+    const [totalNumber, setTotalNumber] = useState(0);
     const [state, setState] = useState({
         showOption: false,
         productOpen: false,
@@ -162,30 +169,29 @@ export default function Production() {
                                                         </span>
                                                     </td>
                                                     <td className='td-w15'>المستودع الرئيسي</td>
-                                                    <td className='td-w15'>
-                                                        <Box className="dot-content">
-                                                            <div onClick={handleDotBox}><FontAwesomeIcon icon={faEllipsis} /> </div>
-                                                            {open ? (
-                                                                <Box className="DotBox-main-wrapper">
-                                                                    <Box className="DotBox-inner">
-                                                                        <Box className="DotBox-p-con">
-                                                                            <FontAwesomeIcon icon={faEdit} /> Edit
-                                                                        </Box>
-                                                                        <Box className="DotBox-p-con">
-                                                                            <FontAwesomeIcon icon={faTrash} /> Delete
-                                                                        </Box>
-                                                                    </Box>
-                                                                </Box>
-                                                            ) : (
-                                                                ""
-                                                            )}
-                                                        </Box>
-
+                                                    <td className='td-w15'  >
+                                                                        <Button className="btnlogo">
+                                                                             <FontAwesomeIcon
+                                    icon={faEdit}
+                                    color="#f29b30"
+                                  />                                                                        </Button>
+                                                                        <Button className="btnlogo"> <FontAwesomeIcon
+                                  icon={faTrash}
+                                  color="#ee3432"
+                                  />
+                                                                        </Button>
+                                                    
                                                     </td>
                                                 </tr>
                                             </tbody>
                                         </Table>
                                     </Box>
+                                    <CustomPagination
+                  perPage={perPage}
+                  totalUsers={totalNumber}
+                  paginate={paginate}
+                  currentPage={currentPage}
+                />
                                 </Col>
                             </Row>
                         </CardLayout>

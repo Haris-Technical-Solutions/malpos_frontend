@@ -25,9 +25,11 @@ import {
 } from "../../components/elements";
 import MultiSelectNoLabel from "../../components/fields/MultiSelectNoLabel";
 import { LabelField } from "../../components/fields";
+import CustomPagination from "../../components/CustomPagination";
 import { useProduct } from "../../components/createProduct/productContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+
 export default function Storage() {
   const navigate = useNavigate();
   const [open, Close] = useState(false);
@@ -35,7 +37,14 @@ export default function Storage() {
   const handleDotBox = () => {
     Close(!open);
   };
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage] = useState(10); 
+  const [totalNumber, setTotalNumber] = useState(0); 
   const  [storage, setStorage]= useState([]);
   useEffect(() => {
   
@@ -76,6 +85,7 @@ export default function Storage() {
     try {
       const res = await axiosInstance.get("/md_storage");
       setStorage(res.data.data);
+      setTotalNumber(res.data.data.total);
     } catch (error) {
       console.log(error);
     }
@@ -183,20 +193,25 @@ export default function Storage() {
                                   // state={{ id: `${item.id}` }}
                                   // href="/product-upload"
                                   title="Edit"
-                                  className="material-icons edit"
+                                  className="btnlogo"
                                   onClick={() => handleStorageEdit(item.id)}
                                 >
-                                  edit
+                                  <FontAwesomeIcon
+                                    icon={faEdit}
+                                    color="#f29b30"
+                                  />
                                 </Button>
                                 <Button
                                   title="Delete"
-                                  className="material-icons delete"
+                                   className="btnlogo"
                                   onClick={() =>
                                     handleStorageDelete(item.id)
                                   }
                                 >
-                                  delete
-                                </Button>
+                                  <FontAwesomeIcon
+                                  icon={faTrash}
+                                  color="#ee3432"
+                                  />                                </Button>
                               
                                   
                                 </td>
@@ -205,6 +220,12 @@ export default function Storage() {
                           </tbody>
                         </Table>
                       </Box>
+                          <CustomPagination
+                  perPage={perPage}
+                  totalUsers={totalNumber}
+                  paginate={paginate}
+                  currentPage={currentPage}
+                />
                     </Col>
                   </Row>
                 </Col>
