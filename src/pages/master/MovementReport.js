@@ -391,7 +391,7 @@ export default function MovementReport() {
               <Col md={12}>
                 <Box className="payment-sale-table-wrap">
                   <Table className="sale-m-table" responsive>
-                    <thead className="mc-table-head dark">
+                    <thead className="mc-table-head thead-dark">
                       <tr>
                         <th className="th-w220" style={{ fontSize: "8px" }}>
                           Name

@@ -25,6 +25,8 @@ import {
 import PageLayout from "../../layouts/PageLayout";
 import data from "../../data/master/ingredients.json";
 import { Link, useNavigate } from "react-router-dom";
+import SkeletonCell from "../../components/Skeleton";
+
 
 import IngredientsTable from "../../components/tables/IngredientsTable";
 import instance from "../../api/baseUrl";
@@ -196,7 +198,39 @@ export default function Ingredients() {
                       </Tr>
                     </Thead>
                     <Tbody className="mc-table-body even">
-                      {ingredients &&
+                    {isLoading ? ( // Render skeleton when loading is true
+                        <>
+                          {Array.from({ length: 5 }).map((_, index) => (
+                            <tr key={index}>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                            </tr>
+                         ))}
+                        </>
+                      ) : ( 
+                        ingredients &&
                         ingredients?.map((item, index) => (
                           <Tr key={index}>
                             {/* <Td>
@@ -255,7 +289,8 @@ export default function Ingredients() {
                               </Box>
                             </Td>
                           </Tr>
-                        ))}
+                        ))
+                      )}
                     </Tbody>
                   </Table>
                 </Box>

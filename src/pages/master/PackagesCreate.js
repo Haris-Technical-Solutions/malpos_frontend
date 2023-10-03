@@ -180,8 +180,9 @@ export default function PackagesCreate() {
                       </CardLayout>
                     </Col>
                   }
-                  <Col md={3}>
+                  <Col md={4}>
                     <SelectField
+                    className="wfield"
                       // className="w-50"
                       label="Client"
                       name="client"
@@ -190,8 +191,9 @@ export default function PackagesCreate() {
                       onChange={handleInputChange}
                     />
                   </Col>
-                  <Col md={3}>
+                  <Col md={4}>
                     <SelectField
+                    className="wfield"
                       required
                       label="Brand"
                       name="brand"
@@ -202,8 +204,9 @@ export default function PackagesCreate() {
                       onChange={handleInputChange}
                     />
                   </Col>
-                  <Col md={3}>
+                  <Col md={4}>
                     <SelectField
+                    className="wfield"
                       required
                       label="Branch"
                       name="branch"
@@ -216,6 +219,7 @@ export default function PackagesCreate() {
                   </Col>
                   <Col md={4}>
                     <LabelField
+                    className="wfield"
                       type="text"
                       name="uom_to_name"
                       value={unitConversionData?.uom_to_name}
@@ -227,6 +231,7 @@ export default function PackagesCreate() {
 
                   <Col md={4}>
                     <LabelField
+                    className="wfield"
                       type="number"
                       name="multiply_rate"
                       value={unitConversionData?.multiply_rate}
@@ -235,8 +240,9 @@ export default function PackagesCreate() {
                       label="Equal"
                     />
                   </Col>
-                  <Col md={3}>
+                  <Col md={4}>
                     <SelectField
+                    className="wfield"
                       required
                       label="Unit"
                       name="md_uom_id"

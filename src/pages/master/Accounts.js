@@ -137,7 +137,7 @@ export default function Accounts() {
                                                                             <FontAwesomeIcon icon={faEdit} /> Edit
                                                                         </Box>
                                                                         </Link>
-                                                                        <Box className="DotBox-p-con">
+                                                                        <Box className="DotBox-p-con deletebtn">
                                                                             <FontAwesomeIcon icon={faTrash} /> Remove
                                                                         </Box>
                                                                     </Box>

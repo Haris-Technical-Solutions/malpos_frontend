@@ -18,6 +18,8 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import data from "../../data/master/categoriesList.json";
 import axiosInstance from "../../api/baseUrl";
 import CustomPagination from "../CustomPagination";
+import SkeletonCell from "../../components/Skeleton";
+
 import { toast } from "react-toastify";
 
 export default function IngredientscatTab() {
@@ -141,7 +143,39 @@ export default function IngredientscatTab() {
                         </Tr>
                       </Thead>
                       <Tbody className="mc-table-body even text-center">
-                        {categories &&
+                      {isLoading ? ( 
+                        <>
+                          {Array.from({ length: 5 }).map((_, index) => (
+                            <tr key={index}>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                            </tr>
+                         ))}
+                        </>
+                      ) : (
+                        categories &&
                           categories.map((category, i) => (
                             <Tr key={i}>
                               <Td className="td-left">{category.name}</Td>
@@ -193,7 +227,8 @@ export default function IngredientscatTab() {
                                 </Box>
                               </Td>
                             </Tr>
-                          ))}
+                          ))
+                      )}
                       </Tbody>
                     </Table>
                     <CustomPagination

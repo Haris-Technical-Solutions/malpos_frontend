@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { CardLayout } from "../../components/cards";
-import PageLayout from "../../layouts/PageLayout";
 import { Col, Row } from "react-bootstrap";
+import SkeletonCell from "../../components/Skeleton";
 import {
   Table,
   Thead,
@@ -18,6 +18,7 @@ import IconSearchBar from "../../components/elements/IconSearchBar";
 import axiosInstance from "../../api/baseUrl";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import PageLayout from "../../layouts/PageLayout";
 import "./ManageModifers.css";
 import CustomPagination from "../../components/CustomPagination";
 
@@ -124,6 +125,7 @@ export default function ManageModifier() {
   }, [name, minNumber, maxNumber, selectedOption]);
   return (
     <>
+    <PageLayout>     
       <Row>
         <Col md={12}>
           <CardLayout>
@@ -182,7 +184,38 @@ export default function ManageModifier() {
                                   </Tr>
                                 </Thead>
                                 <Tbody className="mc-table-body even text-center">
-                                  {modifiers &&
+                                {isLoading ? ( // Render skeleton when loading is true
+                        <>
+                          {Array.from({ length: 5 }).map((_, index) => (
+                            <tr key={index}>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                            </tr>
+                         ))}
+                        </>
+                      ) : (  modifiers &&
                                     modifiers.map((item, i) => (
                                       <Tr key={i + 1}>
                                         <Td>{i}</Td>
@@ -238,7 +271,8 @@ export default function ManageModifier() {
                                           </Box>
                                         </Td>
                                       </Tr>
-                                    ))}
+                                    ))
+                                    )}
                                 </Tbody>
                               </Table>
                               <CustomPagination
@@ -360,6 +394,7 @@ export default function ManageModifier() {
           </Button>
         </Modal.Footer>
       </Modal>
+                </PageLayout>
     </>
   );
 }

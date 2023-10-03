@@ -145,7 +145,7 @@ export default function Packages() {
                         <Table responsive>
                           <thead
                             className="thead-dark"
-                            style={{ backgroundColor: "#F07632" }}
+                            style={{ backgroundColor: "#F07632" , fontSize:"12px", height:"1rem", lineHeight:"0.2rem"}}
                           >
                             <tr>
                               <th className="th-w30">Name</th>

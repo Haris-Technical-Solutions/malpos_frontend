@@ -9,7 +9,7 @@ export default function ProductionDetailsTab() {
     <div>
         <Box className={'cus-ptb'}>
         <Table>
-            <thead>
+            <thead className="thead-dark "  >
                 <tr className='f-13 '>
                 <th>Product</th>
                 <th>Qty</th>

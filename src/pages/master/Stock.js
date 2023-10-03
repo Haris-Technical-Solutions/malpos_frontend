@@ -9,7 +9,6 @@ import PageLayout from "../../layouts/PageLayout";
 import { Button, Input, Box, Label } from "../../components/elements";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useNavigate } from "react-router-dom";
-
 import {
   faSearch,
   faAngleDown,
@@ -511,7 +510,7 @@ export default function Stocks() {
               <Col md={12}>
                 <Box className="payment-sale-table-wrap">
                   <Table className="sale-m-table" responsive>
-                    <thead className="mc-table-head dark">
+                    <thead className="mc-table-head transfer-table thead-dark">
                       <tr>
                         <th>
                           ID

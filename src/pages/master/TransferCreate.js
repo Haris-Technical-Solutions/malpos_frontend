@@ -74,42 +74,44 @@ export default function TransferCreate() {
           <Col md={12}>
             <CardLayout>
               <Row>
-                <Col md={8}>
+                <Col md={12}>
                   <Row>
                     <Col md={6} className="cus-col-mt">
                       <LabelField
                         label="From storage"
+                      className="wfield"
                         option={[
                           "Select form storage",
                           "Return",
                           "Bar storage",
                           "Back Store",
                         ]}
-                        fieldSize="w-100 h-md"
+                        // fieldSize="w-100 h-md"
                       />
                     </Col>
                     <Col md={6} className="cus-col-mt">
                       <LabelField
+                      className="wfield"
                         label="Storage"
                         option={["Return", "Bar storage", "Back Store"]}
                         fieldSize="w-100 h-md"
                       />
                     </Col>
-                    <Col md={12} className="cus-col-mt">
-                      <Row>
-                        <Col md={6}>
-                          <CalenderField label={"Opration time"} />
+                    <Col md={6} className="cus-col-mt">
+                      <Row >
+                        <Col md={6}  >
+                          <CalenderField className='wfield' label={"Operation time"} />
                         </Col>
                       </Row>
                     </Col>
                     <Col md={6} className="cus-col-mt">
-                      <LabelField type={"text"} label={"Reason"} />
+                      <LabelField className="wfield" type={"text"} label={"Reason"} />
                     </Col>
                   </Row>
                 </Col>
                 <Col md={12}>
                   <Box className={"product-add-box"}>
-                    <Box className={"product"}> Product</Box>
+                    <Box className={"product "}> Product</Box>
                     <Box className={"Unit"}> Unit</Box>
                     <Box className={"Qty"}> Qty</Box>
 
@@ -118,18 +120,18 @@ export default function TransferCreate() {
                   <Box className={"product-add-boxes"}>
                     <Box className={"product"}>
                       {" "}
-                      <LabelField option={["Select"]} fieldSize="w-100 h-md" />
+                      <LabelField option={["Select"]} className="wfield" fieldSize="w-100 h-md" />
                     </Box>
                     <Box className={"Unit"}>
                       {" "}
-                      <LabelField option={["Select"]} fieldSize="w-100 h-md" />
+                      <LabelField option={["Select"]}  fieldSize="w-100 h-md" />
                     </Box>
                     <Box
                       className={"Qty"}
                       style={{ backgroundColor: "#f0f0f0" }}
                     >
                       {" "}
-                      <CusField placeholder={"0"} type="number" />{" "}
+                      <CusField placeholder={"0"}  />{" "}
                     </Box>
                   </Box>
                 </Col>

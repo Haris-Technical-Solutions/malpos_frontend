@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Col, Row, Form } from "react-bootstrap";
+import SkeletonCell from "../../components/Skeleton";
 import { Link, useNavigate } from "react-router-dom";
 import PageLayout from "../../layouts/PageLayout";
 import { CardLayout } from "../../components/cards";
@@ -147,7 +148,38 @@ export default function AccountsCatTab() {
                             </Tr>
                           </Thead>
                           <Tbody className="mc-table-body even text-center">
-                            {stations &&
+                          {isLoading ? ( // Render skeleton when loading is true
+                        <>
+                          {Array.from({ length: 5 }).map((_, index) => (
+                            <tr key={index}>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                            </tr>
+                         ))}
+                        </>
+                      ) : ( stations &&
                               stations.map((station, i) => (
                                 <Tr key={i}>
                                   <Td className="td-left">
@@ -222,7 +254,8 @@ export default function AccountsCatTab() {
                                     </Box>
                                   </Td>
                                 </Tr>
-                              ))}
+                              ))
+                      )}
                           </Tbody>
                           {/* <Modal
                             show={alertModal}

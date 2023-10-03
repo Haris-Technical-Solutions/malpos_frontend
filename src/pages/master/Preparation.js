@@ -16,6 +16,8 @@ import PageLayout from "../../layouts/PageLayout";
 import data from "../../data/master/preparationList.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CustomPagination from "../../components/CustomPagination";
+import SkeletonCell from "../../components/Skeleton";
+
 import {
   faPlus,
   faSearch,
@@ -170,7 +172,39 @@ export default function Preparation() {
                       </Tr>
                     </Thead>
                     <Tbody className="text-center">
-                      {prepartions &&
+                    {isLoading ? ( // Render skeleton when loading is true
+                        <>
+                          {Array.from({ length: 5 }).map((_, index) => (
+                            <tr key={index}>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                            </tr>
+                         ))}
+                        </>
+                      ) : (
+                      prepartions &&
                         prepartions.map((item, i) => (
                           <Tr>
                             <Th>{item.name}</Th>
@@ -211,7 +245,8 @@ export default function Preparation() {
                               </Box>
                             </Td>
                           </Tr>
-                        ))}
+                        ))
+                      )}
                     </Tbody>
                     {/* <Tbody className="mc-table-body even">
           {prepartions && prepartions.map((item, index) => (

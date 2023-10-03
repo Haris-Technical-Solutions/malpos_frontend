@@ -8,6 +8,8 @@ import data from "../../data/master/categoriesList.json";
 import { ProductsTable } from "../tables";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import SkeletonCell from "../../components/Skeleton";
+
 import CategoryTable from "../tables/CategoryTable";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import IconSearchBar from "../elements/IconSearchBar";

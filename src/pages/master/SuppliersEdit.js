@@ -132,7 +132,8 @@ const brandsOptions =
             <Col md={4}>
               <LabelField
                 type="text"
-                className="label-field"
+                
+                className="label-field wfield"
                 value={currentSupplier.supplier_name}
                 onChange={(e) =>
                   setCurrentSupplier({
@@ -147,7 +148,7 @@ const brandsOptions =
             <Col md={4}>
               <LabelField
                 type="number"
-                className="label-field"
+                className="label-field wfield"
                 value={currentSupplier.phone}
                 onChange={(e) =>
                   setCurrentSupplier({
@@ -162,7 +163,7 @@ const brandsOptions =
             <Col md={4}>
               <LabelField
                 type="text"
-                className="label-field"
+                className="label-field wfield"
                 value={currentSupplier.tin}
                 onChange={(e) =>
                   setCurrentSupplier({
@@ -177,7 +178,7 @@ const brandsOptions =
             <Col md={4}>
               <LabelField
                 type="text"
-                className="label-field"
+                className="label-field wfield"
                 value={currentSupplier.description}
                 onChange={(e) =>
                   setCurrentSupplier({
@@ -192,7 +193,8 @@ const brandsOptions =
             <Col md={4}>
               <div className="switch">
                 <Form.Check
-                  className="switch-input"
+                style={{marginTop:"2rem"}}
+                  className="switch-input "
                   type="switch"
                   id="custom-switch"
                   label="Status"
