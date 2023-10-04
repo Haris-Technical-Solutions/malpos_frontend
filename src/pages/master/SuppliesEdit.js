@@ -469,6 +469,9 @@ let handleChangeFlag = 0
         <Row>
           <Col md={12}>
             <CardLayout>
+              <Row>
+          <Col md={12}>
+            
               <div className="d-flex justify-content">
                 <h3>
                   {action === "updateSupplies"
@@ -485,11 +488,8 @@ let handleChangeFlag = 0
                 </div>
                  <Link to={"/supplies"} className='btnback'> <button className="btnlk"> Back</button></Link>
               </div>
-            </CardLayout>
+            
           </Col>
-          <Col md={12}>
-            <CardLayout>
-              <Row>
               <Col md={4}>
               <SelectField
                       // className="w-50"
