@@ -29,7 +29,7 @@ import {
   Td,
 } from "../../components/elements/Table";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faPlus,faTrash,faEdit } from "@fortawesome/free-solid-svg-icons";
 import { Modal } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
@@ -498,11 +498,13 @@ export default function ProductList() {
                                   // to="/product-view"
                                   // state={{ id: `${item.id}` }}
                                   // href="/product-upload"
-                                  title="Edit"
-                                  className="material-icons edit"
-                                  onClick={() => handleEdit(item.md_product_id)}
+                                                                   onClick={() => handleEdit(item.md_product_id)}
                                 >
-                                  edit
+                                   <FontAwesomeIcon
+                                    icon={faEdit}
+                                    color="#f29b30"
+                                  />
+                              
                                 </Button>
                                 <Button
                                   title="Delete"
@@ -511,7 +513,11 @@ export default function ProductList() {
                                     handleDelete(item.md_product_id)
                                   }
                                 >
-                                  delete
+                                  <FontAwesomeIcon
+                                  icon={faTrash}
+                                  color="#ee3432"
+                                  /> 
+                                  
                                 </Button>
                               </Box>
                             </Td>

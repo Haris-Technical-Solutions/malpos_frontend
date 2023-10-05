@@ -1,4 +1,4 @@
-import React from "react";
+import React , {useState}from "react";
 import { Link } from "react-router-dom";
 import { Col, Row, Form } from "react-bootstrap";
 import { CardLayout } from "../cards";
@@ -12,8 +12,16 @@ import SkeletonCell from "../../components/Skeleton";
 
 import CategoryTable from "../tables/CategoryTable";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import CustomPagination from "../CustomPagination";
 import IconSearchBar from "../elements/IconSearchBar";
 export default function MenuCateTab() {
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    
+  };
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage] = useState(10); 
+  const [totalNumber, setTotalNumber] = useState(0); 
   return (
     <div>
       <Row>
@@ -53,7 +61,14 @@ export default function MenuCateTab() {
             tbody={data?.menuCategory.tbody}
           />
         </Col>
+        <CustomPagination
+                  perPage={perPage}
+                  totalUsers={totalNumber}
+                  paginate={paginate}
+                  currentPage={currentPage}
+                />
       </Box>
+
     </div>
   );
 }
