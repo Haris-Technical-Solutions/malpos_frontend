@@ -54,6 +54,11 @@ export default function StorageCreate() {
               <Row>
           <Col md={12}>
             Storage Create
+                  <Link to={"/Storage"} style={{marginLeft:"64%"}}>
+                  <Button variant="primary" onClick={handleCreateStorage} style={{padding:"7px 15px"}} >
+                    Create
+                  </Button></Link>
+                  <Link to={"/Storage"} className='btnback'> <button className="btnlk"> Back</button></Link>
           </Col>
                 <Col md={6}>
                   <LabelField
@@ -71,10 +76,6 @@ export default function StorageCreate() {
                     checked={newStorage.is_active === 1}
                     onChange={() => setNewStorage({ ...newStorage, is_active: newStorage.is_active === 1 ? 0 : 1 })}
                   />
-                  <Link to={"/Storage"}>
-                  <Button variant="primary" onClick={handleCreateStorage}>
-                    Create
-                  </Button></Link>
                 </Col>
               </Row>
             </CardLayout>

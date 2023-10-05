@@ -7,7 +7,7 @@ import PageLayout from "../../layouts/PageLayout";
 import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faXmark, faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faXmark, faPlus} from "@fortawesome/free-solid-svg-icons";
 import axiosInstance from "../../api/baseUrl";
 import { toast } from "react-toastify";
 import Datetime from "react-datetime";
@@ -469,13 +469,16 @@ let handleChangeFlag = 0
         <Row>
           <Col md={12}>
             <CardLayout>
-              <div className="d-flex justify-content-between">
+              <Row>
+          <Col md={12}>
+            
+              <div className="d-flex justify-content">
                 <h3>
                   {action === "updateSupplies"
                     ? "Update Supplies"
                     : "Create Supplies"}
                 </h3>
-                <div className="align-self-end">
+                <div className="align-self-end" style={{paddingLeft:"62%"}} >
                   <button
                     className="add-product-btn-pl"
                     onClick={(e) => handleSubmit(e)}
@@ -483,12 +486,10 @@ let handleChangeFlag = 0
                     Submit
                   </button>
                 </div>
+                 <Link to={"/supplies"} className='btnback'> <button className="btnlk"> Back</button></Link>
               </div>
-            </CardLayout>
+            
           </Col>
-          <Col md={12}>
-            <CardLayout>
-              <Row>
               <Col md={4}>
               <SelectField
                       // className="w-50"

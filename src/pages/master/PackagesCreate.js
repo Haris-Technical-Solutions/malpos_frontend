@@ -173,11 +173,21 @@ export default function PackagesCreate() {
                 <Row>
                   {
                     <Col md={12}>
-                      <CardLayout>
+                      
                         {action != undefined && action == "updateConversion"
                           ? "Update Unit Conversion"
                           : "Create Unit Conversion"}
-                      </CardLayout>
+                      
+                  <Link  style={{marginLeft:"60%"}}>
+                    <Button
+                    style={{ padding:"7px 15px"}}
+                      // className="acc-create-btn rs-btn-create"
+                      onClick={handleSubmit}
+                    >
+                      Submit
+                    </Button>
+                  </Link>
+                  <Link to={"/packages"} className='btnback'> <button className="btnlk"> Back</button></Link>
                     </Col>
                   }
                   <Col md={4}>
@@ -254,14 +264,6 @@ export default function PackagesCreate() {
                     />
                   </Col>
 
-                  <Link style={{ float: "left" }}>
-                    <Button
-                      className="acc-create-btn rs-btn-create"
-                      onClick={handleSubmit}
-                    >
-                      Submit
-                    </Button>
-                  </Link>
                 </Row>
               </Col>
             </CardLayout>
