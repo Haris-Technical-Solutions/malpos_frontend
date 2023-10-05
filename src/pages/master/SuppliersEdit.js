@@ -130,6 +130,7 @@ const brandsOptions =
           {action === "updateSupplier" ? "Create Supplier" : "Update Supplier"}
               {action === "create" ? (
                 <Button
+                variant="dark"
                   className="submit-button"
                   onClick={handleUpdateSupplier}
                 >
@@ -137,6 +138,7 @@ const brandsOptions =
                 </Button>
               ) : (
                 <Button
+                variant="dark"
                 style={{marginLeft:"64%", padding:"7px 15px"}}
                   onClick={handleUpdateSupplier}
                 >

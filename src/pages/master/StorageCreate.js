@@ -55,7 +55,7 @@ export default function StorageCreate() {
           <Col md={12}>
             Storage Create
                   <Link to={"/Storage"} style={{marginLeft:"64%"}}>
-                  <Button variant="primary" onClick={handleCreateStorage} style={{padding:"7px 15px"}} >
+                  <Button variant="dark" onClick={handleCreateStorage} style={{padding:"7px 15px"}} >
                     Create
                   </Button></Link>
                   <Link to={"/Storage"} className='btnback'> <button className="btnlk"> Back</button></Link>

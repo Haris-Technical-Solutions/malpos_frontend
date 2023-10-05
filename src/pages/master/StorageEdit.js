@@ -132,13 +132,13 @@ const brandsOptions =
         { <Col md={12}>
             {action === "create" ? "Create Storage" : "Update Storage"}
                 {action === "create" ? (
-                  <button className='add-product-btn-pl' onClick={handleUpdateStorage}>
+                  <Button className='add-product-btn-pl' onClick={handleUpdateStorage}>
                     Create
-                  </button>
+                  </Button>
                 ) : (
-                  <button className='add-product-btn-pl' onClick={handleUpdateStorage}>
+                  <Button className='add-product-btn-pl' variant="dark" onClick={handleUpdateStorage}>
                     Update
-                  </button>
+                  </Button>
                 )
               }
               <Link to={"/Storage"} className='btnback'style={{marginLeft:"69%", padding:"7px 20px"}} > <button className="btnlk"> Back</button></Link>
