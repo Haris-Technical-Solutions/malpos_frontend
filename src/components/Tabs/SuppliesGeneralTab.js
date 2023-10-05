@@ -234,6 +234,7 @@ export default function SuppliesGeneralTab(props) {
                                             onClick={() =>
                                               handleSuppliesEdit(supply.id)
                                             }
+                                            color="#f29b30"
                                             icon={faEdit}
                                           />{" "}
                                           Edit

@@ -22,15 +22,22 @@ import {
   Heading,
 } from "../../components/elements";
 import { useNavigate } from "react-router-dom";
+import CustomPagination from "../../components/CustomPagination";
 import SkeletonCell from "../../components/Skeleton";
 export default function Packages() {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage] = useState(10);
+  const [totalNumber, setTotalNumber] = useState(0);
   const [unitConversions, setUnitConversions] = useState([]);
   const navigate = useNavigate();
 
   const handleDotBox = () => {
     setOpen(!open);
+  };
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
   };
 
   useEffect(() => {
@@ -69,6 +76,7 @@ export default function Packages() {
         );
         console.log(updatedUnitConversions, "updatedUnitConversions");
         setUnitConversions(updatedUnitConversions);
+        setTotalNumber(unitConversionsData.length); 
       } else {
         console.error("Response data is not an array:", unitConversionsData);
       }
@@ -198,27 +206,32 @@ export default function Packages() {
                                       <Col className="text-center">
                                         <Button
                                           title="Edit"
-                                          className="material-icons edit"
+                                          className="btnlogo"
                                           onClick={() =>
                                             handleUomEdit(
                                               conversion.md_uoms_conversions_id
                                             )
                                           }
                                         >
-                                          edit
+                                          <FontAwesomeIcon
+                                    icon={faEdit}
+                                    color="#f29b30"
+                                  />
                                         </Button>
 
                                         <Button
                                           title="Delete"
-                                          className="material-icons delete"
+                                          className="btnlogo"
                                           onClick={() =>
                                             handleUomDelete(
                                               conversion.md_uoms_conversions_id
                                             )
                                           }
                                         >
-                                          delete
-                                        </Button>
+ <FontAwesomeIcon
+                                  icon={faTrash}
+                                  color="#ee3432"
+                                  />                                        </Button>
                                       </Col>
                                     </Row>
                                   </td>
@@ -226,6 +239,12 @@ export default function Packages() {
                               ))}
                           </tbody>
                         </Table>
+                        <CustomPagination
+                  perPage={perPage}
+                  totalUsers={totalNumber}
+                  paginate={paginate}
+                  currentPage={currentPage}
+                />
                       </Box>
                     </Col>
                   </Row>

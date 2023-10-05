@@ -3,6 +3,8 @@ import { Col, Row, Form, Table } from "react-bootstrap";
 import { CardLayout } from "../../components/cards";
 import PageLayout from "../../layouts/PageLayout";
 import SkeletonCell from "../../components/Skeleton";
+
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faSearch,
@@ -12,6 +14,7 @@ import {
   faEdit,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import CustomPagination from "../../components/CustomPagination";
 import axiosInstance from "../../api/baseUrl";
 import { toast } from "react-toastify";
 import {
@@ -25,6 +28,9 @@ import {
 import { useNavigate } from "react-router-dom";
 export default function Unitmeasurement() {
   const [open, setOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage] = useState(10); 
+  const [totalNumber, setTotalNumber] = useState(0); 
   const [loading, setLoading] = useState(true);
   const [unitMeasurements, setUnitMeasurements] = useState([]);
   const navigate = useNavigate();
@@ -32,6 +38,10 @@ export default function Unitmeasurement() {
   const handleDotBox = () => {
     setOpen(!open);
   };
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+  
 
   useEffect(() => {
     fetchUnitMeasurements().then(() => setLoading(false))
@@ -48,6 +58,8 @@ export default function Unitmeasurement() {
 
       if (Array.isArray(unitMeasurementsData)) {
         setUnitMeasurements(unitMeasurementsData);
+        const totalItems= unitMeasurementsData.length; 
+    setTotalNumber(totalItems);
       } else {
         console.error("Response data is not an array:", unitMeasurementsData);
       }
@@ -171,26 +183,31 @@ export default function Unitmeasurement() {
                                       <Col className="text-center">
                                         <Button
                                           title="Edit"
-                                          className="material-icons edit"
+                                           className="btnlogo"
                                           onClick={() =>
                                             handleUomEdit(
                                               measurement.md_uoms_id
                                             )
                                           }
                                         >
-                                          edit
+                                         <FontAwesomeIcon
+                                    icon={faEdit}
+                                    color="#f29b30"
+                                  />
                                         </Button>
 
                                         <Button
                                           title="Delete"
-                                          className="material-icons delete deletebtn"
+                                           className="btnlogo"
                                           onClick={() =>
                                             handleUomDelete(
                                               measurement.md_uoms_id
                                             )
                                           }
-                                        >
-                                          delete
+                                        > <FontAwesomeIcon
+                                        icon={faTrash}
+                                        color="#ee3432"
+                                        />
                                         </Button>
                                       </Col>
                                     </Row>
@@ -200,6 +217,12 @@ export default function Unitmeasurement() {
                           </tbody>
                         </Table>
                       </Box>
+                      <CustomPagination
+                  perPage={perPage}
+                  totalUsers={totalNumber}
+                  paginate={paginate}
+                  currentPage={currentPage}
+                />
                     </Col>
                   </Row>
                 </Col>

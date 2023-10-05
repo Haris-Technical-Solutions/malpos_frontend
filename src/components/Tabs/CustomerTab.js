@@ -415,11 +415,15 @@ export default function CustomerTab() {
                                                                 <Box className="DotBox-main-wrapper">
                                                                     <Box className="DotBox-inner">
                                                                        <Link to={'/accounts-edit'}> <Box className="DotBox-p-con">
-                                                                            <FontAwesomeIcon icon={faEdit} /> Edit
-                                                                        </Box>
+                                                                       <FontAwesomeIcon
+                                    icon={faEdit}
+                                    color="#f29b30"
+                                  />                                                                      </Box>
                                                                         </Link>
-                                                                        <Box className="DotBox-p-con">
-                                                                            <FontAwesomeIcon icon={faTrash} /> Remove
+                                                                        <Box className="DotBox-p-con"> <FontAwesomeIcon
+                                  icon={faTrash}
+                                  color="#ee3432"
+                                  />
                                                                         </Box>
                                                                     </Box>
                                                                 </Box>

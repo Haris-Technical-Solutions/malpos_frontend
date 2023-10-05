@@ -11,13 +11,21 @@ import {
   faTrash,
   faEdit,
 } from "@fortawesome/free-solid-svg-icons";
+import CustomPagination from "../CustomPagination";
 import IconSearchBar from "../elements/IconSearchBar";
 export default function TransactionTab() {
   const [sortOrder, setSortOrder] = useState("asc");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage] = useState(10); 
+  const [totalNumber, setTotalNumber] = useState(0); 
   const [open, Close] = useState(false);
   const handleDotBox = () => {
     Close(!open);
   };
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   const [state, setState] = useState({
     showOption: false,
     transactedOpen: false,
@@ -431,8 +439,10 @@ export default function TransactionTab() {
                         <Box className="DotBox-inner">
                           <Box className="DotBox-p-con">
                             <Link to={"/payment-method-create"}>
-                              {" "}
-                              <FontAwesomeIcon icon={faEdit} /> Edit{" "}
+                              {" "}<FontAwesomeIcon
+                                    icon={faEdit}
+                                    color="#f29b30"
+                                  />{" "}
                             </Link>
                           </Box>
                         </Box>
@@ -446,6 +456,12 @@ export default function TransactionTab() {
             </tbody>
           </Table>
         </Box>
+                  <CustomPagination
+                  perPage={perPage}
+                  totalUsers={totalNumber}
+                  paginate={paginate}
+                  currentPage={currentPage}
+                />
       </Box>
     </div>
   );

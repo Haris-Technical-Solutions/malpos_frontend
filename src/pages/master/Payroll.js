@@ -120,6 +120,12 @@ export default function Payroll() {
                       </tr>
                     </tbody>
                   </Table>
+                  <CustomPagination
+                  perPage={perPage}
+                  totalUsers={totalNumber}
+                  paginate={paginate}
+                  currentPage={currentPage}
+                />
                 </Col>
               </Row>
             </CardLayout>

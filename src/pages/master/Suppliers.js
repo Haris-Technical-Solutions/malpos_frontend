@@ -231,26 +231,31 @@ fetchSupplier().then(() => setLoading(false))
                                     <Col className="text-center">
                                       <Button
                                         title="Edit"
-                                        className="material-icons edit"
+                                        className="btnlogo"
                                         onClick={() =>
                                           handleSupplierEdit(supplier.id)
                                         }
                                       >
-                                        edit
+                                        <FontAwesomeIcon
+                                    icon={faEdit}
+                                    color="#f29b30"
+                                  />
                                       </Button>
-                                    </Col>
-                                    <Col className="text-center">
+                                    
+                                    
                                       <Button
                                         title="Delete"
-                                        className="material-icons delete"
+                                        className="btnlogo"
                                         onClick={() =>
                                           handleSupplierDelete(supplier.id)
                                         }
                                       >
-                                        delete
+                                     <FontAwesomeIcon
+                                  icon={faTrash}
+                                  color="#ee3432"
+                                  />
                                       </Button>
-                                    </Col>
-                                  </Row>
+                                      </Col>                                 </Row>
                                 </td>
                               </tr>
                             ))}

@@ -3,6 +3,7 @@ import { CardGroup, Col, Row, Form } from "react-bootstrap";
 import { CardLayout } from "../../components/cards";
 import PageLayout from "../../layouts/PageLayout";
 import { Link } from "react-router-dom";
+import CustomPagination from "../../components/CustomPagination";
 import MultiSelectNoLabel from "../../components/fields/MultiSelectNoLabel";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -22,10 +23,17 @@ import { Box } from "../../components/elements";
 import { Table } from "react-bootstrap";
 export default function Transfers() {
   const [openDot, CloseDot] = useState(false);
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage] = useState(10); 
+  const [totalNumber, setTotalNumber] = useState(0); 
   const handleDotBox = () => {
     CloseDot(!openDot);
+    
   };
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <div>
       <PageLayout>
@@ -200,10 +208,16 @@ export default function Transfers() {
                                     <Box className="DotBox-main-wrapper">
                                       <Box className="DotBox-inner">
                                         <Box className="DotBox-p-con">
-                                          <FontAwesomeIcon icon={faEdit} /> Edit
+                                        <FontAwesomeIcon
+                                    icon={faEdit}
+                                    color="#f29b30"
+                                  />
                                         </Box>
                                         <Box className="DotBox-p-con">
-                                          <FontAwesomeIcon icon={faTrash} /> Remove
+                                        <FontAwesomeIcon
+                                  icon={faTrash}
+                                  color="#ee3432"
+                                  /> Remove
                                         </Box>
                                         <Box className="DotBox-p-con">
                                           <FontAwesomeIcon icon={faDownload} /> Export
@@ -219,6 +233,12 @@ export default function Transfers() {
                           </tbody>
                         </Table>
                       </Box>
+                      <CustomPagination
+                  perPage={perPage}
+                  totalUsers={totalNumber}
+                  paginate={paginate}
+                  currentPage={currentPage}
+                />
                     </Col>
                   </Row>
                 </Col>

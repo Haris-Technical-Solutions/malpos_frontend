@@ -166,7 +166,10 @@ export default function ReturnSupplies() {
   <Box className="DotBox-main-wrapper">
     <Box className="DotBox-inner">
       <Box className="DotBox-p-con">
-        <FontAwesomeIcon icon={faEdit} /> Edit
+      <FontAwesomeIcon
+                                    icon={faEdit}
+                                    color="#f29b30"
+                                  /> Edit
       </Box>
       
     </Box>
