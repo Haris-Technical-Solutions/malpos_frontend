@@ -17,6 +17,7 @@ import data from "../../data/master/preparationList.json";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import CustomPagination from "../../components/CustomPagination";
 import SkeletonCell from "../../components/Skeleton";
+import CustomModal from "./Modal";
 
 import {
   faPlus,
@@ -45,6 +46,14 @@ export default function Preparation() {
   const [searchTerm, setSearchTerm] = useState("");
   const [perPage] = useState(10);
   const [totalNumber, setTotalNumber] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+  const [itemToDelete, setItemToDelete] = useState(null);
+  
+  const handleShowModal = (id) => {
+    setItemToDelete(id);
+    setShowModal(true);
+  };
+  
 
   const navigate = useNavigate();
 
@@ -67,15 +76,28 @@ export default function Preparation() {
     }
   };
 
-  const handleDelete = async (id) => {
+  const handleConfirmDelete = async () => {
     try {
-      const response = await instance.delete(`/preparation_delete/${id}`);
+      await instance.delete(`/preparation_delete/${itemToDelete}`);
       fetchAllPreparations();
       toast.success("Preparation deleted successfully", { autoClose: 5000 });
     } catch (error) {
       toast.error("Error deleting preparation");
+    } finally {
+      setShowModal(false); // Close the modal
     }
   };
+  
+
+  // const handleDelete = async (id) => {
+  //   try {
+  //     const response = await instance.delete(`/preparation_delete/${id}`);
+  //     fetchAllPreparations();
+  //     toast.success("Preparation deleted successfully", { autoClose: 5000 });
+  //   } catch (error) {
+  //     toast.error("Error deleting preparation");
+  //   }
+  // };
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
@@ -93,6 +115,7 @@ export default function Preparation() {
     fetchAllPreparations();
   }, [searchTerm, currentPage]);
   return (
+    <div>
     <PageLayout>
       <Row>
         <Col xl={12}>
@@ -225,9 +248,7 @@ export default function Preparation() {
                                   <FontAwesomeIcon
                                     icon={faTrash}
                                     color="#ee3432"
-                                    onClick={() =>
-                                      handleDelete(item.md_preparation_id)
-                                    }
+                                    onClick={() => handleShowModal(item.md_preparation_id)}
                                   />
                                 </Box>
                                 <Box
@@ -320,5 +341,11 @@ export default function Preparation() {
         </Col>
       </Row>
     </PageLayout>
+    <CustomModal
+    show={showModal}
+    onHide={() => setShowModal(false)}
+    onConfirm={handleConfirmDelete}
+  />
+  </div>
   );
 }

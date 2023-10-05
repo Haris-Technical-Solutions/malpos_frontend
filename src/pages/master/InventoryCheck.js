@@ -7,10 +7,20 @@ import { faSearch,faTrash, faPlus, faEdit, faCheck, faEllipsis, faMinus,faAngleD
 import { Box } from '../../components/elements'
 import { Table } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
+import CustomPagination from '../../components/CustomPagination'
 import MultiSelectNoLabel from '../../components/fields/MultiSelectNoLabel'
 
 export default function InventoryCheck() {
     const [openDot, CloseDot] = useState(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [perPage] = useState(10); 
+    const [totalNumber, setTotalNumber] = useState(0); 
+    const [searchTerm, setSearchTerm] = useState("");
+  
+    const paginate = (pageNumber) => {
+      setCurrentPage(pageNumber);
+    };
+  
 
   const handleDotBox = () => {
     CloseDot(!openDot);
@@ -41,6 +51,8 @@ export default function InventoryCheck() {
                                                 type="search"
                                                 placeholder="Search"
                                                 className="search-pl"
+                                                value={searchTerm} 
+                                                onChange={(e) => setSearchTerm(e.target.value)}
                                             />
                                             <span
                                                 style={{
@@ -274,6 +286,12 @@ export default function InventoryCheck() {
                                                 </tbody>
                                             </Table>
                                         </Box>
+                                        <CustomPagination
+                  perPage={perPage}
+                  totalUsers={totalNumber}
+                  paginate={paginate}
+                  currentPage={currentPage}
+                />
                                     </Col>
                                     </Row>
                                 </Col>

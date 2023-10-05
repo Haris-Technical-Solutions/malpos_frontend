@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Col, Row, Form, Table } from "react-bootstrap";
+import { Col, Row, Form, Table, Modal } from "react-bootstrap";
 import { CardLayout } from "../../components/cards";
 import PageLayout from "../../layouts/PageLayout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -12,6 +12,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
 import axiosInstance from "../../api/baseUrl";
+import CustomModal from "./Modal";
 import { toast } from "react-toastify";
 import {
   Button,
@@ -30,14 +31,25 @@ export default function Packages() {
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage] = useState(10);
   const [totalNumber, setTotalNumber] = useState(0);
+  const[searchTerm,setSearchTerm]=useState("")
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+const [conversionToDelete, setConversionToDelete] = useState(null);
   const [unitConversions, setUnitConversions] = useState([]);
   const navigate = useNavigate();
+
+  const handleUomDelete = async (id) => {
+    console.log("id is here", id);
+    setConversionToDelete(id);
+    setShowDeleteModal(true);
+  };
+  
 
   const handleDotBox = () => {
     setOpen(!open);
   };
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
+    fetchUnitConversions();
   };
 
   useEffect(() => {
@@ -45,7 +57,7 @@ export default function Packages() {
     .catch((error) => {
       console.error("Error fetching supply data", error);
     });
-  }, []);
+  }, [currentPage,]);
   const fetchUomById = async (id) => {
     try {
       const res = await axiosInstance.get(`/uom/${id}/edit`);
@@ -57,7 +69,13 @@ export default function Packages() {
   };
   const fetchUnitConversions = async () => {
     try {
-      const response = await axiosInstance.get("/uom_conversion");
+      const response = await axiosInstance.get(`/md_uom_conversions`,{
+        params:{
+          search: searchTerm,
+      page:currentPage
+        }
+      }
+      );
       const unitConversionsData = response.data.data.data;
 
       if (Array.isArray(unitConversionsData)) {
@@ -76,7 +94,7 @@ export default function Packages() {
         );
         console.log(updatedUnitConversions, "updatedUnitConversions");
         setUnitConversions(updatedUnitConversions);
-        setTotalNumber(unitConversionsData.length); 
+        setTotalNumber(unitConversionsData.total); 
       } else {
         console.error("Response data is not an array:", unitConversionsData);
       }
@@ -94,19 +112,44 @@ export default function Packages() {
       },
     });
   };
-  const handleUomDelete = async (id) => {
-    console.log("id is here", id);
-    try {
-      await axiosInstance.delete(`/uom_conversion/${id}`);
-      fetchUnitConversions();
-      toast.success("Unit deleted successfully", {
-        autoClose: false,
-        closeButton: true,
-      });
-    } catch (error) {
-      console.log(error);
+
+  const confirmDelete = async () => {
+    if (conversionToDelete) {
+      try {
+        await axiosInstance.delete(`/md_uom_conversions/${conversionToDelete}`);
+        fetchUnitConversions();
+        toast.success("Conversion deleted successfully", {
+          autoClose: false,
+          closeButton: true,
+        });
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setConversionToDelete(null);
+        setShowDeleteModal(false);
+      }
     }
   };
+  
+  const cancelDelete = () => {
+    setConversionToDelete(null);
+    setShowDeleteModal(false);
+  };
+  
+
+  // const handleUomDelete = async (id) => {
+  //   console.log("id is here", id);
+  //   try {
+  //     await axiosInstance.delete(`/md_uom_conversions/${id}`);
+  //     fetchUnitConversions();
+  //     toast.success("Unit deleted successfully", {
+  //       autoClose: false,
+  //       closeButton: true,
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   return (
     <div>
       <PageLayout>
@@ -125,6 +168,8 @@ export default function Packages() {
                           type="search"
                           placeholder="Search"
                           className="search-pl"
+                          value={searchTerm} 
+                          onChange={(e) => setSearchTerm(e.target.value)}
                         />
                         <span
                           style={{
@@ -254,6 +299,12 @@ export default function Packages() {
           </Col>
         </Row>
       </PageLayout>
+      <CustomModal
+  show={showDeleteModal}
+  onHide={cancelDelete}
+  onConfirm={confirmDelete}
+/>
+
     </div>
   );
 }

@@ -19,6 +19,7 @@ import data from "../../data/master/categoriesList.json";
 import axiosInstance from "../../api/baseUrl";
 import CustomPagination from "../CustomPagination";
 import SkeletonCell from "../../components/Skeleton";
+import CustomModal from "../../pages/master/Modal"
 
 import { toast } from "react-toastify";
 
@@ -31,7 +32,8 @@ export default function IngredientscatTab() {
   const [section, setSection] = useState("");
   const [perPage] = useState(10);
   const [totalNumber, setTotalNumber] = useState(0);
-
+  const [showDeleteModal, setShowDeleteModal] = useState(false); 
+  const [categoryIdToDelete, setCategoryIdToDelete] = useState(null);
   const navigate = useNavigate();
 
   const fetchIngredientCategories = async () => {
@@ -64,15 +66,25 @@ export default function IngredientscatTab() {
 
   const handleDelete = async (id) => {
     try {
-      const response = await axiosInstance.delete(
-        `/ingredient_category_delete/${id}`
-      );
-      fetchIngredientCategories();
-      toast.success("Successfully deleted", { autoClose: 5000 });
+      // Set the category ID to delete and open the delete modal
+      setCategoryIdToDelete(id);
+      setShowDeleteModal(true);
     } catch (error) {
       toast.error("Error deleting", { autoClose: 5000 });
     }
   };
+
+  // const handleDelete = async (id) => {
+  //   try {
+  //     const response = await axiosInstance.delete(
+  //       `/ingredient_category_delete/${id}`
+  //     );
+  //     fetchIngredientCategories();
+  //     toast.success("Successfully deleted", { autoClose: 5000 });
+  //   } catch (error) {
+  //     toast.error("Error deleting", { autoClose: 5000 });
+  //   }
+  // };
 
   const handleWindow = (item) => {
     if (selectedItem === item) {
@@ -87,7 +99,8 @@ export default function IngredientscatTab() {
   }, [searchTerm, currentPage]);
 
   return (
-    <Row>
+<div>
+<Row>
       <Col md={12}>
         <CardLayout>
           <Row>
@@ -245,5 +258,13 @@ export default function IngredientscatTab() {
         </CardLayout>
       </Col>
     </Row>
-  );
+<CustomModal
+      show={showDeleteModal}
+      onHide={() => setShowDeleteModal(false)}
+      onConfirm={async () => {
+        await handleDelete(categoryIdToDelete);
+        setShowDeleteModal(false);
+      }}
+    /></div>
+);
 }

@@ -16,9 +16,11 @@ import {
 import { Link } from "react-router-dom";
 import { Box } from "../elements";
 import axiosInstance from "../../api/baseUrl";
+import CustomPagination from "../CustomPagination";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import SkeletonCell from "../Skeleton";
+import CustomModal from "../../pages/master/Modal";
 
 export default function SuppliesGeneralTab(props) {
   const { activeTab } = props;
@@ -26,7 +28,35 @@ export default function SuppliesGeneralTab(props) {
   const [supplyData, setSupplyData] = useState([]);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage] = useState(10); 
+  const [totalNumber, setTotalNumber] = useState(0); 
+  const [searchTerm, setSearchTerm] = useState("");
+  const [showRemoveModal, setShowRemoveModal] = useState(false);
+  const [supplyToRemove, setSupplyToRemove] = useState(null);
 
+  // Function to show the remove modal for a supply
+  const handleShowRemoveModal = (supplyId) => {
+    setSupplyToRemove(supplyId);
+    setShowRemoveModal(true);
+  };
+
+  const handleCloseRemoveModal = () => {
+    setShowRemoveModal(false);
+  };
+
+  const handleRemoveSupply = async () => {
+    if (supplyToRemove) {
+      try {
+        const updatedSupplyData = supplyData.filter((supply) => supply.id !== supplyToRemove);
+        setSupplyData(updatedSupplyData);
+        
+        setShowRemoveModal(false);
+      } catch (error) {
+        console.error("Error removing supply", error);
+      }
+    }
+  };
   const toggleDotBox = (id) => {
     setOpenDot({ ...openDot, [id]: !openDot[id] }); // Toggle dot box state for the clicked row
   };
@@ -37,14 +67,20 @@ export default function SuppliesGeneralTab(props) {
       .catch((error) => {
         console.error("Error fetching supply data", error);
       });
-  }, []);
+  }, [currentPage, searchTerm]);
 
   const fetchSupplies = async () => {
     await axiosInstance
-      .get("/md_supplies")
+      .get("/md_supplies", {
+        params: {
+          page: currentPage,
+          search: searchTerm,
+        },
+      })
       .then((response) => {
         console.log(response.data.data, "success");
         setSupplyData(response.data.data);
+        setTotalNumber(response.data.data.total)
       })
       .catch((error) => {
         console.error("Error fetching supply data", error);
@@ -72,6 +108,11 @@ export default function SuppliesGeneralTab(props) {
         action: "updateSupplies",
       },
     });
+  };
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    fetchSupplies()
   };
 
   return (
@@ -261,19 +302,31 @@ export default function SuppliesGeneralTab(props) {
                                     </Box>
                                   ) : (
                                     ""
-                                  )}
-                                </Box>
+                                    )}
+                                    </Box>
                               </td>
                             </tr>
-                          ))}
+                         )) }
                     </tbody>
                   </Table>
                 </Box>
               </Box>
+
+              <CustomPagination
+              perPage={perPage}
+              totalUsers={totalNumber}
+              paginate={paginate}
+              currentPage={currentPage}
+            />
             </Col>
           </Row>
         </Col>
       </Row>
+      <CustomModal
+        show={showRemoveModal}
+        onHide={handleCloseRemoveModal}
+        onConfirm={handleRemoveSupply}
+      />
     </div>
   );
 }

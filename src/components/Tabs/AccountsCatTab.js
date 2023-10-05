@@ -105,22 +105,27 @@ import { Col, Row, Form } from "react-bootstrap";
 import { Box } from "../elements";
 import { Table } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import CustomModal from "../../pages/master/Modal"
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import data from "../../data/master/categoriesList.json";
 
 export default function AccountsCatTab() {
+  
   const [selectedItem, setSelectedItem] = useState(null);
+  const [showRemoveModal, setShowRemoveModal] = useState(false);
 
   const handleEdit = (item) => {
     setSelectedItem(item);
-    // add logic to open edit modal or perform other actions
+    // Add logic to open edit modal or perform other actions
   };
 
-  const handleRemove = (item) => {
-    // add logic to remove item from data or perform other actions
+  const handleRemove = () => {
+    const updatedData = data?.accountingCategory.tbody.filter(
+      (category) => category !== selectedItem
+    );
+    setShowRemoveModal(false);
   };
-
   const handleWindow = (item) => {
     if (selectedItem === item) {
       setSelectedItem(null);
@@ -221,6 +226,11 @@ export default function AccountsCatTab() {
           </Row>
         </Col>
       </Box>
+      <CustomModal
+        show={showRemoveModal}
+        onHide={() => setShowRemoveModal(false)}
+        onConfirm={handleRemove}
+      />
     </div>
   );
 }

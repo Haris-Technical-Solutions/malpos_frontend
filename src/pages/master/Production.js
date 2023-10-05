@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPlus, faEllipsis, faEdit, faCheck, faSearch, faAngleDown, faTrash } from '@fortawesome/free-solid-svg-icons'
 import { Box, Button } from '../../components/elements'
+import CustomModal from './Modal'
+
 export default function Production() {
     const [open, Close] = useState(false);
 
@@ -38,6 +40,24 @@ export default function Production() {
             return newState;
         });
     };
+
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [itemToDelete, setItemToDelete] = useState(null);
+  
+    const handleDelete = (item) => {
+      setItemToDelete(item);
+      setShowDeleteModal(true);
+    };
+  
+    const handleConfirmDelete = () => {
+      if (itemToDelete) {
+
+        setShowDeleteModal(false);
+      setItemToDelete(null)
+      }
+    };
+  
+
     return (
         <div>
             <PageLayout>
@@ -175,7 +195,7 @@ export default function Production() {
                                     icon={faEdit}
                                     color="#f29b30"
                                   />                                                                        </Button>
-                                                                        <Button className="btnlogo"> <FontAwesomeIcon
+                                                                        <Button className="btnlogo" onClick={handleDelete} > <FontAwesomeIcon
                                   icon={faTrash}
                                   color="#ee3432"
                                   />
@@ -198,6 +218,13 @@ export default function Production() {
                     </Col>
                 </Row>
             </PageLayout>
+            {itemToDelete && (
+        <CustomModal
+          show={showDeleteModal}
+          onHide={() => setShowDeleteModal(false)}
+          onDelete={handleConfirmDelete}
+        />
+      )}
         </div>
     )
 }
