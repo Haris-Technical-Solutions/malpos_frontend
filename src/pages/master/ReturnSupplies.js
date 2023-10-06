@@ -13,6 +13,7 @@ import {
   faEllipsis
 } from "@fortawesome/free-solid-svg-icons";
 import { Table } from "react-bootstrap";
+import CustomPagination from "../../components/CustomPagination";
 import { Box } from "../../components/elements";
 export default function ReturnSupplies() {
   const [openDot, CloseDot] = useState(false);
@@ -20,6 +21,16 @@ export default function ReturnSupplies() {
   const handleDotBox = () => {
     CloseDot(!openDot);
   };
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [perPage] = useState(10); 
+  const [totalNumber, setTotalNumber] = useState(0); 
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <div>
       <PageLayout>
@@ -47,6 +58,8 @@ export default function ReturnSupplies() {
                           type="search"
                           placeholder="Search"
                           className="search-pl"
+                          value={searchTerm} 
+                          onChange={(e) => setSearchTerm(e.target.value)}
                         />
                         <span
                           style={{
@@ -227,6 +240,12 @@ export default function ReturnSupplies() {
                           </tbody>
                         </Table>
                       </Box>
+                      <CustomPagination
+                  perPage={perPage}
+                  totalUsers={totalNumber}
+                  paginate={paginate}
+                  currentPage={currentPage}
+                />
                     </Col>
                   </Row>
                 </CardLayout>

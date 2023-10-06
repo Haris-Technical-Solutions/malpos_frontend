@@ -34,7 +34,7 @@ import { Modal } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import Nav from "react-bootstrap/Nav";
 import SkeletonCell from "../../components/Skeleton";
-
+import CustomModal from "./Modal";
 import { toast } from "react-toastify";
 import axiosInstance from "../../api/baseUrl";
 import CustomPagination from "../../components/CustomPagination";
@@ -54,10 +54,14 @@ export default function ProductList() {
     { id: 1, value: "Yes" },
     { id: 0, value: "No" },
   ]);
+
+
   const [categoryFilter, setCategoryFilter] = useState();
   const [productFilter, setProductFilter] = useState();
   const [giftFilter, setGiftFilter] = useState();
   const [categories, setCategories] = useState();
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [productToDelete, setProductToDelete] = useState(null);
   const [formData, setFormData] = useState({
     search_by_product: "true",
     search: "",
@@ -67,6 +71,13 @@ export default function ProductList() {
   });
 
   const navigate = useNavigate();
+
+
+  const handleDelete = (product) => {
+    setProductToDelete(product);
+    setShowDeleteModal(true);
+  };
+
 
   const fetchProducts = async () => {
     setIsLoading(true);
@@ -154,18 +165,39 @@ export default function ProductList() {
       },
     });
   };
-  const handleDelete = async (id) => {
-    try {
-      await axiosInstance.delete(`/product_delete/${id}`);
-      fetchProducts();
-      toast.success("Product deleted successfully", {
-        autoClose: false,
-        closeButton: true,
-      });
-    } catch (error) {
-      console.log(error);
+
+
+  const handleConfirmDelete = async () => {
+    if (productToDelete) {
+      try {
+        await axiosInstance.delete(`/product_delete/${productToDelete.md_product_id}`);
+        fetchProducts(); // You should define fetchProducts function
+        toast.success("Product deleted successfully", {
+          autoClose: false,
+          closeButton: true,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+      
+      // Close the delete modal
+      setShowDeleteModal(false);
+      setProductToDelete(null); // Reset the product to be deleted
     }
   };
+
+  // const handleDelete = async (id) => {
+  //   try {
+  //     await axiosInstance.delete(`/product_delete/${id}`);
+  //     fetchProducts();
+  //     toast.success("Product deleted successfully", {
+  //       autoClose: false,
+  //       closeButton: true,
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const handleEdit = (id) => {
     console.log("id: " + id);
@@ -197,6 +229,7 @@ export default function ProductList() {
   };
 
   return (
+    <div>
     <PageLayout>
       <Row className="product-list">
         <Col xl={12}>
@@ -539,5 +572,13 @@ export default function ProductList() {
         </Col>
       </Row>
     </PageLayout>
+    {productToDelete && (
+        <CustomModal
+          show={showDeleteModal}
+          onHide={() => setShowDeleteModal(false)}
+          onDelete={handleConfirmDelete}
+        />
+      )}
+    </div>
   );
 }

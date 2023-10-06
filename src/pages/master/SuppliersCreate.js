@@ -58,7 +58,7 @@ export default function SuppliersCreate() {
               <Row>
           <Col md={12}>
             Create Supplier
-                  <Button style={{marginLeft:"64%", padding:"7px 15px"}} onClick={handleCreateSupplier} >
+                  <Button variant="dark" style={{marginLeft:"64%", padding:"7px 15px"}} onClick={handleCreateSupplier} >
                     Create
                   </Button>
                   <Link to={"/suppliers"} className='btnback'> <button className="btnlk"> Back</button></Link>

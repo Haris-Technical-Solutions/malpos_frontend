@@ -26,8 +26,7 @@ import PageLayout from "../../layouts/PageLayout";
 import data from "../../data/master/ingredients.json";
 import { Link, useNavigate } from "react-router-dom";
 import SkeletonCell from "../../components/Skeleton";
-
-
+import CustomModal from "./Modal";
 import IngredientsTable from "../../components/tables/IngredientsTable";
 import instance from "../../api/baseUrl";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -38,6 +37,7 @@ import {
   faEdit,
 } from "@fortawesome/free-solid-svg-icons";
 import { toast } from "react-toastify";
+
 export default function Ingredients() {
   const [ingredients, setIngredients] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -45,7 +45,9 @@ export default function Ingredients() {
   const [searchTerm, setSearchTerm] = useState("");
   const [perPage] = useState(10);
   const [totalNumber, setTotalNumber] = useState(0);
-
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [productToDelete, setProductToDelete] = useState(null);
+  
   const navigate = useNavigate();
 
   const fetchIngredients = async () => {
@@ -68,14 +70,38 @@ export default function Ingredients() {
   };
 
   const handleDelete = async (id) => {
-    try {
-      const response = await instance.delete(`/ingredient_delete/${id}`);
-      toast.success("Ingredient deleted successfully", { autoClose: 5000 });
-      fetchIngredients();
-    } catch (error) {
-      toast.error("Error deleting Ingredient", { autoClose: 5000 });
+    setProductToDelete(id);
+    setShowDeleteModal(true);
+  };
+  
+
+  const confirmDelete = async () => {
+    if (productToDelete) {
+      try {
+        const response = await instance.delete(`/ingredient_delete/${productToDelete}`);
+        toast.success("Ingredient deleted successfully", { autoClose: 5000 });
+        fetchIngredients();
+        setShowDeleteModal(false);
+      } catch (error) {
+        toast.error("Error deleting Ingredient", { autoClose: 5000 });
+      }
     }
   };
+  
+  const cancelDelete = () => {
+    setProductToDelete(null);
+    setShowDeleteModal(false);
+  };
+  
+  // const handleDelete = async (id) => {
+  //   try {
+  //     const response = await instance.delete(`/ingredient_delete/${id}`);
+  //     toast.success("Ingredient deleted successfully", { autoClose: 5000 });
+  //     fetchIngredients();
+  //   } catch (error) {
+  //     toast.error("Error deleting Ingredient", { autoClose: 5000 });
+  //   }
+  // };
 
   const handleEdit = async (id) => {
     navigate("/create-ingredient", {
@@ -93,6 +119,7 @@ export default function Ingredients() {
     fetchIngredients();
   }, [searchTerm, currentPage]);
   return (
+    <>
     <PageLayout>
       <Row>
         <Col xl={12}>
@@ -306,5 +333,10 @@ export default function Ingredients() {
         </Col>
       </Row>
     </PageLayout>
+    <CustomModal
+        show={showDeleteModal}
+        onHide={cancelDelete}
+        onDelete={confirmDelete}/>
+    </>
   );
 }

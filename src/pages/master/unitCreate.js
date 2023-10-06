@@ -162,9 +162,10 @@ export default function UnitCreate() {
                     <Col md={12}   >
                       
                         {action === "updateUom" ? "Update UOMs" : "Create UOMs"}
-                  <Link style={{ marginLeft:"67%"}}>
+                  <Link  style={{ marginLeft:"67%"}}>
                     <Button
                     style={{padding:"7px 15px"}}
+                    variant="dark"
                       // className="acc-create-btn rs-btn-create"
                       onClick={handleSubmit}
                     >

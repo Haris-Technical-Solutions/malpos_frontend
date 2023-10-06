@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Col, Row, Form, Table } from "react-bootstrap";
+import { Col, Row, Form, Table,Modal } from "react-bootstrap";
 import { CardLayout } from "../../components/cards";
+import CustomPagination from "../../components/CustomPagination";
 import PageLayout from "../../layouts/PageLayout";
 import SkeletonCell from "../../components/Skeleton";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -25,6 +26,7 @@ import {
   Heading,
 } from "../../components/elements";
 import { toast } from "react-toastify";
+import CustomModal from "./Modal";
 import { useNavigate } from "react-router-dom";
 
 export default function Suppliers() {
@@ -32,6 +34,19 @@ export default function Suppliers() {
   const [suppliers, setSuppliers] = useState([]);
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [perPage] = useState(10);
+  const [totalNumber, setTotalNumber] = useState(0);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [supplierToDelete, setSupplierToDelete] = useState(null);
+
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber); 
+    fetchSupplier();
+  };
+  
   const handleDotBox = () => {
     setOpen(!open);
   };
@@ -42,14 +57,22 @@ fetchSupplier().then(() => setLoading(false))
 .catch((error) => {
   console.error("Error fetching supply data", error);
 });;
-  }, []);
+  }, [currentPage,searchTerm]);
 
   const fetchSupplier = async () => {
     
    await axiosInstance
-      .get("/md_supplier")
+      .get("/md_supplier",{
+        params:{
+          search: searchTerm,
+          page: currentPage,
+        },
+      })
       .then((response) => {
+        console.log("API Response:", response.data);
         setSuppliers(response.data.data);
+        const totalItems = response.data.data.total;
+        setTotalNumber(totalItems);
       })
       .catch((error) => {
         console.error("Error fetching suppliers data", error);
@@ -66,18 +89,48 @@ fetchSupplier().then(() => setLoading(false))
     });
   };
 
-  const handleSupplierDelete = async (id) => {
-    try {
-      await axiosInstance.delete(`/md_supplier/${id}`);
-      fetchSupplier();
-      toast.success("Supplier deleted successfully", {
-        autoClose: false,
-        closeButton: true,
-      });
-    } catch (error) {
-      console.log(error);
+
+  const handleSupplierDelete = (id) => {
+    setSupplierToDelete(id);
+    setShowDeleteModal(true);
+  };
+
+  const confirmDelete = async () => {
+    if (supplierToDelete) {
+      try {
+        await axiosInstance.delete(`/md_supplier/${supplierToDelete}`);
+        fetchSupplier();
+        toast.success("Supplier deleted successfully", {
+          autoClose: false,
+          closeButton: true,
+        });
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setSupplierToDelete(null);
+        setShowDeleteModal(false);
+      }
     }
   };
+
+  const cancelDelete = () => {
+    setSupplierToDelete(null);
+    setShowDeleteModal(false);
+  };
+
+
+  // const handleSupplierDelete = async (id) => {
+  //   try {
+  //     await axiosInstance.delete(`/md_supplier/${id}`);
+  //     fetchSupplier();
+  //     toast.success("Supplier deleted successfully", {
+  //       autoClose: false,
+  //       closeButton: true,
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   return (
     <div>
@@ -97,6 +150,8 @@ fetchSupplier().then(() => setLoading(false))
                           type="search"
                           placeholder="Search"
                           className="search-pl"
+                          value={searchTerm} 
+                          onChange={(e) => setSearchTerm(e.target.value)}
                         />
                         <span
                           style={{
@@ -262,6 +317,12 @@ fetchSupplier().then(() => setLoading(false))
                           </tbody>
                         </Table>
                       </Box>
+                      <CustomPagination
+                  perPage={perPage}
+                  totalUsers={totalNumber}
+                  paginate={paginate}
+                  currentPage={currentPage}
+                />
                     </Col>
                   </Row>
                 </Col>
@@ -270,6 +331,11 @@ fetchSupplier().then(() => setLoading(false))
           </Col>
         </Row>
       </PageLayout>
+      <CustomModal
+  show={showDeleteModal}
+  onHide={cancelDelete}
+  onConfirm={confirmDelete}
+/>
     </div>
   );
 }

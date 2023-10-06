@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Col, Row, Form, Table } from "react-bootstrap";
+import { Col, Row, Form, Table, Modal } from "react-bootstrap";
 import { CardLayout } from "../../components/cards";
 import PageLayout from "../../layouts/PageLayout";
 import { Link } from "react-router-dom";
+import CustomModal from "./Modal"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axiosInstance from "../../api/baseUrl";
 import SkeletonCell from "../../components/Skeleton";
@@ -39,6 +40,7 @@ export default function Storage() {
   };
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
+    fetchStorage();
   };
 
   const [loading, setLoading] = useState(true);
@@ -46,6 +48,10 @@ export default function Storage() {
   const [perPage] = useState(10); 
   const [totalNumber, setTotalNumber] = useState(0); 
   const  [storage, setStorage]= useState([]);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [storageToDelete, setStorageToDelete] = useState(null);
+const[searchTerm,setSearchTerm]= useState("");
+
   useEffect(() => {
   
     fetchStorage()
@@ -53,7 +59,7 @@ export default function Storage() {
     .catch((error) => {
       console.error("Error fetching supply data", error);
     });
-  },[]);
+  },[searchTerm,currentPage]);
 
   const handleStorageEdit = (id) =>{
     console.log("id: " + id);
@@ -64,26 +70,60 @@ export default function Storage() {
       },
     });
   };
-  const handleStorageDelete = async (id) => {
-    try {
-      await axiosInstance.delete(`/md_storage/${id}`);
-      fetchStorage()
-      .then(() => setLoading(false))
-      .catch((error) => {
-        console.error("Error fetching supply data", error);
-      });
-      toast.success("Storage deleted successfully", {
-        autoClose: false,
-        closeButton: true,
-      });
-    } catch (error) {
-      console.log(error);
-    }
+
+  const handleStorageDelete = (id) => {
+    setStorageToDelete(id);
+    setShowDeleteModal(true);
   };
+
+  const confirmDelete = async () => {
+    if (storageToDelete) {
+      try {
+        await axiosInstance.delete(`/md_storage/${storageToDelete}`);
+        fetchStorage()
+        .then(() => setLoading(false))
+        .catch((error) => {
+          console.error("Error fetching supply data", error);
+        });
+        toast.success("Storage deleted successfully", {
+          autoClose: false,
+          closeButton: true,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+  };}
+
+  const cancelDelete = () => {
+    setStorageToDelete(null);
+    setShowDeleteModal(false);
+  };
+
+  // const handleStorageDelete = async (id) => {
+  //   try {
+  //     await axiosInstance.delete(`/md_storage/${id}`);
+  //     fetchStorage()
+  //     .then(() => setLoading(false))
+  //     .catch((error) => {
+  //       console.error("Error fetching supply data", error);
+  //     });
+  //     toast.success("Storage deleted successfully", {
+  //       autoClose: false,
+  //       closeButton: true,
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
   const fetchStorage = async () => {
     try {
-      const res = await axiosInstance.get("/md_storage");
+      const res = await axiosInstance.get("/md_storage",{ 
+        params:{
+          search:searchTerm,
+          current:currentPage,
+        }
+      });
       setStorage(res.data.data);
       setTotalNumber(res.data.data.total);
     } catch (error) {
@@ -108,6 +148,8 @@ export default function Storage() {
                           type="search"
                           placeholder="Search"
                           className="search-pl"
+                          value={searchTerm} 
+                          onChange={(e) => setSearchTerm(e.target.value)}
                         />
                         <span
                           style={{
@@ -234,6 +276,10 @@ export default function Storage() {
           </Col>
         </Row>
       </PageLayout>
+      <CustomModal
+  show={showDeleteModal}
+  onHide={cancelDelete}
+  onConfirm={confirmDelete}
+/>
     </div>
-  );
-}
+  );}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Col, Row, Form, Table } from "react-bootstrap";
+import { Col, Row, Form, Table , Modal} from "react-bootstrap";
 import { CardLayout } from "../../components/cards";
 import PageLayout from "../../layouts/PageLayout";
 import SkeletonCell from "../../components/Skeleton";
@@ -16,6 +16,7 @@ import {
 import { Link } from "react-router-dom";
 import CustomPagination from "../../components/CustomPagination";
 import axiosInstance from "../../api/baseUrl";
+import CustomModal from "./Modal"
 import { toast } from "react-toastify";
 import {
   Button,
@@ -31,15 +32,19 @@ export default function Unitmeasurement() {
   const [currentPage, setCurrentPage] = useState(1);
   const [perPage] = useState(10); 
   const [totalNumber, setTotalNumber] = useState(0); 
+  const [searchTerm, setSearchTerm] = useState("");
   const [loading, setLoading] = useState(true);
   const [unitMeasurements, setUnitMeasurements] = useState([]);
   const navigate = useNavigate();
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [measurementToDelete, setMeasurementToDelete] = useState(null);
 
   const handleDotBox = () => {
     setOpen(!open);
   };
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
+    fetchUnitMeasurements();
   };
   
 
@@ -48,17 +53,20 @@ export default function Unitmeasurement() {
     .catch((error) => {
       console.error("Error fetching supply data", error);
     });
-  }, []);
+  }, [currentPage, searchTerm]);
 
   const fetchUnitMeasurements = async () => {
     try {
-      const response = await axiosInstance.get("/uom");
+      const response = await axiosInstance.get("/uom",{params: {
+        search: searchTerm,
+        page: currentPage,
+      },});
 
       const unitMeasurementsData = response.data.data.data;
 
       if (Array.isArray(unitMeasurementsData)) {
         setUnitMeasurements(unitMeasurementsData);
-        const totalItems= unitMeasurementsData.length; 
+        const totalItems= response.data.data.total; 
     setTotalNumber(totalItems);
       } else {
         console.error("Response data is not an array:", unitMeasurementsData);
@@ -77,19 +85,48 @@ export default function Unitmeasurement() {
       },
     });
   };
+
   const handleUomDelete = async (id) => {
-    console.log("id is here", id)
-    try {
-      await axiosInstance.delete(`/uom/${id}`);
-      fetchUnitMeasurements();
-      toast.success("Unit deleted successfully", {
-        autoClose: false,
-        closeButton: true,
-      });
-    } catch (error) {
-      console.log(error);
+    setMeasurementToDelete(id);
+    setShowDeleteModal(true);
+  };
+
+  const confirmDelete = async () => {
+    if (measurementToDelete) {
+      try {
+        await axiosInstance.delete(`/uom/${measurementToDelete}`);
+        fetchUnitMeasurements();
+        toast.success("Unit deleted successfully", {
+          autoClose: false,
+          closeButton: true,
+        });
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setMeasurementToDelete(null);
+        setShowDeleteModal(false);
+      }
     }
   };
+  
+  const cancelDelete = () => {
+    setMeasurementToDelete(null);
+    setShowDeleteModal(false);
+  };
+
+  // const handleUomDelete = async (id) => {
+  //   console.log("id is here", id)
+  //   try {
+  //     await axiosInstance.delete(`/uom/${id}`);
+  //     fetchUnitMeasurements();
+  //     toast.success("Unit deleted successfully", {
+  //       autoClose: false,
+  //       closeButton: true,
+  //     });
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
   return (
     <div>
       <PageLayout>
@@ -108,6 +145,8 @@ export default function Unitmeasurement() {
                           type="search"
                           placeholder="Search"
                           className="search-pl"
+                          value={searchTerm} 
+                          onChange={(e) => setSearchTerm(e.target.value)}
                         />
                         <span
                           style={{
@@ -231,6 +270,11 @@ export default function Unitmeasurement() {
           </Col>
         </Row>
       </PageLayout>
+      <CustomModal
+  show={showDeleteModal}
+  onHide={cancelDelete}
+  onConfirm={confirmDelete}
+/>
     </div>
   );
 }
