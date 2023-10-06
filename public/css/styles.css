@@ -1781,13 +1781,13 @@ textarea.form-control {
 .modal-header {
   margin: 0px 10px;
   padding: 0px;
-  border: none;
-  margin-bottom: 30px;
+  border-bottom: 2px solid silver;
+  margin-bottom: 10px;
 }
 
 .modal-title {
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 800;
   text-transform: capitalize;
   color: var(--headingColor);
 }
@@ -1796,7 +1796,7 @@ textarea.form-control {
   padding: 0px;
   border: none;
   margin-right: 10px;
-  margin-top: 35px;
+  margin-top: 20px;
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: end;
