@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Col, Row } from "react-bootstrap";
-import { CardLayout } from "../../components/cards";
 import PageLayout from "../../layouts/PageLayout";
 import { LabelField } from "../../components/fields";
 import api from "../../api/baseUrl";
@@ -161,12 +160,10 @@ export default function CreateBank() {
         <form onSubmit={handleSubmit}>
           <Row>
             <Col md={12}>
-              <CardLayout>
                 <h3>Create Bank</h3>
-              </CardLayout>
+
             </Col>
             <Col md={12}>
-              <CardLayout>
                 <Row>
                   <Row>
                     <Col md={2}>
@@ -242,7 +239,6 @@ export default function CreateBank() {
                     </Link>
                   </Col>
                 </Row>
-              </CardLayout>
             </Col>
           </Row>
         </form>

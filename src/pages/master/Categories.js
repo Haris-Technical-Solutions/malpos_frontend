@@ -27,7 +27,7 @@ export default function Categories() {
 
           <Col md={12}>
             <Row>
-              <CardLayout>
+      
                 <Col md={12}>
                   <Box className="categories-btn">
                     <button
@@ -71,7 +71,7 @@ export default function Categories() {
                     </Col>
                   </Row>
                 </Col>
-              </CardLayout>
+             
             </Row>
           </Col>
         </Row>

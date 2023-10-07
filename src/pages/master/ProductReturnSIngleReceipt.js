@@ -12,7 +12,6 @@ export default function ProductReturnSIngleReceipt() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
               Product Return - #ID 41 - #Receipt 1122
               <Box className="construction-edit-icons">
                 <Box className="edit-icons">
@@ -25,10 +24,8 @@ export default function ProductReturnSIngleReceipt() {
                   </Link>
                 </Box>
               </Box>
-            </CardLayout>
           </Col>
           <Col md={12}>
-            <CardLayout>
               <Box className="receipt-product-return-table-wrap">
                 <Table className="product-return-table">
                   <thead className="thead-modifier">
@@ -110,7 +107,6 @@ export default function ProductReturnSIngleReceipt() {
                   </Row>
                 </Col>
               </Box>
-            </CardLayout>
           </Col>
         </Row>
       </PageLayout>

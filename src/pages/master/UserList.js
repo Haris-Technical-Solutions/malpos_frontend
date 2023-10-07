@@ -13,7 +13,7 @@ export default function UserList() {
         <PageLayout>
             <Row>
                 <Col xl={12}>
-                    <CardLayout>
+                   
                         <Breadcrumb title={ data?.pageTitle }>
                             {data?.breadcrumb.map((item, index) => (
                                 <Item key={ index } className="mc-breadcrumb-item">
@@ -21,7 +21,7 @@ export default function UserList() {
                                 </Item>
                             ))}
                         </Breadcrumb>
-                    </CardLayout>
+                    
                 </Col>
                 {data?.float.map((item, index) => (
                     <Col xl={4} key={ index }>
@@ -34,7 +34,7 @@ export default function UserList() {
                     </Col>
                 ))}
                 <Col xl={12}>
-                    <CardLayout>
+                  
                         <CardHeader title={ data?.cardTitle } dotsMenu={ data?.dotsMenu } />
                         <Row xs={1} sm={4} className="mb-4">
                             {data?.filter.map((item, index)=> (
@@ -55,7 +55,7 @@ export default function UserList() {
                             tbody = { data?.table.tbody }
                         />
                         <Pagination />
-                    </CardLayout>
+                    
                 </Col>
             </Row>
         </PageLayout>

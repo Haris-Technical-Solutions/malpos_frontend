@@ -10,7 +10,7 @@ import data from "../../data/master/settings.json";
 export default function Settings() {
     return (
         <PageLayout>
-            <CardLayout className="mb-4">
+            <div className="mb-4">
                 <Breadcrumb title={ data?.pageTitle }>
                     {data?.breadcrumb.map((item, index) => (
                         <Item key={ index } className="mc-breadcrumb-item">
@@ -18,8 +18,8 @@ export default function Settings() {
                         </Item>
                     ))}
                 </Breadcrumb>
-            </CardLayout>
-            <CardLayout className="p-sm-5">
+            </div>
+            <div className="p-sm-5">
                 <Box className="mb-5">
                     <DivideTitle title="informations" className="mb-4" />
                     <Row>
@@ -52,7 +52,7 @@ export default function Settings() {
                     </Row>
                 </Box>
                 <Button className="mc-btn primary" icon="verified" text="save all changes" />
-            </CardLayout>
+            </div>
         </PageLayout>
     )
 }

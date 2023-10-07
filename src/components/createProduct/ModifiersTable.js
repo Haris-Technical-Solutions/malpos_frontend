@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Button } from "react-bootstrap";
-import { CardLayout } from "../../components/cards";
+// import { CardLayout } from "../../components/cards";
 import PageLayout from "../../layouts/PageLayout";
 import { Col, Row } from "react-bootstrap";
 import {
@@ -128,16 +128,16 @@ export default function ModifiersTable() {
     <>
       <Row>
         <Col md={12}>
-          <CardLayout>
+          {/* <CardLayout> */}
             <Row>
               <Col md={12}>
                 <h3>Manage modifiers</h3>
               </Col>
             </Row>
-          </CardLayout>
+          {/* </CardLayout> */}
         </Col>
         <Col md={12}>
-          <CardLayout>
+          {/* <CardLayout> */}
             <Row>
               <Col md={9} lg={10}>
                 <Row>
@@ -258,7 +258,7 @@ export default function ModifiersTable() {
                 </Col>
               </Row>
             </Col>
-          </CardLayout>
+          {/* </CardLayout> */}
         </Col>
       </Row>
 

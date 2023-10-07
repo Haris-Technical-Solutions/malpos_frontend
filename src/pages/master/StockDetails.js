@@ -15,12 +15,12 @@ export default function StockDetails() {
         <PageLayout>
             <Row>
                 <Col md={12}>
-                    <CardLayout>
+                    
                     Stock #280 : Egg بيض
-                    </CardLayout>
+                    
                 </Col>
                 <Col md={12}>
-                <CardLayout>
+                
                 <Tabs
             id="my-tabs"
             activeKey={key}
@@ -43,7 +43,7 @@ export default function StockDetails() {
               </div>
             </Tab>
           </Tabs>
-                    </CardLayout>
+                  
                 </Col>
             </Row>
         </PageLayout>

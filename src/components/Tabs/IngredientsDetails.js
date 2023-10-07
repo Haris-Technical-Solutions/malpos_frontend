@@ -1,6 +1,6 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
-import { CardLayout } from "../../components/cards";
+// import { CardLayout } from "../../components/cards";
 import data from "../../data/master/ingredients.json";
 import PageLayout from "../../layouts/PageLayout";
 import { Button, Box } from "../../components/elements";
@@ -20,7 +20,7 @@ export default function IngredientsDetails() {
             return item.id == id;
           })
           .map((item, i) => (
-            <CardLayout className="mb-4" key={i}>
+            <div className="mb-4" key={i}>
               <Box className="productedit-edit">
                 <h3>
                   {data.pageTitle} #{item.item}: {item.heading}
@@ -42,17 +42,17 @@ export default function IngredientsDetails() {
                   </Button> */}
                 </Box>
               </Box>
-            </CardLayout>
+            </div>
           ))}
 
         <Col xl={12}>
-          <CardLayout>
+          {/* <CardLayout> */}
             <Row>
               <Col md={12}>
                 <IngredientsTabs />
               </Col>
             </Row>
-          </CardLayout>
+          {/* </CardLayout> */}
         </Col>
       </PageLayout>
     </>

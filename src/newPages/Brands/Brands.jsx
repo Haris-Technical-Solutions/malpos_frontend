@@ -13,7 +13,6 @@ import {
   Tr,
   Td,
 } from "../../components/elements/Table";
-import { CardLayout } from "../../components/cards";
 import PageLayout from "../../layouts/PageLayout";
 import CustomPagination from "../../components/CustomPagination";
 import { Box, Text, Button } from "../../components/elements";
@@ -76,12 +75,9 @@ export default function Brands() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
               <h3>Brands</h3>
-            </CardLayout>
           </Col>
           <Col md={12}>
-            <CardLayout>
               <Row>
                 {/* <Col xs={12} sm={12} md={3} lg={3}>
                   <div style={{ position: "relative" }}>
@@ -184,7 +180,6 @@ export default function Brands() {
                   </Box>
                 </Col>
               </Row>
-            </CardLayout>
           </Col>
         </Row>
       </PageLayout>

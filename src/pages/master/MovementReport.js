@@ -44,18 +44,18 @@ export default function MovementReport() {
     <PageLayout>
       <Row>
         <Col xl={12}>
-          <CardLayout>
+          
             <div className="d-flex justify-content-between align-items-center">
               <h5>Movement Reports 37</h5>
               <div>
                 <FontAwesomeIcon icon={faCalendarDays} />
               </div>{" "}
             </div>
-          </CardLayout>
+          
         </Col>
 
         <Col md={12}>
-          <CardLayout>
+          
             <Box className="">
               <Box className="receipt-tab">
                 {/* <Col md={12}> */}
@@ -383,10 +383,11 @@ export default function MovementReport() {
                 {/* </Col> */}
               </Box>
             </Box>
-          </CardLayout>
+          
         </Col>
         <Col md={12}>
-          <CardLayout>
+        
+        
             <Row>
               <Col md={12}>
                 <Box className="payment-sale-table-wrap">
@@ -430,7 +431,6 @@ export default function MovementReport() {
                 <Pagination />
               </Col>
             </Row>
-          </CardLayout>
         </Col>
       </Row>
     </PageLayout>

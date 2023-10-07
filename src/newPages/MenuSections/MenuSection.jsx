@@ -12,7 +12,6 @@ import {
 } from "../../components/elements/Table";
 
 import PageLayout from "../../layouts/PageLayout";
-import { CardLayout } from "../../components/cards";
 import { Box } from "../../components/elements";
 import {
   faEdit,
@@ -83,16 +82,16 @@ const MenuSections = () => {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
+            {/* <CardLayout> */}
               <Box className="head-sec-rearrange">
                 <Box className="head-sec-rearrange-left">
                   <h3>Menu Sections</h3>
                 </Box>
               </Box>
-            </CardLayout>
+            {/* </CardLayout> */}
           </Col>
           <Col md={12}>
-            <CardLayout>
+            {/* <CardLayout> */}
               <Row>
                 <Col md={10}>
                   <Row>
@@ -213,7 +212,7 @@ const MenuSections = () => {
                   </Col>
                 </Box>
               </Col>
-            </CardLayout>
+            {/* </CardLayout> */}
           </Col>
         </Row>
       </PageLayout>

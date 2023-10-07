@@ -36,33 +36,24 @@ export default function TransactionExpense() {
       <Row>
         <Col md={12}>
           <Row>
-            <Col md={4} style={{height:"10%"}}>
+            <Col md={4} >
               <Form.Label   
                 >Amount</Form.Label>
-              <InputGroup   style={{ width:"80%" }}
-                >
-                <InputGroup.Text
-                  className="bg-danger text-light fw-bold"
-                  id="basic-addon1"
-                 style={{width:"20%"}}
-                  
-                  >
-                  ––
-                </InputGroup.Text>
+              
                 <Form.Control
                     placeholder="Enter Amount"
                   //ref={nameInputRef}
                   label="Amount"
-               
+                  className="wfield"
                />
-              </InputGroup>
-            </Col>
+              </Col>
 
-            <Col md={4}  style={{height:"10%"}}>
+            <Col md={4}  >
               <LabelFieldS
-              style={{width:"80%"}}
+              // style={{width:"80%"}}
 label=" Account Type"
-                option={[
+className="wfield"
+option={[
                   { label: "Assets", value: null },
                   { label: "Liability", value: null },
                   { label: "Owner Equity", value: null },
@@ -72,11 +63,12 @@ label=" Account Type"
                  />
             </Col>
             
-            <Col md={4}   style={{height:"10%"}} >
+            <Col md={4}    >
               <Form.Label>Date</Form.Label>
               <Form.Control
-                style={{width:"80%"}}
-                className="m-0"
+                // style={{width:"80%"}}
+                // className="m-      
+                className="wfield"
                 label="calender"
                 type="date"
                 required
@@ -89,45 +81,49 @@ label=" Account Type"
                 Must not be empty
               </Form.Control.Feedback>
             </Col>
-            <Col md={4} style={{height:"10%"}} >
+            <Col md={4}  >
               <LabelFieldS
                 label="Bank/Cash Account "
                 placeholder="Bank Amount"
-                style={{width:"80%"}}
+                // style={{width:"80%"}}
                 type="text"
+                className="wfield"
   
               />
             </Col>
-            <Col md={4} style={{height:"10%"}} >
+            <Col md={4}  >
               <LabelFieldS
                 label="Accounts"
                 placeholder="Accounts"
                 type="text"
-                style={{width:"80%"}}
+                className="wfield"
+                // style={{width:"80%"}}
               />
             </Col>
-            <Col md={4} style={{height:"10%"}} >
+            <Col md={4}  >
               <LabelFieldS
                 label="Empolyee"
                 type="text"
+                className="wfield"
                 placeholder="Enter employee"
-                style={{width:"80%"}}
+                // style={{width:"80%"}}
               />
             </Col>
-            <Col md={4}  style={{height:"10%"}} >
+            <Col md={4}  >
               <LabelFieldS
                 label="Supplier"
                 type="text"
                 placeholder="Enter supplier"
-                style={{width:"80%"}}
+                // style={{width:"80%"}}
+                className="wfield"
               />
             </Col>
-            <Col md={4} style={{ height:"10%"}} >
+            <Col md={4}  >
               <LabelFieldS
                 label="Customer"
                 placeholder="Enter customer"
                 type="text"
-                style={{width:"80%"}}
+                className="wfield"
               />
             </Col>
           </Row>

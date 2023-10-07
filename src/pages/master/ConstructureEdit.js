@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { CardLayout } from "../../components/cards";
 import PageLayout from "../../layouts/PageLayout";
 import { Col, Row } from "react-bootstrap";
 import { Box, Label } from "../../components/elements";
@@ -15,7 +14,6 @@ export default function ConstructureEdit() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
               <Row>
                 <Col md={12}>
                   <Box className="construction-edit">
@@ -44,10 +42,8 @@ export default function ConstructureEdit() {
                   </Box>
                 </Col>
               </Row>
-            </CardLayout>
           </Col>
           <Col md={12}>
-            <CardLayout>
               <Row>
                 <Col md={4}>
                   <Col md={12}>
@@ -91,7 +87,6 @@ export default function ConstructureEdit() {
                   </Col>
                 </Col>
               </Row>
-            </CardLayout>
           </Col>
         </Row>
       </PageLayout>

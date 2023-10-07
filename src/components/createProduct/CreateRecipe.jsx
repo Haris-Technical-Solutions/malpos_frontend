@@ -13,7 +13,7 @@ import {
   faPepperHot,
   faBowlRice,
 } from "@fortawesome/free-solid-svg-icons";
-import { CardLayout } from "../cards";
+// import { CardLayout } from "../cards";
 import PageLayout from "../../layouts/PageLayout";
 import { Table, Thead, Tr, Tbody, Th, Td } from "../elements/Table";
 import { Box } from "../elements";
@@ -87,17 +87,17 @@ const CreateRecipe = () => {
   return (
     <Row>
       <Col md={12}>
-        <CardLayout>
+        {/* <CardLayou/t> */}
           <Box className="head-sec-rearrange">
             <Box className="head-sec-rearrange-left">
               <h3>Recipes</h3>
             </Box>
           </Box>
-        </CardLayout>
+        {/* </CardLayout> */}
       </Col>
 
       <Col md={12}>
-        <CardLayout>
+        {/* <CardLayout> */}
           <Row>
             <Col md={10}>
               <Row>
@@ -212,7 +212,7 @@ const CreateRecipe = () => {
               />
             </Col>
           </Row>
-        </CardLayout>
+        {/* </CardLayout> */}
       </Col>
     </Row>
   );

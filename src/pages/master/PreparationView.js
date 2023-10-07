@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Row, Col } from "react-bootstrap";
 import { Box, Button } from "../../components/elements";
 import PageLayout from "../../layouts/PageLayout";
-import CardLayout from "../../components/cards/CardLayout";
 import PreparationTabs from "../../components/Tabs/PreparationTabs";
 import data from "../../data/master/preparationList.json";
 import { Link, useLocation } from "react-router-dom";
@@ -11,7 +10,7 @@ export default function PreparationView() {
   const { id } = location.state;
   return (
     <PageLayout>
-      <CardLayout className="mb-4">
+      <div className="mb-4">
         {data?.preparation.tbody
           .filter((item) => {
             return item.id == id;
@@ -32,14 +31,14 @@ export default function PreparationView() {
               </Box>
             </Box>
           ))}
-      </CardLayout>
-      <CardLayout className="my-div">
+      </div>
+      <div className="my-div">
         <Row>
           <Col md={12}>
             <PreparationTabs />
           </Col>
         </Row>
-      </CardLayout>
+      </div>
     </PageLayout>
   );
 }

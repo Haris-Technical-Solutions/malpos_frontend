@@ -32,7 +32,7 @@ export default function ManageModifierEdit() {
           <PageLayout>
             <Row>
               <Col md={12}>
-                <CardLayout>
+                
                   <Box className="head-sec-rearrange">
                     <Box className="head-sec-rearrange-left">
                       <h3>
@@ -48,10 +48,10 @@ export default function ManageModifierEdit() {
                       </Box>
                     </Box>
                   </Box>
-                </CardLayout>
+                
               </Col>
               <Col md={12}>
-                <CardLayout>
+                
                   <Tabs
                     id="my-tabs"
                     activeKey={key}
@@ -69,7 +69,7 @@ export default function ManageModifierEdit() {
                       </div>
                     </Tab>
                   </Tabs>
-                </CardLayout>
+                
               </Col>
             </Row>
           </PageLayout>

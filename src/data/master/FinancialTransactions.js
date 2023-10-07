@@ -24,7 +24,7 @@ export default function Transaction() {
 
           <Col md={12}>
             <Row>
-              <CardLayout>
+              
           <Col md={12}>
             <Row>          
                 <div className="d-flex justify-content-between align-items-center"  style={{marginBottom:"1rem"}}>
@@ -78,7 +78,7 @@ export default function Transaction() {
                     </Col>
                   </Row>
                 </Col>
-              </CardLayout>
+            
             </Row>
           </Col>
         </Row>

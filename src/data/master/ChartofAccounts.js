@@ -26,7 +26,7 @@ export default function AccountCatgories() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
+
               <Row>
         <Col md={12}>
            Chart Of Accounts
@@ -74,7 +74,7 @@ export default function AccountCatgories() {
   lineHeight: "5px"}}>
                       <tr>
                         <th className="th-w30">Code</th>
-                        <th className="th-w30">Name</th>
+                        <th className="th-w30" style={{width:"20%"}}>Name</th>
                         <th className="th-w30">Type</th>
                         <th className="th-w30">Parent_account</th>
                         <th className="th-w30">Seqno</th>
@@ -88,11 +88,11 @@ export default function AccountCatgories() {
                         <React.Fragment>
                         <tr>
     <td className="td-w30">123</td>
-    <td className="td-w60">Category 1</td>
+    <td className="td-w60" style={{width:"20px"}}>Category 1</td>
     <td className="td-w30">Type A</td>
     <td className="td-w30">Parent 1</td>
     <td className="td-w30">001</td>
-    <td className="td-w30" style={{ paddingLeft: "1.5rem" }}>YES</td>
+    <td className="td-w30" style={{ paddingLeft: "1rem" }}>YES</td>
     <td className="td-w10">
       <Box className={"faLock"}>
         <FontAwesomeIcon icon={faLock} />
@@ -219,7 +219,7 @@ export default function AccountCatgories() {
                   </Table>
                 </Col>
               </Row>
-            </CardLayout>
+        
           </Col>
         </Row>
       </PageLayout>

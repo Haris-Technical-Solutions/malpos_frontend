@@ -62,8 +62,9 @@ export default function StorageCreate() {
           </Col>
                 <Col md={6}>
                   <LabelField
+                  className="wfield"
                     type="text"
-                    style={{marginBottom:'1rem' }}
+                    style={{marginBottom:'1rem',width:"60%" }}
                     label={'Name'}
                     value={newStorage.name}
                     onChange={(e) => setNewStorage({ ...newStorage, name: e.target.value })}

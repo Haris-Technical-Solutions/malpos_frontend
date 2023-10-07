@@ -7,7 +7,6 @@ import { useFormik } from "formik";
 import Toggle from "react-toggle";
 import "react-toggle/style.css"; // Import the styles
 
-import { CardLayout } from "../../components/cards";
 import { LabelField } from "../../components/fields";
 import MultiSelectFieldCustom from "../../components/fields/MultiSelectFieldCustom";
 import PageLayout from "../../layouts/PageLayout";
@@ -166,13 +165,10 @@ export default function CreateMenu() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
               <h3>Add New Menu</h3>
-            </CardLayout>
           </Col>
           <Col md={12}>
             <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
-              <CardLayout>
                 <Row>
                   <Col md={12}>
                     <Row>
@@ -315,7 +311,6 @@ export default function CreateMenu() {
                     </Row>
                   </Col>
                 </Row>
-              </CardLayout>
             </form>
           </Col>
         </Row>

@@ -110,7 +110,7 @@ export default function Stocks() {
         </Col>
 
         <Col md={12}>
-          <CardLayout>
+        
             <Box className="">
               <Box className="receipt-tab">
                 <Col md={12}>
@@ -502,10 +502,9 @@ export default function Stocks() {
                 </Col>
               </Box>
             </Box>
-          </CardLayout>
+        
         </Col>
         <Col md={12}>
-          <CardLayout>
             <Row>
               <Col md={12}>
                 <Box className="payment-sale-table-wrap">
@@ -630,7 +629,6 @@ export default function Stocks() {
                 <Pagination />
               </Col>
             </Row>
-          </CardLayout>
         </Col>
       </Row>
     </PageLayout>

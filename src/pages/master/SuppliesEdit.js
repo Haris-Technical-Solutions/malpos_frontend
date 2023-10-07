@@ -583,6 +583,7 @@ let handleChangeFlag = 0
                       <span style={{ color: "red" }}>*</span>
                     </label>
                     <MultiSelect
+                    style={{ height: '1.8rem' }}
                     className="mfield"
                       options={[]}
                       value={selectedCategories}
@@ -612,10 +613,11 @@ let handleChangeFlag = 0
                     </Form.Control>
                   </Form.Group>
                 </Col>
-                <Col md={4}>
+                <Col md={4} >
                   <Form.Label>OPERATION TIME</Form.Label>
                   <Datetime
-                  className="mfield"
+                  style={{ height: '30px' }}
+                   className="mfield"
                     value={selectedDateTime}
                     onChange={handleDateChange}
                     dateFormat="YYYY-MM-DD"

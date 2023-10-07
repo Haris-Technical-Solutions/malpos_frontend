@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Col, Row } from "react-bootstrap";
-import { CardLayout } from "../../components/cards";
 import PageLayout from "../../layouts/PageLayout";
 import { LabelField } from "../../components/fields";
 import api from "../../api/baseUrl";
@@ -200,12 +199,9 @@ export default function CreateBranch() {
         <form onSubmit={handleSubmit}>
           <Row>
             <Col md={12}>
-              <CardLayout>
                 <h3>Create Branch</h3>
-              </CardLayout>
             </Col>
             <Col md={12}>
-              <CardLayout>
                 <Row>
                   <Col md={6}>
                     <Row>
@@ -306,7 +302,6 @@ export default function CreateBranch() {
                     </Row>
                   </Col>
                 </Row>
-              </CardLayout>
             </Col>
           </Row>
         </form>

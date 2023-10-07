@@ -1,7 +1,7 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { Item, Anchor } from "../../components/elements";
-import { CardLayout, CardHeader, FloatCard } from "../../components/cards";
+import {  CardHeader, FloatCard } from "../../components/cards";
 import { Breadcrumb, Pagination } from "../../components";
 import LabelField from "../../components/fields/LabelField";
 import InvoiceTable from "../../components/tables/InvoiceTable";
@@ -13,7 +13,6 @@ export default function InvoiceList() {
         <PageLayout>
             <Row>
                 <Col xl={12}>
-                    <CardLayout>
                         <Breadcrumb title={ data?.pageTitle }>
                             {data?.breadcrumb.map((item, index) => (
                                 <Item key={ index } className="mc-breadcrumb-item">
@@ -21,8 +20,7 @@ export default function InvoiceList() {
                                 </Item>
                             ))}
                         </Breadcrumb>
-                    </CardLayout>
-                </Col>
+                    </Col>
                 {data?.float.map((item, index) => (
                     <Col key={ index } md={6} lg={4}>
                         <FloatCard 
@@ -34,7 +32,6 @@ export default function InvoiceList() {
                     </Col>
                 ))}
                 <Col xl={12}>
-                    <CardLayout>
                         <CardHeader title="shopping invoices" dotsMenu={ data?.dotsMenu } />
                         <Row xs={1} sm={2} lg={4} className="mb-4">
                             {data?.filter.map((item, index)=> (
@@ -52,7 +49,6 @@ export default function InvoiceList() {
                         </Row>
                         <InvoiceTable thead={ data?.table.thead } tbody={ data?.table.tbody } />
                         <Pagination />
-                    </CardLayout>
                 </Col>
             </Row>
         </PageLayout>

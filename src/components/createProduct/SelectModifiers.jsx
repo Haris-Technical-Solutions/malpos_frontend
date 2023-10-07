@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
 import { Modal, Button } from "react-bootstrap";
-import { CardLayout } from "../cards";
+// import { CardLayout } from "../cards";
 import PageLayout from "../../layouts/PageLayout";
 import { Box } from "../elements";
 import { useProduct } from "./productContext";
@@ -73,17 +73,17 @@ const SelectModifiers = () => {
   return (
     <Row>
       <Col cl={12}>
-        <CardLayout>
+        {/* <CardLayout> */}
           <Box className="head-sec-rearrange">
             <Box className="head-sec-rearrange-left">
               <h3>Modifier</h3>
             </Box>
           </Box>
-        </CardLayout>
+        {/* </CardLayout> */}
       </Col>
 
       <Col md={12}>
-        <CardLayout>
+        {/* <CardLayout> */}
           <Row>
             <Col md={3}>
               <Box className="station-right-btn d-flex">
@@ -96,12 +96,12 @@ const SelectModifiers = () => {
               </Box>
             </Col>
           </Row>
-        </CardLayout>
+        {/* </CardLayout> */}
       </Col>
 
       {/* Table to display selected modifier */}
       <Col md={12}>
-        <CardLayout>
+        {/* <CardLayout> */}
           <Row>
             <Col md={12}>
               <h4>Selected Modifiers</h4>
@@ -125,7 +125,7 @@ const SelectModifiers = () => {
               </table>
             </Col>
           </Row>
-        </CardLayout>
+        {/* </CardLayout> */}
       </Col>
       <Modal show={showModal} onHide={handleCloseModal}>
         <Modal.Header closeButton>

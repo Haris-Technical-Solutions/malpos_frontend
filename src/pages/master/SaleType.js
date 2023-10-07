@@ -29,11 +29,10 @@ export default function SaleType() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>Sale Types 1</CardLayout>
+            Sale Types 1
           </Col>
 
           <Col md={12}>
-            <CardLayout>
               <Col md={12}>
                 <Row className="justify-content-between">
                   <Col md={6}>
@@ -141,8 +140,7 @@ export default function SaleType() {
                   </tbody>
                 </Table>
               </Box>
-            </CardLayout>
-          </Col>
+            </Col>
         </Row>
       </PageLayout>
     </div>

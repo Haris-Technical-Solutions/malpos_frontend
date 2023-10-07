@@ -20,7 +20,7 @@ export default function Payroll() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
+          
               <Row>
           <Col md={12}>
               <div className="d-flex justify-content-between align-items-center">
@@ -128,7 +128,6 @@ export default function Payroll() {
                 />
                 </Col>
               </Row>
-            </CardLayout>
           </Col>
         </Row>
       </PageLayout>

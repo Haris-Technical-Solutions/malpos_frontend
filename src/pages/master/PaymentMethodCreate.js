@@ -28,7 +28,7 @@ export default function PaymentMethodCreate() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
+          
               <Box className="head-sec-rearrange">
                 <Box className="head-sec-rearrange-left">
                   <h3 style={{ width: "500px" }}>Sale types/Create</h3>
@@ -45,10 +45,10 @@ export default function PaymentMethodCreate() {
                   </Box>
                 </Box>
               </Box>
-            </CardLayout>
+          
           </Col>
           <Col md={12}>
-            <CardLayout>
+            
               <Row>
                 <Col md={8}>
                   <Row>
@@ -106,7 +106,7 @@ export default function PaymentMethodCreate() {
                   </Row>
                 </Col>
               </Row>
-            </CardLayout>
+            
           </Col>
         </Row>
       </PageLayout>

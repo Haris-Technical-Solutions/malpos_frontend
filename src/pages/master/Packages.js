@@ -156,10 +156,10 @@ const [conversionToDelete, setConversionToDelete] = useState(null);
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>Unit Conversions</CardLayout>
+            Unit Conversions
           </Col>
           <Col md={12}>
-            <CardLayout>
+            
               <Row>
                 <Col md={12}>
                   <Row>
@@ -296,7 +296,6 @@ const [conversionToDelete, setConversionToDelete] = useState(null);
                   </Row>
                 </Col>
               </Row>
-            </CardLayout>
           </Col>
         </Row>
       </PageLayout>

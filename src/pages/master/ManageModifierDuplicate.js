@@ -32,7 +32,7 @@ export default function ManageModifierDuplicate() {
           <PageLayout>
             <Row>
               <Col md={12}>
-                <CardLayout>
+            
                   <Box className="head-sec-rearrange">
                     <Box className="head-sec-rearrange-left">
                       <h3>
@@ -49,10 +49,10 @@ export default function ManageModifierDuplicate() {
                       </Box>
                     </Box>
                   </Box>
-                </CardLayout>
+              
               </Col>
               <Col md={12}>
-                <CardLayout>
+                
                   <Tabs
                     id="my-tabs"
                     activeKey={key}
@@ -70,7 +70,7 @@ export default function ManageModifierDuplicate() {
                       </div>
                     </Tab>
                   </Tabs>
-                </CardLayout>
+                
               </Col>
             </Row>
           </PageLayout>

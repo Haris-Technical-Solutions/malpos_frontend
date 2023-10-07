@@ -11,7 +11,7 @@ import {
   faUser,
   faQuestionCircle,
 } from "@fortawesome/free-solid-svg-icons";
-import { CardLayout } from "../cards";
+// import { CardLayout } from "../cards";
 import { toast } from "react-toastify";
 import { Tabs, Tab } from "react-bootstrap";
 import ManageModifierEmenuTab from "../../components/Tabs/ManageModifierEmenuTab";
@@ -149,7 +149,7 @@ export default function UpdateModifiersDetails() {
             <PageLayout>
               <Row>
                 <Col md={12}>
-                  <CardLayout>
+                  {/* <CardLayout> */}
                     <Box className="head-sec-rearrange">
                       <Box className="head-sec-rearrange-left">
                         <h3>
@@ -165,10 +165,10 @@ export default function UpdateModifiersDetails() {
                         </Box>
                       </Box>
                     </Box>
-                  </CardLayout>
+                  {/* </CardLayout> */}
                 </Col>
                 <Col md={12}>
-                  <CardLayout>
+                  {/* <CardLayout> */}
                     <Tabs
                       id="my-tabs"
                       activeKey={key}
@@ -186,7 +186,7 @@ export default function UpdateModifiersDetails() {
                         </div>
                       </Tab> */}
                     </Tabs>
-                  </CardLayout>
+                  {/* </CardLayout> */}
                 </Col>
               </Row>
             </PageLayout>

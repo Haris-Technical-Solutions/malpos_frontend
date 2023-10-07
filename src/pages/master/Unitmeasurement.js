@@ -134,10 +134,9 @@ export default function Unitmeasurement() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>Unit of Measurements</CardLayout>
+            Unit of Measurements
           </Col>
           <Col md={12}>
-            <CardLayout>
               <Row>
                 <Col md={12}>
                   <Row>
@@ -268,7 +267,6 @@ export default function Unitmeasurement() {
                   </Row>
                 </Col>
               </Row>
-            </CardLayout>
           </Col>
         </Row>
       </PageLayout>

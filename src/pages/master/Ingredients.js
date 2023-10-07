@@ -123,13 +123,11 @@ export default function Ingredients() {
     <PageLayout>
       <Row>
         <Col xl={12}>
-          <CardLayout>
+        
             <Breadcrumb title="Ingredient"></Breadcrumb>
-          </CardLayout>
         </Col>
 
         <Col xl={12}>
-          <CardLayout>
             <Row className="justify-content-between">
               <Col xs={12} sm={12} md={2} lg={2} xl={2}>
                 <div style={{ position: "relative" }}>
@@ -329,7 +327,6 @@ export default function Ingredients() {
                 />
               </Col>
             </Row>
-          </CardLayout>
         </Col>
       </Row>
     </PageLayout>

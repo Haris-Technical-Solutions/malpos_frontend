@@ -13,7 +13,6 @@ import {
   Tr,
   Td,
 } from "../../components/elements/Table";
-import { CardLayout } from "../../components/cards";
 import PageLayout from "../../layouts/PageLayout";
 import CustomPagination from "../../components/CustomPagination";
 import CustomSearch from "../../components/CustomSearch";
@@ -79,12 +78,9 @@ export default function Branches() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
               <h3>Branches</h3>
-            </CardLayout>
           </Col>
           <Col md={12}>
-            <CardLayout>
               <Row>
                 <Col xs={12} sm={12} md={3} lg={3}>
                   <CustomSearch
@@ -184,7 +180,6 @@ export default function Branches() {
                   </Box>
                 </Col>
               </Row>
-            </CardLayout>
           </Col>
         </Row>
       </PageLayout>

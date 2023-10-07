@@ -53,15 +53,12 @@ export default function Reviews() {
     <PageLayout>
       <Row>
         <Col xl={12}>
-          <CardLayout>
             <div className="d-flex justify-content-between align-items-center">
               <h5>Review</h5>
             </div>
-          </CardLayout>
-        </Col>
+         </Col>
 
         <Col md={12}>
-          <CardLayout>
             <Box className="">
               <Box className="receipt-tab">
                 {/* <Col md={12}> */}
@@ -370,8 +367,7 @@ export default function Reviews() {
                 {/* </Col> */}
               </Box>
             </Box>
-          </CardLayout>
-        </Col>
+         </Col>
 
         <Box className="payment-sale-table-wrap">
           <Table className="sale-m-table" responsive>

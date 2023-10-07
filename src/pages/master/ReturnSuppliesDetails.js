@@ -11,7 +11,6 @@ export default function ReturnSuppliesDetails() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
               <div className="d-flex justify-content-between align-items-center">
                 <h5>Returned supplies - #2</h5>
                 <Box className="construction-edit-icons">
@@ -26,8 +25,7 @@ export default function ReturnSuppliesDetails() {
                   </Box>
                 </Box>
               </div>
-            </CardLayout>
-          </Col>
+            </Col>
           <Col md={12}>
             <CardLayout>
               <Table className={"return-supplies-details-table"}>

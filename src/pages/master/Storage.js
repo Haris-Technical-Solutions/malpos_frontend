@@ -135,7 +135,7 @@ const[searchTerm,setSearchTerm]= useState("");
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
+          
               <Row>
           <Col md={12}>
             Storage
@@ -272,7 +272,6 @@ const[searchTerm,setSearchTerm]= useState("");
                   </Row>
                 </Col>
               </Row>
-            </CardLayout>
           </Col>
         </Row>
       </PageLayout>

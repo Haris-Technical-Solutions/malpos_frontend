@@ -54,7 +54,7 @@ export default function SuppliersCreate() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
+  
               <Row>
           <Col md={12}>
             Create Supplier
@@ -148,9 +148,7 @@ export default function SuppliersCreate() {
                     />
                   </Box>
                   </Col>
-
               </Row>
-            </CardLayout>
           </Col>
         </Row>
       </PageLayout>

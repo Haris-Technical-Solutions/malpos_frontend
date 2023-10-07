@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { CardLayout } from "../../components/cards";
 import PageLayout from "../../layouts/PageLayout";
 import { Col, Row, Form } from "react-bootstrap";
 import {
@@ -78,16 +77,13 @@ export default function Menus() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
               <Row>
                 <Col md={12}>
                   <h3>Manage Menus</h3>
                 </Col>
               </Row>
-            </CardLayout>
           </Col>
           <Col md={12}>
-            <CardLayout>
               <Row>
                 <Col md={9} lg={10}>
                   <Row>
@@ -208,7 +204,6 @@ export default function Menus() {
                   </Col>
                 </Row>
               </Col>
-            </CardLayout>
           </Col>
         </Row>
       </PageLayout>

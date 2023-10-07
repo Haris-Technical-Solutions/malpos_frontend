@@ -2,7 +2,7 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { Box, Anchor, Button, Image, Input, Label, Icon, Text } from "../../components/elements"; 
 import { LabelField, LabelTextarea } from "../../components/fields";
-import { CardLayout, CardHeader } from "../../components/cards";
+import {  CardHeader } from "../../components/cards";
 import Breadcrumb from "../../components/Breadcrumb";
 import PageLayout from "../../layouts/PageLayout";
 import data from "../../data/master/productUpload.json";
@@ -14,7 +14,7 @@ export default function ProductUpload() {
         <PageLayout>
             <Row>
                 <Col xl={12}>
-                    <CardLayout>
+                    
                         <Breadcrumb title={ data?.pageTitle }>
                             {data?.breadcrumb.map((item, index) => (
                                 <li key={ index } className="mc-breadcrumb-item">
@@ -22,10 +22,8 @@ export default function ProductUpload() {
                                 </li>
                             ))}
                         </Breadcrumb>
-                    </CardLayout>
-                </Col>
+                    </Col>
                 <Col xl={7}>
-                    <CardLayout>
                         <CardHeader title="basic information" dotsMenu={ data?.dotsMenu }  />
                         <Row>
                             <Col xl={12}><LabelField type="text" label="title" fieldSize="w-100 h-md" /></Col>
@@ -38,10 +36,9 @@ export default function ProductUpload() {
                             <Col xl={6}><LabelField type="text" label="tax rate" fieldSize="w-100 h-md" /></Col>
                             <Col xl={12}><LabelTextarea label="tags" fieldSize="w-100 h-text-md" /></Col>
                         </Row>
-                    </CardLayout>
-                </Col>
+                  </Col>
                 <Col xl={5}>
-                    <CardLayout className="mb-4">
+                    <div className="mb-4">
                         <CardHeader title="organization" dotsMenu={ data?.dotsMenu }  />
                         <Row>
                             <Col xl={12}>
@@ -63,8 +60,7 @@ export default function ProductUpload() {
                                 </Box>
                             </Col>
                         </Row>
-                    </CardLayout>
-                    <CardLayout>
+                    </div>
                         <CardHeader title="specification" dotsMenu={ data?.dotsMenu }  />
                         <Row>
                             <Col xl={6}><LabelField label="size" option={['sm', 'md', 'lg', 'xl', 'xxl']} fieldSize="w-100 h-multiple" multiple/></Col>
@@ -72,10 +68,8 @@ export default function ProductUpload() {
                             <Col xl={6}><LabelField type="text" label="stock" fieldSize="w-100 h-md" /></Col>
                             <Col xl={6}><LabelField type="text" label="weight" fieldSize="w-100 h-md" /></Col>
                         </Row>
-                    </CardLayout>
                 </Col>
                 <Col xl={12}>
-                    <CardLayout>
                         <CardHeader title="media &amp; published" dotsMenu={ data?.dotsMenu }  />
                         <Box className="mc-product-upload-media">
                             <Box className="mc-product-upload-image"><Image src="images/product/single/01.webp" alt="product" /></Box>
@@ -93,7 +87,6 @@ export default function ProductUpload() {
                             icon="cloud_upload" 
                             href="#"
                         />
-                    </CardLayout>
                 </Col>
             </Row>
         </PageLayout>

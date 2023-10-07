@@ -169,7 +169,7 @@ export default function PackagesCreate() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
+            
               <Col md={12}>
                 <Row>
                   {
@@ -268,7 +268,6 @@ export default function PackagesCreate() {
 
                 </Row>
               </Col>
-            </CardLayout>
           </Col>
         </Row>
       </PageLayout>

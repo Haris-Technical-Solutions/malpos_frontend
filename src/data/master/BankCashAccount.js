@@ -26,7 +26,6 @@ export default function Accounts() {
         <Row>
          
           <Col md={12}>
-            <CardLayout>
               <Col md={12}>
                 <Row>
             <Col md={12}>
@@ -284,7 +283,7 @@ export default function Accounts() {
                   </Table>
                 </Box>
               </Col>
-            </CardLayout>
+            
           </Col>
         </Row>
       </PageLayout>

@@ -12,7 +12,6 @@ import {
 } from "../../components/elements/Table";
 
 import PageLayout from "../../layouts/PageLayout";
-import { CardLayout } from "../../components/cards";
 import { Box } from "../../components/elements";
 import {
   faEdit,
@@ -83,16 +82,13 @@ const Allergies = () => {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
               <Box className="head-sec-rearrange">
                 <Box className="head-sec-rearrange-left">
                   <h3>Allergies</h3>
                 </Box>
               </Box>
-            </CardLayout>
-          </Col>
+           </Col>
           <Col md={12}>
-            <CardLayout>
               <Row>
                 <Col md={10}>
                   <Row>
@@ -211,7 +207,6 @@ const Allergies = () => {
                   </Col>
                 </Box>
               </Col>
-            </CardLayout>
           </Col>
         </Row>
       </PageLayout>

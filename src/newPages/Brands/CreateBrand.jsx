@@ -3,7 +3,6 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Col, Row } from "react-bootstrap";
-import { CardLayout } from "../../components/cards";
 import PageLayout from "../../layouts/PageLayout";
 import { LabelField } from "../../components/fields";
 import SelectField from "../../components/fields/SelectField";
@@ -118,12 +117,10 @@ export default function CreateBrand() {
         <form onSubmit={handleSubmit}>
           <Row>
             <Col md={12}>
-              <CardLayout>
                 <h3>Create Brand</h3>
-              </CardLayout>
+
             </Col>
             <Col md={12}>
-              <CardLayout>
                 <Row>
                   <Col md={6}>
                     <Row>
@@ -184,7 +181,6 @@ export default function CreateBrand() {
                     </Row>
                   </Col>
                 </Row>
-              </CardLayout>
             </Col>
           </Row>
         </form>

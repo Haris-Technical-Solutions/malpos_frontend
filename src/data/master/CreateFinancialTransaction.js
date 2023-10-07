@@ -25,7 +25,7 @@ export default function CreateTransaction() {
         <Row>
           <Col md={12}>
             <Row>
-              <CardLayout>
+      
           <Col md={12}>
             <Row>
              
@@ -89,7 +89,7 @@ export default function CreateTransaction() {
                     </Col>
                   </Row>
                 </Col>
-              </CardLayout>
+          
             </Row>
           </Col>
         </Row>

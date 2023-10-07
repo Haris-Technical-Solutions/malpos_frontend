@@ -37,20 +37,17 @@ export default function ReturnSupplies() {
         <Row>
           <Col md={12}>
             <Row>
-              <CardLayout>
                 <div className="d-flex justify-content-between align-items-center">
                   <h5>Returned Supplies 4</h5>
                   <div>
                     <FontAwesomeIcon icon={faCalendarDays} />
                   </div>{" "}
                 </div>
-              </CardLayout>
-            </Row>
+             </Row>
           </Col>
           <Col md={12}>
             <Row>
               <Col md={12}>
-                <CardLayout>
                   <Row>
                     <Col md={3}>
                       <div style={{ position: "relative" }}>
@@ -248,7 +245,6 @@ export default function ReturnSupplies() {
                 />
                     </Col>
                   </Row>
-                </CardLayout>
               </Col>
             </Row>
           </Col>

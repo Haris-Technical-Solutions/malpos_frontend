@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Col, Row, Form, Button } from "react-bootstrap";
-import { CardLayout } from "../../components/cards";
+// import { CardLayout } from "../../components/cards";
 import { Box } from "../../components/elements";
 import { LabelField } from "../../components/fields";
 import PageLayout from "../../layouts/PageLayout";
@@ -127,7 +127,6 @@ const brandsOptions =
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
               <Row>
         { <Col md={12}>
             {action === "create" ? "Create Storage" : "Update Storage"}
@@ -225,7 +224,7 @@ const brandsOptions =
                   </Box>
                 </Col>
               </Row>
-            </CardLayout>
+            
           </Col>
         </Row>
       </PageLayout>
