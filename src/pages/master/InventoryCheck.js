@@ -35,12 +35,12 @@ export default function InventoryCheck() {
             <PageLayout>
                 <Row>
                     <Col md={12}>
-                        <CardLayout>
+                        
                             Inventory check 3
-                        </CardLayout>
+            
                     </Col>
                     <Col md={12}>
-                        <CardLayout>
+                        
                             <Row>
                                 <Col md={12}>
                                    
@@ -296,8 +296,6 @@ export default function InventoryCheck() {
                                     </Row>
                                 </Col>
                             </Row>
-                        </CardLayout>
-
                     </Col>
                 </Row>
             </PageLayout>

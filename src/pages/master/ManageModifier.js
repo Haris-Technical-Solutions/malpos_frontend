@@ -128,16 +128,15 @@ export default function ManageModifier() {
     <PageLayout>     
       <Row>
         <Col md={12}>
-          <CardLayout>
+         
             <Row>
               <Col md={12}>
                 <h3>Manage modifiers</h3>
               </Col>
             </Row>
-          </CardLayout>
         </Col>
         <Col md={12}>
-          <CardLayout>
+       
             <Row>
               <Col md={9} lg={10}>
                 <Row>
@@ -290,7 +289,6 @@ export default function ManageModifier() {
                 </Col>
               </Row>
             </Col>
-          </CardLayout>
         </Col>
       </Row>
 

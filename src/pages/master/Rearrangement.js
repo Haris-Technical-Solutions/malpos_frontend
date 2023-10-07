@@ -51,7 +51,6 @@ export default function Rearrangement() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
               <Box className="head-sec-rearrange">
                 <Box className="head-sec-rearrange-left">
                   <h3 style={{ width: "300px" }}>Menu Re-arrangement</h3>
@@ -69,10 +68,8 @@ export default function Rearrangement() {
                   </Box>
                 </Box>
               </Box>
-            </CardLayout>
-          </Col>
+            </Col>
           <Col md={12}>
-            <CardLayout>
               <Row>
                 <DragDropContext onDragEnd={handleDragEnd}>
                   <Col md={4} lg={3}>
@@ -180,8 +177,7 @@ export default function Rearrangement() {
                   </Col>
                 </DragDropContext>
               </Row>
-            </CardLayout>
-          </Col>
+            </Col>
         </Row>
       </PageLayout>
     </div>

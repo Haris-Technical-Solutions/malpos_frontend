@@ -15,7 +15,6 @@ import { CustomerReview, RatingAnalytics } from "../../components/review";
 import { Breadcrumb, DivideTitle } from "../../components";
 import PageLayout from "../../layouts/PageLayout";
 import LabelTextarea from "../../components/fields/LabelTextarea";
-import CardLayout from "../../components/cards/CardLayout";
 import data from "../../data/master/productList.json";
 import MyTabs from "../../components/elements/MyTabs";
 import { Link, useLocation } from "react-router-dom";
@@ -35,7 +34,7 @@ export default function ProductView() {
                     ))}
                 </Breadcrumb>
             </CardLayout> */}
-      <CardLayout className="mb-4">
+      <div className="mb-4">
         {data.product.tbody
           .filter((item) => {
             // return item.id == id;
@@ -70,14 +69,14 @@ export default function ProductView() {
               </Box>
             </Box>
           ))}
-      </CardLayout>
-      <CardLayout className="my-div">
+      </div>
+      <div className="my-div">
         <Row>
           <Col md={12}>
             <MyTabs />
           </Col>
         </Row>
-      </CardLayout>
+      </div>
       {/* <CardLayout className="p-lg-5">
                 <Row>
                     <Col xl={5}>

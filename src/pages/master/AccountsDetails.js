@@ -14,7 +14,7 @@ export default function AccountsDetails() {
             {/* </Row> */}
           
           <Col md={12}>
-            <CardLayout>
+      
               <Row>
           <Col md={12}>
             {/* <Row> */}
@@ -24,6 +24,7 @@ export default function AccountsDetails() {
                   <Box className="edit-icons">
                     <Link to="/accounts" className="addproduct-btn ">
                       <img
+                      color="black"
                         className="fas fa-user"
                         src="/images/icons/close1.png"
                         alt="Close"
@@ -50,7 +51,7 @@ export default function AccountsDetails() {
                   </Table>
                 </Col>
               </Row>
-            </CardLayout>
+            
           </Col>
         </Row>
       </PageLayout>

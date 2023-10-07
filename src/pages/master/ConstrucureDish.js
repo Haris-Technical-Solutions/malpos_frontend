@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { CardLayout } from "../../components/cards";
 import PageLayout from "../../layouts/PageLayout";
 import { Col, Row } from "react-bootstrap";
 import { Box } from "../../components/elements";
@@ -20,7 +19,6 @@ export default function ConstructureDish() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
               <Row>
                 <Col md={12}>
                   <Box className="construction-edit">
@@ -49,10 +47,8 @@ export default function ConstructureDish() {
                   </Box>
                 </Col>
               </Row>
-            </CardLayout>
           </Col>
           <Col md={12}>
-            <CardLayout>
               <Tabs id="my-tabs" activeKey={key} onSelect={(k) => setKey(k)}>
                 <Tab eventKey="tab1" title="Details">
                   <div className="tabContent additiona-infoTab">
@@ -76,7 +72,6 @@ export default function ConstructureDish() {
                   </div>
                 </Tab>
               </Tabs>
-            </CardLayout>
           </Col>
         </Row>
       </PageLayout>

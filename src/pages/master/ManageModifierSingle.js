@@ -24,7 +24,7 @@ export default function ManageModifierSingle() {
           <PageLayout key={i}>
             <Row>
               <Col md={12}>
-                <CardLayout>
+                
                   #{item.item} الحجم-145-428
                   <Box className="construction-edit-icons">
                     <Box className="edit-icons">
@@ -37,10 +37,10 @@ export default function ManageModifierSingle() {
                       </Link>
                     </Box>
                   </Box>
-                </CardLayout>
+              
               </Col>
               <Col md={12}>
-                <CardLayout>
+                
                   <Tabs
                     id="my-tabs"
                     activeKey={key}
@@ -58,7 +58,7 @@ export default function ManageModifierSingle() {
                       </div>
                     </Tab>
                   </Tabs>
-                </CardLayout>
+                
               </Col>
             </Row>
           </PageLayout>

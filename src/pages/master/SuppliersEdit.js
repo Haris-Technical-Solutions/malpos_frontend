@@ -124,7 +124,7 @@ const brandsOptions =
       <PageLayout>
         <Row>
           <Col md={12}>
-        <CardLayout>
+
           <Row>
         <Col md={12} >
           {action === "updateSupplier" ? "Create Supplier" : "Update Supplier"}
@@ -228,7 +228,6 @@ const brandsOptions =
   
         
         </Row>
-  </CardLayout>
   </Col>
   </Row>
       </PageLayout>

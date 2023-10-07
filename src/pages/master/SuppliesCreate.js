@@ -49,12 +49,12 @@ export default function SuppliesCreate() {
             <PageLayout>
                 <Row>
                     <Col md={12}>
-                        <CardLayout>
+        
                             Supplies Create
-                        </CardLayout>
+                
                     </Col>
                     <Col md={12}>
-                        <CardLayout>
+    
                             <Row>
                                 <Col md={8}>
                                     <Row>
@@ -459,7 +459,7 @@ export default function SuppliesCreate() {
                                 </Col>
 
                             </Row>
-                        </CardLayout>
+                        
                     </Col>
                 </Row>
             </PageLayout>

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Col, Row } from "react-bootstrap";
-import { CardLayout } from "../../../components/cards";
+// import { CardLayout } from "../../../components/cards";
 import PageLayout from "../../../layouts/PageLayout";
 import { LabelField } from "../../../components/fields";
 import api from "../../../api/baseUrl";
@@ -114,13 +114,13 @@ const CreateClientRoles = () => {
     <PageLayout>
       <Row>
         <Col md={12}>
-          <CardLayout>
+          {/* <CardLayout> */}
             <h3>Create Role</h3>
-          </CardLayout>
+          {/* </CardLayout> */}
         </Col>
         <Col md={12}>
           <form onSubmit={handleSubmit}>
-            <CardLayout>
+            {/* <CardLayout> */}
               <Row>
                 <Col md={4}>
                   <LabelField
@@ -188,7 +188,7 @@ const CreateClientRoles = () => {
                   </Link>
                 </Col>
               </Row>
-            </CardLayout>
+            {/* </CardLayout> */}
           </form>
         </Col>
       </Row>

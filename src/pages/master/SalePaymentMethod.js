@@ -24,11 +24,10 @@ export default function SalePaymentMethod() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>Payment method</CardLayout>
+            Payment method
           </Col>
 
           <Col md={12}>
-            <CardLayout>
               <Col md={12}>
                 <Row className="justify-content-between">
                   <Col md={6}>
@@ -130,7 +129,6 @@ export default function SalePaymentMethod() {
                   </tbody>
                 </Table>
               </Box>
-            </CardLayout>
           </Col>
         </Row>
       </PageLayout>

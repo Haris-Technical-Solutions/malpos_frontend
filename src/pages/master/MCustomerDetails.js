@@ -14,12 +14,12 @@ export default function MCustomerDetails() {
             <PageLayout>
                 <Row>
                     <Col md={12}>
-                        <CardLayout>
+                    
                             Customer #2 : Mohammed
-                        </CardLayout>
+                        
                     </Col>
                     <Col md={12}>
-                        <CardLayout>
+                        
                             <Tabs
                                 id="my-tabs"
                                 activeKey={key}
@@ -38,7 +38,7 @@ export default function MCustomerDetails() {
                                 </Tab>
 
                             </Tabs>
-                        </CardLayout>
+                        
                     </Col>
                 </Row>
             </PageLayout>

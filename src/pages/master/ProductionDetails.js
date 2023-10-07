@@ -1,6 +1,5 @@
 import React,{useState} from 'react'
 import { Col, Row } from 'react-bootstrap'
-import { CardLayout } from '../../components/cards'
 import PageLayout from '../../layouts/PageLayout'
 import { Tabs, Tab } from "react-bootstrap";
 import IconSearchBar from '../../components/elements/IconSearchBar';
@@ -15,13 +14,13 @@ export default function ProductionDetails() {
         <PageLayout>
             <Row>
                 <Col md={12}>
-                    <CardLayout>
+                  
                         Operation time #33
-                    </CardLayout>
+                  
                 </Col>
               
                 <Col md={12}>
-                    <CardLayout>
+                  
                         <Row>
                         <Col md={12}>
                     <Row>
@@ -51,7 +50,7 @@ export default function ProductionDetails() {
                             </Col>
                         </Row>
                   
-                    </CardLayout>
+                  
                 </Col>
             </Row>
         </PageLayout>

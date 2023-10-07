@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Col, Row, Form, Table } from "react-bootstrap";
-import { CardLayout } from "../../components/cards";
 import PageLayout from "../../layouts/PageLayout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -39,17 +38,14 @@ export default function ProductReturn() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
               <div className="d-flex justify-content-between align-items-center">
                 <h5>Product Return 1</h5>
                 <div>
                   <FontAwesomeIcon icon={faCalendarDays} />
                 </div>
               </div>
-            </CardLayout>
           </Col>
           <Col md={12}>
-            <CardLayout>
               <Box className="order-return-tab-wrapper">
                 <Box className="receipt-tab">
                   <Col md={4} sm={12} lg={2}>
@@ -538,7 +534,6 @@ export default function ProductReturn() {
                   </tbody>
                 </Table>
               </Box>
-            </CardLayout>
           </Col>
         </Row>
       </PageLayout>

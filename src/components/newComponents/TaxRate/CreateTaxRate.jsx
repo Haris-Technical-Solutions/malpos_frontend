@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { Col, Row } from "react-bootstrap";
 
-import { CardLayout } from "../../../components/cards";
+// import { CardLayout } from "../../../components/cards";
 import PageLayout from "../../../layouts/PageLayout";
 import { LabelField } from "../../../components/fields";
 import api from "../../../api/baseUrl";
@@ -207,12 +207,12 @@ export default function CreateTaxRate() {
         <form onSubmit={handleSubmit}>
           <Row>
             <Col md={12}>
-              <CardLayout>
+              {/* <CardLayout> */}
                 <h3>Create Tax Rate</h3>
-              </CardLayout>
+              {/* </CardLayout> */}
             </Col>
             <Col md={12}>
-              <CardLayout>
+              {/* <CardLayout> */}
                 <Row>
                   <Row>
                     <Col md={2}>
@@ -338,7 +338,7 @@ export default function CreateTaxRate() {
                     </Link>
                   </Col>
                 </Row>
-              </CardLayout>
+              {/* </CardLayout> */}
             </Col>
           </Row>
         </form>

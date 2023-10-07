@@ -6,7 +6,7 @@ import { Table, Thead, Tbody, Th, Tr, Td } from "../../elements/Table";
 import { Breadcrumb } from "../../../components/";
 import CustomPagination from "../../CustomPagination";
 import CustomSearch from "../../CustomSearch";
-import { CardLayout } from "../../cards";
+// import { CardLayout } from "../../cards";
 import PageLayout from "../../../layouts/PageLayout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrash } from "@fortawesome/free-solid-svg-icons";
@@ -85,7 +85,7 @@ export default function ProductCategory() {
   }, []);
   return (
     <PageLayout>
-      <CardLayout>
+      {/* <CardLayout> */}
         <Breadcrumb title={data?.pageTitle}>
           {data?.breadcrumb.map((item, index) => (
             <li key={index} className="mc-breadcrumb-item">
@@ -99,9 +99,9 @@ export default function ProductCategory() {
             </li>
           ))}
         </Breadcrumb>
-      </CardLayout>
+      {/* </CardLayout> */}
 
-      <CardLayout>
+      {/* <CardLayout> */}
         <Row>
           <Col xs={12} sm={12} md={3} lg={3}>
             <CustomSearch
@@ -202,7 +202,7 @@ export default function ProductCategory() {
             />
           </Box>
         </Row>
-      </CardLayout>
+      {/* </CardLayout> */}
     </PageLayout>
   );
 }

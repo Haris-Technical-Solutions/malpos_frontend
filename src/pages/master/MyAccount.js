@@ -21,7 +21,7 @@ export default function MyAccount() {
                     </Breadcrumb>
                 </Col>
                 <Col xl={12}>
-                    <CardLayout>
+                
                         <Tabs defaultActiveKey="profile" id="mc" className="mc-tabs">
                             <Tab eventKey="profile" title="edit Profile" className="mc-tabpane profile">
                                 <TabCard title="public information">
@@ -101,7 +101,6 @@ export default function MyAccount() {
                                 <Button className="mc-btn primary" icon="verified" text="update changes" />
                             </Tab>
                         </Tabs>
-                    </CardLayout>
                 </Col>
             </Row>
         </PageLayout>

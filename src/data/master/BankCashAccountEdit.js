@@ -1,6 +1,6 @@
 import React, {useRef,useState,useEffect} from 'react'
 import { Col,Row,Form } from 'react-bootstrap'
-import { CardLayout } from '../../components/cards'
+// import { CardLayout } from '../../components/cards'
 import PageLayout from '../../layouts/PageLayout'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {  faSave } from "@fortawesome/free-solid-svg-icons";
@@ -28,20 +28,26 @@ export default function AccountsEdit() {
   return (
     <div>
         <PageLayout>
-            <Row>
+            
                 <Col md={12}>
-                    <CardLayout>
+                    
                         <Row>
-                <Col md={12}>                 
+                <Col md={12} style={{display:"inline-flex"}}>                 
                 Bank Cash Account / Edit
+                      <Link to={"/accounts"} style={{marginLeft:"62%"}} >
+                    <button className="acc-create-btn" style={{padding:"10px 15px"}} >
+                      <FontAwesomeIcon icon={faSave} /> {" "}Save
+                    </button>
+                  </Link>
+                  <Link to={"/accounts"} className='btnback'> <button className="btnlk"  > Back</button></Link>
                 </Col>
                             <Col md={11}>
                                 <Row>
                                 <Col md={6}>
                       <Form.Label>Code</Form.Label>
                       <Form.Control
- style={{width:"60%", height:"45%"}}
-className="m-0"
+//  style={{width:"60%", height:"45%"}}
+className="wfield"
                         label="Code"
                         type="number"
                         required
@@ -50,8 +56,8 @@ className="m-0"
                     <Col md={6}>
                       <Form.Label>Name</Form.Label>
                       <Form.Control
-                      style={{width:"60%", height:"45%", marginLeft:"25%"}}
-                        className="m-0"
+                      // style={{width:"60%", height:"45%", marginLeft:"25%"}}
+                        className="wfield"
                         label="Name"
                         type="text"
                         required
@@ -68,7 +74,8 @@ className="m-0"
                     <Col md={6}>
                       <Form.Label>Bank</Form.Label>
                       <Form.Control
-style={{width:"60%",height:"55%"}}                        className="m-0"
+// style={{width:"60%",height:"55%"}}              
+          className="wfield"
                         label="Enter bank name"
                         type="text"
                         required
@@ -77,8 +84,8 @@ style={{width:"60%",height:"55%"}}                        className="m-0"
                     <Col md={6}>
                       <Form.Label>Account NO</Form.Label>
                       <Form.Control
-                        className="m-0"
-                        style={{width:"60%", height:"55%", marginLeft:"20%"}}
+                        className="wfield"
+                        // style={{width:"60%", height:"55%", marginLeft:"20%"}}
                         label="Account_No"
                         type="number"
                         required
@@ -87,8 +94,8 @@ style={{width:"60%",height:"55%"}}                        className="m-0"
                     <Col md={6}>
                       <Form.Label>BBAN</Form.Label>
                       <Form.Control
-                        className="m-0"
-                        style={{width:"60%", height:"55%"}}   label="Enter BBAN No"
+                        className="wfield"
+                        // style={{width:"60%", height:"55%"}}   label="Enter BBAN No"
                         type="text"
                         required
                       />
@@ -96,9 +103,9 @@ style={{width:"60%",height:"55%"}}                        className="m-0"
                     <Col md={6}>
                       <Form.Label>IBAN</Form.Label>
                       <Form.Control
-                        className="m-0"
+                        className="wfield"
                         label="IBAN"
-                        style={{width:"60%", height:"55%", marginLeft:"20%"}}
+                        // style={{width:"60%", height:"55%", marginLeft:"20%"}}
                         type="text"
                         required
                       />
@@ -106,15 +113,17 @@ style={{width:"60%",height:"55%"}}                        className="m-0"
                     <Col md={6}>
                       <Form.Label>Currency</Form.Label>
                       <Form.Control
-                        className="m-0"
-                        label="Currency"style={{width:"60%", height:"50%"}}
+                        className="wfield"
+                        label="Currency"
+                        // style={{width:"60%", height:"50%"}}
                         type="number"
                         required
                       />
                     </Col>
-                    <Col md={6}  mdOffset={2} style={{ height:"55%"}} >
+                    <Col md={6}  mdOffset={2}  >
                       <LabelFieldS
-                      style={{width:"60%"}}
+                      className="wfield"
+                      // style={{width:"60%"}}
                         label="Account Type"
                         option={[
                           { label: "Cash", value: null },
@@ -128,26 +137,22 @@ style={{width:"60%",height:"55%"}}                        className="m-0"
                     <Col md={6}>
                       <Form.Label>Current_Balance</Form.Label>
                       <Form.Control
-                        className="m-0"
+                        className="wfield"
                         label="Balance"
-                        type="number" style={{width:"60%", height:"55%"}}
+                        type="number" 
+                        // style={{width:"60%", height:"55%"}}
                         required
                       />
                     </Col>
                                 </Row>
                  
                         </Col>                
-                        <Link to={"/accounts"}>
-                      <button className="acc-create-btn">
-                        <FontAwesomeIcon icon={faSave} /> {" "}Save
-                      </button>
-                    </Link>
                     
                         </Row>
-                    </CardLayout>
+              
                 </Col>
 
-            </Row>
+            
         </PageLayout>
     </div>
   )

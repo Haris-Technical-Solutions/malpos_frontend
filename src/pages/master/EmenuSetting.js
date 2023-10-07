@@ -2,7 +2,6 @@ import { faXmark } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useState } from 'react'
 import { Col, Row, Form } from 'react-bootstrap'
-import { CardLayout } from '../../components/cards'
 import { Box } from '../../components/elements'
 import { LabelField } from '../../components/fields'
 import { Text } from '../../components/elements'
@@ -24,12 +23,9 @@ export default function EmenuSetting() {
             <PageLayout>
                 <Row>
                     <Col md={12}>
-                        <CardLayout>
                             Settings
-                        </CardLayout>
                     </Col>
                     <Col md={12}>
-                        <CardLayout>
                             <Row>
                                 <Col md={10} lg={8}>
                                     <Row>
@@ -175,7 +171,6 @@ export default function EmenuSetting() {
                                     </Row>
                                 </Col>
                             </Row>
-                        </CardLayout>
                     </Col>
                 </Row>
             </PageLayout>

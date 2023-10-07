@@ -16,13 +16,14 @@ export default function TransactionCashflow() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
+      
               <div className="d-flex justify-content-between align-items-center">
                 <h5>Transactions</h5>
                 <Box className="construction-edit-icons">
                   <Box className="edit-icons">
                     <Link to="/cashflow" className="addproduct-btn ">
                       <img
+                      color="black"
                         className="fas fa-user"
                         src="/images/icons/close1.png"
                         alt="Close"
@@ -31,10 +32,8 @@ export default function TransactionCashflow() {
                   </Box>
                 </Box>
               </div>
-            </CardLayout>
           </Col>
           <Col md={12}>
-            <CardLayout>
               <Table className="cashflow-transaction-table">
                 <thead>
                   <tr>
@@ -69,7 +68,6 @@ export default function TransactionCashflow() {
                   <tr></tr>
                 </tbody>
               </Table>
-            </CardLayout>
           </Col>
         </Row>
       </PageLayout>

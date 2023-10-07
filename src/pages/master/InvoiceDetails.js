@@ -2,7 +2,6 @@ import React from "react";
 import { Row, Col } from "react-bootstrap";
 import { Box, Text, List, Item, Image, Anchor, Heading } from "../../components/elements";
 import { Table, Thead, Tbody, Th, Tr, Td } from "../../components/elements/Table";
-import CardLayout from "../../components/cards/CardLayout";
 import Breadcrumb from "../../components/Breadcrumb";
 import PageLayout from "../../layouts/PageLayout";
 import data from "../../data/master/invoiceDetails.json";
@@ -12,7 +11,6 @@ export default function InvoiceDetails() {
         <PageLayout>
             <Row>
                 <Col xl={12}>
-                    <CardLayout>
                         <Breadcrumb title={ data?.pageTitle }>
                             {data?.breadcrumb.map((item, index) => (
                                 <Item key={ index } className="mc-breadcrumb-item">
@@ -20,10 +18,9 @@ export default function InvoiceDetails() {
                                 </Item>
                             ))}
                         </Breadcrumb>
-                    </CardLayout>
                 </Col>
                 <Col xl={12}>
-                    <CardLayout className="p-md-5">
+                    <div className="p-md-5">
                         <Box className="mc-invoice-head">
                             <Image src={ data?.logo.src } alt={ data?.logo.alt } />
                             <Heading as="h2">{ data?.title }</Heading>
@@ -90,7 +87,7 @@ export default function InvoiceDetails() {
                                 /> 
                             ))}
                         </Box>
-                    </CardLayout>
+                    </div>
                 </Col>
             </Row>
         </PageLayout>

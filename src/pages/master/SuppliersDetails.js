@@ -10,13 +10,12 @@ export default function SuppliersDetails() {
         <PageLayout>
             <Row>
                 <Col md={12}>
-                    <CardLayout>
+                    
                     Supplier : شركة التوريدات العالمية ID: 1, Balance: 346.6 SAR, Balance ID: 1004
 
-                    </CardLayout>
                 </Col>
                 <Col md={12}>
-                    <CardLayout>
+                    
                     <Box className={'cus-ptb'}>
             <Box className={'market-customer-transacion-table-wrapper'}>
                 <Table>
@@ -57,7 +56,6 @@ export default function SuppliersDetails() {
                 </Table>
             </Box>
         </Box>
-                    </CardLayout>
                 </Col>
 
             </Row>

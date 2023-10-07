@@ -23,7 +23,6 @@ export default function ModiferProduct() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
               <Row>
                 <Col md={12}>
                   <Box className="construction-edit">
@@ -56,10 +55,10 @@ export default function ModiferProduct() {
                   </Box>
                 </Col>
               </Row>
-            </CardLayout>
+          
           </Col>
           <Col md={12}>
-            <CardLayout>
+          
               <Tabs id="my-tabs" activeKey={key} onSelect={(k) => setKey(k)}>
                 <Tab eventKey="tab1" title="Details">
                   <div className="tabContent additiona-infoTab">
@@ -83,7 +82,7 @@ export default function ModiferProduct() {
                   </div>
                 </Tab>
               </Tabs>
-            </CardLayout>
+            
           </Col>
         </Row>
       </PageLayout>

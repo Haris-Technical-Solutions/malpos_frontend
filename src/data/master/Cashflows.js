@@ -51,9 +51,9 @@ export default function Cashflow() {
   return (
     <div>
       <PageLayout>
-        <Row>
+        
           <Col md={12}>
-            <CardLayout>
+    
             <Col >
              <div   className="d-flex justify-content-between align-items-center" style={{marginBottom:" 1rem"}}>
                 <h5 >Cashflow</h5>
@@ -180,9 +180,8 @@ export default function Cashflow() {
                   </Row>
                 </Col>
               </Row>
-            </CardLayout>
+          
           </Col>
-        </Row>
       </PageLayout>
     </div>
   );

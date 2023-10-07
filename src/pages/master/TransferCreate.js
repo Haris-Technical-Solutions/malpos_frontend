@@ -111,8 +111,8 @@ export default function TransferCreate() {
                     </Col>
                     <Col md={6} className="cus-col-mt">
                       <Row >
-                        <Col md={6}  >
-                          <CalenderField className='wfield' label={"Operation time"} />
+                        <Col md={10}  >
+                          <CalenderField style={{width:"80%"}} label={"Operation time"} />
                         </Col>
                       </Row>
                     </Col>

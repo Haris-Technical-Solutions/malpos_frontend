@@ -9,13 +9,13 @@ export default function StorageDetails() {
         <PageLayout>
             <Row>
                 <Col md={12}>
-                    <CardLayout>
+                 
                     Storage #1 : المستودع الرئيسي
 
-                    </CardLayout>
+                 
                 </Col>
                 <Col md={12}>
-                    <CardLayout>
+                  
                         <Box className='storageDetails-table-wrap'>
                             <Table>
                                 <thead className='thead-dark'>
@@ -32,7 +32,7 @@ export default function StorageDetails() {
                                 </tbody>
                             </Table>
                         </Box>
-                    </CardLayout>
+              
                 </Col>
             </Row>
         </PageLayout>

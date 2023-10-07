@@ -1,6 +1,5 @@
 import React,{useState} from 'react'
 import { Col, Row,ListGroup } from 'react-bootstrap'
-import { CardLayout } from '../../components/cards'
 import PageLayout from '../../layouts/PageLayout'
 
 export default function AddProductInventory() {
@@ -25,12 +24,10 @@ export default function AddProductInventory() {
         <PageLayout>
             <Row>
                 <Col md={12}>
-                    <CardLayout>
+                
                         Product
-                    </CardLayout>
-                </Col>
+                 </Col>
                 <Col md={12}>
-                    <CardLayout>
                     <ListGroup>
       {items.map((item) => (
         <ListGroup.Item key={item.id}>
@@ -46,7 +43,6 @@ export default function AddProductInventory() {
         </ListGroup.Item>
       ))}
     </ListGroup>
-                    </CardLayout>
                 </Col>
             </Row>
         </PageLayout>

@@ -36,7 +36,6 @@ export default function ReturnSuppliesCreate() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
               <div className="d-flex justify-content-between align-items-center">
                 <h5>Returned supplies/Create</h5>
                 <Box className="construction-edit-icons">
@@ -51,10 +50,8 @@ export default function ReturnSuppliesCreate() {
                   </Box>
                 </Box>
               </div>
-            </CardLayout>
-          </Col>
+           </Col>
           <Col md={12}>
-            <CardLayout>
               <Row>
                 <Col md={8}>
                   <Row>
@@ -627,8 +624,7 @@ type={"number"}
                   </Box>
                 </Col>
               </Row>
-            </CardLayout>
-          </Col>
+           </Col>
         </Row>
       </PageLayout>
     </div>

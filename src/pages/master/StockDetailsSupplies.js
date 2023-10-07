@@ -14,12 +14,12 @@ export default function StockDetailsSupplies() {
         <PageLayout>
             <Row>
                 <Col md={12}>
-                    <CardLayout>
+                    
                         Supplies #1122
-                    </CardLayout>
+                  
                 </Col>
                 <Col md={12}>
-                    <CardLayout>
+                 
                         <Row>
                             <Col md={3}>
                                 <IconSearchBar/>
@@ -40,7 +40,7 @@ export default function StockDetailsSupplies() {
           </Tabs>
                             </Col>
                         </Row>
-                    </CardLayout>
+                   
                 </Col>
             </Row>
         </PageLayout>

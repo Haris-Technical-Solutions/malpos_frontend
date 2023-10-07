@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Col, Row, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
 import PageLayout from "../../layouts/PageLayout";
-import { CardLayout } from "../../components/cards";
+// import { CardLayout } from "../../components/cards";
 import { Box } from "../elements";
 import {
   Table,
@@ -102,7 +102,7 @@ export default function IngredientscatTab() {
 <div>
 <Row>
       <Col md={12}>
-        <CardLayout>
+        {/* <CardLayout> */}
           <Row>
             <Col md={10}>
               <Row>
@@ -255,7 +255,7 @@ export default function IngredientscatTab() {
               </Col>
             </Box>
           </Col>
-        </CardLayout>
+        {/* </CardLayout> */}
       </Col>
     </Row>
 <CustomModal

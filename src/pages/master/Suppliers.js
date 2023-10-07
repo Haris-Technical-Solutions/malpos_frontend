@@ -137,10 +137,10 @@ fetchSupplier().then(() => setLoading(false))
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>Suppliers</CardLayout>
+            Suppliers
           </Col>
           <Col md={12}>
-            <CardLayout>
+          
               <Row>
                 <Col md={12}>
                   <Row>
@@ -327,7 +327,7 @@ fetchSupplier().then(() => setLoading(false))
                   </Row>
                 </Col>
               </Row>
-            </CardLayout>
+         
           </Col>
         </Row>
       </PageLayout>

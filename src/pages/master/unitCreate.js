@@ -153,9 +153,7 @@ export default function UnitCreate() {
   return (
     <div>
       <PageLayout>
-        <Row>
           <Col md={12} >
-            <CardLayout>
               <Col md={12}  >
                 <Row >
                   {
@@ -258,9 +256,7 @@ export default function UnitCreate() {
                   </Col>
                 </Row>
               </Col>
-            </CardLayout>
           </Col>
-        </Row>
       </PageLayout>
     </div>
   );

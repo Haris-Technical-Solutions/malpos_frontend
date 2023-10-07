@@ -11,7 +11,6 @@ import Select from "react-select";
 import Toggle from "react-toggle";
 import "react-toggle/style.css"; // Import the styles
 
-import { CardLayout } from "../../components/cards";
 import { Button, Box } from "../../components/elements";
 import { LabelField } from "../../components/fields";
 import MultiSelectFieldCustom from "../../components/fields/MultiSelectFieldCustom";
@@ -292,13 +291,10 @@ const CreatePreparation = () => {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
               <h3>Add New Preparation</h3>
-            </CardLayout>
           </Col>
           <Col md={12}>
             <form onSubmit={formik.handleSubmit} encType="multipart/form-data">
-              <CardLayout>
                 <Row>
                   <Col md={12}>
                     <Row>
@@ -702,7 +698,6 @@ const CreatePreparation = () => {
                     </Row>
                   </Col>
                 </Row>
-              </CardLayout>
             </form>
           </Col>
         </Row>

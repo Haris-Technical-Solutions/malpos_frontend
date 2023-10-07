@@ -11,7 +11,7 @@ export default function MenuItem({ item }) {
                         icon = { item.icon } 
                         text = { item.text } 
                         badge = { item.badge }
-                        arrow = "expand_more"
+                        // arrow = "expand_more"
                         className = "mc-sidebar-menu-btn" 
                     />
                     <List className="mc-sidebar-dropdown-list">

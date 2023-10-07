@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from 'react'
 import { Col,Row, Form } from 'react-bootstrap'
-import { CardLayout } from '../../components/cards'
+// import { CardLayout } from '../../components/cards'
 import PageLayout from '../../layouts/PageLayout'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {  faSave } from "@fortawesome/free-solid-svg-icons";
@@ -27,17 +27,23 @@ export default function AccountCategoryedit  () {
    <PageLayout>
             <Row>
                 <Col md={12}>
-                    <CardLayout>
-                <Col md={12} style={{marginBottom:"2rem"}} >
+              
+                <Col md={12} style={{marginBottom:"2rem", display:"inline-flex"}} >
                    
                         Chart of Account / Edit
-      
+                        <Link to={"/account-categories"} style={{marginLeft:"59%"}} >
+                      <button className="acc-create-btn" style={{padding:"10px 12x"}} >
+                        <FontAwesomeIcon icon={faSave} /> {" "}Save
+                      </button>
+                    </Link>
+                    <Link to={"/account-categories"} className='btnback'> <button className="btnlk" > Back</button></Link>
                 </Col>
                         <Row>
                             <Col md={12}>
                                 <Row>
                                 <Col md={4} >
                       <LabelFieldS
+                      className="wfield"
                         label=" code"
                         type="number"
                         fieldSize="w-100 h-md"
@@ -46,7 +52,7 @@ export default function AccountCategoryedit  () {
                     <Col md={4}>
                       <Form.Label>Name</Form.Label>
                       <Form.Control
-                        className="m-0"
+                        className="wfield"
                         label="Name"
                         type="text"
                         required
@@ -63,6 +69,7 @@ export default function AccountCategoryedit  () {
 
                     <Col md={4}  >
                       <LabelFieldS
+                      className="wfield"
                         label=" Type"
                         option={[
                           { label: "Assets", value: null },
@@ -73,27 +80,30 @@ export default function AccountCategoryedit  () {
                           { label: "Revenue", value: null },
                           
                         ]}
-                        fieldSize="w-100 h-md"
+                        // fieldSize="w-100 h-md"
                       />
                     </Col>
                     <Col md={4}  >
                       <LabelFieldS
                       type="text"
+                      className="wfield"
                         label=" Parent_Account"
-                        fieldSize="w-100 h-md"
+                        // fieldSize="w-100 h-md"
                       />
                     </Col>
                     <Col md={4}  >
                       <LabelFieldS
                         label=" Seqno"
                         type="number"
-                        fieldSize="w-100 h-md"
+                        className="wfield"
+                        // fieldSize="w-100 h-md"
                       />
                     </Col>
                     <Col md={4}  >
                       <LabelFieldS
                         label=" Summary"
-                        fieldSize="w-100 h-md"
+                        className="wfield"
+                        // fieldSize="w-100 h-md"
                         option={[
                           { label: "Yes", value: null },
                           { label: "No", value: null },
@@ -103,14 +113,8 @@ export default function AccountCategoryedit  () {
                     </Col>                        
                       </Row>               
                         </Col>                
-                        <Link to={"/account-categories"}>
-                      <button className="acc-create-btn">
-                        <FontAwesomeIcon icon={faSave} /> {" "}Save
-                      </button>
-                    </Link>
                     
                         </Row>
-                    </CardLayout>
                 </Col>
 
             </Row>

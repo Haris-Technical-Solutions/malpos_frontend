@@ -13,7 +13,7 @@ import {
   Tr,
   Td,
 } from "../../../components/elements/Table";
-import { CardLayout } from "../../../components/cards";
+// import { CardLayout } from "../../../components/cards";
 import PageLayout from "../../../layouts/PageLayout";
 import CustomPagination from "../../../components/CustomPagination";
 import CustomSearch from "../../../components/CustomSearch";
@@ -81,12 +81,12 @@ const TaxRate = () => {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
+            {/* <CardLayout> */}
               <h3>Tax Rates</h3>
-            </CardLayout>
+            {/* </CardLayout> */}
           </Col>
           <Col md={12}>
-            <CardLayout>
+            {/* <CardLayout> */}
               <Row>
                 <Col xs={12} sm={12} md={3} lg={3}>
                   <CustomSearch
@@ -164,7 +164,7 @@ const TaxRate = () => {
                   </Box>
                 </Col>
               </Row>
-            </CardLayout>
+            {/* </CardLayout> */}
           </Col>
         </Row>
       </PageLayout>
