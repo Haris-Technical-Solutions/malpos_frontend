@@ -18,7 +18,7 @@ export default function TransferDetails() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
+          
               <div className="d-flex justify-content-between align-items-center">
                 <h5>Transfer #186 (مستودع الفرع الرئيسيA test2)</h5>
                 <Box className="construction-edit-icons">
@@ -33,10 +33,8 @@ export default function TransferDetails() {
                   </Box>
                 </Box>
               </div>
-            </CardLayout>
-          </Col>
+           </Col>
           <Col md={12}>
-            <CardLayout>
               <Row>
                 <Col md={3}>
                   <IconSearchBar />
@@ -55,7 +53,6 @@ export default function TransferDetails() {
                   </Tabs>
                 </Col>
               </Row>
-            </CardLayout>
           </Col>
         </Row>
       </PageLayout>

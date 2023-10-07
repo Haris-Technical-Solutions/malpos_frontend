@@ -31,12 +31,12 @@ export default function InventoryCreate() {
             <PageLayout>
                 <Row>
                     <Col md={12}>
-                        <CardLayout>
+                  
                             Inventory check/Create
-                        </CardLayout>
+                      
                     </Col>
                     <Col md={12}>
-                        <CardLayout>
+                        
                             <Row>
                                 <Col md={4}>
                                     <MultiSelectField />
@@ -123,7 +123,7 @@ export default function InventoryCreate() {
                                     </Row>
                                 </Col>
                             </Row>
-                        </CardLayout>
+                        
                     </Col>
                 </Row>
             </PageLayout>

@@ -11,7 +11,7 @@ export default function UserProfile() {
         <PageLayout>
             <Row>
                 <Col xl={12}>
-                    <CardLayout>
+                    
                         <Breadcrumb title="user profile">
                             {data?.breadcrumb.map((item, index) => (
                                 <Item key={ index } className="mc-breadcrumb-item">
@@ -19,10 +19,10 @@ export default function UserProfile() {
                                 </Item>
                             ))}
                         </Breadcrumb>
-                    </CardLayout>
+                    
                 </Col>
                 <Col xl={5}>
-                    <CardLayout>
+                 
                         <CardHeader title="user information" dotsMenu={ data?.dotsMenu } />
                         <Box className="mc-user-group">
                             <Box className="mc-user-profile">
@@ -67,7 +67,7 @@ export default function UserProfile() {
                                 </Box>
                             </Box>
                         </Box>
-                    </CardLayout>
+                   
                 </Col>
                 <Col xl={7}>
                     <Row>

@@ -13,7 +13,6 @@ import {
 
 import PageLayout from "../../layouts/PageLayout";
 import CustomPagination from "../../components/CustomPagination";
-import { CardLayout } from "../../components/cards";
 import { Box } from "../../components/elements";
 import {
   faEdit,
@@ -84,16 +83,13 @@ const Diets = () => {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
               <Box className="head-sec-rearrange">
                 <Box className="head-sec-rearrange-left">
                   <h3>Diets</h3>
                 </Box>
               </Box>
-            </CardLayout>
           </Col>
           <Col md={12}>
-            <CardLayout>
               <Row>
                 <Col md={10}>
                   <Row>
@@ -210,7 +206,6 @@ const Diets = () => {
                   </Col>
                 </Box>
               </Col>
-            </CardLayout>
           </Col>
         </Row>
       </PageLayout>

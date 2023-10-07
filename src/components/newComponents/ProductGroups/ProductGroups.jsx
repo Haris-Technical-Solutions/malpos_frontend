@@ -4,7 +4,7 @@ import { Row, Col, Form } from "react-bootstrap";
 import data from "../../../data/productGroup.json";
 import { Table, Thead, Tbody, Th, Tr, Td } from "../../elements/Table";
 import { Pagination, Breadcrumb } from "../../../components/";
-import { CardLayout } from "../../cards";
+// import { CardLayout } from "../../cards";
 import PageLayout from "../../../layouts/PageLayout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch, faPlus } from "@fortawesome/free-solid-svg-icons";
@@ -24,7 +24,7 @@ export default function ProductGroups() {
 
   return (
     <PageLayout>
-      <CardLayout>
+      {/* <CardLayout> */}
         <Breadcrumb title={data?.pageTitle}>
           {data?.breadcrumb.map((item, index) => (
             <li key={index} className="mc-breadcrumb-item">
@@ -38,9 +38,9 @@ export default function ProductGroups() {
             </li>
           ))}
         </Breadcrumb>
-      </CardLayout>
+      {/* </CardLayout>
 
-      <CardLayout>
+      <CardLayout> */}
         <Row>
           <Col xs={12} sm={12} md={3} lg={3}>
             <div style={{ position: "relative" }}>
@@ -153,7 +153,7 @@ export default function ProductGroups() {
             <Pagination />
           </Box>
         </Row>
-      </CardLayout>
+      {/* </CardLayout> */}
     </PageLayout>
   );
 }

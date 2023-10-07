@@ -4,7 +4,6 @@ import { Box ,Text} from '../../components/elements'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faXmark } from '@fortawesome/free-solid-svg-icons'
 
-import { CardLayout } from '../../components/cards'
 import { LabelField } from '../../components/fields'
 import PageLayout from '../../layouts/PageLayout'
 
@@ -16,12 +15,9 @@ export default function EmenuCategoriesCreate() {
             <PageLayout>
                 <Row>
                     <Col md={12}>
-                        <CardLayout>
                             Categories Create
-                        </CardLayout>
                     </Col>
                     <Col md={12}>
-                        <CardLayout>
                             <Row>
                                 <Col md={6}>
                                     <Row>
@@ -74,7 +70,6 @@ export default function EmenuCategoriesCreate() {
                                 </Col>
 
                             </Row>
-                        </CardLayout>
                     </Col>
                 </Row>
             </PageLayout>

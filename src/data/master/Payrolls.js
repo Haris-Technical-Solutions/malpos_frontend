@@ -1,6 +1,5 @@
 import React,{useState} from "react";
 import { Col, Row } from "react-bootstrap";
-import { CardLayout } from "../../components/cards";
 import PageLayout from "../../layouts/PageLayout";
 import { Form } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,7 +19,7 @@ export default function Payroll() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
+       
               <Row>
           <Col md={12}>
               <div className="d-flex justify-content-between align-items-center">
@@ -175,7 +174,7 @@ export default function Payroll() {
                   </Table>
                 </Col>
               </Row>
-            </CardLayout>
+            
           </Col>
         </Row>
       </PageLayout>

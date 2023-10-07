@@ -14,13 +14,12 @@ export default function SuppliersDetailsSupplies() {
          <PageLayout>
             <Row>
                 <Col md={12}>
-                    <CardLayout>
+                    
                         Operation time #33
-                    </CardLayout>
+                    
                 </Col>
               
                 <Col md={12}>
-                    <CardLayout>
                         <Row>
                         <Col md={12}>
                     <Row>
@@ -46,7 +45,7 @@ export default function SuppliersDetailsSupplies() {
                             </Col>
                         </Row>
                   
-                    </CardLayout>
+            
                 </Col>
             </Row>
         </PageLayout>

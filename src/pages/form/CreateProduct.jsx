@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { CardLayout } from "../../components/cards";
 import { Box } from "../../components/elements";
 import { LabelField } from "../../components/fields";
 import CreateRecipe from "../../components/createProduct/CreateRecipe";
@@ -183,7 +182,6 @@ export default function CreateProduct() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
               <h3>
                 {action === "updateProduct"
                   ? "Update Product"
@@ -231,12 +229,10 @@ export default function CreateProduct() {
               {/* <Box className="categories-btn"> */}
 
               {/* </Box> */}
-            </CardLayout>
           </Col>
           <Col md={12}>
             {activeTab === 0 && (
               <form onSubmit={handleSubmit} encType="multipart/form-data">
-                <CardLayout>
                   <Row>
                     <Col md={12}>
                       <Row>
@@ -563,7 +559,6 @@ export default function CreateProduct() {
                       </Row>
                     </Col>
                   </Row>
-                </CardLayout>
               </form>
             )}
 

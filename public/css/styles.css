@@ -737,7 +737,7 @@ p {
 .form-select,
 .form-control {
   width: 100%;
-  height: 37px;
+  height: 1.8rem;
   padding: 0px 16px;
   border-radius: 2px;
   border: 1px solid var(--deepBorder);
@@ -2625,11 +2625,11 @@ textarea.form-control {
 }
 
 .thin-scrolling:hover::-webkit-scrollbar-thumb {
-  background-color: var(--cusPrimaryLight);
+  background-color: red;
 }
 
 .thin-scrolling::-webkit-scrollbar {
-  width: 3px;
+  width: 4px;
 }
 
 .thin-scrolling::-webkit-scrollbar-thumb {
@@ -4830,11 +4830,12 @@ textarea.form-control {
   top: 75px;
   left: -270px;
   z-index: 3;
+  background-color: #df524b;
   padding-top: 20px;
   padding-bottom: 20px;
   padding-right: 17px;
-  padding-left: 20px;
-  width: 270px;
+  padding-left: 5px;
+  width: 210px;
   overflow-y: scroll;
   height: calc(100vh - 75px);
   transition: all linear 0.3s;
@@ -4848,7 +4849,7 @@ textarea.form-control {
   .mc-sidebar {
     z-index: 5;
     background-color: var(--bodyBG);
-    border-right: 1px solid var(--lightGray);
+    border-right: 1px solid white;
   }
 }
 
@@ -4868,7 +4869,7 @@ textarea.form-control {
 }
 
 .mc-sidebar-menu-title {
-  font-size: 13px;
+  font-size: 8px;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -4878,6 +4879,7 @@ textarea.form-control {
 
 .mc-sidebar-menu-item {
   margin-bottom: 3px;
+
 }
 
 .mc-sidebar-menu-item.focused .mc-sidebar-menu-btn {
@@ -4907,11 +4909,13 @@ textarea.form-control {
   height: auto;
   overflow: visible;
   padding: 10px 0px;
+  
 }
 
 .mc-sidebar-menu-btn {
   width: 100%;
   padding: 12px 10px;
+  color: white;
   border-radius: 8px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -4937,7 +4941,8 @@ textarea.form-control {
   -moz-transition: all linear 0.3s;
   -ms-transition: all linear 0.3s;
   -o-transition: all linear 0.3s;
-  color: #f29b30;
+  
+  color: white;
 }
 
 .mc-sidebar-menu-btn:hover {
@@ -4979,7 +4984,7 @@ textarea.form-control {
 }
 
 .mc-sidebar-menu-btn sup.red {
-  background: #ff304f;
+  background: white;
 }
 
 .mc-sidebar-menu-btn sup.blue {
@@ -5003,7 +5008,7 @@ textarea.form-control {
 }
 
 .mc-sidebar-menu-btn small {
-  font-size: 20px;
+  font-size: 2px;
   -webkit-transform: rotate(-90deg);
   transform: rotate(-90deg);
   transition: all linear 0.3s;
@@ -5035,11 +5040,12 @@ textarea.form-control {
 
 .mc-sidebar-dropdown-link {
   width: 100%;
-  font-size: 15px;
+  font-size: 14px;
   position: relative;
   /* text-transform: capitalize; */
-  padding-left: 20px;
+  padding-left: 8px;
   margin: 6px 0px;
+  color: white;
   transition: all linear 0.3s;
   -webkit-transition: all linear 0.3s;
   -moz-transition: all linear 0.3s;
@@ -5048,7 +5054,7 @@ textarea.form-control {
 }
 
 .mc-sidebar-dropdown-link:hover {
-  color: var(--cusPrimaryColorActive);
+  color: black;
 }
 
 .mc-sidebar-dropdown-link::before {
@@ -5057,7 +5063,7 @@ textarea.form-control {
   top: 0px;
   left: -1px;
   z-index: 1;
-  width: 2px;
+  width: 6px;
   height: 100%;
   opacity: 0;
   background-color: var(--cusPrimaryColorActive);
@@ -5145,11 +5151,11 @@ textarea.form-control {
 .mc-main {
   padding: 24px;
   border-radius: 8px;
-  background-color: var(--thinGray);
-  margin-top: 75px;
+  background-color: transparent;
+  margin-top: 60px;
   margin-bottom: 20px;
   margin-right: 20px;
-  margin-left: 20px;
+  margin-left: 10px;
   transition: all linear 0.3s;
   -webkit-transition: all linear 0.3s;
   -moz-transition: all linear 0.3s;
@@ -5160,7 +5166,7 @@ textarea.form-control {
 @media (max-width: 575px) {
   .mc-main {
     padding: 24px 15px;
-    margin-top: 62px;
+    margin-top: 72px;
     margin-bottom: 0px;
     margin-right: 0px;
     margin-left: 0px;
@@ -8966,15 +8972,19 @@ background-color: #f0f0f0;
 }
 
 .mfield{
-  width:60%;
-  height: 2.1rem;
+  width:80%;
+  font-size: 12px;
+  height: 1.8rem;
   /* background-color: #f0f0f0; */
 }
 .wfield{
-  width: 60%;
-  height: 2.1rem;
+  width: 80%;
+  height: 1.8rem;
+  font-size: 13px;
   padding-left: 10px;
-  background-color:#F0F0F0;
+  border: 0.5px solid rgb(209, 206, 206);
+  border-radius: 1px;
+  background-color:white;
 }
 .deletebtn{
   fill: red;
@@ -9730,7 +9740,7 @@ background-color: #f0f0f0;
 }
 
 .multi-select-opt .rmsc .dropdown-heading {
-  height: 36px;
+  height: 1.8rem;
 }
 .rmsc {
   --rmsc-gray: #403e57 !important;
@@ -9751,7 +9761,7 @@ background-color: #f0f0f0;
 }
 
 .multi-select-opt-no-lab .rmsc .dropdown-heading {
-  height: 36px;
+  height: 1.8rem;
 }
 
 .multi-select-opt-no-lab .rmsc .dropdown-container {

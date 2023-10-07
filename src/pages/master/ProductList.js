@@ -233,7 +233,7 @@ export default function ProductList() {
     <PageLayout>
       <Row className="product-list">
         <Col xl={12}>
-          <CardLayout>
+          
             <Breadcrumb title={data?.pageTitle}>
               {data?.breadcrumb.map((item, index) => (
                 <li key={index} className="mc-breadcrumb-item">
@@ -247,11 +247,11 @@ export default function ProductList() {
                 </li>
               ))}
             </Breadcrumb>
-          </CardLayout>
+        
         </Col>
         {/* <FloatCard numberOfProducts={products?.length} /> */}
         <Col xl={12}>
-          <CardLayout>
+      
             <Row>
               <Col
                 xs={12}
@@ -280,11 +280,11 @@ export default function ProductList() {
                 </Nav>
               </Col>
             </Row>
-          </CardLayout>
+
         </Col>
 
         <Col xl={12}>
-          <CardLayout>
+        
             <Row>
               <Col xs={12} sm={12} md={3} lg={3}>
                 <div style={{ position: "relative" }}>
@@ -568,7 +568,6 @@ export default function ProductList() {
                 />
               </Col>
             </Row>
-          </CardLayout>
         </Col>
       </Row>
     </PageLayout>

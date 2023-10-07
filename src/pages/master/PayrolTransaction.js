@@ -1,6 +1,5 @@
 import React from "react";
 import { Col, Table, Row } from "react-bootstrap";
-import { CardLayout } from "../../components/cards";
 import PageLayout from "../../layouts/PageLayout";
 import { faRemove } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -13,7 +12,6 @@ export default function PayrolTransactions() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
               <div className="d-flex justify-content-between align-items-center">
                 <h5>Transactions : cashier</h5>
                 <Box className="construction-edit-icons">
@@ -28,10 +26,8 @@ export default function PayrolTransactions() {
                   </Box>
                 </Box>
               </div>
-            </CardLayout>
           </Col>
           <Col md={12}>
-            <CardLayout>
               <Table className="pr-transaction-table">
                 <thead>
                   <tr>
@@ -46,7 +42,6 @@ export default function PayrolTransactions() {
                   </tr>
                 </tbody>
               </Table>
-            </CardLayout>
           </Col>
         </Row>
       </PageLayout>

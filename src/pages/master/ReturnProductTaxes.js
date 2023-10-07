@@ -1,6 +1,5 @@
 import React from "react";
 import { Col, Row } from "react-bootstrap";
-import { CardLayout } from "../../components/cards";
 import PageLayout from "../../layouts/PageLayout";
 import { Box } from "../../components/elements";
 import { Table } from "react-bootstrap";
@@ -11,7 +10,6 @@ export default function ReturnProductTaxes() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
               Taxes
               <Box className="construction-edit-icons">
                 <Box className="edit-icons">
@@ -24,10 +22,8 @@ export default function ReturnProductTaxes() {
                   </Link>
                 </Box>
               </Box>
-            </CardLayout>
           </Col>
           <Col md={12}>
-            <CardLayout>
               <Box className="receipt-product-tax-table-wrap">
                 <Table className="product-tax-table">
                   <thead className="thead-modifier">
@@ -46,7 +42,6 @@ export default function ReturnProductTaxes() {
                   </tbody>
                 </Table>
               </Box>
-            </CardLayout>
           </Col>
         </Row>
       </PageLayout>

@@ -63,7 +63,7 @@ export default function Production() {
             <PageLayout>
                 <Row>
                     <Col md={12}>
-                        <CardLayout>
+                     
                             <Row>
                     <Col md={12}>
                             Production
@@ -214,7 +214,7 @@ export default function Production() {
                 />
                                 </Col>
                             </Row>
-                        </CardLayout>
+                    
                     </Col>
                 </Row>
             </PageLayout>

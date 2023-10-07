@@ -81,17 +81,17 @@ export default function AccountsCatTab() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
+            
               <Box className="head-sec-rearrange">
                 <Box className="head-sec-rearrange-left">
                   <h3>Stations</h3>
                 </Box>
               </Box>
-            </CardLayout>
+            
           </Col>
 
           <Col md={12}>
-            <CardLayout>
+            
               <Row>
                 <Col md={10}>
                   <Row>
@@ -297,7 +297,6 @@ export default function AccountsCatTab() {
                   </Col>
                 </Box>
               </Col>
-            </CardLayout>
           </Col>
         </Row>
       </PageLayout>

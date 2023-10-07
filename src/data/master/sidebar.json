@@ -77,9 +77,9 @@
           "icon": "layers",
           "text": "Finances",
           "submenu": [
-            { "href": "/accounts", "text": "Accounts" },
-            { "href": "/account-categories", "text": "Categories" },
-            { "href": "/transactions", "text": "Transactions" },
+            { "href": "/accounts", "text": "Bank Cash Accounts" },
+            { "href": "/account-categories", "text": "Chart Of Accounts" },
+            { "href": "/transactions", "text": "Financial Transactions" },
             { "href": "/payroll", "text": "Payroll" },
             { "href": "/cashflow", "text": "Cashflow" }
           ]

@@ -12,7 +12,7 @@ export default function Message() {
         <PageLayout>
             <Row>
                 <Col md={5} xl={4}>
-                    <CardLayout className="p-0">
+                    <div className="p-0">
                         <Box className="mc-message-user">
                             <Box className="mc-message-user-filter">
                                 <IconField 
@@ -47,10 +47,10 @@ export default function Message() {
                                 ))}
                             </List>
                         </Box>
-                    </CardLayout>
+                    </div>
                 </Col>
                 <Col md={7} xl={8}>
-                    <CardLayout>
+                
                         <Box className="mc-message-chat">
                             <Box className="mc-message-chat-header">
                                 <RoundAvatar src="images/avatar/01.webp" alt="avatar" size="xs" />
@@ -89,7 +89,6 @@ export default function Message() {
                                 <Button type="button" className="material-icons">send</Button>
                             </Form>
                         </Box>
-                    </CardLayout>
                 </Col>
             </Row>
         </PageLayout>

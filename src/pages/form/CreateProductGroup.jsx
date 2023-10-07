@@ -1,7 +1,5 @@
 import { Col, Row } from "react-bootstrap";
 import { Link } from "react-router-dom";
-
-import { CardLayout } from "../../components/cards";
 import { LabelField } from "../../components/fields";
 import MultiSelectField from "../../components/fields/MultiSelectField";
 import PageLayout from "../../layouts/PageLayout";
@@ -12,13 +10,12 @@ export default function CreateProductGroup() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
+            
               <h3>Add New Group</h3>
-            </CardLayout>
+    
           </Col>
           <Col md={12}>
             <form>
-              <CardLayout>
                 <Row>
                   <Col md={12}>
                     <Row>
@@ -80,7 +77,6 @@ export default function CreateProductGroup() {
                     </Row>
                   </Col>
                 </Row>
-              </CardLayout>
             </form>
           </Col>
         </Row>

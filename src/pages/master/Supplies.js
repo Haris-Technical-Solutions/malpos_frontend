@@ -38,7 +38,6 @@ export default function Supplies() {
 
           <Col md={12}>
             <Row>
-              <CardLayout>
                 <Col md={12}>
                   <Box className="categories-btn">
                     <button
@@ -79,7 +78,7 @@ export default function Supplies() {
                     </Col>
                   </Row>
                 </Col>
-              </CardLayout>
+
             </Row>
           </Col>
         </Row>

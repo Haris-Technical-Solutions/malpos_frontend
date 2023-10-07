@@ -4,7 +4,6 @@ import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
 
-import { CardLayout } from "../../components/cards";
 import { LabelField } from "../../components/fields";
 import MultiSelectField from "../../components/fields/MultiSelectField";
 import PageLayout from "../../layouts/PageLayout";
@@ -187,13 +186,10 @@ const CreateModifer = () => {
     <PageLayout>
       <Row>
         <Col md={12}>
-          <CardLayout>
             <h3>Add New Modifier</h3>
-          </CardLayout>
         </Col>
         <Col md={12}>
           <form onSubmit={handleSubmit} encType="multipart/form-data">
-            <CardLayout>
               <Row>
                 <Col md={12}>
                   <Row>
@@ -268,11 +264,9 @@ const CreateModifer = () => {
                   </Row>
                 </Col>
               </Row>
-            </CardLayout>
           </form>
         </Col>
         <Col md={12}>
-          <CardLayout>
             <Table responsive>
               <thead>
                 <tr>
@@ -379,7 +373,6 @@ const CreateModifer = () => {
                 </button>
               </Link>
             </Col>
-          </CardLayout>
         </Col>
       </Row>
     </PageLayout>

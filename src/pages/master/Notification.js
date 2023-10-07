@@ -8,7 +8,7 @@ import data from "../../data/master/notification.json";
 export default function Notification() {
     return (
         <PageLayout>
-            <CardLayout className="mb-4">
+            <div className="mb-4">
                 <Breadcrumb title={ data?.pageTitle }>
                     {data?.breadcrumb.map((item, index) => (
                         <Item key={ index } className="mc-breadcrumb-item">
@@ -16,8 +16,8 @@ export default function Notification() {
                         </Item>
                     ))}
                 </Breadcrumb>
-            </CardLayout>
-            <CardLayout>
+            </div>
+            
                 <CardHeader title="all notification" dotsMenu={ data?.dotsMenu } />
                 <List className="mc-notify-list">
                     {data?.notify.map((item, index) => (
@@ -36,7 +36,7 @@ export default function Notification() {
                         </Item>
                     ))}
                 </List>
-            </CardLayout>
+            
         </PageLayout>
     )
 }

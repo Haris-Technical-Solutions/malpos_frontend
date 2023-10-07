@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Row, Col, Form } from "react-bootstrap";
-import { CardLayout, FloatCard } from "../../components/cards";
+import {  FloatCard } from "../../components/cards";
 import ProductsTable from "../../components/tables/ProductsTable";
 import LabelField from "../../components/fields/LabelField";
 import { Pagination, Breadcrumb } from "../../components";
@@ -44,18 +44,18 @@ export default function ProductMovement() {
     <PageLayout>
       <Row>
         <Col xl={12}>
-          <CardLayout>
+        
             <div className="d-flex justify-content-between align-items-center">
               <h5>Product Movement 0</h5>
               <div>
                 <FontAwesomeIcon icon={faCalendarDays} />
               </div>{" "}
             </div>
-          </CardLayout>
+          
         </Col>
 
         <Col md={12}>
-          <CardLayout>
+        
             <Box className="">
               <Box className="receipt-tab">
                 {/* <Col md={12}> */}
@@ -280,10 +280,10 @@ export default function ProductMovement() {
                 {/* </Col> */}
               </Box>
             </Box>
-          </CardLayout>
+
         </Col>
         <Col md={12}>
-          <CardLayout>
+    
             {/* <h3>Select Product</h3> */}
             <Row>
               <Col md={12}>
@@ -363,7 +363,7 @@ export default function ProductMovement() {
                 <Pagination />
               </Col>
             </Row>
-          </CardLayout>
+    
         </Col>
       </Row>
     </PageLayout>

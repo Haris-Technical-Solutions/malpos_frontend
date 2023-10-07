@@ -43,12 +43,11 @@ export default function OfferNotifications() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
+            
               <h5>Order Notifications</h5>
-            </CardLayout>
+          
           </Col>
           <Col md={12}>
-            <CardLayout>
               <Box className="order-return-tab-wrapper">
                 <Box className="receipt-tab">
                   <Col md={10}>
@@ -408,7 +407,6 @@ export default function OfferNotifications() {
                   </tbody>
                 </Table>
               </Box>
-            </CardLayout>
           </Col>
         </Row>
       </PageLayout>

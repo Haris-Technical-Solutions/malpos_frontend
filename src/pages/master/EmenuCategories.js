@@ -4,7 +4,6 @@ import React, { useState } from 'react'
 import { Button, Col, Row, Table } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { Box } from '../../components/elements'
-import { CardLayout } from '../../components/cards'
 import IconSearchBar from '../../components/elements/IconSearchBar'
 import PageLayout from '../../layouts/PageLayout'
 
@@ -18,12 +17,8 @@ export default function EmenuCategories() {
             <PageLayout>
                 <Row>
                     <Col md={12}>
-                        <CardLayout>
-
-                        </CardLayout>
                     </Col>
                     <Col md={12}>
-                        <CardLayout>
                             <Row>
                                 <Col md={3}>
                                     <IconSearchBar />
@@ -74,7 +69,6 @@ export default function EmenuCategories() {
                                     </Box>
                                 </Col>
                             </Row>
-                        </CardLayout>
                     </Col>
                 </Row>
             </PageLayout>

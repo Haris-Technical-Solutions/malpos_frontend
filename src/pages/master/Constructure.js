@@ -4,7 +4,6 @@ import { useState } from "react";
 import { Col, Row } from "react-bootstrap";
 import { Box, Image } from "../../components/elements";
 import { Dropdown } from "react-bootstrap";
-import { CardLayout } from "../../components/cards";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MenuSelectCard from "../../components/newComponents/MenuSelectCard/MenuSelectCard";
 import {
@@ -58,7 +57,7 @@ export default function Constructure() {
       <PageLayout>
         <Row>
           <Col md={12}>
-            <CardLayout>
+        
               <Box className="head-sec-rearrange">
                 <Box className="head-sec-rearrange-left">
                   <h3 style={{ width: "500px" }}>Menu Constructor</h3>
@@ -72,10 +71,9 @@ export default function Constructure() {
                   </Box>
                 </Box>
               </Box>
-            </CardLayout>
+ 
           </Col>
           <Col md={12}>
-            <CardLayout>
               <Box className="cardLayout-padding">
                 <Row>
                   <Col md={4} lg={3}>
@@ -269,7 +267,6 @@ export default function Constructure() {
                   </Col>
                 </Row>
               </Box>
-            </CardLayout>
           </Col>
         </Row>
       </PageLayout>

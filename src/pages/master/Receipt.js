@@ -102,7 +102,6 @@ import {
   Td,
 } from "../../components/elements/Table";
 import { Breadcrumb } from "../../components";
-import { CardLayout } from "../../components/cards/";
 import PageLayout from "../../layouts/PageLayout";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit } from "@fortawesome/free-solid-svg-icons";
@@ -197,7 +196,6 @@ export default function OrderReceipt() {
   }, []);
   return (
     <PageLayout>
-      <CardLayout>
         <Breadcrumb title={data?.pageTitle}>
           {data?.breadcrumb.map((item, index) => (
             <li key={index} className="mc-breadcrumb-item">
@@ -211,9 +209,6 @@ export default function OrderReceipt() {
             </li>
           ))}
         </Breadcrumb>
-      </CardLayout>
-
-      <CardLayout>
         <Row>
           <Col xs={12} sm={12} md={3} lg={3}>
             <CustomSearch
@@ -378,7 +373,6 @@ export default function OrderReceipt() {
             />
           </Box>
         </Row>
-      </CardLayout>
     </PageLayout>
   );
 }
