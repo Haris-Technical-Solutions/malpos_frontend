@@ -94,15 +94,17 @@ export default function Unitmeasurement() {
   const confirmDelete = async () => {
     if (measurementToDelete) {
       try {
-        await axiosInstance.delete(`/uom/${measurementToDelete}`);
-        fetchUnitMeasurements();
-        toast.success("Unit deleted successfully", {
-          autoClose: false,
-          closeButton: true,
-        });
+        await axiosInstance.delete(`/uom/${measurementToDelete}`).then(()=>{
+          toast.success("Unit deleted successfully", {
+            autoClose: false,
+            closeButton: true,
+          });
+        })
+ 
       } catch (error) {
         console.log(error);
       } finally {
+        fetchUnitMeasurements();  
         setMeasurementToDelete(null);
         setShowDeleteModal(false);
       }
