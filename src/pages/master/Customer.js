@@ -1,25 +1,39 @@
-import React, { useState } from "react";
-import { Row, Col, Form, Table } from "react-bootstrap";
+import React, { useState,useEffect } from "react";
+import { Row, Col, Form, Table, Button } from "react-bootstrap";
 import { CardLayout, FloatCard } from "../../components/cards";
 import ProductsTable from "../../components/tables/ProductsTable";
 import LabelField from "../../components/fields/LabelField";
 import { Breadcrumb } from "../../components";
-
+import axiosInstance from "../../api/baseUrl";
 import PageLayout from "../../layouts/PageLayout";
 import { Box } from "../../components/elements";
+import { toast } from "react-toastify";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faSearch,
+  faEdit,faTrash,
   faAngleDown,
   faPlus,
   faEllipsis,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import CustomModal from "./Modal"
+import CustomPagination from "../../components/CustomPagination";
+import SkeletonCell from "../../components/Skeleton";
 import MultiSelectNoLabel from "../../components/fields/MultiSelectNoLabel";
+import { useNavigate } from "react-router-dom";
 
 export default function Customer() {
   const [sortOrder, setSortOrder] = useState("asc");
-
+const[customers,setCustomers]=useState([])
+const [isLoading, setIsLoading] = useState(false);
+const [currentPage, setCurrentPage] = useState(1);
+  const [perPage] = useState(10); 
+  const [totalNumber, setTotalNumber] = useState(0); 
+  const [searchTerm, setSearchTerm] = useState("");
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
+  const [customerToDelete, setCustomerToDelete] = useState(null);
+ const navigate=useNavigate()
   const [state, setState] = useState({
     showOption: false,
     productOpen: false,
@@ -37,22 +51,115 @@ export default function Customer() {
       return newState;
     });
   };
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+    fetchCustomer();
+  };
+
+  useEffect(() => {
+fetchCustomer()
+  }, [searchTerm,currentPage]);
+
+
+  const handleStorageEdit = (id) =>{
+    console.log("id: " + id);
+    navigate(`/Customer-edit`, {
+      state: {
+        id: id,
+        action: "updateCustomer",
+      },
+    });
+  };
+
+  const fetchCustomer = async () => {
+    setIsLoading(true);
+    try {
+      const response = await axiosInstance.get("/md_customer",{params: {
+        search: searchTerm,
+        page: currentPage,
+      },});
+
+      setCustomers(response.data);
+      // const totalItems= response.total; 
+    setTotalNumber(response.data.total);
+    } catch (error) {
+      console.error("error fetching customer data",error)
+      // Show error message to user here
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+
+  // const fetchCustomer = async () => {
+  //   setIsLoading(true);
+  //   await axiosInstance
+  //      .get("/md_customer")
+  //      .then((response) => {
+  //        console.log("API Response:", response.data);
+  //        setCustomers(response.data);
+  //         })
+  //      .catch((error) => {
+  //        console.error("Error fetching customer data", error);
+  //      })
+  //      finally {
+  //       setIsLoading(false);
+  //     }
+  //  };
+
+  const handleCustomerDelete = (id) => {
+    setCustomerToDelete(id);
+    setShowDeleteModal(true);
+  };
+
+
+  const confirmDelete = async () => {
+    if (customerToDelete) {
+      try {
+        await axiosInstance.delete(`/md_customer/${customerToDelete}`);
+        fetchCustomer()
+        .then(() => setIsLoading(false))
+        .catch((error) => {
+          console.error("Error fetching customer data", error);
+        });
+        toast.success("Customer deleted successfully", {
+          autoClose: false,
+          closeButton: true,
+        });
+      } catch (error) {
+        console.log(error);
+      }
+  };
+  setShowDeleteModal(false);
+}
+
+  const cancelDelete = () => {
+    setCustomerToDelete(null);
+    setShowDeleteModal(false);
+  };
+
+
+console.log(customers);
   const toggleSortOrder = () => {
     setSortOrder(sortOrder === "asc" ? "desc" : "asc");
   };
   return (
-    <PageLayout>
+<div>
+<PageLayout>
       <Row>
         <Col xl={12}>
-          <CardLayout>
+         
             <div className="d-flex justify-content-between align-items-center">
               <h5>Customer</h5>
             </div>
-          </CardLayout>
+         
         </Col>
 
+
         <Col md={12}>
-          <CardLayout>
+            <Row>
+        <Col md={12}>
             <Row>
               <Box className="">
                 <Box className="receipt-tab">
@@ -64,6 +171,8 @@ export default function Customer() {
                             type="search"
                             placeholder="Name"
                             className="search-pl"
+                            value={searchTerm} 
+                            onChange={(e) => setSearchTerm(e.target.value)}
                           />
                           <span
                             style={{
@@ -140,23 +249,19 @@ export default function Customer() {
                   <Col md={2} sm={12} >
                     <Link to={"/customer-create"} className="w-100">
                       <button className="acc-create-btn rs-btn-create w-100 text-center">
-                        <FontAwesomeIcon icon={faPlus} /> Create{" "}
+                        <FontAwesomeIcon icon={faPlus} /> Create
                       </button>
                     </Link>
                   </Col>
                 </Box>
               </Box>
             </Row>
-          </CardLayout>
+          
         </Col>
-
-        <Col md={12}>
-          <CardLayout>
-            <Row>
               <Col md={12}>
                 <Box className="payment-sale-table-wrap">
                   <Table className="sale-m-table" responsive>
-                    <thead className="mc-table-head dark">
+                    <thead className="mc-table-head thead-dark">
                       <tr>
                         <th className="th-w220" style={{ fontSize: "8px" }}>
                           Name
@@ -169,185 +274,108 @@ export default function Customer() {
                         </th>
                         <th style={{ fontSize: "8px" }}>Phone</th>
                         <th style={{ fontSize: "8px" }}>address</th>
+                        <th style={{ fontSize: "8px" }}>E-mail</th>
                         <th style={{ fontSize: "8px" }}> Balance</th>
-                        <th style={{ fontSize: "8px" }}> Group</th>
-                        <th style={{ fontSize: "8px" }}>Date of Bir</th>
+                        <th style={{ fontSize: "8px" }}> Description</th>
+                        <th style={{ fontSize: "8px" }}>DOB</th>
                         <th style={{ fontSize: "8px" }}> gender</th>
-                        <th style={{ fontSize: "8px" }}> code</th>
-                        <th style={{ fontSize: "8px" }}>Total ceive</th>
+                        <th style={{ fontSize: "8px" }}> Group</th>
+                        <th style={{ fontSize: "8px" }}>Active</th>
                         <th style={{ fontSize: "8px" }}>Source</th>
-                        <th style={{ fontSize: "8px" }}>Total Expense</th>
-                        <th style={{ fontSize: "8px" }}></th>
+                        <th style={{ fontSize: "8px" }}>Country</th>
+                        <th style={{ fontSize: "8px" }}>City</th>
+                        <th style={{ fontSize: "8px" }}>Action</th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr style={{ fontSize: "10px" }}>
-                        <td className="td-w220 fw-bold "><Link className="link" to={'/marketing-customer-details'}> TIS </Link></td>
-                        <td>+966 9200 33035</td>
-                        <td>jaddah</td>
+                    {isLoading ? ( // Render skeleton when loading is true
+                        <>
+                          {Array.from({ length: 5 }).map((_, index) => (
+                            <tr key={index}>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                              <td>
+                                <SkeletonCell />
+                              </td>
+                            </tr>
+                         ))}
+                        </>
+                      ) : (
+                          customers.map((customer)=>(
+                      <tr style={{ fontSize: "10px" }} key={customer.id}>
+                        <td className="td-w220 fw-bold "><Link className="link" to={'/marketing-customer-details'}> {customer.name} </Link></td>
+                        <td>{customer.phone}</td>
+                        <td>{customer.address}</td>
+                        <td>{customer.email}</td>
                         <td>25.00 </td>
-                        <td>TIS Group</td>
-                        <td>08.12.198</td>
-                        <td>Male</td>
+                        <td>{customer.description}</td>
+                        <td>{customer.dob}</td>
+                        <td>{customer.gender}</td>
+                        <td>{customer.group_label}</td>
                         <td>--</td>
-                        <td>25 </td>
-                        <td>--</td>
-                        <td>16839.41</td>
+                        <td>{customer.is_active} </td>
+                        
+                        <td>{customer.country}</td>
+                        <td>{customer.city}</td>
                         <td>
-                          {" "}
-                          <Box className={"td-left"}>
-                            <span>
-                              <FontAwesomeIcon icon={faEllipsis} />{" "}
-                            </span>
-                          </Box>
+                        <Row>
+                                    <Col className="text-center">
+                                      <button
+                                        title="Edit"
+                                        className="btnlogo"
+                                        onClick={() => handleStorageEdit(customer.id)}
+                                      >            <FontAwesomeIcon icon={faEdit} color="#f29b30"/>
+                                      </button>
+                                    
+                                      <button
+                                        title="Delete"
+                                         className="btnlogo" 
+                                         onClick={()=>handleCustomerDelete(customer.id)} >
+                                     <FontAwesomeIcon icon={faTrash} color="#ee3432"/>
+                                      </button>
+                                      </Col>                             
+                                          </Row>
                         </td>
                       </tr>
-                    </tbody>
-                    <tbody>
-                      <tr style={{ fontSize: "10px" }}>
-                        <td className="td-w220 fw-bold"><Link className="link" to={'/marketing-customer-details'}> Muhammad </Link></td>
-                        <td>+966 9200 33035</td>
-                        <td></td>
-                        <td>25.00 </td>
-                        <td>TIS Group</td>
-                        <td>08.12.198</td>
-                        <td>Male</td>
-                        <td>--</td>
-                        <td>25 </td>
-                        <td>--</td>
-                        <td>16839.41</td>
-                        <td>
-                          {" "}
-                          <Box className={"td-left"}>
-                            <span>
-                              <FontAwesomeIcon icon={faEllipsis} />{" "}
-                            </span>
-                          </Box>
-                        </td>
-                      </tr>
-                    </tbody>
-                    <tbody>
-                      <tr style={{ fontSize: "10px" }}>
-                        <td className="td-w220 fw-bold"><Link className="link" to={'/marketing-customer-details'}> Ahad </Link></td>
-                        <td>+966 9200 33035</td>
-                        <td></td>
-                        <td>25.00 </td>
-                        <td>TIS Group</td>
-                        <td>08.12.198</td>
-                        <td>Male</td>
-                        <td>--</td>
-                        <td>25 </td>
-                        <td>--</td>
-                        <td>16839.41</td>
-                        <td>
-                          {" "}
-                          <Box className={"td-left"}>
-                            <span>
-                              <FontAwesomeIcon icon={faEllipsis} />{" "}
-                            </span>
-                          </Box>
-                        </td>
-                      </tr>
-                    </tbody>
-                    <tbody>
-                      <tr style={{ fontSize: "10px" }}>
-                        <td className="td-w220 fw-bold"><Link className="link" to={'/marketing-customer-details'}> Ali Raza </Link></td>
-                        <td className="td-w220 fw-bold">+966 9200 33035</td>
-                        <td>jaddah</td>
-                        <td>25.00 </td>
-                        <td>TIS Group</td>
-                        <td>08.12.198</td>
-                        <td>Male</td>
-                        <td>--</td>
-                        <td>25 </td>
-                        <td>--</td>
-                        <td>16839.41</td>
-                        <td>
-                          {" "}
-                          <Box className={"td-left"}>
-                            <span>
-                              <FontAwesomeIcon icon={faEllipsis} />{" "}
-                            </span>
-                          </Box>
-                        </td>
-                      </tr>
-                    </tbody>
-                    <tbody>
-                      <tr style={{ fontSize: "10px" }}>
-                        <td className="td-w220 fw-bold"><Link className="link" to={'/marketing-customer-details'}> Burger Man C </Link></td>
-                        <td>+966 9200 33035</td>
-                        <td></td>
-                        <td>25.00 </td>
-                        <td>TIS Group</td>
-                        <td>08.12.198</td>
-                        <td>Male</td>
-                        <td>--</td>
-                        <td>25 </td>
-                        <td>--</td>
-                        <td>16839.41</td>
-                        <td>
-                          {" "}
-                          <Box className={"td-left"}>
-                            <span>
-                              <FontAwesomeIcon icon={faEllipsis} />{" "}
-                            </span>
-                          </Box>
-                        </td>
-                      </tr>
-                    </tbody>
-                    <tbody>
-                      <tr style={{ fontSize: "10px" }}>
-                        <td className="td-w220"><Link className="link" to={'/marketing-customer-details'}> Eman </Link></td>
-                        <td>+966 9200 33035</td>
-                        <td>Makkah</td>
-                        <td>25.00 </td>
-                        <td>TIS Group</td>
-                        <td>08.12.198</td>
-                        <td>Male</td>
-                        <td>--</td>
-                        <td>25 </td>
-                        <td>--</td>
-                        <td>16839.41</td>
-                        <td>
-                          {" "}
-                          <Box className={"td-left"}>
-                            <span>
-                              <FontAwesomeIcon icon={faEllipsis} />{" "}
-                            </span>
-                          </Box>
-                        </td>
-                      </tr>
-                    </tbody>
-                    <tbody>
-                      <tr style={{ fontSize: "10px" }}>
-                        <td className="td-w220 fw-bold"><Link className="link" to={'/marketing-customer-details'}> Rehman  </Link> </td>
-                        <td>+966 9200 33035</td>
-                        <td></td>
-                        <td>25.00 </td>
-                        <td>TIS Group</td>
-                        <td>08.12.198</td>
-                        <td>Male</td>
-                        <td>--</td>
-                        <td>25 </td>
-                        <td>--</td>
-                        <td>16839.41</td>
-                        <td>
-                          {" "}
-                          <Box className={"td-left"}>
-                            <span>
-                              <FontAwesomeIcon icon={faEllipsis} />{" "}
-                            </span>
-                          </Box>
-                        </td>
-                      </tr>
-                    </tbody>
+)))}
+</tbody>
                   </Table>
                 </Box>
+                <CustomPagination
+                  perPage={perPage}
+                  totalUsers={totalNumber}
+                  paginate={paginate}
+                  currentPage={currentPage}
+                />
               </Col>
             </Row>
-          </CardLayout>
         </Col>
       </Row>
     </PageLayout>
+        <CustomModal
+        show={showDeleteModal}
+        onHide={cancelDelete}
+        onConfirm={confirmDelete}
+      />
+      </div>
   );
 }

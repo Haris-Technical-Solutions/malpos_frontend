@@ -172,6 +172,7 @@ import SuppliersEdit from "./pages/master/SuppliersEdit";
 import AccountCategoryedit from "./data/master/ChatofAccountEdit";
 import Unitmeasurement from "./pages/master/Unitmeasurement";
 import UnitCreate from "./pages/master/unitCreate";
+import CreateCustomergroup from "./pages/master/CreateCustomergroup";
 
 export default function App() {
   return (
@@ -188,9 +189,9 @@ export default function App() {
                 <Route
                   path="/analytics"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <Analytics />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route path="/crm" element={<CRM />} />
@@ -229,179 +230,179 @@ export default function App() {
                 <Route
                   path="/product-groups"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <ProductGroups />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="report"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <Reports />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="banks"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <Banks />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="create-bank"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <CreateBank />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/bank-account"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <BankAccounts />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/create-bank-account"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <CreateBankAccount />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/client-roles"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <ClientRoles />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/create-client-role"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <CreateClientRoles />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/create-station"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <CreateStation />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/create-ingredient-category"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <CreateIngredientCategory />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 {/* <Route
                 path="/create-menus"
                 element={
-                  <RequireAuth>
+                  //<RequireAuth>
                     <CreateMenus />
-                  </RequireAuth>
+                  //</RequireAuth>
                 }
               /> */}
                 <Route
                   path="/create-menu-modifier"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <CreateMenuModifier />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/allergies"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <Allergies />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/create-allergie"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <CreateAllergie />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/diets"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <Diets />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/create-diet"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <CreateDiet />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/menus"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <Menus />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/create-menu"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <CreateMenu />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route path="/preparation" element={<Preparation />} />
                 <Route
                   path="/create-preparation"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <CreatePreparation />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
 
                 <Route
                   path="/menu-section"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <MenuSections />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/create-menu-section"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <CreateMenuSection />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/create-modifer"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <CreateModifer />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
 
@@ -633,42 +634,45 @@ export default function App() {
                 <Route
                   path="/emenu-categories"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <EmenuCategories />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/emenu-categories-create"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <EmenuCategoriesCreate />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/emenu-setting"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <EmenuSetting />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 {/* marketing  */}
                 <Route
                   path="/marketing-customer-details"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <MCustomerDetails />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
+
+<Route path="/Customer-edit" element={<MCustomerCreate/>}/>
+<Route path="/Customergroup-edit/" element={<CreateCustomergroup/>}/>
                 <Route
                   path="/customer-create"
                   element={
-                    <RequireAuth>
-                      <MCustomerCreate />
-                    </RequireAuth>
+                    //<RequireAuth>
+                      <MCustomerCreate/>
+                    //</RequireAuth>
                   }
                 />
                 {/* sk 4-4-23 end */}
@@ -677,42 +681,43 @@ export default function App() {
                 <Route
                   path="/customer"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <Customer />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/customer-group"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <CustomerGroup />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
-                />
+                  />
+                  < Route path="/create-customergroup" element={<CreateCustomergroup/>}/>
                 <Route
                   path="/review"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <Reviews />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 {/* eMenu pages */}
                 <Route
                   path="/eMenu-list"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <EmenuList />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/eMenu-rearrangement"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <Rearrangement />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
 
@@ -728,97 +733,97 @@ export default function App() {
                 <Route
                   path="/product-category"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <ProductCategory />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/create-product"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <CreateProduct />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/create-category"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <CreateProductCategory />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/create-group"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <CreateProductGroup />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/tax-category"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <TaxCategory />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/create-tax-category"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <CreateTaxCategory />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/tax-rate"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <TaxRate />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/create-tax-rate"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <CreateTaxRate />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/brands"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <Brands />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/branches"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <Branches />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/create-branch"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <CreateBranch />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
                 <Route
                   path="/create-brand"
                   element={
-                    <RequireAuth>
+                    //<RequireAuth>
                       <CreateBrand />
-                    </RequireAuth>
+                    //</RequireAuth>
                   }
                 />
               </Routes>
