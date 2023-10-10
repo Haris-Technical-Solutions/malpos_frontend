@@ -1,20 +1,27 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Col, Row } from "react-bootstrap";
 import { CardLayout } from "../../components/cards";
+import SelectField from "../../components/fields/SelectField";
 import MultiSelectField from "../../components/fields/MultiSelectField";
 import CalenderField from "../../components/fields/CalenderField";
 import { LabelField } from "../../components/fields";
+import Datetime from "react-datetime";
+import "react-datetime/css/react-datetime.css";
 import CusField from "../../components/fields/CusField";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars, faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
 import MultiSelectNoLabel from "../../components/fields/MultiSelectNoLabel";
 import { Box, Button } from "../../components/elements";
+import axiosInstance from "../../api/baseUrl";
+import { useLocation } from "react-router-dom";
 import PageLayout from "../../layouts/PageLayout";
+import { Form } from "react-bootstrap";
 import IconSearchBar from "../../components/elements/IconSearchBar";
 import CusLabelField from "../../components/fields/CusLabelField";
 import { Modal } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
+import { toast } from "react-toastify";
 
 export default function TransferCreate() {
   const [open, close] = useState(false);
@@ -24,11 +31,181 @@ export default function TransferCreate() {
   const [boxId, setBoxId] = useState();
   const handleCloseGoods = () => setShow(false);
   const handleShowGoods = () => setShow(true);
+  const [selectedDateTime, setSelectedDateTime] = useState("");
+  const currentDate = new Date();
+  const [currentStorage, setCurrentTransfer] = useState({});
+  const [action, setAction] = useState();
+  const location = useLocation();
+  const [selectedBranchId, setSelectedBranchId] = useState("");
+  const [selectedBrandId, setSelectedBrandId] = useState("");
+  const [selectedClientId, setSelectedClientId] = useState("");
+  const [selectedFromStorage, setSelectedFromStorage] = useState("");
+  const [selectedToStorage, setSelectedToStorage] = useState("");
+  const [brands, setBrands] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [currentSupplies, setCurrentSupplies] = useState([]);
+  const [storages, setStorages] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [branches, setBranches] = useState([]);
+  const [clients, setClients] = useState([]);
+  const [uoms, setUOMs] = useState([]);
+  const [reason,setReason] = useState('');
+  const [stocks, setStocks] = useState([]);
+  const [supplyLines, setSupplyLines] = useState([
+    {
+      md_supply_id: 0,
+      md_product_id: 0,
+      qty: 0,
+      md_product_units_id: "base",
+    },
+  ]);
+  const clientsOptions =
+    clients != undefined &&
+    clients?.map((item) => ({
+      label: item.name,
+      value: item.cd_client_id,
+    }));
+  const productOptions =
+    products != undefined &&
+    products?.map((item) => ({
+      label: item.product_name,
+      value: item.md_product_id,
+    }));
+  const branchesOptions =
+    branches != undefined &&
+    branches?.map((item) => ({
+      label: item.name,
+      value: item.cd_branch_id,
+    }));
+  const brandsOptions =
+    brands != undefined &&
+    brands?.map((item) => ({
+      label: item.name,
+      value: item.cd_brand_id,
+    }));
+  const storageOptions =
+    storages != undefined &&
+    storages?.map((item) => ({
+      label: item.name,
+      value: item.cd_brand_id,
+    }));
+  const uomsOptions =
+    uoms != undefined &&
+    uoms?.map((item) => ({
+      label: item.name,
+      value: item.cd_brand_id,
+    }));
   const Closehandle = () => {
     close(false);
   };
+  const isValidDate = (current) => {
+    return current.isSame(currentDate, "day");
+  };
   const handleMultiSelect = () => {
     close(!open);
+  };
+  useEffect(() => {
+    fetchClients();
+    fetchBrands();
+    fetchBranches();
+    fetchProducts();
+    fetchStorage();
+    fetchUom()
+      .then(() => setLoading(false))
+      .catch((error) => {
+        console.error("Error fetching supply data", error);
+      });
+    // if (location.state?.id) {
+    //   fetchStorageById(location.state?.id);
+    //   setEditStorageId(location.state?.id);
+    //   setAction(location.state?.action);
+    // }
+  }, [location.state]);
+  const fetchUom = async () => {
+    try {
+      const res = await axiosInstance.get("/uom");
+      setUOMs(res.data.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const fetchProducts = async () => {
+    try {
+      const res = await axiosInstance.get("/product");
+      setProducts(res.data.products.data);
+      console.log("setProducts", res.data.products.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const fetchStorage = async () => {
+    try {
+      const res = await axiosInstance.get("/md_storage");
+      setStorages(res.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const fetchClients = async () => {
+    try {
+      const res = await axiosInstance.get("/cdclients");
+      console.log(res.data, "cdclients");
+      setClients(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const fetchBranches = async () => {
+    try {
+      const res = await axiosInstance.get("/cdbranch");
+      console.log(res.data, "cdbranch");
+      setBranches(res.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const fetchBrands = async () => {
+    try {
+      const res = await axiosInstance.get("/cdbrand");
+      setBrands(res.data);
+      console.log(res.data, "cdbrand");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+
+  const fetchStocks = async (storageid) => {
+    try {
+      const response = await axiosInstance.get("/get_stock");
+      const stockData = response.data.data;
+      
+      let filteredStock = stockData.filter((stock) => stock.storage_id === storageid)
+      const stocksWithDetails = await Promise.all(
+        filteredStock.map(async (stock) => {
+          const mdProductId = stock.md_product_id;
+          const mdStorageId = stock.md_storage_id;
+
+          const productResponse = await axiosInstance.get(
+            `/product/${mdProductId}/edit`
+          );
+          const storageResponse = await axiosInstance.get(
+            `/md_storage/${mdStorageId}/edit`
+          );
+
+          return {
+            ...stock,
+            productName: productResponse.data.product_name,
+            productPrice: productResponse.data.product_price,
+            storageName: storageResponse.data.name,
+          };
+        })
+      );
+      setStocks(stocksWithDetails);
+      // setIsLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
   };
   const handleAddBox = (id) => {
     const nextIndex = boxes.length;
@@ -65,6 +242,88 @@ export default function TransferCreate() {
     setNumBoxes(numBoxes - 1);
   };
 
+
+  const handleCreateTransfers = () => {
+    let timeCurrent = selectedDateTime.format("YYYY-MM-DD HH:mm:ss");
+    delete supplyLines.unitsOptions;
+
+    let currentSupplies_ = {
+      cd_client_id: selectedClientId,
+      cd_brand_id: selectedBrandId,
+      cd_branch_id: selectedBranchId,
+      operation_time: timeCurrent,
+      md_from_storage_id: selectedFromStorage,
+      md_to_storage_id: selectedToStorage,
+      created_by: "1",
+      updated_by: "1",
+      lines: supplyLines,
+    };
+    console.log(currentSupplies_,'currentSupplies_');
+    return
+    axiosInstance
+      .post(`/md_supplies`, currentSupplies_)
+      .then((response) => {
+        toast.success("Supplies updated successfully", {
+          position: "top-right",
+          autoClose: 3000,
+        });
+        console.log("Supplies updated successfully", response.data);
+      })
+      .catch((error) => {
+        toast.error("Error updating supplies", {
+          position: "top-right",
+          autoClose: 3000,
+        });
+        console.error("Error updating supplies", error);
+      });
+  };
+  const handleUpdateTransfers = (editSuppliesId) => {
+    let timeCurrent = selectedDateTime.format("YYYY-MM-DD HH:mm:ss");
+    delete supplyLines.unitsOptions;
+        let currentSupplies_ = {
+      cd_client_id: selectedClientId,
+      cd_brand_id: selectedBrandId,
+      operation_time: timeCurrent,
+      cd_branch_id: selectedBranchId,
+      md_from_storage_id: selectedFromStorage,
+      md_to_storage_id: selectedToStorage,
+      created_by: "1",
+      updated_by: "1",
+      lines: supplyLines,
+    };
+    // console.log(currentSupplies_,'currentSupplies_');
+    // return
+    axiosInstance
+      .post(`/md_supplies/update/${editSuppliesId}`, currentSupplies_)
+      .then((response) => {
+        toast.success("Supplies updated successfully", {
+          position: "top-right",
+          autoClose: 3000,
+        });
+        console.log("Supplies updated successfully", response.data);
+      })
+      .catch((error) => {
+        toast.error("Error updating supplies", {
+          position: "top-right",
+          autoClose: 3000,
+        });
+        console.error("Error updating supplies", error);
+      });
+  };
+
+  const handleDateChange = (date) => {
+    setSelectedDateTime(date);
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (action == "updateSupplies") {
+      handleUpdateTransfers(location.state.id);
+    } else {
+      handleCreateTransfers();
+    }
+  };
+
   return (
     <div>
       <PageLayout>
@@ -72,52 +331,145 @@ export default function TransferCreate() {
           <Col md={12}>
             <CardLayout>
               <Row>
-          <Col md={12}>
-          Transfer Create
-          <Link style={{ marginLeft:"67%", backgroundColor:"black",padding:"5px 15px", borderRadius:"5px"}}>
+                <Col md={12}>
+                  Transfer Create
+                  <Link
+                    style={{
+                      marginLeft: "67%",
+                      backgroundColor: "black",
+                      padding: "5px 15px",
+                      borderRadius: "5px",
+                    }}
+                  >
                     <Button
-                    className="btnsub"
-                    // style={{padding:"7px 15px"}}
+                      className="btnsub"
+                      // style={{padding:"7px 15px"}}
                       // className="acc-create-btn rs-btn-create"
-                
+                      onClick={(e) => handleSubmit(e)}
+
                     >
                       Submit
                     </Button>
                   </Link>
-                  <Link to={"/transfers"} className='btnback'> <button className="btnlk"> Back</button></Link>
-          </Col>
+                  <Link to={"/transfers"} className="btnback">
+                    {" "}
+                    <button className="btnlk"> Back</button>
+                  </Link>
+                </Col>
                 <Col md={12}>
                   <Row>
-                    <Col md={6} className="cus-col-mt">
-                      <LabelField
-                        label="From storage"
-                      className="wfield"
-                        option={[
-                          "Select form storage",
-                          "Return",
-                          "Bar storage",
-                          "Back Store",
-                        ]}
-                        // fieldSize="w-100 h-md"
+                    <Col md={6}>
+                      <SelectField
+                        // className="w-50"
+                        label="Client"
+                        name="cd_client_id"
+                        className="wfield"
+                        options={clientsOptions}
+                        value={selectedClientId}
+                        onChange={(e) =>
+                          setSelectedClientId(
+                            e.target.value,
+                          )
+                        }
+                      />
+                    </Col>
+                    <Col md={6}>
+                      <SelectField
+                        required
+                        label="Brand"
+                        name="brand"
+                        type="select"
+                        title="Brand"
+                        className="wfield"
+                        options={brandsOptions}
+                        value={selectedBrandId}
+                        onChange={(e) =>
+                          setSelectedBrandId(
+                            e.target.value,
+                          )
+                        }
+                      />
+                    </Col>
+                    <Col md={6}>
+                      <SelectField
+                        required
+                        className="wfield"
+                        label="Branch"
+                        name="branch"
+                        type="select"
+                        title="Branch"
+                        options={branchesOptions}
+                        value={selectedBranchId}
+                        onChange={(e) =>
+                          setSelectedBranchId(
+                             e.target.value,
+                          )
+                        }
                       />
                     </Col>
                     <Col md={6} className="cus-col-mt">
-                      <LabelField
-                      className="wfield"
-                        label="Storage"
-                        option={["Return", "Bar storage", "Back Store"]}
-                        fieldSize="w-100 h-md"
+                      <SelectField
+                        required
+                        className="wfield"
+                        label="From Storage"
+                        name="from_storage"
+                        type="select"
+                        title="From Storage"
+                        options={storageOptions}
+                        value={selectedFromStorage}
+                        onChange={(e) =>
+                          setSelectedFromStorage(
+                          e.target.value,
+                          fetchStocks(e.target.value)
+                          )
+                        }
                       />
                     </Col>
                     <Col md={6} className="cus-col-mt">
-                      <Row >
-                        <Col md={10}  >
-                          <CalenderField style={{width:"80%"}} label={"Operation time"} />
+                      <SelectField
+                        required
+                        className="wfield"
+                        label="To Storage"
+                        name="to_storage"
+                        type="select"
+                        title="To Storage"
+                        options={storageOptions}
+                        value={selectedToStorage}
+                        onChange={(e) =>
+                          setSelectedToStorage(
+                            e.target.value,
+                          )
+                        }
+                      />
+                    </Col>
+                    <Col md={6} className="cus-col-mt">
+                      <Row>
+                        <Col md={6}>
+                        <Form.Label>OPERATION TIME</Form.Label>
+                  <Datetime
+                  className="mfield"
+                  style={{width:"100% !important" }}
+                    value={selectedDateTime}
+                    onChange={handleDateChange}
+                    dateFormat="YYYY-MM-DD"
+                    isValidDate={isValidDate}
+                    timeFormat="HH:mm"
+                  />
                         </Col>
                       </Row>
                     </Col>
                     <Col md={6} className="cus-col-mt">
-                      <LabelField className="wfield" type={"text"} label={"Reason"} />
+                      <LabelField
+                        className="wfield"
+                        type={"text"}
+                        label={"Reason"}
+                        value={reason}
+                        onChange={(e) =>
+                          setReason(
+                            e.target.value,
+                          )
+                        }
+                      />
                     </Col>
                   </Row>
                 </Col>
@@ -129,23 +481,73 @@ export default function TransferCreate() {
 
                     <Box className={"Xmark"}> </Box>
                   </Box>
-                  <Box className={"product-add-boxes"}>
-                    <Box className={"product"}>
-                      {" "}
-                      <LabelField option={["Select"]} className="wfield" fieldSize="w-100 h-md" />
-                    </Box>
-                    <Box className={"Unit"}>
-                      {" "}
-                      <LabelField option={["Select"]}  fieldSize="w-100 h-md" />
-                    </Box>
-                    <Box
-                      className={"Qty"}
-                      style={{ backgroundColor: "#f0f0f0" }}
-                    >
-                      {" "}
-                      <CusField placeholder={"0"}  />{" "}
-                    </Box>
-                  </Box>
+
+                  {supplyLines.map((supply, index) => {
+                      return (
+                        <Box className={"product-add-boxes"}>
+                        <Box className={"product"}>
+                          {" "}
+                          <Form.Group>
+                            <Form.Control
+                              className="lfield"
+                              as="select"
+                              name="productid"
+                              type="select"
+                              // value={supply.md_product_id} // Set the value to preselect
+                              // onChange={(e) => {
+                              //   handleSupplyFieldsChange(
+                              //     e,
+                              //     index,
+                              //     "md_product_id"
+                              //   );
+                              // }}
+                            >
+                              <option value="">Select</option>
+                              {productOptions.map((option) => (
+                                <option key={option.value} value={option.value}>
+                                  {option.label}
+                                </option>
+                              ))}
+                            </Form.Control>
+                          </Form.Group>
+                        </Box>
+                        <Box className={"Unit"}>
+                          {" "}
+                          <Form.Group>
+                            <Form.Control
+                              className="lfield"
+                              as="select"
+                              name="productid"
+                              type="select"
+                              // value={supply.md_product_id} // Set the value to preselect
+                              // onChange={(e) => {
+                              //   handleSupplyFieldsChange(
+                              //     e,
+                              //     index,
+                              //     "md_product_id"
+                              //   );
+                              // }}
+                            >
+                              <option value="">Select</option>
+                              {uomsOptions.map((option) => (
+                                <option key={option.value} value={option.value}>
+                                  {option.label}
+                                </option>
+                              ))}
+                            </Form.Control>
+                          </Form.Group>
+                        </Box>
+                        <Box
+                          className={"Qty"}
+                          style={{ backgroundColor: "#f0f0f0" }}
+                        >
+                          {" "}
+                          <CusField placeholder={"0"} />{" "}
+                        </Box>
+                      </Box>
+                    );
+                  })}
+
                 </Col>
                 <Col md={12}>
                   {boxes.map((box, index) => {

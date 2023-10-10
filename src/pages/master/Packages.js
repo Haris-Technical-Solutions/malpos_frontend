@@ -69,14 +69,15 @@ const [conversionToDelete, setConversionToDelete] = useState(null);
   };
   const fetchUnitConversions = async () => {
     try {
-      const response = await axiosInstance.get(`/md_uom_conversions`,{
+      const response = await axiosInstance.get(`/uom_conversion`,
+      {
         params:{
           search: searchTerm,
       page:currentPage
         }
       }
       );
-      const unitConversionsData = response.data.data.data;
+            const unitConversionsData = response.data.data.data;
 
       if (Array.isArray(unitConversionsData)) {
         const updatedUnitConversions = await Promise.all(
@@ -116,8 +117,7 @@ const [conversionToDelete, setConversionToDelete] = useState(null);
   const confirmDelete = async () => {
     if (conversionToDelete) {
       try {
-        await axiosInstance.delete(`/md_uom_conversions/${conversionToDelete}`);
-        fetchUnitConversions();
+        await axiosInstance.delete(`/uom_conversion/${conversionToDelete}`);
         toast.success("Conversion deleted successfully", {
           autoClose: false,
           closeButton: true,
@@ -125,6 +125,7 @@ const [conversionToDelete, setConversionToDelete] = useState(null);
       } catch (error) {
         console.log(error);
       } finally {
+        fetchUnitConversions();
         setConversionToDelete(null);
         setShowDeleteModal(false);
       }
