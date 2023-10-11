@@ -59,6 +59,7 @@ const [currentPage, setCurrentPage] = useState(1);
 
   useEffect(() => {
 fetchCustomer()
+fetchCustomerGroupNameById()
   }, [searchTerm,currentPage]);
 
 
@@ -79,8 +80,19 @@ fetchCustomer()
         search: searchTerm,
         page: currentPage,
       },});
-
-      setCustomers(response.data);
+      const updatedCustomers = await Promise.all(
+        response.data.map(async (customer) => {
+          const groupName = await fetchCustomerGroupNameById(customer.group);
+          const updatedCustomer = {
+            ...customer,
+            group: groupName || "N/A", 
+          };
+          console.log("Updated Customer:", updatedCustomer); 
+          return updatedCustomer;
+        })
+      );
+  
+      setCustomers(updatedCustomers);
       // const totalItems= response.total; 
     setTotalNumber(response.data.total);
     } catch (error) {
@@ -90,7 +102,17 @@ fetchCustomer()
       setIsLoading(false);
     }
   };
-
+  const fetchCustomerGroupNameById = async (id) => {
+    try {
+      const res = await axiosInstance.get(`/md_customer_group/${id}/edit`);
+      console.log("Group Name Response:", res.data.group_name);
+      return res.data.group_name;
+    
+    } catch (error) {
+      console.log(error);
+      return null;
+    }
+  };
 
   // const fetchCustomer = async () => {
   //   setIsLoading(true);
@@ -272,16 +294,17 @@ console.log(customers);
                             {sortOrder === "asc" ? "▲" : "▼"}
                           </button>
                         </th>
+                        {/* <th style={{ fontSize: "8px" }}>Code</th> */}
                         <th style={{ fontSize: "8px" }}>Phone</th>
                         <th style={{ fontSize: "8px" }}>address</th>
                         <th style={{ fontSize: "8px" }}>E-mail</th>
-                        <th style={{ fontSize: "8px" }}> Balance</th>
+                        {/* <th style={{ fontSize: "8px" }}> Balance</th> */}
                         <th style={{ fontSize: "8px" }}> Description</th>
                         <th style={{ fontSize: "8px" }}>DOB</th>
                         <th style={{ fontSize: "8px" }}> gender</th>
                         <th style={{ fontSize: "8px" }}> Group</th>
                         <th style={{ fontSize: "8px" }}>Active</th>
-                        <th style={{ fontSize: "8px" }}>Source</th>
+                        {/* <th style={{ fontSize: "8px" }}>Source</th> */}
                         <th style={{ fontSize: "8px" }}>Country</th>
                         <th style={{ fontSize: "8px" }}>City</th>
                         <th style={{ fontSize: "8px" }}>Action</th>
@@ -323,17 +346,17 @@ console.log(customers);
                           customers.map((customer)=>(
                       <tr style={{ fontSize: "10px" }} key={customer.id}>
                         <td className="td-w220 fw-bold "><Link className="link" to={'/marketing-customer-details'}> {customer.name} </Link></td>
+                        {/* <td>{customer.code}</td> */}
                         <td>{customer.phone}</td>
                         <td>{customer.address}</td>
                         <td>{customer.email}</td>
-                        <td>25.00 </td>
+                        {/* <td>25.00 </td> */}
                         <td>{customer.description}</td>
                         <td>{customer.dob}</td>
                         <td>{customer.gender}</td>
-                        <td>{customer.group_label}</td>
-                        <td>--</td>
+                        <td style={{ fontSize: "10px" }}> {customer.group_name !== null && customer.group_name !== undefined ? customer.group_name : 'N/A'}</td>
+                        {/* <td>--</td> */}
                         <td>{customer.is_active} </td>
-                        
                         <td>{customer.country}</td>
                         <td>{customer.city}</td>
                         <td>
