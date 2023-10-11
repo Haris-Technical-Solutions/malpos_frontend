@@ -159,9 +159,9 @@ const brandsOptions =
               <Row>
        <Col md={12} style={{display:"inline-flex"}}>
             {action === "create" ? "Create Customer Group" : "Update Customer Group"}
-                  <button type='button' className='add-product-btn-pl' style={{marginLeft:"57%",backgroundColor:"black"}} variant="dark" onClick={handleUpdateCustomergroup}  >
+                 <Link to={"/customer-group"}  style={{marginLeft:"57%"}}> <button type='button' className='add-product-btn-pl' style={{backgroundColor:"black"}} variant="dark" onClick={handleUpdateCustomergroup}  >
                   {action === 'create' ? 'Create' : 'Update'}
-                  </button>
+                  </button></Link>
                 
               
                 {/* <Link  style={{marginLeft:"57%"}}>

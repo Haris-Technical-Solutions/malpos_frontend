@@ -97,6 +97,7 @@ const [currentPage, setCurrentPage] = useState(1);
           } catch (error) {
             console.log(error);
           }
+          setShowDeleteModal(false);
       };}
     
       const cancelDelete = () => {
