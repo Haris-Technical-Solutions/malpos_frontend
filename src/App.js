@@ -307,14 +307,14 @@ export default function App() {
                     //</RequireAuth>
                   }
                 />
-                {/* <Route
+                <Route
                 path="/create-menus"
                 element={
                   //<RequireAuth>
                     <CreateMenus />
                   //</RequireAuth>
                 }
-              /> */}
+              />
                 <Route
                   path="/create-menu-modifier"
                   element={

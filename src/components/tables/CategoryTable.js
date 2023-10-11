@@ -16,10 +16,23 @@ import { Link } from "react-router-dom";
 export default function CategoryTable({ thead, tbody }) {
   const [alertModal, setAlertModal] = useState(false);
   const [data, setData] = useState([]);
+  const [expandedRows, setExpandedRows] = useState([]);
 
   useEffect(() => {
     setData(tbody);
   }, [tbody]);
+
+  const toggleRow = (index) => {
+    const newExpandedRows = [...expandedRows];
+    if (newExpandedRows.includes(index)) {
+      // Collapse the row by removing it from the expandedRows array
+      newExpandedRows.splice(newExpandedRows.indexOf(index), 1);
+    } else {
+      // Expand the row by adding it to the expandedRows array
+      newExpandedRows.push(index);
+    }
+    setExpandedRows(newExpandedRows);
+  };
 
   return (
     <Box className="mc-table-responsive">
@@ -33,55 +46,72 @@ export default function CategoryTable({ thead, tbody }) {
         </Thead>
         <Tbody className="mc-table-body even">
           {data?.map((item, index) => (
-            <Tr key={index}>
-              <Td>
-                <Box className="mc-table-product md">
-                  <Image src={item.src} alt={item.alt} />
-                </Box>
-              </Td>
-              <td>
-                <Box className="">
-                  {/* <Link to="/product-view" state={{ id: `${item.id}` }}> */}
-                  <Heading as="h6">{item.heading}</Heading>
-                  {/* </Link> */}
-                </Box>
-              </td>
-              <Td>
-                <Box className="mc-table-price">
-                  <td>{item.visibility}</td>
-                </Box>
-              </Td>
+            <React.Fragment key={index}>
+              <Tr>
+              <td onClick={() => toggleRow(index)} className="name-clickable">
+                  <Box className="mc-table-product md">
+                    <Image src={item.src} alt={item.alt} />
+                  </Box>
+                </td>
+                <Td className="expand-button" onClick={() => toggleRow(index)}>
+                {item.heading}
+                </Td>
 
-              <Td>{item.count}</Td>
+                <Td>
+                  <Box className="mc-table-price">
+                    <td>{item.visibility}</td>
+                  </Box>
+                </Td>
+                <Td>{item.count}</Td>
+                <Td>
+                  <Box className="mc-table-action">
+                    <Link
+                      to="/product-view"
+                      state={{ id: `${item.id}` }}
+                      title="View"
+                      className="material-icons view"
+                    >
+                      {item.action.view}
+                    </Link>
+                    <Link
+                      to={`/${item.id}`}
+                      title="Edit"
+                      className="material-icons edit"
+                    >
+                      {item.action.edit}
+                    </Link>
+                    <Button
+                      title="Delete"
+                      className="material-icons delete"
+                      onClick={() => setAlertModal(true)}
+                    >
+                      {item.action.delete}
+                    </Button>
+                  </Box>
+                </Td>
+              </Tr>
+              {expandedRows.includes(index) && (
+                <Tr>
+                  <Td>
+                  <Image style={{width:"40px"}} src={item.src} alt={item.alt} />
+                  </Td>
+                  <Td>
+                  {item.heading}
+                  </Td>
 
-              <Td>
-                <Box className="mc-table-action">
-                  <Link
-                    to="/product-view"
-                    state={{ id: `${item.id}` }}
-                    title="View"
-                    className="material-icons view"
-                  >
-                    {item.action.view}
-                  </Link>
-                  <Link
-                    to={`/${item.id}`}
-                    // href="/product-upload"
-                    title="Edit"
-                    className="material-icons edit"
-                  >
-                    {item.action.edit}
-                  </Link>
-                  <Button
-                    title="Delete"
-                    className="material-icons delete"
-                    onClick={() => setAlertModal(true)}
-                  >
-                    {item.action.delete}
-                  </Button>
-                </Box>
-              </Td>
-            </Tr>
+                  <Td>
+                  {item.visibility}
+                  </Td>
+                  <Td>
+                  {item.count}
+                  </Td>
+                  <Td>
+                   {" Content for the expanded row"}
+                    <Text>{item.additionalDetails}</Text>
+                  </Td>
+                </Tr>
+              )}
+            </React.Fragment>
           ))}
         </Tbody>
       </Table>
@@ -89,7 +119,7 @@ export default function CategoryTable({ thead, tbody }) {
       <Modal show={alertModal} onHide={() => setAlertModal(false)}>
         <Box className="mc-alert-modal">
           <Icon type="new_releases" />
-          <Heading as="h3">are your sure!</Heading>
+          <Heading as="h3">Are you sure?</Heading>
           <Text as="p">Want to delete this product?</Text>
           <Modal.Footer>
             <Button
@@ -97,14 +127,14 @@ export default function CategoryTable({ thead, tbody }) {
               className="btn btn-secondary"
               onClick={() => setAlertModal(false)}
             >
-              nop, close
+              No, close
             </Button>
             <Button
               type="button"
               className="btn btn-danger"
               onClick={() => setAlertModal(false)}
             >
-              yes, delete
+              Yes, delete
             </Button>
           </Modal.Footer>
         </Box>

@@ -47,12 +47,20 @@ export default function SuppliesEdit() {
   const [selectedDateTime, setSelectedDateTime] = useState("");
   const [invoiceNumber, setInvoicesNumber] = useState("");
   const [description, setDescription] = useState("");
+  const [balance,setBalance] = useState("");
   const [seleectedProduct, setSelectedProduct] = useState([]);
   const [suppliers, setSuppliers] = useState([]);
+  const [selectedUnit , setSelectedUnit] = ("")
   const [seletedSupplier, setSelectedSupplier] = useState([]);
   const clientsOptions =
     clients != undefined &&
     clients?.map((item) => ({
+      label: item.name,
+      value: item.cd_client_id,
+    }));
+    const uomOptions =
+    uoms != undefined &&
+    uoms?.map((item) => ({
       label: item.name,
       value: item.cd_client_id,
     }));
@@ -74,20 +82,7 @@ export default function SuppliesEdit() {
       label: item.name,
       value: item.cd_brand_id,
     }));
-  const [supplyLines, setSupplyLines] = useState([
-    {
-      md_supply_id: 0,
-      md_product_id: 0,
-      qty: 0,
-      total: 0,
-      cost: 0,
-      discount_percent: 0,
-      tax: 0,
-      uom_id: 0,
-      uom_type: "base",
-      unitsOptions: [],
-    },
-  ]);
+  const [supplyLines, setSupplyLines] = useState([]);
   useEffect(() => {
     fetchProducts();
     fetchUom();
@@ -175,6 +170,8 @@ export default function SuppliesEdit() {
     await Promise.all(
       supplies.map(async (item) => {
         const unitsOptions = await fetchUomConversions(item.md_product_id);
+        debugger
+        console.log(unitsOptions,'options')
         let tempData = {
           md_supply_id: item.md_supply_id,
           md_product_id: item.md_product_id,
@@ -183,8 +180,7 @@ export default function SuppliesEdit() {
           cost: item.cost,
           discount_percent: item.discount_percent,
           tax: item.tax,
-          uom_id: item.uom_id,
-          uom_type: "base",
+          uom_id: 1,
           unitsOptions: unitsOptions,
         }
         return tempData
@@ -194,6 +190,17 @@ export default function SuppliesEdit() {
     return suppliesOptions
     // Now suppliesOptions contains the resolved data.
   
+  };
+
+  const fetchUomById = async (id) => {
+    try {
+      const res = await axiosInstance.get(`/uom/${id}/edit`);
+      console.log(res.data, "response here is upom");
+      setUOMs([res.data.data])
+      return res;
+    } catch (error) {
+      console.log(error);
+    }
   };
   const productOptions =
     products != undefined &&
@@ -234,6 +241,7 @@ export default function SuppliesEdit() {
   };
 
   const fetchProducts = async () => {
+    debugger
     try {
       const res = await axiosInstance.get("/product");
       setProducts(res.data.products.data);
@@ -244,19 +252,8 @@ export default function SuppliesEdit() {
   };
   const fetchUomConversions = async (id) => {
     const res = await axiosInstance.get(`/uom/get_units_by_product/${id}`);
-    const uniqueId = Date.now();
-    const mergedArray = [
-      {
-        uniqueid: uniqueId,
-        name: res.data.data.name,
-        md_uoms_id: res.data.data.md_uoms_id,
-      },
-      ...res.data.data.conversions.map((conversion) => ({
-        ...conversion,
-        uniqueid: uniqueId,
-      })),
-    ];
-    return mergedArray;
+
+    return res;
   };
   const fetchUom = async () => {
     try {
@@ -285,7 +282,6 @@ export default function SuppliesEdit() {
       tax: 0,
       total: 0,
       uom_id: "",
-      uom_type: "base",
     };
     const updatedSupplyLines = [...supplyLines];
     updatedSupplyLines.push(newSupplyLine);
@@ -307,6 +303,13 @@ export default function SuppliesEdit() {
     delete supplyLines.unitsOptions;
     console.log(selectedDateTime);
     const formattedDate = momentObject.format("YYYY-MM-DD HH:mm");
+    const updatedSupplyLines = supplyLines.map(line => ({
+      ...line,
+      "md_uom_id": line.uom_id,
+      uom_id: undefined
+    }));
+  
+  
     let currentSupplies_ = {
       cd_client_id: selectedClientId,
       cd_brand_id: selectedBrandId,
@@ -316,12 +319,12 @@ export default function SuppliesEdit() {
       md_supplier_id: seletedSupplier,
       md_storage_id: selectedStorage,
       status: selectedStatus,
-      balance: null,
+      balance: currentSupplies.balance,
       category: null,
       description: description,
       created_by: "1",
       updated_by: "1",
-      lines: supplyLines,
+      lines: updatedSupplyLines,
     };
     // console.log(currentSupplies_,'currentSupplies_');
     // return
@@ -344,27 +347,33 @@ export default function SuppliesEdit() {
   };
   const handleCreateSupplies = () => {
     let timeCurrent = selectedDateTime.format("YYYY-MM-DD HH:mm:ss");
-    delete supplyLines.unitsOptions;
-
+    const updatedSupplyLines = supplyLines.map(line => ({
+      ...line,
+      "md_uom_id": line.uom_id,
+      uom_id: undefined
+    }));
     let currentSupplies_ = {
       cd_client_id: 1,
       cd_brand_id: 1,
       cd_branch_id: 1,
 
       invoice_no: invoiceNumber,
-    operation_time: timeCurrent,
+      operation_time: timeCurrent,
       md_supplier_id: 1,
       md_storage_id: selectedStorage,
       status: selectedStatus,
       balance: null,
       category: null,
+      balance: balance,
       description: description,
       created_by: "1",
       updated_by: "1",
-      lines: supplyLines,
+      lines: updatedSupplyLines,
     };
     // console.log(currentSupplies_,'currentSupplies_');
     // return
+    // const jsonData = JSON.stringify(currentSupplies_);
+
     axiosInstance
       .post(`/md_supplies`, currentSupplies_)
       .then((response) => {
@@ -422,8 +431,16 @@ export default function SuppliesEdit() {
     return qty * cost - discount + tax;
   };
   const handleSupplyFieldsChange = (event, index, fieldName) => {
+    debugger
+    // debugger
     const { value } = event.target;
 
+    if(fieldName == "md_product_id"){
+      let pro = products.filter((p) => p.md_product_id == value)
+      console.log(pro,'pro is here')
+
+      fetchUomById(pro[0].md_uom_id)
+    }
     // Clone the supplyLines array
     const updatedSupplyLines = [...supplyLines];
     // Update the field
@@ -434,6 +451,7 @@ export default function SuppliesEdit() {
     // Update the state
     setSupplyLines(updatedSupplyLines);
   };
+
 let handleChangeFlag = 0
   const handleUnitOptionsChange = (event, index) => {
     handleChangeFlag = 1
@@ -649,7 +667,7 @@ let handleChangeFlag = 0
                     label="Balance"
                     type="text"
                     className="wfield"
-                    value={currentSupplies && currentSupplies?.balance}
+                    onChange={(e) => setBalance(e.target.value)}
                     placeholder={"Balance"}
                   />
                 </Col>
@@ -723,18 +741,20 @@ let handleChangeFlag = 0
                                 type="select"
                                 value={supply.uom_id} // Set the value to preselect
                                 onChange={(e) => 
-                                  handleUnitOptionsChange(e.target.value, index)
+                                  handleSupplyFieldsChange( e,
+                                    index,
+                                    "uom_id")
                                 }
                               >
                                 <option value="">Select</option>
-                                {supply.unitsOptions &&
-                                  supply.unitsOptions.length > 0 &&
-                                  supply.unitsOptions.map((item) => (
+                                {uomOptions &&
+                                  uomOptions.length > 0 &&
+                                  uomOptions.map((option) => (
                                     <option
-                                      key={item}
-                                      value={JSON.stringify(item)}
+                                    key={option.value}
+                                    value={option.value}
                                     >
-                                      {item.name}
+                                     {option.label}
                                     </option>
                                   ))}
                               </Form.Control>

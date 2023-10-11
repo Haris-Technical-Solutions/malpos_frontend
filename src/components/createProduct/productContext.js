@@ -132,9 +132,10 @@ export const ProductProvider = ({ children }) => {
     }
   };
   const fetchUom = async () => {
+    debugger
     try {
       const res = await axiosInstance.get("/uom");
-      const formattedData = formatData(res.data.data.data, "md_uoms_id");
+      const formattedData = formatData(res.data.data.data, "md_uom_id");
       setUOMs(formattedData);
       console.log("uom details", res.data.data.data);
     } catch (error) {
@@ -474,6 +475,7 @@ export const ProductProvider = ({ children }) => {
   };
 
   const handleUomChange = (e) => {
+    debugger
     setForm((prevForm) => ({
       ...prevForm,
       md_uom_id: e.target.value,

@@ -341,9 +341,9 @@ export default function CreateProduct() {
                         <Col md={3}>
                           <SelectField
                             label="Unit of Measurement"
-                            name="md_uoms_id"
+                            name="md_uom_id"
                             options={UOMs}
-                            value={form.md_uoms_id}
+                            value={form.md_uom_id}
                             onChange={handleUomChange}
                           />
                         </Col>

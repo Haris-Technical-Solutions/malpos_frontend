@@ -77,19 +77,24 @@ const [conversionToDelete, setConversionToDelete] = useState(null);
         }
       }
       );
+      debugger
             const unitConversionsData = response.data.data.data;
-
       if (Array.isArray(unitConversionsData)) {
         const updatedUnitConversions = await Promise.all(
           unitConversionsData.map(async (conversion) => {
-            const uomId = conversion.md_uom_id;
-
-            const uomResponse = await fetchUomById(uomId);
-
-            const { name } = uomResponse.data.data;
+            let baseUnit = await fetchUomById(conversion.md_product_units_id)
+            console.log(baseUnit,'base====')
+            let uom_from ='KGram' 
+            if(!baseUnit.data.error && baseUnit.data.data !=undefined){
+              uom_from = baseUnit.data.data.name
+            }
+            const { uom_to_name } = conversion.conversion;
+            const { product_name } = conversion.product;
             return {
               ...conversion,
-              uom_name: name,
+               uom_to_name: uom_to_name,
+              product_name: product_name,
+              uom_from_name:uom_from,
             };
           })
         );
@@ -242,10 +247,11 @@ const [conversionToDelete, setConversionToDelete] = useState(null);
                                     {conversion.uom_to_name}
                                   </td>
                                   <td className="td-w30">
-                                    {conversion.multiply_rate}
+                                    {/* {conversion.conversion[0].multiply_rate} */}
+                                    sample value
                                   </td>
                                   <td className="td-w30">
-                                    {conversion.uom_name}
+                                    {conversion.uom_from_name}
                                   </td>
                                   <td className="td-w10">
                                     <Row>
@@ -274,7 +280,7 @@ const [conversionToDelete, setConversionToDelete] = useState(null);
                                             )
                                           }
                                         >
- <FontAwesomeIcon
+                   <FontAwesomeIcon
                                   icon={faTrash}
                                   color="#ee3432"
                                   />                                        </Button>
