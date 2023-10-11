@@ -13,30 +13,32 @@ import { useLocation } from 'react-router-dom';
 export default function MCustomerCreate() {
    
   const location = useLocation();
+  const [countries, setCountries] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [gender, setGender] = useState('Male'); 
   const [editcustomerId, setEditcustomerId] = useState();  
     const [unitData, setUnitData] = useState({
         cd_client_id: 1,
         cd_brand_id: 1,
         cd_branch_id: 1,
-        md_customer_group_id:1,
+        md_customer_group_id:2,
         name: "",
-        code: "",
         email: "",
         address:"",
         phone: "",
         description: "",
-        country:1,
-        gender:"",
+        country:"",
+        gender:gender,
          city:"",
         dob:"",
         is_active:"1",
         created_by: "1",
         updated_by: "1",
       });
+
       const [brands, setBrands] = useState([]);
       const [action, setAction] = useState('create');
       const [branches, setBranches] = useState([]);
-      const [countries, setCountries] = useState([]);
       const [customergroupid, setCustomergroupid] = useState([]);
       const [clients, setClients] = useState([]);
       const clientsOptions =
@@ -66,9 +68,18 @@ export default function MCustomerCreate() {
     const Countriesoption =
       countries != undefined &&
       countries?.map((item) => ({
-        label: item.name,
-        value: item.gd_country_id,
+        label: item.country_name,
+        value: item.cities,
       }));
+    const Cityoption =
+      cities != undefined &&
+      cities?.map((item) => ({
+        label: item.cities,
+        value: item.cities,
+      }));
+    const handleGenderChange = (e) => {
+      setGender(e.target.value);
+    };
     
       const fetchcustomerById = async (id) => {
         try {
@@ -80,9 +91,9 @@ export default function MCustomerCreate() {
       };
      const fetchCountries = async () => {
         try {
-          const res = await axiosInstance.get("/gd_countries");
-          console.log(res.data, "gd_countries");
-          setCountries(res.data);
+          const res = await axiosInstance.get("/get_country");
+          console.log(res.data,"get_country");
+          setCountries(res.data); 
         } catch (error) {
           console.log(error);
         }
@@ -93,6 +104,15 @@ export default function MCustomerCreate() {
           const res = await axiosInstance.get("/cdclients");
           console.log(res.data, "cdclients");
           setClients(res.data);
+        } catch (error) {
+          console.log(error);
+        }
+      };
+      const fetchCity = async () => {
+        try {
+          const res = await axiosInstance.get("/get_city/Pakistan");
+          console.log(res.data, "city");
+          setCities(res.data);
         } catch (error) {
           console.log(error);
         }
@@ -129,6 +149,7 @@ export default function MCustomerCreate() {
         fetchClients();
         fetchBrands();
         fetchCountries();
+        fetchCity()
         fetchcustomergroupid()
         fetchBranches();
         if (location.state?.id) {
@@ -138,8 +159,21 @@ export default function MCustomerCreate() {
         }
       }, [location.state]);
       
+ const [errors, setErrors] = useState({}); 
+
+  const isEmailValid = (email) => {
+    const emailPattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/;
+    return emailPattern.test(email);
+  };
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
+
+ if (name === 'email' && !isEmailValid(value)) {
+      setErrors({ ...errors, [name]: '*Invalid email format' });
+    } else {
+      setErrors({ ...errors, [name]: '' });
+    }
 
     setUnitData((prevData) => ({
       ...prevData,
@@ -150,19 +184,18 @@ export default function MCustomerCreate() {
   const handleUpdateCustomer = () => {
     const updatedcustomerData = {
       name: unitData.name,
-      code:unitData.code,
       email: unitData.email,
       address:unitData.address,
       phone: unitData.phone,
       description: unitData.description,
-      country:unitData.gd_country_id,
+      country: unitData.country,
       gender:unitData.gender,
        city:unitData.city,
       dob:unitData.dob,
       is_active:"1",
       created_by: "1",
       updated_by: "1",
-      md_customer_group_id:unitData.id,
+      md_customer_group_id:unitData.md_customer_group_id,
       cd_branch_id: unitData.cd_branch_id,
       cd_brand_id: unitData.cd_brand_id,
       cd_client_id: unitData.cd_client_id,
@@ -213,9 +246,9 @@ export default function MCustomerCreate() {
                     <Col md={12} style={{display:"inline-flex"}} >
                             {action === "create" ? "Create Customer" : "Update Customer"}
             
-                  <button  className='add-product-btn-pl' style={{marginLeft:"60%", backgroundColor:"black"}} onClick={handleUpdateCustomer}>
+                <Link to={"/customer"} style={{marginLeft:"65%",}} >    <button  className='add-product-btn-pl' style={{ backgroundColor:"black"}} onClick={handleUpdateCustomer}>
                   {action === 'create' ? 'Create' : 'Update'}
-                  </button>
+                  </button></Link>
                 
               
               <Link to={"/customer"} className='btnback'> <button className="btnlk"> Back</button></Link>
@@ -238,6 +271,9 @@ export default function MCustomerCreate() {
                       value={unitData?.cd_client_id}
                       onChange={handleInputChange}
                     />
+                    {errors.cd_client_id && (
+                  <span className="error-message">{errors.cd_client_id}</span>
+                )}
                   </Col>
                   <Col md={4} >
                     <SelectField
@@ -251,6 +287,9 @@ export default function MCustomerCreate() {
                       value={unitData?.cd_brand_id}
                       onChange={handleInputChange}
                     />
+                  {errors.cd_brand_id && (
+                  <span className="error-message">{errors.cd_brand_id}</span>
+                )}
                   </Col>
                   <Col md={4}>
                     <SelectField
@@ -264,6 +303,9 @@ export default function MCustomerCreate() {
                       value={unitData?.cd_branch_id}
                       onChange={handleInputChange}
                     />
+                    {errors.cd_branch_id && (
+                  <span className="error-message">{errors.cd_branch_id}</span>
+                )}
                   </Col>
                   <Col md={4} >
                     <SelectField
@@ -277,6 +319,9 @@ export default function MCustomerCreate() {
                       value={unitData?.id}
                       onChange={handleInputChange}
                     />
+                    {errors.id && (
+                  <span className="error-message">{errors.id}</span>
+                )}
                   </Col>
                                         <Col md={4}>
                                             <LabelField type={'text'}
@@ -286,17 +331,11 @@ export default function MCustomerCreate() {
                                            onChange={handleInputChange}
                                              className="wfield"
                                              label={"Name"} />
+                                        {errors.name && (
+                  <span className="error-message">{errors.name}</span>
+                )}
                                         </Col>
-                                        <Col md={4}>
-                                            <LabelField type={'number'}
-                                             placeholder={'Code'} 
-                                             className="wfield"
-                                             value={unitData?.code}
-                                             name="code"
-                                             onChange={handleInputChange}
-                                             label={"Code"} />
-
-                                        </Col>
+                                       
                                         <Col md={4}>
                                             <LabelField type={'email'}
                                              placeholder={'Email'} 
@@ -305,7 +344,11 @@ export default function MCustomerCreate() {
                                              onChange={handleInputChange}
                                              className="wfield" 
                                              label={"Email"} />
+                                        {errors.email && (
+                  <span className="error-message" style={{color:"red", fontSize:"10px"}} >{errors.email}</span>
+                )}
                                         </Col>
+
                                         <Col md={4}>
                                             <LabelField type={'number'}
                                              placeholder={'Phone number'} 
@@ -314,6 +357,9 @@ export default function MCustomerCreate() {
                                              onChange={handleInputChange}
                                              className="wfield" 
                                              label={"Phone Number"} />
+                  {errors.phone && (
+                  <span className="error-message">{errors.phone}</span>
+                )}
                                         </Col>
                                         <Col md={4}>
                                             <LabelField type={'date'}
@@ -323,6 +369,9 @@ export default function MCustomerCreate() {
                                              onChange={handleInputChange}
                                               placeholder={'Date of Birth'} 
                                               label={"Date of Birth"} />
+                                        {errors.dob && (
+                  <span className="error-message">{errors.dob}</span>
+                )}
                                         </Col>
                                         <Col md={4}>
                                             <LabelField className="wfield"
@@ -332,36 +381,78 @@ export default function MCustomerCreate() {
 onChange={handleInputChange}
                                              placeholder={'Address'}
                                               label={'Address'}  />
+                                        {errors.address && (
+                  <span className="error-message">{errors.address}</span>
+                )}
                                         </Col>
 
-                                        <Col md={4} >
+                                        <Col md={4}>
+            <Form.Group>
+              <Form.Label>Gender</Form.Label>
+              <Form.Control
+                as="select"
+                className='wfield'
+                value={gender}
+                onChange={handleGenderChange}
+              >
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </Form.Control>
+            </Form.Group>
+          </Col>
+
+                                        <Col md={4}>
+                                            <LabelField type={'text'}
+                                             placeholder={'country'} 
+                                           value={unitData?.country}
+                                           name="country"
+                                           onChange={handleInputChange}
+                                             className="wfield"
+                                             label={"Country"} />
+                                        </Col>
+                                        <Col md={4}>
+                                            <LabelField type={'text'}
+                                             placeholder={'City'} 
+                                           value={unitData?.city}
+                                           name="city"
+                                           onChange={handleInputChange}
+                                             className="wfield"
+                                             label={"City"} />
+                                             {errors.city && (
+                  <span className="error-message">{errors.city}</span>
+                )}
+                                        </Col>
+
+                                        {/* {/* <Col md={4} >
                     <SelectField
                       className="wfield"
                       required
                       label="Country"
                       name="country"
                       type="select"
-                      title="country Name"
+                      title="country"
                       options={Countriesoption}
-                      value={unitData?.gd_country_id}
+                      value={unitData?.country}
                       onChange={handleInputChange}
                     />
-                  </Col>
-
+                  </Col> */}
                                         <Col md={4} >
-                                        <LabelFieldS                    
-                     className="wfield"
-                        label="Gender"
-                        value={unitData?.gender}
-                        name="gender"
-                        onChange={handleInputChange}
-                        option={[
-                          { label: "Male" },
-                          { label: "Female" },
-                        ]}
-                        />
-                            </Col>
+                    <SelectField
+                      className="wfield"
+                      required
+                      label="City"
+                      name="city"
+                      type="select"
+                      title="city"
+                      options={Cityoption}
+                      value={unitData?.city}
+                      onChange={handleInputChange}
+                    />
+                  </Col> 
+
+                                   
                             <Col md={4}>
+                              
                                             <LabelField type={'description'}
                                              className="wfield"
                                              value={unitData?.description}
@@ -370,33 +461,6 @@ onChange={handleInputChange}
                                               placeholder={'detail of customer'} 
                                               label={"Description"} />
                                         </Col>
-                              
-                        {/* <Col md={4}>
-                        <LabelFieldS                    
-                     className="wfield"
-                        label="Group"
-                        value={unitData?.city}
-                        name="city"
-                        onChange={handleInputChange}
-                        option={[
-                          { label: "Group A", value: null },
-                          { label: "Group B", value: null },
-                        ]}
-                        />
-                        </Col> */}
-                                        {/* <Col md={6}>
-                                            <Box className={'cus-mt-5'}>
-                                            <MultiSelectField label={'Gender'}/>
-                                            </Box>
-                                        </Col>
-                                        <Col md={6}>
-                                            <LabelTextarea label={'Description'}/>
-                                        </Col>
-                                        <Col md={6}>
-                                        <Box className={'cus-mt-5'}>
-                                            <MultiSelectField label={'Group'}/>
-                                            </Box>                         */}
-                                        {/* </Col> */}
                                     </Row>
                                 </Col>
                             </Row>
