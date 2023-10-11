@@ -19,6 +19,7 @@ export default function PackagesCreate() {
     uom_to_name: "",
     multiply_rate: "",
     md_uom_id: "",
+    divide_rate:'1',
     created_by: "1",
     updated_by: "1",
   });

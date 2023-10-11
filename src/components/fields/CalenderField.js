@@ -15,6 +15,8 @@ export default function CalenderField({ label }) {
           onChange={(date) => setSelectedDate(date)}
           showTimeSelect
           dateFormat="Pp"
+          minDate={selectedDate}
+          maxDate={selectedDate}
         />
       </Box>
     </div>
