@@ -1,19 +1,22 @@
 import React from "react";
 import { Modal, Button } from "react-bootstrap";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {faTriangleExclamation
+} from "@fortawesome/free-solid-svg-icons";
 
 function CustomModal({ show, onHide, onConfirm }) {
   return (
-    <Modal show={show} onHide={onHide}>
-      <Modal.Header  closeButton>
-        <Modal.Title >Confirm Deletion</Modal.Title>
-      </Modal.Header>
-      <Modal.Body  style={{borderBottom:"2px solid silver", fontSize:"1rem",marginTop:"1px"}}>Are you sure you want to remove this item?</Modal.Body>
+     <Modal  show={show} onHide={onHide}>
+      <Modal.Body style={{fontSize:"0.8rem",textAlign:"center"}}>
+       <FontAwesomeIcon icon={faTriangleExclamation} style={{color: "yellow",height:"4rem", width:"4rem",alignItems:"center"}} /> <br/>
+      Are You Sure?
+         </Modal.Body>
       <Modal.Footer >
-        <Button style={{padding:"10px", fontSize:"10px",border:"none",backgroundColor:"#f29b30"}}  onClick={onHide}>
-          Cancel
+         <Button style={{padding:"10px 20px", fontSize:"10px",border:"solid 1px silver",backgroundColor:"white",color:"black" }}  onClick={onHide}>
+          No
         </Button>
-        <Button style={{backgroundColor:"black",border:"none", padding:"10px", fontSize:"10px"}} onClick={onConfirm}>
-          Remove
+        <Button style={{backgroundColor:"red",border:"none", padding:"10px 20px", fontSize:"10px"}} onClick={onConfirm}>
+          Yes
         </Button>
       </Modal.Footer>
     </Modal>
