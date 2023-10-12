@@ -54,7 +54,7 @@ const [currentPage, setCurrentPage] = useState(1);
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
-    fetchCustomer();
+    // fetchCustomer();
   };
 
   useEffect(() => {
@@ -82,11 +82,12 @@ fetchCustomerGroupNameById()
       },});
       const updatedCustomers = await Promise.all(
         response.data.map(async (customer) => {
-          const groupName = await fetchCustomerGroupNameById(customer.group);
+          const groupName = await fetchCustomerGroupNameById(customer.group_name);
           const updatedCustomer = {
             ...customer,
-            group: groupName || "N/A", 
+            group_name: groupName || "N/A", 
           };
+          setCustomers((prevCustomers) => [response.data, ...prevCustomers]);
           console.log("Updated Customer:", updatedCustomer); 
           return updatedCustomer;
         })
@@ -94,10 +95,11 @@ fetchCustomerGroupNameById()
   
       setCustomers(updatedCustomers);
       // const totalItems= response.total; 
-    setTotalNumber(response.data.total);
+    setTotalNumber(response.data.length);
     } catch (error) {
       console.error("error fetching customer data",error)
       // Show error message to user here
+      
     } finally {
       setIsLoading(false);
     }
@@ -146,7 +148,7 @@ fetchCustomerGroupNameById()
           console.error("Error fetching customer data", error);
         });
         toast.success("Customer deleted successfully", {
-          autoClose: false,
+          autoClose: 3000,
           closeButton: true,
         });
       } catch (error) {

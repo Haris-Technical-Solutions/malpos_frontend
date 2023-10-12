@@ -147,7 +147,8 @@ export default function ConProductVarientTab() {
                         type="number"
                         placeholder="0"
                         label="Cost Price"
-                        fieldSize="w-100 h-md"
+                        className="wfield"
+                        // fieldSize="w-100 h-md"
                       />
                     </Col>
                     <Col md={4}>
@@ -155,7 +156,8 @@ export default function ConProductVarientTab() {
                         type="number"
                         placeholder="0"
                         label="Price"
-                        fieldSize="w-100 h-md"
+                        className="wfield"
+                        // fieldSize="w-100 h-md"
                       />
                     </Col>
                   </Row>

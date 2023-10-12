@@ -152,7 +152,6 @@ export default function MCustomerCreate() {
     fetchClients();
     fetchBrands();
     fetchCountries();
-
     fetchcustomergroupid();
     fetchBranches();
     if (location.state?.id) {
@@ -223,6 +222,7 @@ export default function MCustomerCreate() {
         });
 
         console.log("customer updated successfully", response.data);
+
       })
       .catch((error) => {
         toast.error("Error updating customer", {

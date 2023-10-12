@@ -406,20 +406,22 @@ export default function ConDishDetailsTab() {
       <Row>
         <Col md={8}>
           <Row>
-            <Col md={6}>
+            <Col md={4}>
               <LabelField
                 type="text"
                 label=" Name"
+                className="wfield"
                 fieldSize="w-100 h-md"
                 required
                 // value="Fish"
               />
             </Col>
-            <Col md={6}>
-              <LabelField type="text" label="Bardcode" fieldSize="w-100 h-md" />
+            <Col md={4}>
+              <LabelField type="text" className="wfield" label="Bardcode" fieldSize="w-100 h-md" />
             </Col>
-            <Col md={6}>
+            <Col md={4}>
               <LabelField
+              className="wfield"
                 label=" Accounting Category"
                 option={[
                   "Select Category",
@@ -431,8 +433,9 @@ export default function ConDishDetailsTab() {
                 fieldSize="w-100 h-md"
               />
             </Col>
-            <Col md={6}>
+            <Col md={4}>
               <LabelField
+              className="wfield"
                 label=" Category"
                 option={[
                   "Select Category",
@@ -445,15 +448,17 @@ export default function ConDishDetailsTab() {
               />
             </Col>
 
-            <Col md={6}>
+            <Col md={4}>
               <LabelField
+              className="wfield"
                 label="Station"
                 option={["Select Station", "Kitchen", "Hotbar", "Shisha"]}
                 fieldSize="w-100 h-md"
               />
             </Col>
-            <Col md={6}>
+            <Col md={4}>
               <LabelField
+              className="wfield"
                 type="number"
                 placeholder="Default: 1"
                 label="Maximum days of product return"
@@ -466,25 +471,28 @@ export default function ConDishDetailsTab() {
                 </p>
               )}
             </Col>
-            <Col md={6}>
+            <Col md={4}>
               <LabelField
+              className="wfield"
                 type="number"
                 placeholder="0"
                 label="Cooking time"
                 fieldSize="w-100 h-md"
               />
             </Col>
-            <Col md={6}>
+            <Col md={4}>
               <Label
+              // className="wfield"
                 for="Description"
                 style={{ color: "#403e57", fontSize: "14px" }}
               >
                 Description
               </Label>
               <textarea
+
                 style={{ fontSize: "12px" }}
                 id="description"
-                className="form-control"
+                className="form-control wfield"
                 rows={5}
               ></textarea>
             </Col>
@@ -519,7 +527,7 @@ export default function ConDishDetailsTab() {
               <MultiSelectDiets />
             </Col>
 
-            <Col md={6}>
+            <Col md={4}>
               <FormLabel>Inactive</FormLabel>
               <Form.Check type="switch" id="custom-switch" label="" />
               <Box className="basicInfo-checkBoxes">
@@ -604,7 +612,8 @@ export default function ConDishDetailsTab() {
                             <td>
                               <Col md={2}>
                                 <input
-                                  className="conProduct-input"
+
+                                  className="conProduct-input wfield"
                                   type="number"
                                   placeholder="0"
                                 />
@@ -624,7 +633,7 @@ export default function ConDishDetailsTab() {
                             <td>
                               <Col md={2}>
                                 <input
-                                  className="conProduct-input"
+                                  className="conProduct-input wfield"
                                   type="number"
                                   placeholder="0"
                                 />
@@ -671,6 +680,7 @@ export default function ConDishDetailsTab() {
                       <LabelField
                         type="number"
                         placeholder="0"
+                        className="wfield"
                         label="Cost Price"
                         fieldSize="w-100 h-md"
                         disabled
@@ -680,6 +690,7 @@ export default function ConDishDetailsTab() {
                       <LabelField
                         type="number"
                         placeholder="0"
+                        className="wfield"
                         label="Extra cost Price"
                         fieldSize="w-100 h-md"
                       />

@@ -129,7 +129,7 @@ const CreatePreparation = () => {
 
   const fetchClients = async () => {
     try {
-      const res = await axiosInstance.get("/cdclient");
+      const res = await axiosInstance.get("/cdclients");
       const formattedData = formatData(res.data, "cd_client_id");
       setClients(formattedData);
     } catch (error) {
@@ -298,7 +298,7 @@ const CreatePreparation = () => {
                 <Row>
                   <Col md={12}>
                     <Row>
-                      <Col md={3}>
+                      <Col md={4}>
                         <MultiSelectFieldCustom
                           required
                           error={
@@ -308,6 +308,7 @@ const CreatePreparation = () => {
                           label="Role"
                           name="cd_client_id"
                           title="Client"
+                          className="wfield"
                           options={clients}
                           value={formik.values.cd_client_id}
                           onChange={(selectedValues) => {
@@ -320,7 +321,7 @@ const CreatePreparation = () => {
                           onBlur={formik.handleBlur}
                         />
                       </Col>
-                      <Col md={3}>
+                      <Col md={4}>
                         <MultiSelectFieldCustom
                           required
                           error={
@@ -330,6 +331,7 @@ const CreatePreparation = () => {
                           label="Role"
                           name="cd_brand_id"
                           title="Brand"
+                          className="wfield"
                           options={brands}
                           value={formik.values.cd_brand_id}
                           onChange={(selectedValues) => {
@@ -341,7 +343,7 @@ const CreatePreparation = () => {
                           onBlur={formik.handleBlur}
                         />
                       </Col>
-                      <Col md={3}>
+                      <Col md={4}>
                         <MultiSelectFieldCustom
                           required
                           error={
@@ -349,6 +351,7 @@ const CreatePreparation = () => {
                             formik.errors.cd_branch_id
                           }
                           label="Role"
+                          className="wfield"
                           name="cd_branch_id"
                           title="Branch"
                           options={branches}
@@ -363,7 +366,7 @@ const CreatePreparation = () => {
                         />
                       </Col>
 
-                      <Col md={3}>
+                      <Col md={4}>
                         <MultiSelectFieldCustom
                           error={
                             formik.touched.md_ingredient_category_id &&
@@ -372,6 +375,7 @@ const CreatePreparation = () => {
                           label="Role"
                           name="md_ingredient_category_id"
                           title="Category"
+                          className="wfield"
                           options={ingredientCategories}
                           value={formik.values.md_ingredient_category_id}
                           onChange={(selectedValues) => {
@@ -384,12 +388,12 @@ const CreatePreparation = () => {
                         />
                       </Col>
 
-                      <Col md={3}>
+                      <Col md={4}>
                         <LabelField
-                          className="w100"
+                          className="wfield"
                           style={{
-                            border: "1px solid",
-                            borderColor: "black",
+                            // border: "1px solid",
+                            // borderColor: "black",
                             padding: "0.4rem",
                           }}
                           required
@@ -404,21 +408,22 @@ const CreatePreparation = () => {
                         />
                       </Col>
 
-                      <Col md={3}>
+                      <Col md={4}>
                         <div>
                           <label>Delete Method</label>
                           <Select
+                          className="mfield"
                             isMulti={false}
                             value={deleteMethodsOptions.find(
                               (option) =>
                                 option.value === formik.values.deleting_method
-                            )}
-                            onChange={(option) => {
-                              formik.setFieldValue(
-                                "deleting_method",
-                                option.value
-                              );
-                            }}
+                                )}
+                                onChange={(option) => {
+                                  formik.setFieldValue(
+                                    "deleting_method",
+                                    option.value
+                                    );
+                                  }}
                             options={deleteMethodsOptions}
                           />
                         </div>
@@ -429,10 +434,10 @@ const CreatePreparation = () => {
                           <div className="d-flex">
                             <input
                               type="number"
-                              className="w-100"
+                              className=" wfield"
                               style={{
-                                border: "1px solid",
-                                borderColor: "black",
+                                // border: "1px solid",
+                                // borderColor: "black",
                                 padding: "0.4rem",
                                 marginRight: "0.5rem",
                               }}
@@ -484,12 +489,12 @@ const CreatePreparation = () => {
                         </div>
                       </Col>
 
-                      <Col md={3}>
+                      <Col md={4}>
                         <LabelField
-                          className="w100"
+                          className="wfield"
                           style={{
-                            border: "1px solid",
-                            borderColor: "black",
+                            // border: "1px solid",
+                            // borderColor: "black",
                             padding: "0.4rem",
                           }}
                           label="Description"
@@ -525,7 +530,7 @@ const CreatePreparation = () => {
                           Select Ingredients for this Preparation
                         </h3>
                         <Table responsive>
-                          <thead>
+                          <thead className="thead-dark">
                             <tr>
                               <th>Ingredients</th>
                               <th>Type</th>
@@ -567,10 +572,10 @@ const CreatePreparation = () => {
                                     <td>Ingredient</td>
                                     <td>
                                       <LabelField
-                                        className="w-100"
+                                        className="wfield"
                                         style={{
-                                          border: "1px solid",
-                                          borderColor: "black",
+                                          // border: "1px solid",
+                                          // borderColor: "black",
                                           padding: "0.4rem",
                                         }}
                                         name="gross"
@@ -591,14 +596,14 @@ const CreatePreparation = () => {
                                     </td>
                                     <td>
                                       <input
-                                        className="w-50"
+                                        className="wfield"
                                         readOnly
                                         style={{
-                                          border: "1px solid",
-                                          borderColor: "black",
+                                          // border: "1px solid",
+                                          // borderColor: "black",
                                           borderRadius: "1rem",
                                           padding: "0.4rem",
-                                          backgroundColor: "lightgray",
+                                          // backgroundColor: "lightgray",
                                         }}
                                         name="gross"
                                         type="number"
@@ -615,14 +620,14 @@ const CreatePreparation = () => {
                                     </td>
                                     <td>
                                       <input
-                                        className="w-50"
+                                        className="wfield"
                                         readOnly
                                         style={{
-                                          border: "1px solid",
-                                          borderColor: "black",
+                                          // border: "1px solid",
+                                          // borderColor: "black",
                                           borderRadius: "1rem",
                                           padding: "0.4rem",
-                                          backgroundColor: "lightgray",
+                                          // backgroundColor: "lightgray",
                                         }}
                                         name="gross_cost"
                                         type="number"

@@ -44,22 +44,24 @@ export default function ConProductGeneralTab() {
   return (
     <div>
       <Row>
-        <Col md={8}>
+        <Col md={12}>
           <Row>
-            <Col md={6}>
+            <Col md={4}>
               <LabelField
                 type="text"
                 label=" Name"
-                fieldSize="w-100 h-md"
+                className="wfield"
+                // fieldSize="w-100 h-md"
                 required
                 // value="Fish"
               />
             </Col>
-            <Col md={6}>
-              <LabelField type="text" label="Bardcode" fieldSize="w-100 h-md" />
+            <Col md={4}>
+              <LabelField type="text" className="wfield" label="Bardcode"  />
             </Col>
-            <Col md={6}>
+            <Col md={4}>
               <LabelField
+className="wfield"
                 label=" Accounting Category"
                 option={[
                   "Select Category",
@@ -68,12 +70,12 @@ export default function ConProductGeneralTab() {
                   "Ice drink",
                   "Pizza",
                 ]}
-                fieldSize="w-100 h-md"
               />
             </Col>
-            <Col md={6}>
+            <Col md={4}>
               <LabelField
-                label=" Category"
+              className="wfield"
+               label=" Category"
                 option={[
                   "Select Category",
                   "Sea food",
@@ -81,20 +83,22 @@ export default function ConProductGeneralTab() {
                   "Ice drink",
                   "Pizza",
                 ]}
-                fieldSize="w-100 h-md"
+                // fieldSize="w-100 h-md"
               />
             </Col>
 
-            <Col md={6}>
+            <Col md={4}>
               <LabelField
+              className="wfield"
                 label="Station"
                 option={["Select Station", "Kitchen", "Hotbar", "Shisha"]}
-                fieldSize="w-100 h-md"
+                // fieldSize="w-100 h-md"
               />
             </Col>
 
-            <Col md={6}>
+            <Col md={4}>
               <LabelField
+              className="wfield"
                 label="Taxes"
                 option={[
                   "Select Tax",
@@ -102,15 +106,16 @@ export default function ConProductGeneralTab() {
                   "VAT 20%",
                   "Tobacco Tax 100%",
                 ]}
-                fieldSize="w-100 h-md"
+                // fieldSize="w-100 h-md"
               />
             </Col>
-            <Col md={6}>
+            <Col md={4}>
               <LabelField
                 type="number"
+                className="wfield"
                 placeholder="Default: 1"
                 label="Maxium day of product return"
-                fieldSize="w-100 h-md"
+                // fieldSize="w-100 h-md"
                 onChange={handleChange}
               />
               {errorMessage && (
@@ -204,7 +209,7 @@ export default function ConProductGeneralTab() {
                             <td>
                               <Col md={2}>
                                 <input
-                                  className="conProduct-input"
+                                  className="conProduct-input "
                                   type="number"
                                   placeholder="0"
                                 />
@@ -271,16 +276,18 @@ export default function ConProductGeneralTab() {
                       <LabelField
                         type="number"
                         placeholder="0"
+                        className="wfield"
                         label="Cost Price"
-                        fieldSize="w-100 h-md"
+                        // fieldSize="w-100 h-md"
                       />
                     </Col>
                     <Col md={4}>
                       <LabelField
                         type="number"
+                        className="wfield"
                         placeholder="0"
                         label="Price"
-                        fieldSize="w-100 h-md"
+                        // fieldSize="w-100 h-md"
                       />
                     </Col>
                   </Row>
