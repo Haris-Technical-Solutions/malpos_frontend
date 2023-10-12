@@ -77,7 +77,7 @@ const [conversionToDelete, setConversionToDelete] = useState(null);
         }
       }
       );
-      debugger
+      
             const unitConversionsData = response.data.data.data;
       if (Array.isArray(unitConversionsData)) {
         const updatedUnitConversions = await Promise.all(

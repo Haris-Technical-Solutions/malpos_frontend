@@ -70,7 +70,7 @@ export default function SuppliesGeneralTab(props) {
   }, [currentPage, searchTerm]);
 
   const fetchSupplies = async () => {
-    debugger
+      
     await axiosInstance
       .get("/md_supplies", {
         params: {

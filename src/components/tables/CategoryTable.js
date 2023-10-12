@@ -11,13 +11,13 @@ import {
   Icon,
   Button,
 } from "../elements";
-import { Link } from "react-router-dom";
-
+import { Link, useNavigate } from "react-router-dom";
 export default function CategoryTable({ thead, tbody }) {
   const [alertModal, setAlertModal] = useState(false);
   const [data, setData] = useState([]);
   const [expandedRows, setExpandedRows] = useState([]);
 
+  const navigate = useNavigate();
   useEffect(() => {
     setData(tbody);
   }, [tbody]);
@@ -32,6 +32,17 @@ export default function CategoryTable({ thead, tbody }) {
       newExpandedRows.push(index);
     }
     setExpandedRows(newExpandedRows);
+  };
+
+  const handleEdit = (id) => {
+    debugger
+    console.log("id: " + id);
+    navigate(`/create-menus/`, {
+      state: {
+        id: id,
+        action: "updateProduct",
+      },
+    });
   };
 
   return (
@@ -73,13 +84,14 @@ export default function CategoryTable({ thead, tbody }) {
                     >
                       {item.action.view}
                     </Link>
-                    <Link
-                      to={`/${item.id}`}
+                    <Button
+                      // to={`/${item.id}`}
+                      onClick={() => handleEdit(item.id)}
                       title="Edit"
                       className="material-icons edit"
                     >
                       {item.action.edit}
-                    </Link>
+                    </Button>
                     <Button
                       title="Delete"
                       className="material-icons delete"

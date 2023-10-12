@@ -135,7 +135,8 @@ export default function SuppliesEdit() {
       setSelectedBrandId(res.data.cd_brand_id);
       setSelectedStorage(res.data.md_storage_id);
       const supplylines = await fecthSupplyLines(res.data?.supplies_lines);
-      
+      // debugger
+      // setSupplyLines(res.data?.supplies_lines);
       fecthSuppliersById(res.data?.md_supplier_id);
       setSelectedStatus(res.data.status.toLowerCase());
       setInvoicesNumber(res.data.invoice_no);
@@ -147,7 +148,7 @@ export default function SuppliesEdit() {
       );
       const formattedDate = momentObject.format("YYYY-MM-DD HH:mm");
       setSelectedDateTime(formattedDate);
-      res.data.supplies_lines = supplylines;
+      // res.data.supplies_lines = supplylines;
       console.log(res.data, "supplies updated");
       setCurrentSupplies(res.data);
     } catch (error) {
@@ -169,9 +170,9 @@ export default function SuppliesEdit() {
     const suppliesOptions = 
     await Promise.all(
       supplies.map(async (item) => {
-        const unitsOptions = await fetchUomConversions(item.md_product_id);
-        debugger
-        console.log(unitsOptions,'options')
+        // const unitsOptions = await fetchUomConversions(item.md_product_id);
+         
+        // console.log(unitsOptions,'options')
         let tempData = {
           md_supply_id: item.md_supply_id,
           md_product_id: item.md_product_id,
@@ -180,8 +181,8 @@ export default function SuppliesEdit() {
           cost: item.cost,
           discount_percent: item.discount_percent,
           tax: item.tax,
-          uom_id: 1,
-          unitsOptions: unitsOptions,
+          uom_id: item.md_uom_id,
+          unitsOptions: item.unit,
         }
         return tempData
       })
@@ -241,7 +242,7 @@ export default function SuppliesEdit() {
   };
 
   const fetchProducts = async () => {
-    debugger
+     
     try {
       const res = await axiosInstance.get("/product");
       setProducts(res.data.products.data);
@@ -431,8 +432,8 @@ export default function SuppliesEdit() {
     return qty * cost - discount + tax;
   };
   const handleSupplyFieldsChange = (event, index, fieldName) => {
-    debugger
-    // debugger
+    //  
+    //  
     const { value } = event.target;
 
     if(fieldName == "md_product_id"){
@@ -464,7 +465,7 @@ let handleChangeFlag = 0
     updatedSupplyLines[index][fieldName] = value[fieldName];
     updatedSupplyLines[index]['type'] = typeName;
     console.log("hello world",updatedSupplyLines[index])
-    debugger
+     
     // Calculate and update the total
     // updatedSupplyLines[index].total = calculateTotal(updatedSupplyLines[index]);
 
