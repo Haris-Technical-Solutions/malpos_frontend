@@ -167,14 +167,14 @@ export default function ConDishEmenuTab() {
   return (
     <div>
       <Row>
-        <Col md={8}>
+        <Col md={12}>
           <Row>
-            <Col md={6}>
+            <Col md={4}>
               <FormLabel>Hide</FormLabel>
-              <Form.Check type="switch" id="custom-switch" label="" />
+              <Form.Check type="switch"  id="custom-switch" label="" />
             </Col>
 
-            <Col md={6}>
+            <Col md={4}>
               <LabelField
                 label="Category"
                 option={[
@@ -184,43 +184,48 @@ export default function ConDishEmenuTab() {
                   "Ice drink",
                   "Pizza",
                 ]}
-                fieldSize="w-100 h-md"
+                className="wfield"
+                // fieldSize="w-100 h-md"
               />
             </Col>
-            <Col md={6}>
+            <Col md={4}>
               <LabelField
                 label="عربي"
                 type="text"
                 placeholder="Name"
-                fieldSize="w-100 h-md"
+                className="wfield"
+                // fieldSize="w-100 h-md"
               />
             </Col>
-            <Col md={6}>
+            <Col md={4}>
               <LabelField
                 label="Description"
                 type="text"
                 placeholder="Description"
-                fieldSize="w-100 h-md"
+                className="wfield"
+                // fieldSize="w-100 h-md"
               />
             </Col>
-            <Col md={6}>
+            <Col md={4}>
               <LabelField
                 label="English"
                 type="text"
                 placeholder="Name"
-                fieldSize="w-100 h-md"
+                className="wfield"
+                // fieldSize="w-100 h-md"
               />
             </Col>
-            <Col md={6}>
+            <Col md={4}>
               <LabelField
                 label="Description"
                 type="text"
+                className="wfield"
                 placeholder="Description"
-                fieldSize="w-100 h-md"
+                // fieldSize="w-100 h-md"
               />
             </Col>
 
-            <Col md={6} className="emenu-tab-product-f-radio">
+            <Col md={4} className="emenu-tab-product-f-radio">
               <FormLabel>Item ability</FormLabel>
 
               <Form.Check
@@ -242,11 +247,12 @@ export default function ConDishEmenuTab() {
             </Col>
             {showAbility ? (
               <div>
-                <Col md={6}>
+                <Col md={4}>
                   <LabelField
                     label="Week"
+                    className="wfield"
                     option={["Mon", "Tue", "Wed", "Thus", "Fri", "Sat", "Sun"]}
-                    fieldSize="w-md h-md"
+                    // fieldSize="w-md h-md"
                   />
                   <div
                     key="inline-radio"
@@ -324,7 +330,7 @@ export default function ConDishEmenuTab() {
             ) : (
               ""
             )}
-            <Col md={6} className="emenu-tab-product-f-radio">
+            <Col md={4} className="emenu-tab-product-f-radio">
               <FormLabel>Item Visilbility</FormLabel>
 
               <Form.Check
@@ -348,9 +354,10 @@ export default function ConDishEmenuTab() {
               <div>
                 <Col md={6}>
                   <LabelField
+                    className="wfield"
                     label="Week"
                     option={["Mon", "Tue", "Wed", "Thus", "Fri", "Sat", "Sun"]}
-                    fieldSize="w-100 h-md"
+                    // fieldSize="w-100 h-md"
                   />
                   <div
                     key="inline-radio"
@@ -434,7 +441,8 @@ export default function ConDishEmenuTab() {
                     type="number"
                     placeholder="0"
                     label="Orginal Price"
-                    fieldSize="w-100 h-md"
+                    // fieldSize="w-100 h-md"
+                    className="wfield"
                   />
                 </Col>
               </Row>
@@ -442,14 +450,15 @@ export default function ConDishEmenuTab() {
 
             <Col md={12}>
               <Row>
-                <Col md={12}>
+                <Col md={6}>
                   <Row>
                     <Col md={4}>
                       <LabelField
                         type="number"
+                        className="wfield"
                         placeholder="0"
                         label="Cost Price"
-                        fieldSize="w-100 h-md"
+                        // fieldSize="w-100 h-md"
                       />
                     </Col>
                     <Col md={4}>
@@ -457,7 +466,8 @@ export default function ConDishEmenuTab() {
                         type="number"
                         placeholder="0"
                         label="Price"
-                        fieldSize="w-100 h-md"
+                        className="wfield"
+                        // fieldSize="w-100 h-md"
                       />
                     </Col>
                   </Row>

@@ -236,9 +236,9 @@ export default function CreateProduct() {
                   <Row>
                     <Col md={12}>
                       <Row>
-                        <Col md={3}>
+                        <Col md={4}>
                           <SelectField
-                            // className="w-50"
+                            className="wfield"
                             label="Client"
                             name="cd_client_id"
                             options={clients}
@@ -246,10 +246,11 @@ export default function CreateProduct() {
                             onChange={handleClientChange}
                           />
                         </Col>
-                        <Col md={3}>
+                        <Col md={4}>
                           <MultiSelectField
                             required
                             label="Role"
+                            className="wfield"
                             name="cd_brand_id"
                             type="select"
                             title="Brand"
@@ -258,9 +259,10 @@ export default function CreateProduct() {
                             onChange={handleBrandChange}
                           />
                         </Col>
-                        <Col md={3}>
+                        <Col md={4}   >
                           <MultiSelectField
                             required
+                            className="wfield"
                             label="Role"
                             name="cd_branch_id"
                             type="select"
@@ -270,10 +272,11 @@ export default function CreateProduct() {
                             onChange={handleBranchChange}
                           />
                         </Col>
-                        <Col md={3}>
+                        <Col md={4}>
                           <MultiSelectField
                             required
                             label="Category"
+                            className="wfield"
                             name="md_product_category_id"
                             type="select"
                             title="Category"
@@ -282,8 +285,9 @@ export default function CreateProduct() {
                             onChange={handleCategoryChange}
                           />
                         </Col>
-                        <Col md={3}>
+                        <Col md={4}>
                           <SelectField
+                           className="wfield"
                             label="Tax Category"
                             name="td_tax_category_id"
                             options={taxCategories}
@@ -291,7 +295,7 @@ export default function CreateProduct() {
                             onChange={handleTaxCategoryChange}
                           />
                         </Col>
-                        <Col md={3}>
+                        <Col md={4}>
                           {/* <SelectField
                             label="Diet"
                             name="md_diet_id"
@@ -304,6 +308,7 @@ export default function CreateProduct() {
                             required
                             label="Diet"
                             name="md_diet_id"
+                            className="wfield"
                             type="select"
                             title="Diet"
                             options={diets}
@@ -311,7 +316,7 @@ export default function CreateProduct() {
                             onChange={handleDietsChange}
                           />
                         </Col>
-                        <Col md={3}>
+                        <Col md={4}>
                           {/* <SelectField
                             label="Allergy"
                             name="md_allergy_id"
@@ -322,6 +327,7 @@ export default function CreateProduct() {
                           <MultiSelectField
                             required
                             label="Allergy"
+                            className="wfield"
                             name="md_allergy_id"
                             title="Allergy"
                             options={allergies}
@@ -329,19 +335,21 @@ export default function CreateProduct() {
                             onChange={handleAllergyChange}
                           />
                         </Col>
-                        <Col md={3}>
+                        <Col md={4}>
                           <SelectField
                             label="Station"
+                            className="wfield"
                             name="md_station_id"
                             options={stations}
                             value={form.md_station_id}
                             onChange={handleStationChange}
                           />
                         </Col>
-                        <Col md={3}>
+                        <Col md={4}>
                           <SelectField
                             label="Unit of Measurement"
                             name="md_uom_id"
+                            className="wfield"
                             options={UOMs}
                             value={form.md_uom_id}
                             onChange={handleUomChange}
@@ -372,6 +380,7 @@ export default function CreateProduct() {
                         <Col md={4}>
                           <LabelField
                             required
+                            className="wfield"
                             label="Product name"
                             name="product_name"
                             type="text"
@@ -382,6 +391,7 @@ export default function CreateProduct() {
                         </Col>
                         <Col md={4}>
                           <LabelField
+                           className="wfield"
                             label="Product Code"
                             type="text"
                             name="product_code"
@@ -392,6 +402,7 @@ export default function CreateProduct() {
                         </Col>
                         <Col md={4}>
                           <LabelField
+                           className="wfield"
                             label="Barcode"
                             type="text"
                             name="barcode"
@@ -402,6 +413,7 @@ export default function CreateProduct() {
                         </Col>
                         <Col md={4}>
                           <LabelField
+                           className="wfield"
                             label="Cooking Time"
                             type={"text"}
                             name="cooking_time"
@@ -412,6 +424,7 @@ export default function CreateProduct() {
                         </Col>
                         <Col md={4}>
                           <LabelField
+                           className="wfield"
                             label="Product return days"
                             type="number"
                             name="maximun_day_of_product_return"
@@ -422,6 +435,7 @@ export default function CreateProduct() {
                         </Col>
                         <Col md={4}>
                           <LabelField
+                           className="wfield"
                             label="Description"
                             name="description"
                             type="text"
@@ -432,6 +446,7 @@ export default function CreateProduct() {
                         </Col>
                         <Col md={4}>
                           <LabelField
+                           className="wfield"
                             label="Product Price"
                             type="number"
                             name="product_price"
@@ -442,6 +457,7 @@ export default function CreateProduct() {
                         </Col>
                         <Col md={4}>
                           <LabelField
+                           className="wfield"
                             label="Sale Price"
                             type="number"
                             name="sale_price"

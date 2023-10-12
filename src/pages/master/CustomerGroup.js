@@ -67,7 +67,7 @@ const [currentPage, setCurrentPage] = useState(1);
           },});
           setCustomergroup(response.data);
           // const totalItems= response.data.total; 
-    setTotalNumber(response.data.total);
+    setTotalNumber(response.data.length);
         } catch (error) {
           console.log(error);
           console.error("error while fetching customer group", error)
@@ -91,7 +91,7 @@ const [currentPage, setCurrentPage] = useState(1);
               console.error("Error fetching customer Group data", error);
             });
             toast.success("Customer Group deleted successfully", {
-              autoClose: false,
+              autoClose: 3000,
               closeButton: true,
             });
           } catch (error) {

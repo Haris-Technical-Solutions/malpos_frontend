@@ -81,9 +81,10 @@ const CreateIngredient = () => {
 
   const fetchClients = async () => {
     try {
-      const res = await axiosInstance.get("/cdclient");
+      const res = await axiosInstance.get("/cdclients");
       const formattedData = formatData(res.data, "cd_client_id");
       setClients(formattedData);
+      console.log("clinets", formattedData)
     } catch (error) {
       console.log(error);
     }
@@ -196,7 +197,6 @@ const CreateIngredient = () => {
                           onChange={(selectedValues) => {
                             formik.setFieldValue(
                               "cd_client_id",
-
                               selectedValues.map((v) => v.value)
                             );
                           }}
