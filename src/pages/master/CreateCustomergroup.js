@@ -2,12 +2,13 @@ import React, {useState,useEffect} from 'react'
 import PageLayout from '../../layouts/PageLayout'
 import { Row,Col,Button } from 'react-bootstrap'
 import { LabelField } from '../../components/fields'
-import {Link, useLocation} from "react-router-dom"
+import {Link, useLocation, useNavigate} from "react-router-dom"
 import { toast } from 'react-toastify'
 import SelectField from '../../components/fields/SelectField'
 import axiosInstance from "../../api/baseUrl";
 
 const CreateCustomergroup = () => {
+  const navigate=useNavigate();
   const [unitData, setUnitData] = useState({
     cd_client_id: 1,
     cd_brand_id: 1,
@@ -121,7 +122,7 @@ const brandsOptions =
           position: "top-right",
           autoClose: 3000,
         });
-
+navigate("/customer-group")
         console.log("customer group updated successfully", response.data);
       })
       .catch((error) => {
@@ -159,9 +160,9 @@ const brandsOptions =
               <Row>
        <Col md={12} style={{display:"inline-flex"}}>
             {action === "create" ? "Create Customer Group" : "Update Customer Group"}
-                 <Link to={"/customer-group"}  style={{marginLeft:"57%"}}> <button type='button' className='add-product-btn-pl' style={{backgroundColor:"black"}} variant="dark" onClick={handleUpdateCustomergroup}  >
+                 <button  type='button' className='add-product-btn-pl' style={{backgroundColor:"black",marginLeft:"57%"}} variant="dark" onClick={handleUpdateCustomergroup}  >
                   {action === 'create' ? 'Create' : 'Update'}
-                  </button></Link>
+                  </button>
                 
               
                 {/* <Link  style={{marginLeft:"57%"}}>

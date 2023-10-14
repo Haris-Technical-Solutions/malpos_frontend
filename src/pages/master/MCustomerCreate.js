@@ -8,9 +8,11 @@ import PageLayout from "../../layouts/PageLayout";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 import SelectField from "../../components/fields/SelectField";
-import { useLocation } from "react-router-dom";
+import { useLocation , useNavigate} from "react-router-dom";
+
 
 export default function MCustomerCreate() {
+  const navigate=useNavigate();
   const location = useLocation();
   const [countries, setCountries] = useState([]);
   const [cities, setCities] = useState([]);
@@ -163,6 +165,12 @@ export default function MCustomerCreate() {
     }
   }, [location.state]);
 
+  // useEffect(() => {
+  //   if (unitData.gender) {
+  //     setGender(unitData.gender);
+  //   }
+  // }, [unitData])
+
   const [errors, setErrors] = useState({});
 
   const isEmailValid = (email) => {
@@ -220,9 +228,9 @@ export default function MCustomerCreate() {
           position: "top-right",
           autoClose: 3000,
         });
-
+navigate("/customer")
         console.log("customer updated successfully", response.data);
-
+        
       })
       .catch((error) => {
         toast.error("Error updating customer", {
@@ -257,16 +265,16 @@ export default function MCustomerCreate() {
           <Col md={12} style={{ display: "inline-flex" }}>
             {action === "create" ? "Create Customer" : "Update Customer"}
 
-            <Link to={"/customer"} style={{ marginLeft: "65%" }}>
+            {/* <Link to={""} style={{ marginLeft: "65%" }}> */}
               {" "}
               <button
                 className="add-product-btn-pl"
-                style={{ backgroundColor: "black" }}
+                style={{ backgroundColor: "black" ,marginLeft: "65%" }}
                 onClick={handleUpdateCustomer}
               >
                 {action === "create" ? "Create" : "Update"}
               </button>
-            </Link>
+            {/* </Link> */}
 
             <Link to={"/customer"} className="btnback">
               {" "}
@@ -430,6 +438,7 @@ export default function MCustomerCreate() {
                       <Form.Control
                         as="select"
                         className="wfield"
+                        name="gender"
                         value={gender}
                         onChange={handleGenderChange}
                       >

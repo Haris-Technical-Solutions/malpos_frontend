@@ -20,8 +20,8 @@ export default function ProfileDropdown({ name, image, dropdown }) {
   return (
     <Dropdown className="mc-header-user">
       <Dropdown.Toggle className="mc-dropdown-toggle">
-        {/* <RoundAvatar src={image} alt="avatar" size="xs" /> */}
-        <DuelText title={name} />
+        <RoundAvatar src={image} alt="avatar" size="xs" />
+        {/* <DuelText title={name} /> */}
       </Dropdown.Toggle>
       <Dropdown.Menu align="end" className="mc-dropdown-paper">
         {modifiedDropdown.map((item, index) => (

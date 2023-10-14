@@ -20,10 +20,21 @@ export default function CreateMenus() {
         <Row>
           <Col md={12}>
               <Row>
-                <Col md={12}>
+                <Col md={12} >
                   <Box className="construction-edit">
-                    <Box className="construction-edit-h5">
+                    <Box className="construction-edit-h5" style={{display:"flex"}} >
                       <h5>{`Create Menu Category`}</h5>
+                   
+                   <Link to={"/categories"} style={{ marginLeft: "60%" }}>
+              {" "}
+              <button
+                className="add-product-btn-pl" style={{ backgroundColor: "black" }}>
+                Submit
+              </button>
+            </Link>
+            <Link to={"/categories"} className="btnback"> {" "}
+              <button className="btnlk"> Back</button>
+            </Link>
                     </Box>
                     {/* <Box className="construction-edit-icons">
                       <Box className="edit-icons">

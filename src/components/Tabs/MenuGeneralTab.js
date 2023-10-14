@@ -44,20 +44,23 @@ export default function MenuGeneralTab() {
   return (
     <div>
       <Row>
-        <Col md={8}>
+        <Col md={12}>
           <Row>
-            <Col md={6}>
+            <Col md={5}>
               <LabelField
                 type="text"
                 label="Name"
-                fieldSize="w-100 h-md"
+                className="wfield"
+                // fieldSize="w-100 h-md"
                 required
                 // value="Fish"
               />
             </Col>
 
-            <Col md={6}>
+            <Col md={5}>
               <LabelField
+className="mfield"
+style={{border:"1px solid silver"}}
                 label="Parent Category"
                 option={[
                   "Select Category",
@@ -66,7 +69,7 @@ export default function MenuGeneralTab() {
                   "Ice drink",
                   "Pizza",
                 ]}
-                fieldSize="w-100 h-md"
+                // fieldSize="w-100 h-md"
               />
             </Col>
 
@@ -76,7 +79,7 @@ export default function MenuGeneralTab() {
             </Col>
             <Col md={12}>
               <Row>
-                <Col md={6}>
+                <Col md={5}>
                   <Form>
                     <Form.Group controlId="formFile">
                       <Form.Label>Image</Form.Label>
@@ -118,7 +121,7 @@ export default function MenuGeneralTab() {
                     </Form.Group>
                   </Form>
                 </Col>
-                <Col md={6}>
+                <Col md={5}>
                   <ColorDivs />
                 </Col>
               </Row>
