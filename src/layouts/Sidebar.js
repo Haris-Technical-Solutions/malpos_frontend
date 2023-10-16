@@ -36,18 +36,13 @@ export default function Sidebar() {
         <Logout data={data?.button} />
       </Section>
     </Section>
-
+{/* 
   <Button
-  style={{marginLeft: "28%",
-    position: "fixed",
-    borderRadius:" 50%",
-    backgroundColor: "red",
-    color: "white",
-    padding: "3px"}}
+
     icon={drawer ? "menu_open" : "menu"}
     className="mc-sidebar-toggle-button"
     onClick={toggleDrawer}
-  />
+  /> */}
   </>
   );
 }

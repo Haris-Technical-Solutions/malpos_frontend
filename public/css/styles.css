@@ -847,7 +847,7 @@ textarea.form-control {
 
 .mc-table.preparation tr th:first-child,
 .mc-table.preparation tr td:first-child {
-  width: 500px;
+  width: 30px;
   max-width: 40%;
   min-width: -webkit-fit-content;
   min-width: -moz-fit-content;
@@ -888,6 +888,32 @@ textarea.form-control {
   min-width: -webkit-fit-content;
   min-width: -moz-fit-content;
   min-width: fit-content;
+}
+.mc-table.preparation tr th:nth-child(1) {
+  padding: 10px;
+  max-width: 30%;
+  width: 30px;
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+}
+.mc-table.preparation tr th:nth-child(2) {
+  padding-left: 30px;
+
+  /* max-width: 30%;
+  width: 155px;
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content; */
+}
+.mc-table.preparation tr td:nth-child(2) {
+  padding-left: 5px;
+
+  /* max-width: 30%;
+  width: 155px;
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content; */
 }
 
 .mc-table-head {
@@ -946,7 +972,7 @@ textarea.form-control {
   min-width: -webkit-fit-content;
   min-width: -moz-fit-content;
   min-width: fit-content;
-  padding: 15px 15px;
+  padding: 5px 5px;
   text-align: left;
   font-size: 11px;
   font-weight: 600;
@@ -2067,7 +2093,7 @@ textarea.form-control {
 
 .mc-dropdown-toggle.btn {
   border: inherit;
-  margin-left: 98%;
+  margin-left: 454px;
   margin-top: -15px;
   padding: inherit;
   color: inherit;
@@ -2549,15 +2575,18 @@ textarea.form-control {
 .mc-round-avatar.xs {
   border-width: 1px;
   position: fixed;
+  top: 8px;
+  left: 96%;
+  /* right: 5px; */
   /* margin-left: 62rem; */
   border: transparent;
 }
 
 .mc-round-avatar.xs img {
-  width: 47px;
+  width: 30px;
   /* margin-top: -28px; */
   /* margin-left: 50%; */
-  height: 47px;
+  height: 30px;
   border: 2px solid #DD2909;
 }
 
@@ -2635,7 +2664,7 @@ textarea.form-control {
 }
 
 .thin-scrolling:hover::-webkit-scrollbar-thumb {
-  background-color: red;
+  background-color: rgb(99, 3, 3);
 }
 
 .thin-scrolling::-webkit-scrollbar {
@@ -4021,7 +4050,7 @@ textarea.form-control {
 
 .mc-header {
   width: 100%;
-  padding: 15px 20px;
+  padding: 8px 25px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -4040,7 +4069,7 @@ textarea.form-control {
 
 @media (max-width: 575px) {
   .mc-header {
-    padding: 12px 15px;
+    padding: 8px 0px;
   }
 }
 
@@ -4309,10 +4338,10 @@ textarea.form-control {
 
 .mc-header-icon i {
   font-size: 18px;
-  width: 38px;
-  height: 38px;
-  line-height: 38px;
-  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  line-height: 28px;
+  border-radius: 20%;
   text-align: center;
   /* color: var(--cusTextColor);
   background-color: rgba(var(--cusActiveBg), 5%); */
@@ -4925,16 +4954,49 @@ textarea.form-control {
 }
 
 .mc-sidebar-toggle-button{
-  /* margin-left: 6%; */
-  margin-top: -14px;
-    position: fixed;
+  /* margin-left: 12%; */
+  margin-top: -12px;
+    position:fixed;
     /* border-radius: 50%; */
     background-color: #DD2909;
     color: white;
-    padding: 3px;
+    padding: 1px;
     z-index: 10;
 }
 
+.header-fixed {
+  /* Add your fixed header styles here */
+  width: 80%;
+  left: 12.8%;
+top:-11px;
+gap: 40%;
+  
+  
+}
+
+/* Header when sidebar is closed (full width) */
+.header-full-width {
+  width: 100%;
+  gap: 40%;
+/* justify-content: space-between; */
+  margin-top: -8px;
+  /* Add your full-width header styles here */
+}
+
+
+.icon-sidebar-open {
+  position: absolute;
+  top: 0;
+  right: 0;
+  transform: translateY(50%);
+  transition: transform 0.2s;
+}
+.icon-sidebar-closed {
+  position: relative;
+  right: 0;
+  transform: translateY(0);
+  transition: transform 0.2s;
+}
 .mc-sidebar-menu-btn {
   width: 100%;
   padding: 12px 10px;
@@ -9670,7 +9732,7 @@ background-color: #f0f0f0;
   float: right;
   color: #f8f8f8;
   outline: none;
-  background-color: var(--cusTextColor);
+  background-color: #495055;
 }
 
 .acc-table-head {

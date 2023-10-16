@@ -15,16 +15,17 @@ export default function PageLayout({ children }) {
 
     return (
         <DrawerProvider>
-            {/* <Header /> */}
+            <Header />
             <Sidebar />
             <Main>
                 <>
-                {<ProfileDropdown
+
+                {/* {<ProfileDropdown
              name={data.profile.name}
              image={data.profile.image}
              username={data.profile.username}
              dropdown={data.profile.dropdown}
-      />}
+      />} */}
                     { children }
                     {/* {location.pathname !== "/message" } */}
                 </>
