@@ -301,12 +301,12 @@ export default function SupplierTab() {
 
         <Box className="receip-table-m">
           <Table responsive>
-            <thead className="thead-modifier "  style={{backgroundColor:'#F07632', color:'black'}}>
+            <thead className="thead-modifier "  style={{backgroundColor:'#F07632', color:'white'}}>
               <tr>
                 <th>
                   ID
                   <button
-                    style={{ color: "#172026" }}
+                    style={{ color: "white" }}
                     className="sorting-icon"
                     onClick={toggleSortOrder}
                   >
@@ -316,7 +316,7 @@ export default function SupplierTab() {
                 <th style={{ width: "135px" }}>
                   Operation time
                   <button
-                    style={{ color: "#172026" }}
+                    style={{ color: "white" }}
                     className="sorting-icon"
                     onClick={toggleSortOrder}
                   >
@@ -326,7 +326,7 @@ export default function SupplierTab() {
                 <th style={{ width: "110px" }}>
                   Created at
                   <button
-                    style={{ color: "#172026" }}
+                    style={{ color: "white" }}
                     className="sorting-icon"
                     onClick={toggleSortOrder}
                   >
@@ -343,7 +343,7 @@ export default function SupplierTab() {
                 <th>
                   Amount
                   <button
-                    style={{ color: "#172026" }}
+                    style={{ color: "white" }}
                     className="sorting-icon"
                     onClick={toggleSortOrder}
                   >
@@ -357,7 +357,7 @@ export default function SupplierTab() {
                 <th>
                   Type
                   <button
-                    style={{ color: "#172026" }}
+                    style={{ color: "white" }}
                     className="sorting-icon"
                     onClick={toggleSortOrder}
                   >
@@ -374,7 +374,7 @@ export default function SupplierTab() {
                 <td style={{ width: "110px" }}>Mar 09,23</td>
                 <td>Terminal 1</td>
                 <td>Mar 09,23</td>
-                <td>--</td>
+                <td>abc</td>
                 <td>Refund</td>
                 <td>--</td>
                 <td>#41</td>

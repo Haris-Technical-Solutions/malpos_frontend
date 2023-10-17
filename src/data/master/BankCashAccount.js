@@ -31,7 +31,7 @@ export default function Accounts() {
             <Col md={12}>
               Bank Cash  Accounts 
           </Col>
-                  <Col md={3}>
+                  <Col md={2}>
                     <div style={{ position: "relative" }}>
                       <Form.Control
                         type="search"
@@ -55,7 +55,7 @@ export default function Accounts() {
                   </Col>
                   <Col md={7}>
                     <Row>
-                      <Col md={4}>
+                      <Col md={3}>
                         <MultiSelectNoLabel
                           label="Type"
                           options={[
@@ -76,8 +76,8 @@ export default function Accounts() {
                       </Col>
                     </Row>
                   </Col>
-                  <Col md={3} lg={2}>
-                    <Link to={"/accounts-create"}>
+                  <Col md={3} lg={3}>
+                    <Link to={"/accounts-create"} style={{marginLeft:"7rem"}} >
                       <button className="acc-create-btn">
                         <FontAwesomeIcon icon={faPlus} /> Create{" "}
                       </button>

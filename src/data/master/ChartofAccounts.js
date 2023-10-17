@@ -1,6 +1,6 @@
 import React from "react";
 import { useState } from "react";
-import { Row, Col, Form, Table } from "react-bootstrap";
+import { Row, Col, Form, Table,Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { CardLayout } from "../../components/cards";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -35,7 +35,7 @@ export default function AccountCatgories() {
                   <Row>
                     <Col md={6}>
                       {/* <Row> */}
-                      <Col md={6}>
+                      <Col md={5}>
                         <div style={{ position: "relative" }}>
                           <Form.Control
                             type="search"
@@ -70,33 +70,46 @@ export default function AccountCatgories() {
                 </Col>
                 <Col md={12}>
                   <Table className="acc-categories-parent-table">
-                    <thead style={{backgroundColor:'#F07632',color:"white", 
+                    <thead style={{backgroundColor:'#F07632',color:"white", textAlign:"center",
   lineHeight: "5px"}}>
                       <tr>
-                        <th className="th-w30">Code</th>
-                        <th className="th-w30" style={{width:"20%"}}>Name</th>
-                        <th className="th-w30">Type</th>
-                        <th className="th-w30">Parent_account</th>
-                        <th className="th-w30">Seqno</th>
-                        <th className="th-w30">Summary(Y/N)</th>
-                        <th className="th-w10"></th>
+                        <th className="th-w20">Code</th>
+                        <th className="th-w20">Name</th>
+                        <th className="th-w20">Type</th>
+                        <th className="th-w20">Parent_account</th>
+                        <th className="th-w20">Seqno</th>
+                        <th className="th-w20">Summary(Y/N)</th>
+                        <th className="th-w20">Action</th>
                       </tr>
                     </thead>
                     <tbody>
 
                       
                         <React.Fragment>
-                        <tr>
-    <td className="td-w30">123</td>
-    <td className="td-w60" style={{width:"20px"}}>Category 1</td>
-    <td className="td-w30">Type A</td>
-    <td className="td-w30">Parent 1</td>
-    <td className="td-w30">001</td>
-    <td className="td-w30" style={{ paddingLeft: "1rem" }}>YES</td>
-    <td className="td-w10">
-      <Box className={"faLock"}>
-        <FontAwesomeIcon icon={faLock} />
-      </Box>
+                        <tr style={{textAlign:"center"}}>
+    <td className="td-w20">123</td>
+    <td className="td-w20" >Category 1</td>
+    <td className="td-w20">Type A</td>
+    <td className="td-w20">Parent 1</td>
+    <td className="td-w20">001</td>
+    <td className="td-w20" style={{ paddingLeft: "1rem" }}>YES</td>
+    <td className="td-w20">
+      
+   <Link to={"/category-edit"} > <button  title="Edit" className="btnlogo" >
+                                  <FontAwesomeIcon icon={faEdit} color="#f29b30" />
+                                </button></Link>
+                                <button title="Delete" className="btnlogo"  >
+                                  <FontAwesomeIcon icon={faTrash} color="#ee3432"/> </button>
+          </td>
+  </tr>
+  <tr style={{textAlign:"center"}}>
+    <td className="td-w20">456</td>
+    <td className="td-w20">Category 2</td>
+    <td className="td-w20">Type B</td>
+    <td className="td-w20">Parent 2</td>
+    <td className="td-w20">002</td>
+    <td className="td-w20" style={{ paddingLeft: "1.5rem" }}>NO</td>
+    <td className="td-w20">
       <Box className="dot-content">
         <div onClick={handleDotBox}><FontAwesomeIcon icon={faEllipsis} /> </div>
         {open ? (
@@ -118,17 +131,14 @@ export default function AccountCatgories() {
       </Box>
     </td>
   </tr>
-  <tr>
-    <td className="td-w30">456</td>
-    <td className="td-w60">Category 2</td>
-    <td className="td-w30">Type B</td>
-    <td className="td-w30">Parent 2</td>
-    <td className="td-w30">002</td>
-    <td className="td-w30" style={{ paddingLeft: "1.5rem" }}>NO</td>
-    <td className="td-w10">
-      <Box className={"faLock"}>
-        <FontAwesomeIcon icon={faLock} />
-      </Box>
+  <tr style={{textAlign:"center"}}>
+    <td className="td-w20">789</td>
+    <td className="td-w20">Category 3</td>
+    <td className="td-w20">Type C</td>
+    <td className="td-w20">Parent 3</td>
+    <td className="td-w20">003</td>
+    <td className="td-w20" style={{ paddingLeft: "1.5rem" }}>YES</td>
+    <td className="td-w20">
       <Box className="dot-content">
         <div onClick={handleDotBox}><FontAwesomeIcon icon={faEllipsis} /> </div>
         {open ? (
@@ -150,49 +160,14 @@ export default function AccountCatgories() {
       </Box>
     </td>
   </tr>
-  <tr>
-    <td className="td-w30">789</td>
-    <td className="td-w60">Category 3</td>
-    <td className="td-w30">Type C</td>
-    <td className="td-w30">Parent 3</td>
-    <td className="td-w30">003</td>
-    <td className="td-w30" style={{ paddingLeft: "1.5rem" }}>YES</td>
-    <td className="td-w10">
-      <Box className={"faLock"}>
-        <FontAwesomeIcon icon={faLock} />
-      </Box>
-      <Box className="dot-content">
-        <div onClick={handleDotBox}><FontAwesomeIcon icon={faEllipsis} /> </div>
-        {open ? (
-          <Box className="DotBox-main-wrapper">
-            <Box className="DotBox-inner">
-              <Link to={'/category-edit'}>
-                <Box className="DotBox-p-con">
-                  <FontAwesomeIcon icon={faEdit} /> Edit
-                </Box>
-              </Link>
-              <Box className="DotBox-p-con">
-                <FontAwesomeIcon icon={faTrash} /> Remove
-              </Box>
-            </Box>
-          </Box>
-        ) : (
-          ""
-        )}
-      </Box>
-    </td>
-  </tr>
-  <tr>
-    <td className="td-w30">101</td>
-    <td className="td-w60">Category 4</td>
-    <td className="td-w30">Type D</td>
-    <td className="td-w30">Parent 4</td>
-    <td className="td-w30">004</td>
-    <td className="td-w30" style={{ paddingLeft: "1.5rem" }}>NO</td>
-    <td className="td-w10">
-      <Box className={"faLock"}>
-        <FontAwesomeIcon icon={faLock} />
-      </Box>
+  <tr style={{textAlign:"center"}}>
+    <td className="td-w20">101</td>
+    <td className="td-w20">Category 4</td>
+    <td className="td-w20">Type D</td>
+    <td className="td-w20">Parent 4</td>
+    <td className="td-w20">004</td>
+    <td className="td-w20" style={{ paddingLeft: "1.5rem" }}>NO</td>
+    <td className="td-w20 ">
       <Box className="dot-content">
         <div onClick={handleDotBox}><FontAwesomeIcon icon={faEllipsis} /> </div>
         {open ? (

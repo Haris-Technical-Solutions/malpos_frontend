@@ -364,12 +364,12 @@ export default function TransactionTab() {
 
         <Box className="receip-table-m">
           <Table responsive> 
-            <thead className="thead-modifier " style={{ backgroundColor: "#F07632", color:"black" }} >
+            <thead className="thead-modifier " style={{ backgroundColor: "#F07632", color:"white" }} >
               <tr>
                 <th>
                   ID
                   <button
-                    style={{ color: "#172026" }}
+                    style={{ color: "white" }}
                     className="sorting-icon"
                     onClick={toggleSortOrder}
                   >
@@ -379,7 +379,7 @@ export default function TransactionTab() {
                 <th style={{ width: "135px" }}>
                   Operation time
                   <button
-                    style={{ color: "#172026" }}
+                    style={{ color: "white" }}
                     className="sorting-icon"
                     onClick={toggleSortOrder}
                   >
@@ -389,7 +389,7 @@ export default function TransactionTab() {
                 <th style={{ width: "110px" }}>
                   Created at
                   <button
-                    style={{ color: "#172026" }}
+                    style={{ color: "white" }}
                     className="sorting-icon"
                     onClick={toggleSortOrder}
                   >
@@ -403,7 +403,7 @@ export default function TransactionTab() {
                 <th>
                   Amount
                   <button
-                    style={{ color: "#172026" }}
+                    style={{ color: "white" }}
                     className="sorting-icon"
                     onClick={toggleSortOrder}
                   >
@@ -413,7 +413,7 @@ export default function TransactionTab() {
                   <span style={{color:'red'}}>112.00 SA</span>
                 </th>
                 <th>Account</th>
-                <th></th>
+                <th style={{marginLeft:"15px"}}>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -425,11 +425,16 @@ export default function TransactionTab() {
                 <td>Terminal 1</td>
                 <td>Refund</td>
                 <td>#41</td>
-                <td></td>
+                <td>Transaction 1</td>
                 <td>15.00</td>
                 <td> Bank account</td>
-                <td>
-                  <Box className="dot-content" style={{ marginLeft: "20px" }}>
+                <td style={{marginLeft:"20px"}}>
+                <Link to={"/payment-method-create"} > <button  title="Edit" className="btnlogo" >
+                                  <FontAwesomeIcon icon={faEdit} color="#f29b30" />
+                                </button></Link>
+                                <button title="Delete" className="btnlogo"  >
+                                  <FontAwesomeIcon icon={faTrash} color="#ee3432"/> </button>
+                  {/* <Box className="dot-content" style={{ marginLeft: "20px" }}>
                     <div onClick={handleDotBox}>...</div>
                     {open ? (
                       <Box
@@ -450,7 +455,48 @@ export default function TransactionTab() {
                     ) : (
                       ""
                     )}
-                  </Box>
+                  </Box> */}
+                </td>
+              </tr>
+              <tr className="tbody-r">
+                {" "}
+                <td>1009</td>
+                <td style={{ width: "135px" }}>Mar 09,23</td>
+                <td style={{ width: "110px" }}>Mar 09,23</td>
+                <td>Terminal 1</td>
+                <td>Refund</td>
+                <td>#41</td>
+                <td>Transaction 1</td>
+                <td>15.00</td>
+                <td> Bank account</td>
+                <td style={{marginLeft:"20px"}}>
+                <Link to={"/payment-method-create"} > <button  title="Edit" className="btnlogo" >
+                                  <FontAwesomeIcon icon={faEdit} color="#f29b30" />
+                                </button></Link>
+                                <button title="Delete" className="btnlogo"  >
+                                  <FontAwesomeIcon icon={faTrash} color="#ee3432"/> </button>
+                  {/* <Box className="dot-content" style={{ marginLeft: "20px" }}>
+                    <div onClick={handleDotBox}>...</div>
+                    {open ? (
+                      <Box
+                        className="DotBox-main-wrapper"
+                        onClick={handleDotBox}
+                      >
+                        <Box className="DotBox-inner">
+                          <Box className="DotBox-p-con">
+                            <Link to={"/payment-method-create"}>
+                              {" "}<FontAwesomeIcon
+                                    icon={faEdit}
+                                    color="#f29b30"
+                                  />{" "}
+                            </Link>
+                          </Box>
+                        </Box>
+                      </Box>
+                    ) : (
+                      ""
+                    )}
+                  </Box> */}
                 </td>
               </tr>
             </tbody>

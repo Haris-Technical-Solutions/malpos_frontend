@@ -35,15 +35,15 @@ export default function AccountsEdit() {
                 <Col md={12} style={{display:"inline-flex"}}>                 
                 Bank Cash Account / Edit
                       <Link to={"/accounts"} style={{marginLeft:"62%"}} >
-                    <button className="acc-create-btn" style={{padding:"10px 15px"}} >
+                    <button className="acc-create-btn" style={{padding:"12px 15px"}} >
                       <FontAwesomeIcon icon={faSave} /> {" "}Save
                     </button>
                   </Link>
-                  <Link to={"/accounts"} className='btnback'> <button className="btnlk"  > Back</button></Link>
+                  <Link to={"/accounts"} className='btnback' style={{padding:"6px 15px",marginBottom:"5px"}} > <button className="btnlk"  > Back</button></Link>
                 </Col>
                             <Col md={11}>
                                 <Row>
-                                <Col md={6}>
+                                <Col md={4}>
                       <Form.Label>Code</Form.Label>
                       <Form.Control
 //  style={{width:"60%", height:"45%"}}
@@ -53,7 +53,7 @@ className="wfield"
                         required
                       />
                     </Col>
-                    <Col md={6}>
+                    <Col md={4}>
                       <Form.Label>Name</Form.Label>
                       <Form.Control
                       // style={{width:"60%", height:"45%", marginLeft:"25%"}}
@@ -71,7 +71,7 @@ className="wfield"
                         Must not be empty
                       </Form.Control.Feedback>
                     </Col>
-                    <Col md={6}>
+                    <Col md={4}>
                       <Form.Label>Bank</Form.Label>
                       <Form.Control
 // style={{width:"60%",height:"55%"}}              
@@ -81,7 +81,7 @@ className="wfield"
                         required
                       />
                     </Col>
-                    <Col md={6}>
+                    <Col md={4}>
                       <Form.Label>Account NO</Form.Label>
                       <Form.Control
                         className="wfield"
@@ -91,7 +91,7 @@ className="wfield"
                         required
                       />
                     </Col>
-                    <Col md={6}>
+                    <Col md={4}>
                       <Form.Label>BBAN</Form.Label>
                       <Form.Control
                         className="wfield"
@@ -100,7 +100,7 @@ className="wfield"
                         required
                       />
                     </Col>
-                    <Col md={6}>
+                    <Col md={4}>
                       <Form.Label>IBAN</Form.Label>
                       <Form.Control
                         className="wfield"
@@ -110,7 +110,7 @@ className="wfield"
                         required
                       />
                     </Col>
-                    <Col md={6}>
+                    <Col md={4}>
                       <Form.Label>Currency</Form.Label>
                       <Form.Control
                         className="wfield"
@@ -120,7 +120,7 @@ className="wfield"
                         required
                       />
                     </Col>
-                    <Col md={6}  mdOffset={2}  >
+                    <Col md={4}  mdOffset={2}  >
                       <LabelFieldS
                       className="wfield"
                       // style={{width:"60%"}}
@@ -134,7 +134,7 @@ className="wfield"
                       />
                     </Col>
                     
-                    <Col md={6}>
+                    <Col md={4}>
                       <Form.Label>Current_Balance</Form.Label>
                       <Form.Control
                         className="wfield"

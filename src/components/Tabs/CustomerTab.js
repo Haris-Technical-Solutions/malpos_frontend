@@ -325,12 +325,12 @@ export default function CustomerTab() {
 
         <Box className="receip-table-m">
           <Table responsive>
-            <thead className="thead-modifier " style={{backgroundColor:'#F07632', color:'black'}}>
+            <thead className="thead-modifier " style={{backgroundColor:'#F07632', color:'white'}}>
               <tr>
                 <th>
                   ID
                   <button
-                    style={{ color: "#172026" }}
+                    style={{ color: "white" }}
                     className="sorting-icon"
                     onClick={toggleSortOrder}
                   >
@@ -340,7 +340,7 @@ export default function CustomerTab() {
                 <th style={{ width: "135px" }}>
                   Operation time
                   <button
-                    style={{ color: "#172026" }}
+                    style={{ color: "white" }}
                     className="sorting-icon"
                     onClick={toggleSortOrder}
                   >
@@ -350,7 +350,7 @@ export default function CustomerTab() {
                 <th style={{ width: "110px" }}>
                   Created at
                   <button
-                    style={{ color: "#172026" }}
+                    style={{ color: "white" }}
                     className="sorting-icon"
                     onClick={toggleSortOrder}
                   >
@@ -367,7 +367,7 @@ export default function CustomerTab() {
                 <th>
                   Amount
                   <button
-                    style={{ color: "#172026" }}
+                    style={{ color: "white" }}
                     className="sorting-icon"
                     onClick={toggleSortOrder}
                   >
@@ -381,14 +381,14 @@ export default function CustomerTab() {
                 <th>
                   Type
                   <button
-                    style={{ color: "#172026" }}
+                    style={{ color: "white" }}
                     className="sorting-icon"
                     onClick={toggleSortOrder}
                   >
                     {sortOrder === "asc" ? "▲" : "▼"}
                   </button>
                 </th>
-                <th></th>
+                <th>Action</th>
               </tr>
             </thead>
             <tbody>
@@ -399,17 +399,23 @@ export default function CustomerTab() {
                 <td style={{ width: "110px" }}>Mar 09,23</td>
                 <td>Terminal 1</td>
                 <td>Mar 09,23</td>
-                <td>--</td>
+                <td>owner</td>
                 <td>Refund</td>
-                <td>--</td>
+                <td>new customer</td>
                 <td>#41</td>
-                <td></td>
+                <td> abc</td>
                 <td>15.00</td>
                 <td> Bank account</td>
-                <td> Cash account</td>
+                <td style={{paddingLeft:"15px"}}> Cash account</td>
                 <td> Income</td>
                 <td>
-                <Box className="dot-content">
+
+                <Link to={""} > <button  title="Edit" className="btnlogo" >
+                                  <FontAwesomeIcon icon={faEdit} color="#f29b30" />
+                                </button></Link>
+                                <button title="Delete" className="btnlogo"  >
+                                  <FontAwesomeIcon icon={faTrash} color="#ee3432"/> </button>
+                {/* <Box className="dot-content">
                            <div onClick={handleDotBox}><FontAwesomeIcon icon={faEllipsis} /> </div>
                                       {open ? (
                                                                 <Box className="DotBox-main-wrapper">
@@ -430,7 +436,54 @@ export default function CustomerTab() {
                                                             ) : (
                                                                 ""
                                                             )}
-                                                        </Box>
+                                                        </Box> */}
+                </td>
+              </tr>
+              <tr className="tbody-r">
+                {" "}
+                <td>1009</td>
+                <td style={{ width: "135px" }}>Mar 09,23</td>
+                <td style={{ width: "110px" }}>Mar 09,23</td>
+                <td>Terminal 1</td>
+                <td>Mar 09,23</td>
+                <td>owner</td>
+                <td>Refund</td>
+                <td>new customer</td>
+                <td>#41</td>
+                <td> abc</td>
+                <td>15.00</td>
+                <td> Bank account</td>
+                <td style={{paddingLeft:"15px"}}> Cash account</td>
+                <td> Income</td>
+                <td>
+
+                <Link to={""} > <button  title="Edit" className="btnlogo" >
+                                  <FontAwesomeIcon icon={faEdit} color="#f29b30" />
+                                </button></Link>
+                                <button title="Delete" className="btnlogo"  >
+                                  <FontAwesomeIcon icon={faTrash} color="#ee3432"/> </button>
+                {/* <Box className="dot-content">
+                           <div onClick={handleDotBox}><FontAwesomeIcon icon={faEllipsis} /> </div>
+                                      {open ? (
+                                                                <Box className="DotBox-main-wrapper">
+                                                                    <Box className="DotBox-inner">
+                                                                       <Link to={'/accounts-edit'}> <Box className="DotBox-p-con">
+                                                                       <FontAwesomeIcon
+                                    icon={faEdit}
+                                    color="#f29b30"
+                                  />                                                                      </Box>
+                                                                        </Link>
+                                                                        <Box className="DotBox-p-con"> <FontAwesomeIcon
+                                  icon={faTrash}
+                                  color="#ee3432"
+                                  />
+                                                                        </Box>
+                                                                    </Box>
+                                                                </Box>
+                                                            ) : (
+                                                                ""
+                                                            )}
+                                                        </Box> */}
                 </td>
               </tr>
             </tbody>

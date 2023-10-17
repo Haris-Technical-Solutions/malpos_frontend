@@ -32,11 +32,11 @@ export default function AccountCategoryedit  () {
                    
                         Chart of Account / Edit
                         <Link to={"/account-categories"} style={{marginLeft:"59%"}} >
-                      <button className="acc-create-btn" style={{padding:"10px 12x"}} >
+                      <button className="acc-create-btn" style={{padding:"10px 13px"}} >
                         <FontAwesomeIcon icon={faSave} /> {" "}Save
                       </button>
                     </Link>
-                    <Link to={"/account-categories"} className='btnback'> <button className="btnlk" > Back</button></Link>
+                    <Link to={"/account-categories"} className='btnback'style={{marginBottom:"5px"}}> <button className="btnlk" > Back</button></Link>
                 </Col>
                         <Row>
                             <Col md={12}>

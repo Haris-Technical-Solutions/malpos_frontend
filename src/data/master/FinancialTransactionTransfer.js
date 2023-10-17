@@ -30,7 +30,7 @@ export default function TransactionTransfer() {
   return (
     <Col md={12}>
       <Row>
-        <Col md={11}>
+        <Col md={12}>
           <Row>
             {/* <Col md={6}>
               <Form.Label>Amount</Form.Label>

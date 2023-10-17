@@ -32,7 +32,7 @@ export default function TransactionIncome() {
   return (
     <Col md={12}>
       <Row>
-        <Col md={11}>
+        <Col md={12}>
           <Row>
           <Col md={4}>
               <Form.Label   
