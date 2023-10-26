@@ -27,7 +27,7 @@ export default function ConstructureProduct() {
                     </Box>
                     <Box className="construction-edit-icons">
                       <Box className="edit-icons">
-                        <Link to="/constructure" className="addproduct-btn ">
+                        <Link to="" className="addproduct-btn ">
                           <img
                             className="fas fa-user"
                             src="/images/icons/check.png"
@@ -35,7 +35,7 @@ export default function ConstructureProduct() {
                           />
                         </Link>
 
-                        <Link to="/constructure" className="addproduct-btn ">
+                        <Link to="/product-list" className="addproduct-btn ">
                           <img
                             className="fas fa-user"
                             src="/images/icons/close1.png"

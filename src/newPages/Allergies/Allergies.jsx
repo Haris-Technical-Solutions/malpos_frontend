@@ -196,16 +196,11 @@ const Allergies = () => {
                               ))}
                           </Tbody>
                         </Table>
-                        <CustomPagination
-                          perPage={perPage}
-                          totalUsers={totalNumber}
-                          paginate={paginate}
-                          currentPage={currentPage}
-                        />
                       </Col>
                     </Row>
                   </Col>
                 </Box>
+                        5
               </Col>
           </Col>
         </Row>
