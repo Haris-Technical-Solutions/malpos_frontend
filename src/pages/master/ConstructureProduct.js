@@ -4,6 +4,7 @@ import { Col, Row } from "react-bootstrap";
 import { Box } from "../../components/elements";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { useProduct } from "../../components/createProduct/productContext";
 
 import { Tabs, Tab } from "react-bootstrap";
 import ConProductGeneralTab from "../../components/Tabs/ConProductGeneralTab";
@@ -13,6 +14,9 @@ import { Link } from "react-router-dom";
 
 export default function ConstructureProduct() {
   const [key, setKey] = useState("tab1");
+  const{
+    handleSubmit
+  }=useProduct();
 
   return (
     <div>
@@ -27,7 +31,8 @@ export default function ConstructureProduct() {
                     </Box>
                     <Box className="construction-edit-icons">
                       <Box className="edit-icons">
-                        <Link to="" className="addproduct-btn ">
+                        <Link to="" className="addproduct-btn " 
+                        onClick={(e) => handleSubmit(e)}>
                           <img
                             className="fas fa-user"
                             src="/images/icons/check.png"

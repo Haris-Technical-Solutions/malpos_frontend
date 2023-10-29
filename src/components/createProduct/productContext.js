@@ -7,7 +7,7 @@ export const ProductContext = createContext();
 export const ProductProvider = ({ children }) => {
   // States
   const [ingredients, setIngredients] = useState([
-    { ingredient: null, type: null, gross: null, price: null },
+    { ingredient: null, type: null, gross: null,baseunit:null, price: null },
   ]);
 
   const [storage, setStorage] = useState([]);
@@ -30,7 +30,7 @@ export const ProductProvider = ({ children }) => {
   const [UOMs, setUOMs] = useState([]);
   const [allOptions, setAllOptions] = useState([
     {
-      label: "Ingredients",
+    label: "Ingredients",
       options: [],
     },
     {
@@ -92,6 +92,20 @@ export const ProductProvider = ({ children }) => {
       product_detail: newProductDetail,
     }));
   };
+  const [errors, setErrors] = useState({
+    cd_client_id: '',
+    cd_brand_id: '',
+    cd_branch_id: '',
+    md_uom_id: '',
+    product_name: '',
+    product_code: '',
+    td_tax_category_id:'',
+    md_allergy_id:'',
+    md_diet_id:'',
+    md_allergy_id:'',
+    md_station_id:'',
+
+  });
 
   const calculateCostPrice = (ing) => {
     const grossWeight = ing.grossWeight || 0; // Make sure to handle null or undefined
@@ -269,6 +283,7 @@ export const ProductProvider = ({ children }) => {
         label: item.name,
         type: "ingredient",
         cost: item.cost_price,
+        baseunit: item.base_unit
       }));
       setAllOptions((prevOptions) => [
         {
@@ -526,9 +541,75 @@ export const ProductProvider = ({ children }) => {
     setIngredients(newIngredients);
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e,type) => {
   
     e.preventDefault();
+    const updatedErrors = { ...errors };
+
+    if (!form.cd_client_id) {
+      updatedErrors.cd_client_id = "*Client is required";
+    } else {
+      updatedErrors.cd_client_id = "";
+    }
+    if (!form.cd_branch_id) {
+      updatedErrors.cd_branch_id = "*Branch is required";
+    } else {
+      updatedErrors.cd_branch_id = "";
+    }
+    if (!form.cd_brand_id) {
+      updatedErrors.cd_brand_id = "*Brand is required";
+    } else {
+      updatedErrors.cd_brand_id = "";
+    }
+    if (!form.md_station_id) {
+      updatedErrors.md_station_id = "*Station is required";
+    } else {
+      updatedErrors.md_station_id = "";
+    }
+    if (!form.md_product_category_id) {
+      updatedErrors.md_product_category_id = "*Product category is required";
+    } else {
+      updatedErrors.md_product_category_id = "";
+    }
+    if (!form.md_diet_id) {
+      updatedErrors.md_diet_id = "*Diet is required";
+    } else {
+      updatedErrors.md_diet_id = "";
+    }
+
+    if (!form.product_name) {
+      updatedErrors.product_name= "*Product name is required";
+    } else {
+      updatedErrors.product_name = "";
+    }
+    if (!form.md_uom_id) {
+      updatedErrors.md_uom_id = "*Uoms is required";
+    } else {
+      updatedErrors.md_uom_id = "";
+    }
+    if (!form.md_allergy_id) {
+      updatedErrors.md_allergy_id = "*Allergy is required";
+    } else {
+      updatedErrors.md_allergy_id = "";
+    }
+    if (!form.product_code) {
+      updatedErrors.product_code = "*Product Code is required";
+    } else {
+      updatedErrors.product_code = "";
+    }
+    if (!form.td_tax_category_id) {
+      updatedErrors.td_tax_category_id = "*Tax Category is required";
+    } else {
+      updatedErrors.td_tax_category_id = "";
+    }
+    setErrors(updatedErrors);
+
+    // If any errors exist, prevent form submission
+    if (Object.values(updatedErrors).some((error) => error)) {
+      return;
+    }
+
+  
     console.log("ingredients submit", ingredients);
     const updatedIngredients = ingredients.map((item) => {
       if (item && item.ingredient && item.ingredient.value) {
@@ -553,6 +634,7 @@ export const ProductProvider = ({ children }) => {
       product_type: ing.type,
       gross: ing.grossWeight,
       cost: 1,
+      base_unit:ing.base_unit,
     }));
 
     const newForm = {
@@ -587,6 +669,7 @@ export const ProductProvider = ({ children }) => {
     delete filteredObject.cd_branch_id;
     delete filteredObject.md_diet_id;
     delete filteredObject.md_product_category_id;
+    filteredObject.type = type;
     // delete filteredObject.cd_client_id;
     // filteredObject.cd_client_id = 1;
     console.log(filteredObject);
@@ -747,6 +830,7 @@ export const ProductProvider = ({ children }) => {
         deletingMethod,
         isLoading,
         allOptions,
+        errors,setErrors,
         modifiers,
         selectedModifier,
         UOMs,

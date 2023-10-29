@@ -19,7 +19,7 @@ export default function Analytics() {
     <PageLayout>
       <Row>
         <Col xl={12}>
-          <Box className="mc-card">
+          {/* <Box className="mc-card"> */}
             <Breadcrumb title={data?.pageTitle}>
               {data?.breadcrumb.map((item, index) => (
                 <Item key={index} className="mc-breadcrumb-item">
@@ -33,7 +33,7 @@ export default function Analytics() {
                 </Item>
               ))}
             </Breadcrumb>
-          </Box>
+          {/* </Box> */}
         </Col>
         {data?.mixed.map((item, index) => (
           <Col md={6} lg={4} xl={4} key={index}>
@@ -74,9 +74,9 @@ export default function Analytics() {
           </Col>
         ))}
         <Col xl={12}>
-          <div className="mc-card">
+          {/* <div className="mc-card"> */}
             <Heading>{data?.saleTitle}</Heading>{" "}
-          </div>
+          {/* </div> */}
         </Col>
         {data?.mostSales.map((item, i) => (
           <Col xl={4}>

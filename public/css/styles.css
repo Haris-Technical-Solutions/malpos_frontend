@@ -728,11 +728,12 @@ p {
 }
 
 .form-label {
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 700;
-  text-transform: uppercase;
+  text-transform: capitalize;
+  margin-bottom: -9px;
   white-space: nowrap;
-  color: var(--headingColor);
+  color: #726a6a;
 }
 
 .form-select,
@@ -1430,10 +1431,11 @@ textarea.form-control {
 }
 
 .mc-label-field-title {
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
-  text-transform: uppercase;
-  color: var(--headingColor);
+  margin-bottom: -8px;
+  text-transform: capitalize;
+  color: #726a6a;
 }
 
 .mc-label-field-input,
@@ -2664,7 +2666,7 @@ textarea.form-control {
 }
 
 .thin-scrolling:hover::-webkit-scrollbar-thumb {
-  background-color: rgb(99, 3, 3);
+  background-color: rgb(153, 118, 118);
 }
 
 .thin-scrolling::-webkit-scrollbar {
@@ -4346,7 +4348,7 @@ textarea.form-control {
   /* color: var(--cusTextColor);
   background-color: rgba(var(--cusActiveBg), 5%); */
   color: var(--cusWhite);
-  background-color: var(--cusPrimaryColorActive);
+  background-color: #2a0001f6;
   transition: all linear 0.3s;
   -webkit-transition: all linear 0.3s;
   -moz-transition: all linear 0.3s;
@@ -4869,7 +4871,7 @@ textarea.form-control {
   top: 0px;
   left: -270px;
   z-index: 3;
-  background-color: #dd2909;
+  background-color: #2a0001f6;
   padding-top: 20px;
   padding-bottom: 20px;
   padding-right: 17px;
@@ -4902,6 +4904,7 @@ textarea.form-control {
 
 .mc-sidebar.active {
   left: 0px;
+
 }
 
 .mc-sidebar-menu {
@@ -4915,6 +4918,7 @@ textarea.form-control {
   text-transform: uppercase;
   letter-spacing: 1px;
   margin-bottom: -14px;
+  background-color: none;
   color: #cfc5c5;
 }
 
@@ -4924,16 +4928,19 @@ textarea.form-control {
 }
 
 .mc-sidebar-menu-item.focused .mc-sidebar-menu-btn {
-  /* color: var(--activeColor); */
+  color: var(--activeColor);
   color: var(--cusPrimaryColorActive);
+  background-color: none;
 
-  background-color: var(--cusActiveBg);
+  /* background-color: var(--cusActiveBg); */
 }
 
 .mc-sidebar-menu-item.active .mc-sidebar-menu-btn {
   /* color: var(--activeColor); */
   color: var(--cusWhite);
-  background-color: var(--cusPrimaryColorActive);
+  background-color: #2a0001f6;
+  border: 1px solid white;
+  /* background-color: var(--cusPrimaryColorActive); */
 }
 
 .mc-sidebar-menu-item.active .mc-sidebar-menu-btn i {
@@ -4958,7 +4965,7 @@ textarea.form-control {
   margin-top: -12px;
     position:fixed;
     /* border-radius: 50%; */
-    background-color: #DD2909;
+    background-color: #2a0001f6;
     color: white;
     padding: 1px;
     z-index: 10;
@@ -5000,7 +5007,7 @@ gap: 40%;
 .mc-sidebar-menu-btn {
   width: 100%;
   padding: 12px 10px;
-  color: #cfc5c5;
+  color: white;
   border-radius: 8px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -5027,16 +5034,18 @@ gap: 40%;
   -ms-transition: all linear 0.3s;
   -o-transition: all linear 0.3s;
   
-  color: #cfc5c5;
+  color: white;
 }
 
 .mc-sidebar-menu-btn:hover {
-  background-color: var(--cusPrimaryColorActive);
+  /* background-color: var(--cusPrimaryColorActive); */
+  background-color: #2a0001f6;
+  border: 1px solid white;
   color: var(--cusWhite);
 }
 
 .mc-sidebar-menu-btn:hover i {
-  color: #fff;
+  /* color: #fff; */
 }
 
 .mc-sidebar-menu-btn span {
@@ -5055,6 +5064,7 @@ gap: 40%;
   font-size: 10px;
   font-weight: 600;
   text-transform: uppercase;
+  background-color: none;
   color: var(--lightColor);
 }
 
@@ -5107,7 +5117,7 @@ gap: 40%;
   height: 0px;
   overflow: hidden;
   margin: 0px 20px;
-  border-left: 1px solid var(--deepBorder);
+  border-left: 1px solid white  ;
   transition: all linear 0.3s;
   -webkit-transition: all linear 0.3s;
   -moz-transition: all linear 0.3s;
@@ -5130,7 +5140,7 @@ gap: 40%;
   /* text-transform: capitalize; */
   padding-left: 8px;
   margin: 6px 0px;
-  color: #cfc5c5;
+  color: white;
   transition: all linear 0.3s;
   -webkit-transition: all linear 0.3s;
   -moz-transition: all linear 0.3s;
@@ -5148,10 +5158,11 @@ gap: 40%;
   top: 0px;
   left: -1px;
   z-index: 1;
-  width: 6px;
+  width: 6px; 
   height: 100%;
   opacity: 0;
-  background-color: var(--cusPrimaryColorActive);
+  background-color: white ;
+  /* background-color: var(--cusPrimaryColorActive); */
   transition: all linear 0.3s;
   -webkit-transition: all linear 0.3s;
   -moz-transition: all linear 0.3s;
@@ -9061,17 +9072,22 @@ background-color: #f0f0f0;
 .mfield{
   width:80%;
   font-size: 12px;
+  color: black;
   height: 1.8rem;
+
   /* background-color: #f0f0f0; */
+  background-color: silver;
 }
 .wfield{
   width: 80%;
   height: 1.8rem;
   font-size: 13px;
+  text-transform:capitalize;
+  color: black;
   padding-left: 10px;
   border: 0.5px solid rgb(209, 206, 206);
-  border-radius: 1px;
-  background-color:white;
+  border-radius: 5px;
+  background-color:#F0F0F0;
 }
 .deletebtn{
   fill: red;
@@ -9815,12 +9831,14 @@ background-color: #f0f0f0;
 } */
 .multi-select-opt {
   /* margin-top: -3px; */
-  color: var(--headingColor);
+  color:#726a6a;
+  margin-bottom: -8px;
 }
 
 .multi-select-opt label {
-  font-size: 13px;
-  margin-bottom: 5px;
+  font-size: 11px;
+  margin-bottom: -8px;
+  color: #726a6a;
 }
 
 .multi-select-opt .rmsc {
@@ -9835,6 +9853,8 @@ background-color: #f0f0f0;
 }
 .multi-select-opt .rmsc .dropdown-container {
   border-radius: 2px;
+  background-color: #f0f0f0;
+  border-radius: 10px;
   width:80%;
 }
 .dropdown-heading-dropdown-arrow {

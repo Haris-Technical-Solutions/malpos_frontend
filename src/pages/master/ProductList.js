@@ -50,6 +50,7 @@ export default function ProductList() {
   const [totalNumber, setTotalNumber] = useState(0);
   const [searchByProduct, setSearchByProduct] = useState("");
   const [activeLink, setActiveLink] = useState(0);
+  const [selectedProductType, setSelectedProductType] = useState("");
   const [gift, setGift] = useState([
     { id: 1, value: "Yes" },
     { id: 0, value: "No" },
@@ -86,7 +87,21 @@ export default function ProductList() {
         params: {
           search: searchTerm,
           page: currentPage,
+
         },
+        params: {
+          "types": [
+            "time_product"
+            ,
+            "dish"
+            ,
+            "preparation"
+            ,
+            "ready_made"
+            ,
+            "ingredient"
+          ]
+        }
       });
       setProducts(response.data.products.data);
       setTotalNumber(response.data.products.total);
@@ -158,33 +173,58 @@ export default function ProductList() {
     console.log(index);
     setActiveLink(index); // Update the active link when it's clicked
   };
-  const handleCreateProduct = () => {
-    navigate(`/create-product/`, {
-      state: {
-        action: "createProduct",
-      },
-    });
+  // const handleCreateProduct = () => {
+  //   navigate(`/create-product/`, {
+  //     state: {
+  //       action: "createProduct",
+  //     },
+  //   });
+  // };
+  const handleCreateProduct = (type) => {
+    if(type == 'dish'){
+      navigate(`/create-product/`, {
+        state: {
+          action: "createProduct",
+          type: type,
+        },
+      });
+    }
+    if(type == 'ready_made'){
+      navigate(`/constructure-product`, {
+        state: {
+          action: "createProduct",
+          type: type,
+        },
+      });
+    }
+    if(type == 'time_product'){
+      navigate(`/constructure-time`, {
+        state: {
+          action: "createProduct",
+          type: type,
+        },
+      });
+    }
+ 
   };
 
-
   const handleConfirmDelete = async () => {
-    if (productToDelete) {
       try {
-        await axiosInstance.delete(`/product_delete/${productToDelete.md_product_id}`);
-        fetchProducts(); // You should define fetchProducts function
+        await axiosInstance.delete(`/product_delete/${productToDelete}`);
         toast.success("Product deleted successfully", {
           autoClose: false,
           closeButton: true,
         });
+        setShowDeleteModal(false);
+        setProductToDelete(null); // Reset the product to be deleted
+        fetchProducts(); // You should define fetchProducts function
       } catch (error) {
         console.log(error);
       }
       
       // Close the delete modal
-      setShowDeleteModal(false);
-      setProductToDelete(null); // Reset the product to be deleted
     }
-  };
+  
 
   // const handleDelete = async (id) => {
   //   try {
@@ -199,22 +239,38 @@ export default function ProductList() {
   //   }
   // };
 
-  const handleEdit = (id) => {
+  const handleEdit = (id,type) => {
     console.log("id: " + id);
     navigate(`/create-product/`, {
       state: {
         id: id,
+        type: type,
         action: "updateProduct",
       },
     });
   };
+  // const handleEdit = (id) => {
+  //   console.log("id: " + id);
+  //   navigate(`/create-product/`, {
+  //     state: {
+  //       id: id,
+  //       action: "updateProduct",
+  //     },
+  //   });
+  // };
 
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
   const handleClose = () => setShow(false);
-  const handleShow = () => {
+
+  const handleShow = (productType) => {
+    setSelectedProductType(productType);
+    setFormData({
+      ...formData,
+      type: productType,
+    });
     setShow(true);
   };
 
@@ -286,12 +342,12 @@ export default function ProductList() {
         <Col xl={12}>
         
             <Row>
-              <Col xs={12} sm={12} md={3} lg={3}>
+              <Col xs={12} sm={6} md={2} lg={3}>
                 <div style={{ position: "relative" }}>
                   <Form.Control
                     type="search"
                     placeholder="Search"
-                    className="search-pl"
+                    className="search-pl wfield"
                     value={searchByProduct}
                     onChange={(e) => setSearchByProduct(e.target.value)}
                   />
@@ -299,7 +355,8 @@ export default function ProductList() {
                     style={{
                       position: "absolute",
                       top: "50%",
-                      right: "10px",
+                      right: "60px",
+
                       transform: "translateY(-50%)",
                     }}
                   >
@@ -312,6 +369,7 @@ export default function ProductList() {
               <Col xs={12} sm={6} md={2} lg={2} className="col-2-filters">
                 <ProductOptions
                   option={products}
+                  className="wfield"
                   title={"Products"}
                   labelDir="label-col"
                   fieldSize="field-select  w-100 h-md"
@@ -322,6 +380,7 @@ export default function ProductList() {
                 <CategoryOptions
                   option={categories}
                   title={"Category"}
+                  className="wfield"
                   labelDir="label-col"
                   fieldSize="field-select  w-100 h-md"
                   callback={updateCategoryFilter}
@@ -331,12 +390,13 @@ export default function ProductList() {
                 <GiftOptions
                   option={gift}
                   title={"Gift"}
+                  className="wfield"
                   labelDir="label-col"
                   fieldSize="field-select  w-100 h-md"
                   callback={updateGiftFilter}
                 />
               </Col>
-              <Col sm={12} md={2} lg={2}>
+              <Col sm={12} md={3} lg={3}>
                 {/* <Link to={"/create-product"}> */}
                 <Button className="add-product-btn-pl" onClick={handleShow}>
                   + Create
@@ -374,7 +434,8 @@ export default function ProductList() {
                             <FontAwesomeIcon
                               className="faPlus custom-faPlus"
                               icon={faPlus}
-                              onClick={handleCreateProduct}
+                        
+                              onClick={() => handleCreateProduct('dish')}
                             />
                             {/* </Link> */}
                           </Col>
@@ -394,12 +455,37 @@ export default function ProductList() {
                             <p>Add ready items to menu</p>
                           </Col>
                           <Col md={2} className="col-2 custom-col-2">
-                            <Link to="/constructure-product">
+                            {/* <Link to="/constructure-product"> */}
                               <FontAwesomeIcon
                                 className="faPlus custom-faPlus"
                                 icon={faPlus}
+                                onClick={() => handleCreateProduct('ready_made')}
                               />
-                            </Link>
+                            {/* </Link> */}
+                          </Col>
+                        </Row>
+                      </Col>
+                    </Row>
+                    <Row>
+                      <Col md={12}>
+                        <Row className="custom-row">
+                          <Col md={2} className="col-2 custom-col-2">
+                            <div className="faDish-img custom-faDish-img">
+                              <img src="/images/product/drink.jpg" alt="img" />
+                            </div>
+                          </Col>
+                          <Col md={8}>
+                            <h6 className="custom-h6">Time Products</h6>
+                            <p>Book Time Products</p>
+                          </Col>
+                          <Col md={2} className="col-2 custom-col-2">
+                            {/* <Link to="/constructure-time"> */}
+                              <FontAwesomeIcon
+                                className="faPlus custom-faPlus"
+                                icon={faPlus}
+                                onClick={() => handleCreateProduct('time_product')}
+                              />
+                            {/* </Link> */}
                           </Col>
                         </Row>
                       </Col>
@@ -503,7 +589,7 @@ export default function ProductList() {
                             <Td>{item.is_active === 1 ? "✅" : "❌"}</Td>
 
                             <Td>{item.is_active === 1 ? "✅" : "❌"}</Td>
-                            <Td>Dish</Td>
+                            <Td>{item.type}</Td>
                             <Td>{item.cooking_time}</Td>
                             {/* <Td>
                 <Box className="mc-table-price">
@@ -531,7 +617,7 @@ export default function ProductList() {
                                   // to="/product-view"
                                   // state={{ id: `${item.id}` }}
                                   // href="/product-upload"
-                                                                   onClick={() => handleEdit(item.md_product_id)}
+                                  onClick={() => handleEdit(item.md_product_id, item.type)}
                                 >
                                    <FontAwesomeIcon
                                     icon={faEdit}

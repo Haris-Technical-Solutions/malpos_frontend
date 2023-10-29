@@ -29,6 +29,8 @@ export default function CreateProduct() {
     menuId,
     UOMs,
     // menuSections,
+    errors,
+    setErrors,
     imagePreviewURL,
     setDeletingMethod,
     deletingMethod,
@@ -39,6 +41,7 @@ export default function CreateProduct() {
     setBrands,
     setBranches,
     setCategories,
+    ingredients,
     setTaxCategories,
     setDiets,
     setAllergies,
@@ -67,6 +70,10 @@ export default function CreateProduct() {
     handleSubmit,
   } = useProduct();
 
+  const [productColor, setProductColor] = useState(""); // State to store selected color  
+  const handleColorSelect = (color) => {
+    setProductColor(color); // Update productColor state with the selected color
+  };
   const [activeTab, setActiveTab] = useState(0);
   const [action, setAction] = useState();
   const location = useLocation();
@@ -95,14 +102,17 @@ export default function CreateProduct() {
         md_product_category_id: "",
         md_station_id: "",
         md_allergy_id: "",
+        product_color:"",
         md_diet_id: "",
         is_active: 1,
+        md_uom_id:"",
         product_name: "",
         maximun_day_of_product_return: "",
         cooking_time: "",
         description: "",
         gift: false,
         portion: false,
+        ignore_service_charges:false,
         bundle: false,
         not_allow_apply_discount: "",
         sold_by_weight: false,
@@ -112,12 +122,12 @@ export default function CreateProduct() {
         product_price: "",
         created_by: "1",
         updated_by: "1",
-        product_detail: [],
+        product_detail: "",
       });
     }
   }, []);
   const getPreSelectIds = (productData, field) => {
-    console.log(productData, field);
+    // console.log(productData, field);
     const categoryIds = productData.map((item) => item[field]);
     console.log("ids here ->>" + categoryIds, field);
     return categoryIds;
@@ -125,9 +135,15 @@ export default function CreateProduct() {
   const fetchProductData = async () => {
     if (location.state?.id) {
       const id = location.state?.id;
+      const type = location.state?.type;
       try {
-        const response = await axiosInstance.get(`/product_edit/${id}`);
-        console.log(response, "response is here");
+        const response = await axiosInstance.post(`/product_edit/${id}`, {
+
+          "type": type
+        }
+        );
+        // const response = await axiosInstance.get(`/product_edit/${id}`);
+        // console.log(response, "response is here");
         const productData = response.data;
         setImagePreviewURL(productData.product_image);
         setForm((prevForm) => ({
@@ -146,6 +162,7 @@ export default function CreateProduct() {
             "md_product_category_id"
           ),
           td_tax_category_id: productData.td_tax_category_id,
+          ingredients:productData.ingredients,
           product_name: productData.product_name,
           maximun_day_of_product_return:
             productData.maximun_day_of_product_return,
@@ -154,21 +171,31 @@ export default function CreateProduct() {
           is_active: productData.is_active,
           description: productData.description,
           gift: productData.gift,
+          ignore_service_charges:productData.ignore_service_charges,
+          portion:productData.portion,
           cooking_time: productData.cooking_time,
           barcode: productData.barcode,
           bundle: productData.bundle,
+          product_code:productData.product_code,
           not_allow_apply_discount: productData.not_allow_apply_discount,
-          md_allergy_id: getPreSelectIds(
+          md_allergy_id:
+           getPreSelectIds(
             productData.product_allergy,
             "md_allergy_id"
           ),
+          md_uom_id:
+          //  getPreSelectIds(
+            productData.md_uom_id,
+          //   "md_uom_id"
+          // ),
           md_menu_id: productData.md_menu_id,
           md_menu_section_id: productData.md_menu_section_id,
           md_diet_id: getPreSelectIds(productData.product_diet, "md_diet_id"),
-          md_station_id: getPreSelectIds(
-            productData.station_product,
-            "md_station_id"
-          ),
+          md_station_id: 
+          // getPreSelectIds(
+            productData.md_station_id,
+          //   "md_station_id"
+          // ),
           product_code: productData.product_code,
           product_price: productData.product_price,
           product_image: productData.product_image,
@@ -176,6 +203,13 @@ export default function CreateProduct() {
         }));
       } catch (error) {}
     }
+  };
+
+  const clearError = (fieldName) => {
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [fieldName]: '',
+    }));
   };
   return (
     <div>
@@ -219,7 +253,7 @@ export default function CreateProduct() {
                 <div className="d-flex align-self-end">
                   <button
                     className="add-product-btn-pl"
-                    onClick={(e) => handleSubmit(e)}
+                    onClick={(e) => handleSubmit(e, location?.state?.type)}
                   >
                     Submit
                   </button>
@@ -238,13 +272,15 @@ export default function CreateProduct() {
                       <Row>
                         <Col md={4}>
                           <SelectField
-                            className="wfield"
+                            className=  "wfield"
                             label="Client"
                             name="cd_client_id"
                             options={clients}
                             value={form.cd_client_id}
                             onChange={handleClientChange}
+                            onFocus={() => clearError('cd_client_id')}
                           />
+                          {errors.cd_client_id && <span style={{fontSize:"10px",paddingLeft:"5px", color: "red" }}>{errors.cd_client_id}</span>}
                         </Col>
                         <Col md={4}>
                           <MultiSelectField
@@ -257,7 +293,9 @@ export default function CreateProduct() {
                             options={brands}
                             value={form.cd_brand_id}
                             onChange={handleBrandChange}
+                            onFocus={() => clearError('cd_brand_id')}
                           />
+                          {errors.cd_brand_id && <span style={{fontSize:"10px",paddingLeft:"5px", color: "red" }}>{errors.cd_brand_id}</span>}
                         </Col>
                         <Col md={4}   >
                           <MultiSelectField
@@ -269,8 +307,10 @@ export default function CreateProduct() {
                             title="Branch"
                             options={branches}
                             value={form.cd_branch_id}
+                            onFocus={() => clearError('cd_branch_id')}
                             onChange={handleBranchChange}
                           />
+                          {errors.cd_branch_id && <span style={{fontSize:"10px",paddingLeft:"5px", color: "red" }}>{errors.cd_branch_id}</span>}
                         </Col>
                         <Col md={4}>
                           <MultiSelectField
@@ -283,7 +323,9 @@ export default function CreateProduct() {
                             options={categories}
                             value={form.md_product_category_id}
                             onChange={handleCategoryChange}
+                            onFocus={() => clearError('md_product_category_id')}
                           />
+                           {errors.md_product_category_id && <span style={{fontSize:"10px",paddingLeft:"5px", color: "red" }}>{errors.md_product_category_id}</span>}
                         </Col>
                         <Col md={4}>
                           <SelectField
@@ -293,7 +335,9 @@ export default function CreateProduct() {
                             options={taxCategories}
                             value={form.td_tax_category_id}
                             onChange={handleTaxCategoryChange}
+                            onFocus={() => clearError('td_tax_category_id')}
                           />
+                          {errors.td_tax_category_id && <span style={{fontSize:"10px",paddingLeft:"5px", color: "red" }}>{errors.td_tax_category_id}</span>}
                         </Col>
                         <Col md={4}>
                           {/* <SelectField
@@ -314,7 +358,9 @@ export default function CreateProduct() {
                             options={diets}
                             value={form.md_diet_id}
                             onChange={handleDietsChange}
+                            onFocus={() => clearError('md_diet_id')}
                           />
+                           {errors.md_diet_id && <span style={{fontSize:"10px",paddingLeft:"5px", color: "red" }}>{errors.md_station_id}</span>}
                         </Col>
                         <Col md={4}>
                           {/* <SelectField
@@ -332,8 +378,10 @@ export default function CreateProduct() {
                             title="Allergy"
                             options={allergies}
                             value={form.md_allergy_id}
+                            onFocus={() => clearError('md_allergy_id')}
                             onChange={handleAllergyChange}
                           />
+                          {errors.md_allergy_id && <span style={{fontSize:"10px",paddingLeft:"5px", color: "red" }}>{errors.md_allergy_id}</span>}
                         </Col>
                         <Col md={4}>
                           <SelectField
@@ -343,7 +391,9 @@ export default function CreateProduct() {
                             options={stations}
                             value={form.md_station_id}
                             onChange={handleStationChange}
+                            onFocus={() => clearError('md_station_id')}
                           />
+                           {errors.md_station_id && <span style={{fontSize:"10px",paddingLeft:"5px", color: "red" }}>{errors.md_station_id}</span>}
                         </Col>
                         <Col md={4}>
                           <SelectField
@@ -353,7 +403,9 @@ export default function CreateProduct() {
                             options={UOMs}
                             value={form.md_uom_id}
                             onChange={handleUomChange}
+                            onFocus={() => clearError('md_uom_id')}
                           />
+                          {errors.md_uom_id && <span style={{fontSize:"10px",paddingLeft:"5px", color: "red" }}>{errors.md_uom_id}</span>}
                         </Col>
                         {/* <Col md={6}>
                           <SelectField
@@ -387,7 +439,9 @@ export default function CreateProduct() {
                             value={form.product_name}
                             placeholder="Enter product name"
                             onChange={handleChange}
+                            onFocus={() => clearError('product_name')}
                           />
+                          {errors.product_name && <span style={{fontSize:"10px",paddingLeft:"5px", color: "red" }}>{errors.product_name}</span>}
                         </Col>
                         <Col md={4}>
                           <LabelField
@@ -398,7 +452,9 @@ export default function CreateProduct() {
                             placeholder="Enter product code"
                             value={form.product_code}
                             onChange={handleChange}
+                            onFocus={() => clearError('product_code')}
                           />
+                          {errors.product_code && <span style={{fontSize:"10px",paddingLeft:"5px", color: "red" }}>{errors.product_code }</span>}
                         </Col>
                         <Col md={4}>
                           <LabelField
@@ -496,9 +552,9 @@ export default function CreateProduct() {
                             <Form.Check
                               type="checkbox"
                               label="Ignore Service Charges"
-                              name="ignory_service_charges"
-                              value={form.ignory_service_charges}
-                              checked={form.ignory_service_charges === 1}
+                              name="ignore_service_charges"
+                              value={form.ignore_service_charges}
+                              checked={form.ignore_service_charges === 1}
                               onChange={handleCheckboxChange}
                             />
                             <Form.Check
@@ -541,7 +597,8 @@ export default function CreateProduct() {
                           )}
                         </Col>
                         <Col md={6}>
-                          <ColorDivs />
+                         <ColorDivs onSelectColor={handleColorSelect} /> 
+                       
                         </Col>
                         <Col md={6}>
                           <label htmlFor="image">

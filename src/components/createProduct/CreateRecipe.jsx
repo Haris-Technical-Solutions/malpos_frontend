@@ -3,8 +3,9 @@ import { Row, Col, Form } from "react-bootstrap";
 import Select from "react-select";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import axiosInstance from "../../api/baseUrl";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+import { useLocation } from  "react-router-dom";
 import {
   faEdit,
   faPlus,
@@ -21,12 +22,15 @@ import instance from "../../api/baseUrl";
 import { useProduct } from "./productContext";
 
 const CreateRecipe = () => {
+  const location=useLocation(); 
   const {
     ingredients,
     totalGrossWeight,
     deletingMethod,
     isLoading,
+    deleting_Method,
     allOptions,
+    setForm,
     setIngredients,
     setTotalGrossWeight,
     setAllOptions,
@@ -46,6 +50,23 @@ const CreateRecipe = () => {
     { value: "write_off_ingredient", label: "Write off ingredient" },
   ];
 
+  const fetchProductData = async () => {
+    if (location.state?.id) {
+      const id = location.state?.id;
+      try {
+        const response = await axiosInstance.get(`/product_edit/${id}`);
+        console.log(response, "response is here");
+        const productData = response.data;
+        setForm((prevForm) => ({
+          ...prevForm,
+        ingredients:productData.ingredients,
+        totalGrossWeight:productData.totalGrossWeight,
+        deleting_Method:productData.deleting_Method
+        }))}
+          catch (error) {}
+        }
+      }
+
   // const handleDeletingMethodChange = (selectedOption) => {
   //   setDeletingMethod(selectedOption);
   // };
@@ -63,6 +84,7 @@ const CreateRecipe = () => {
     console.log(allOptions, "update");
     console.log(form.product_detail, "update===");
   });
+  fetchProductData()
   const customStyles = {
     control: (provided) => ({
       ...provided,
@@ -133,6 +155,7 @@ const CreateRecipe = () => {
                           <Tr key={index}>
                             <Td>
                               <Select
+                              
                                 value={ing.ingredient}
                                 onChange={(e) => handleSelectChange(e, index)}
                                 options={allOptions}
@@ -190,7 +213,7 @@ const CreateRecipe = () => {
             <Col md={3}>
               <label>Deleting Method</label>
               <Select
-                value={deletingMethod}
+                value={deleting_Method}
                 onChange={handleDeletingMethodChange}
                 options={deletingOptions}
               />
@@ -201,7 +224,7 @@ const CreateRecipe = () => {
               <input
                 readOnly
                 type="number"
-                name="totalGrossWeight"
+                name="total_weight"
                 value={totalGrossWeight}
                 style={{
                   borderRadius: "12px",
